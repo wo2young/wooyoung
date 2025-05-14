@@ -152,3 +152,24 @@ select ename, sal
 from emp
 where deptno in(20, 30) and sal >=1500
 order by sal;
+
+select *
+from emp
+where comm is null and
+mgr is not null 
+and job = in ('MANAGER', 'CLERK')
+and ename not like '_L%';
+
+-- 함수  사용
+select ENAME, upper(ename), lower(ename), initcap(ename)
+from emp;
+
+select ename
+from emp
+where lower(ename) like lower('%aM%');
+
+select upper('abc') from dual;
+
+select ename
+from emp
+where length(ename) = 5;
