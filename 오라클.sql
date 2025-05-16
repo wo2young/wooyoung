@@ -355,4 +355,86 @@ select empno, ename, comm,
        when comm > 0 then '수당 : ' || comm
      end as comm_text
      from emp;
-        
+     
+select comm,
+       decode(comm,
+       null, -1,
+       comm),
+       case 
+       when comm is null then -1
+       else comm
+       end
+from emp;
+       
+----- 되새김 문제
+--Q1
+select empno, rpad(substr(empno, 1, 2),4,'*') as masking_empno,
+       ename, rpad(substr(ename, 1, 1),5,'*') as masking_ename
+       from emp
+where length(ename) >= 5
+       and length(ename) <6;
+--Q2       
+select empno, ename, sal, 
+       trunc(sal/21.5,2) as day_pay, round(sal/(21.5*8),1)as time_pay
+from emp;
+
+--Q4
+ select empno, ename, mgr, 
+    case substr(mgr,1,2)
+       when '75' then '5555'    
+       when '76' then '6666'
+       when '77' then '7777'
+       when '78' then '8888'
+       else nvl(to_char(mgr),'0000') -- '' || mgr 이것도 문자처리
+    end as chg_mgr  
+    from emp;
+
+select sum(comm) ---sum은 다중행 함수로 여러행을 구할 수 없음. null값 무시하고 계산한다
+from emp;
+
+select count(*)
+from emp;
+
+select count(ename)
+from emp
+where ename like '%A%';
+
+select median(sal)
+from emp;
+
+select trunc(avg(sal)),'10' as deptno
+from emp
+where deptno = 10
+union all
+select trunc(avg(sal)),'20' as deptno
+from emp
+where deptno = 20
+union all
+select trunc(avg(sal)),'30' as deptno
+from emp
+where deptno = 30;
+
+select count(comm)
+from emp
+where comm is not null;
+
+select count(*), deptno
+from emp
+group by deptno;
+
+select count(comm), deptno
+from emp
+where comm is not null
+group by deptno;
+
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+order by deptno, job;
+
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+having avg(sal) >= 2000
+order by deptno, job;
+
