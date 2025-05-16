@@ -309,4 +309,50 @@ select empno, ename, sal, comm, sal + comm,
        nvl(comm, 0), /* 원래 null이 나오던걸 계산할 수 있어진다. */
        sal + nvl(comm, 0)
    from emp;
+--                 5일차
+select ename, sal, nvl(comm, 0),
+       sal*12 + nvl(comm,0) as total_pay 
+from emp;
 
+select ename, sal, comm,
+       case
+       when comm is null then sal * 12
+       when comm >= 0 then sal * 12 + comm
+    end as total_pay
+    from emp;
+    
+select ename, sal, nvl(comm,0),
+       case
+       when comm is null then sal * 12
+       when comm >= 0 then sal * 12 + comm
+    end as total_pay
+    from emp;
+       
+
+--decode 함수와 case문(case문이 더 범용적)
+
+select empno, ename, job, sal, 
+      decode(job,
+             'MANAGER', sal*1.1,
+             'SALESMAN', sal*1.05,
+             'ANALYST' , sal,
+             sal*1.03) as upsal
+from emp;
+
+select empno, ename, job, sal,
+       case job
+            when 'MANAGER' then sal*1.1
+            when 'SALESMAN' then sal*1.05
+            when 'ANALYST' then sal
+            else sal*1.03
+        end as upsal
+        from emp;
+        
+select empno, ename, comm,
+       case
+       when comm is null then '해당 사항 없음'
+       when comm = 0 then '수당 없음'
+       when comm > 0 then '수당 : ' || comm
+     end as comm_text
+     from emp;
+        
