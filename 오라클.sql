@@ -437,4 +437,113 @@ from emp
 group by deptno, job
 having avg(sal) >= 2000
 order by deptno, job;
+---------                         6일차
+
+select * from dept;
+
+select *
+    from emp, dept
+order by empno;
+
+select *
+    from emp, dept
+   where emp.deptno = dept.deptno
+order by empno;
+
+select *
+    from emp e, dept d
+    where e.deptno = d.deptno
+order by empno;
+
+select e.empno, e.ename, d.deptno, d.dname, d.loc
+    from emp e, dept d
+    where e.deptno = d.deptno
+order by d.deptno, e.empno;
+
+select e.empno, e.ename, d.deptno, d.dname, d.loc
+    from emp e, dept d
+    where e.deptno = d.deptno
+      and sal >= 3000;
+      
+select * from salgrade;
+
+select e.ename, e.sal, s.losal, s.hisal
+    from emp e, salgrade s
+where e.sal between s.losal and s.hisal
+order by sal;
+
+select e.ename, e.sal, s.grade, s.losal, s.hisal
+    from emp e, salgrade s
+where e.sal >= s.losal and e.sal <= s.hisal
+order by sal;
+--- 왼쪽 오른쪽 외부 join방식
+select e1.empno, e1.ename, e1.mgr,
+       e2.empno, e2.ename
+       from emp e1, emp e2
+       where e1.mgr = e2.empno(+)
+    order by e1.empno;
+
+select e1.empno, e1.ename, e1.mgr,
+       e2.empno, e2.ename
+       from emp e1, emp e2
+       where e1.mgr(+) = e2.empno
+    order by e1.empno;
+-----         위에는 오라클에서만 가능하고, 밑에는 다른곳에서도 가능    
+    select e1.empno, e1.ename, e1.mgr,
+       e2.empno, e2.ename
+       from emp e1 left outer join emp e2 on (e1.mgr = e2.empno)
+    order by e1.empno;
+
+select e1.empno, e1.ename, e1.mgr,
+       e2.empno, e2.ename
+       from emp e1 right outer join emp e2 on (e1.mgr = e2.empno)
+    order by e1.empno;
+
+select e1.empno, e1.ename, e1.mgr,
+       e2.empno, e2.ename
+       from emp e1 full outer join emp e2 on (e1.mgr = e2.empno)
+    order by e1.empno;
+    
+
+-- join on이 범용성이 높아 많이 사용
+select e.empno, e.ename, e.deptno, d.dname, d.loc
+    from emp e join dept d on (e.deptno = d.deptno)
+    where sal <= 3000
+    order by e.deptno, empno;
+    
+select e.empno, e.ename, deptno, d.dname, d.loc
+    from emp e join dept d using (deptno)
+    where sal >= 3000
+    order by deptno, e.empno;
+    
+    ----되새김문제
+--Q1
+select d.deptno, d.dname, e.empno, e.ename, e.sal
+    from dept d, emp e
+where d.deptno = e.deptno 
+     and sal > 2000
+order by e.deptno;
+
+--Q2
+select d.deptno, d.dname, 
+      trunc(avg(sal)) avg_sal, max(sal) max_sal, min(sal) min_sal, count(*) cnt 
+    from emp e, dept d
+    where e.deptno = d.deptno
+group by d.deptno, d.dname;
+
+--Q3
+select d.deptno, d.dname, e.ename, e.job, e.sal
+    from emp e full outer join dept d on (e.deptno = d.deptno)
+order by d.deptno, e.ename;
+
+--Q4
+select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal,
+      e1.deptno as deptno_1, s.losal, s.hisal,  
+      e2.empno as mgr_empno, e2.ename as mgr_ename
+          from
+         emp e1 full outer join dept d on (e1.deptno = d.deptno)
+         full outer join emp e2 on (e1.mgr = e2.empno) 
+         full join salgrade s on e1.sal between s.losal and s.hisal
+         where d.deptno is not null
+          order by e1.deptno, e1.empno;
 
