@@ -236,7 +236,7 @@ from emp;
 
 --이름을 총 20자 중 가운데 정렬             심화 CUT
 select ename, rpad(lpad(ename, length(ename)+(20-length(ename))/2,' '), 20,' ') 
-as ena_me from emp; /* 글자수 + (전체글자수 - 글자수)/2가 가운제 정렬 공식 */
+as ena_me from emp; /* 글자수 + (전체글자수 - 글자수)/2가 가운데 정렬 공식 */
 /* 전체글자수에서 글자수를 빼면 공백의 값이 나온다 여기에 /2를 해야 앞뒤에 나누어 가운데 
 정렬이 가능해진다 */
 --job을 기준으로 20자 가운데 정렬
@@ -476,7 +476,7 @@ select e.ename, e.sal, s.grade, s.losal, s.hisal
     from emp e, salgrade s
 where e.sal >= s.losal and e.sal <= s.hisal
 order by sal;
---- 왼쪽 오른쪽 외부 join방식
+--- 왼쪽left 오른쪽right 전부full 외부 join방식
 select e1.empno, e1.ename, e1.mgr,
        e2.empno, e2.ename
        from emp e1, emp e2
@@ -488,7 +488,7 @@ select e1.empno, e1.ename, e1.mgr,
        from emp e1, emp e2
        where e1.mgr(+) = e2.empno
     order by e1.empno;
------         위에는 오라클에서만 가능하고, 밑에는 다른곳에서도 가능    
+-----    위에는 오라클에서만 가능하고, 밑에는 다른곳에서도 가능 그러니 밑에걸 공부하자    
     select e1.empno, e1.ename, e1.mgr,
        e2.empno, e2.ename
        from emp e1 left outer join emp e2 on (e1.mgr = e2.empno)
@@ -522,7 +522,7 @@ select d.deptno, d.dname, e.empno, e.ename, e.sal
     from dept d, emp e
 where d.deptno = e.deptno 
      and sal > 2000
-order by e.deptno;
+order by e.deptno, dname;
 
 --Q2
 select d.deptno, d.dname, 
@@ -531,9 +531,19 @@ select d.deptno, d.dname,
     where e.deptno = d.deptno
 group by d.deptno, d.dname;
 
+select e.deptno, d.dname, trunc(avg(e.sal)), 
+       max(e.sal) max_sal, min(e.sal) min_sal, count(*) cnt
+    from emp e left outer join dept d on (e.deptno = d.deptno)
+         group by e.deptno, d.dname
+         order by deptno;
+         
 --Q3
 select d.deptno, d.dname, e.ename, e.job, e.sal
     from emp e full outer join dept d on (e.deptno = d.deptno)
+order by d.deptno, e.ename;
+
+select d.deptno, d.dname, e.ename, e.job, e.sal
+    from dept d left outer join emp e on (e.deptno = d.deptno)
 order by d.deptno, e.ename;
 
 --Q4
@@ -543,7 +553,175 @@ select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal,
           from
          emp e1 full outer join dept d on (e1.deptno = d.deptno)
          full outer join emp e2 on (e1.mgr = e2.empno) 
-         full join salgrade s on e1.sal between s.losal and s.hisal
+         full outer join salgrade s on e1.sal between s.losal and s.hisal
          where d.deptno is not null
           order by e1.deptno, e1.empno;
+
+-------- gpt가 낸 답
+select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal,
+      e1.deptno as deptno_1, s.losal, s.hisal,  
+      e2.empno as mgr_empno, e2.ename as mgr_ename
+          from
+         dept d left outer join emp e1 on e1.deptno = d.deptno
+         left outer join emp e2 on e1.mgr = e2.empno 
+         left join salgrade s on e1.sal between s.losal and s.hisal
+         where d.deptno is not null
+          order by e1.deptno, e1.empno;
+
+------------7일차
+
+--각 부서별로 급여가 가장 높은 사원과 가장 낮은 사원 급여 차이랑 부서번호
+
+select deptno, max(sal), min(sal),max(sal) - min(sal)
+     from emp
+group by deptno
+order by deptno;
+-- 서브쿼리 if중복문 같은 느낌 in을 많이 사용한다.
+select *
+    from emp
+ where sal in (select max(sal)
+                  from emp
+                    group by deptno);
+
+select *
+    from emp
+ where sal > any (select max(sal) 
+                  from emp
+                    group by deptno);
+
+select *
+    from emp
+    where hiredate < (select hiredate
+                        from emp
+                       where ename = 'SCOTT');
+        
+--        emp부서에 전체 평균 급여보다 더 많이 받는 사람               
+select *
+    from emp
+    where sal > (select avg(sal)
+                    from emp);
+--- 다중행 서브쿼리인데 그냥 쉽다.
+select *
+    from emp
+    where (deptno, sal) in (select deptno, max(sal)
+                            from emp
+                            group by deptno);
+                            
+
+select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal,
+      e1.deptno as deptno_1, s.losal, s.hisal,  
+      e2.empno as mgr_empno, e2.ename as mgr_ename
+          from
+         emp e1 full outer join dept d on (e1.deptno = d.deptno)
+         full outer join emp e2 on (e1.mgr = e2.empno) 
+         full outer join salgrade s on e1.sal between s.losal and s.hisal
+         where d.deptno is not null
+          order by e1.deptno, e1.empno;
+-- with절 코드(from절등)가 길어지면 많이 사용  ↑ 위 글을 with를 사용하여 밑에 글로
+with
+e1 as (select * from emp),
+e2 as (select * from emp),
+d as (select * from dept),
+s as (select * from salgrade)
+select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal,
+       e1.deptno, s.losal, s.hisal,
+       e2.empno as mgr_empno, e2.ename as mgr_ename
+  from
+    d left outer join e1 on e1.deptno = d.deptno
+    left outer join e2 on e1.mgr = e2.empno
+    left outer join s on e1.sal between s.losal and s.hisal
+ where d.deptno is not null
+ order by e1.deptno, e1.empno;
+ -- 서브쿼리는 select에도 사용 가능하다.
+ select empno, ename, job, sal,
+                (select grade
+                    from salgrade
+                    where e.sal between losal and hisal) as salgrade,
+                    deptno,
+                    (select dname
+                        from dept
+                        where e.deptno = dept.deptno) as dname
+                from emp e;
+ -- rownum은 키워드로 select로 출력한 줄에 수를 세준다. 
+-- 예) select 5줄은 5까지만 수정해서 select 2줄로 바뀌면 2까지만
+--밑에는 SQL문에 순서떄문에 서브쿼리로 묶어서 순서를 조정했다.
+-- SQL문 순서는 with / from / where / group by / having / select / order by
+ select rn, ename, sal
+ from (
+ select rownum rn, ename, sal
+ from (
+    select *
+    from emp
+    order by sal desc) 
+)
+where rn < 4 and rn > 1;
+
+with e10 as 
+(select * from emp where deptno = 10),
+d as 
+(select * from dept)
+select e10.empno, e10.ename, e10.deptno, d.dname, d.loc
+    from e10, d
+    where e10.deptno = d.deptno;
+    ----------되새김문제
+--Q1
+select e.job, e.empno, e.ename, e.sal, e.deptno, d.dname
+from emp e join dept d on e.deptno = d.deptno
+where job in  
+    (select job
+    from emp
+    where ename = 'ALLEN');
+   
+--Q2
+select e.empno, e.ename, d.dname, e.hiredate, d.loc, e.sal, s.grade
+from salgrade s, emp e, dept d
+where sal >(
+    select avg(sal)
+    from emp)
+and e.sal between s.losal and s.hisal
+and e.deptno = d.deptno
+order by e.sal desc;
+-- join을 사용하는 방법
+select e.empno, e.ename, d.dname, e.hiredate, d.loc, e.sal, s.grade
+from  emp e left outer join salgrade s on e.sal between s.losal and s.hisal
+            left outer join dept d on e.deptno = d.deptno
+where sal >
+           (select avg(sal)
+            from emp)
+order by e.sal desc;
+--Q3
+select e.empno, e.ename, e.job, e.deptno, d.dname, d.loc
+from emp e, dept d
+where job not in
+    (select job
+    from emp
+    where deptno = 30)
+and e.deptno = 10
+and e.deptno = d.deptno;
+
+--join을 사용하는 방법
+select e.empno, e.ename, e.job, e.deptno, d.dname, d.loc
+from emp e left outer join dept d on e.deptno = d.deptno
+where job not in
+    (select job
+    from emp
+    where deptno = 30)
+    and e.deptno = 10;
+---Q4
+select e.empno, e.ename, e.sal, s.grade
+from emp e, salgrade s
+where e.sal > 
+    (select max(sal)
+    from emp
+    where job = 'SALESMAN')
+and e.sal between s.losal and s.hisal;
+
+-- join을 사용하는 방법
+select e.empno, e.ename, e.sal, s.grade
+from emp e
+left outer join salgrade s on e.sal between s.losal and s.hisal
+where e.sal >
+    (select max(sal)
+    from emp
+    where job = 'SALESMAN');
 
