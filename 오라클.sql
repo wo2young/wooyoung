@@ -950,4 +950,113 @@ create table chap10hw_salgrade
         as select * from salgrade;
 
 --- 트랜잭션 하나의 단위로 데이터를 처리 한큐에 처리
+rollback;
+commit;
+---------- 9일차
+
+select * from dict;
+
+select * from USER_TABLES;
+
+select * from user_indexes;
+
+select * from user_ind_columns;
+
+create index idx_emp_sal
+    on emp(sal);
+    
+select * from user_ind_columns;
+
+select /*+ index(e idx_emp_sal) */ -- 강제힌트 경로설정같은 느낌
+        * 
+from emp e
+where sal > 2000;
+
+create view vw_emp20
+    as (select empno, ename, job, deptno
+        from emp
+        where deptno = 20);
+
+grant create sequence to SCOTT;
+
+create sequence seq_dept_seq
+increment by 10
+start with 10
+maxvalue 90
+minvalue 0
+nocycle  
+cache 2;
+
+select * from user_sequences;
+
+drop sequence seq_tb_user;
+
+insert into dept_temp (deptno, dname, loc)
+values (seq_dept_sequence.nextval, 'DATABASE', 'SEOUL');
+
+insert into dept_temp (deptno, dname, loc)
+values (seq_dept_seq.nextval, '테스트', '천안');
+
+select * from dept_temp;
+
+select seq_dept_seq.nextval
+from dual;
+
+create table table_pk(
+    login_id varchar2(20) primary key,
+    login_pwd varchar2(20) not null,
+    tel       varchar2(20)
+);
+
+desc table_pk;
+
+insert into table_pk(login_id,login_pwd, tel)
+values('TEST_ID_01', 'PW01', '010-1234-5678');
+
+select * from table_pk;
+
+create table empfk_deptno_fk
+ as select * from emp;
+ 
+ select * from emp_fk;
+ 
+ create table dept_fk
+ as select * from dept;
+ 
+ select * from dept_fk;
+ 
+ drop table dept_fk;
+ 
+ create table dept_fk(
+    deptno number(2) constraint deptfk_deptno_pk primary key,
+    dname varchar2(14),
+    loc   varchar2(13)
+);
+
+create table emp_fk(
+    empno number(4) constraint empfk_empno_pk primary key,
+    ename varchar2(10),
+    job   varchar2(9),
+    mgr   number(4),
+    hiredate date,
+    sal   number(7,2),
+    comm  number(7,2),
+    deptno number(2) constraint empfk_deptno_fk references dept_fk (deptno)
+);
+select * from dept_fk;
+
+insert into dept_fk
+values (20, 'test', 'test_');
+
+insert into emp_fk
+values (1111, '우영', '학생', null, sysdate, 1000, null, 20);
+
+insert into emp_fk(empno, ename, deptno)
+values (1000, '이름', 10);
+
+delete emp_fk
+where deptno = 10;
+
+desc emp_fk;
+select * from emp_fk;
 
