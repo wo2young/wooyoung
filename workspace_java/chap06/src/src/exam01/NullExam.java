@@ -57,10 +57,11 @@ public class NullExam {
 		System.out.println("g == null : " + (g == null));
 		System.out.println("g + \"abc\": "+ (g+"abc"));
 		
-		System.out.println(h.equals(g)); // false
-		if(g != null) { // 방어코딩 error를 막아준다.
-		System.out.println(g.equals(h)); // error
-		}
+//		System.out.println(h.equals(g)); // false
+//		if(g != null) { // 방어 코딩 error를 막아준다.
+//		System.out.println(g.equals(h)); // g가 null이 아니라면 값을 내준다.
+//		}
+		
 		
 		
 		
