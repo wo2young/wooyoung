@@ -70,7 +70,22 @@ public class ArrayExam {
 		bs1[0] = b0 + 1;
 		bs1[1] = b1 + 1;
 		bs1[2] = b2 + 1;
+		
+		int [] [] bs = new int[2][3];
 		System.out.println(bs1[2]);
 		System.out.println(bs1[1]);
+		System.out.println("bs.length : " + bs.length);
+		System.out.println("bs[0].length : " + bs[0].length);
+		
+		int[] f = new int [10];
+		for(int i = 0; i < 10; i++) {
+			f[i] = i+1;
+			System.out.println("f[" + i + "] : " + f[i]);
+		}
+		
+		
+		
+		
+		
 	}
 }
