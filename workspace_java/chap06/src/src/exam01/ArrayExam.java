@@ -72,6 +72,7 @@ public class ArrayExam {
 		bs1[2] = b2 + 1;
 		
 		int [] [] bs = new int[2][3];
+		System.out.println("bs[1] [1] : " + bs[1] [1]);
 		System.out.println(bs1[2]);
 		System.out.println(bs1[1]);
 		System.out.println("bs.length : " + bs.length);
@@ -82,6 +83,43 @@ public class ArrayExam {
 			f[i] = i+1;
 			System.out.println("f[" + i + "] : " + f[i]);
 		}
+		
+		int[] d1 = new int[] {1,2,3,4,5};
+		int[] d2 = d1;
+		
+		d2[1] = 10;
+		System.out.println("d1[1] : " + d1[1]);
+		// d2가 d1과 같은 주소를 가지고 있기때문에 d2를 바꿔면 d1의 값도 바뀐다.
+		
+		int[] f1 = {2, 4, 11, 24, 34, 22}; // 그냥 아무 숫자
+		int[] f2 = new int [f1.length];// f1의 길이가 바뀌면 같이 바뀐다.
+		for (int i = 0; i < f1.length; i++) {
+			System.out.println(f1[i]);
+		} // i=0은 배열로 만든 변수는 0부터 시작이기 때문이다.
+		  // i<f2.length는 f2의 길이가 길어지면 알아서 수정되는 좋은 방법이다.
+		for (int i = 0; i < f2.length; i++) {
+			f2[i] = f1[i]; // f2 = f1을 해야 같은 값을 대입한다.
+			System.out.println(f2[i]); // 대입했으니 맞는지 확인
+		}
+		
+		for(int i=0; i<f1.length;i++) {
+			int data = f1[i];
+			System.out.println("data : "+ data);
+		}//향상된 for문
+		for(int data : f1) {
+		System.out.println("data : "+ data);
+		}
+		//로또 자동추천 아직 중복된 숫자가 나올수 있음
+		int[] lotto = new int[45];	
+			for(int i=0; i < 6; i++) {
+				for(int j = 1; j < lotto.length; j++) {
+					lotto[j] = j+1;
+				}
+				System.out.print(lotto[(int)(Math.random()* lotto.length + 1)]);
+				System.out.print(" ");
+		}
+		
+			
 		
 		
 		
