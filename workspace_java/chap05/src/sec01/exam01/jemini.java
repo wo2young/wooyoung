@@ -41,7 +41,7 @@ public class jemini {
 	        System.out.println("환영합니다! 스위프트 은행입니다.");
 	
 	        while (run) { // run 플래그가 true인 동안 루프 반복
-	        	System.out.println("\n-------------------------------------");
+	        	System.out.println("-------------------------------------");
 	            System.out.println("1. 예금 | 2. 출금 | 3. 잔고확인 | 4. 종료");
 	            System.out.println("-------------------------------------");
 	            System.out.print("선택> ");
