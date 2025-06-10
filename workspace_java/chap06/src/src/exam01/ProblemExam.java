@@ -165,7 +165,7 @@ public class ProblemExam {
 
 		}
 		
-		//문제9
+//		문제9
 //		자리가 10개 있는 소극장의 예약 시스템
 //		자리 번호는 1~10번까지 번호의 자리가 있습니다.
 //		메뉴 : "1.예약 2.모든 좌석 현황 3.잔여좌석 0.종료"
@@ -216,6 +216,7 @@ public class ProblemExam {
 			} scan.close();
 		}	
 		
+		System.out.println();
 		//문제10
 //		로또 6개 생성. 단, 중복 없이 
 		int [] lo = new int [45];
@@ -230,8 +231,8 @@ public class ProblemExam {
 			int lotto = rand.nextInt(number); //lotto는 랜덤으로 lo의 길이만큼에서 숫자 만들기
 			System.out.print(lo[lotto] + " | ");
 			
-			lo[lotto] = lo[number - 1];// 만약 44가 나왔다면 lo[44-1]에 있음 
-			number--; //nember에 값을 제거
+			lo[lotto] = lo[number - 1];// 만약 44가 나왔다면 lo[44]에 lo[45-1]을 넣음 
+			number--; //위에서 44를 넣었으니 number--로 lo[44]를 없앤다.
 		}
 		System.out.println();
 		
