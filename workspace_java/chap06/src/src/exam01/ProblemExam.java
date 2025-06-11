@@ -184,7 +184,7 @@ public class ProblemExam {
 //		메뉴 : "1.예약 2.모든 좌석 현황 3.잔여좌석 0.종료"
 //		만약1 : 예약이 가능하다면 "n번 자리 예약 했습니다"
 //		만약2 : 예약이 불가능하다면 "이미 예약 되어 있습니다"
-<<<<<<< HEAD
+		
 		boolean run = true;
 		int [] num = new int [10];
 		while (run) { // run 플래그가 true인 동안 루프 반복
@@ -231,7 +231,7 @@ public class ProblemExam {
 		}	
 		
 		System.out.println();
-=======
+		
 //		boolean run = true;
 //		int [] num = new int [10];
 //		while(run) { // run 플래그가 true인 동안 루프 반복
@@ -278,7 +278,7 @@ public class ProblemExam {
 //		} 	
 		System.out.println();
 		System.out.print("| ");
->>>>>>> origin/main
+
 		//문제10
 //		로또 6개 생성. 단, 중복 없이 
 		int [] lo = new int [45];
@@ -293,17 +293,11 @@ public class ProblemExam {
 			int lotto = rand.nextInt(number); //lotto는 랜덤으로 lo의 길이만큼에서 숫자 만들기
 			System.out.print(lo[lotto] + " | ");
 			
-<<<<<<< HEAD
+
 			lo[lotto] = lo[number - 1];// 만약 44가 나왔다면 lo[44]에 lo[45-1]을 넣음 
 			number--; //위에서 44를 넣었으니 number--로 lo[44]를 없앤다.
 		}
-=======
-			lo[lotto] = lo[number - 1];// 만약 44가 나왔다면 lo[44]에 lo[45-1]를 대입 
-			number--; //number에서 lo[lotto]에서 나온 값을 제거
-		} 
->>>>>>> origin/main
-		System.out.println();
-		
+
 		
 	}
 

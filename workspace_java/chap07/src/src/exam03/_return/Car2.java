@@ -1,19 +1,24 @@
-package src.exam03;
+package src.exam03._return;
 
-public class Car {
-	
+public class Car2 {
+		
 	// 필드
-	int gas;
+	int gas; 
+	int speed;
 	
 	// 생성자
 	
 	//메소드
+	void setSpeed(int s) {
+		speed =s;
+		System.out.println("속도 : " + speed);
+		
+	}
 	void setGas(int g) {
 		gas = g;
 		
 	}
-	/** 가스가 0이면 false를 가스가 0이 아니면 true 
-	 * 
+	/** 가스가 0이면 false를 가스가 0이 아니면 true  
 	 *  메소드명 : isLeftGas
 	 *  전달인자 : gas
 	 * 	리턴타입 : boolean
@@ -33,10 +38,14 @@ public class Car {
 			if(gas > 0) {
 				System.out.println("달려.(gas 잔량 : " + gas + ")");
 				gas -= 1;
+				setSpeed((gas+1)*10);
 			} else {
 				System.out.println("멈춰.(gas 잔량 : " +  gas + ")");
+				setSpeed(0);
 				return;
 			}
 		}
 	}
 }
+
+

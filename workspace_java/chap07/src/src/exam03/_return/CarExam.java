@@ -1,11 +1,14 @@
-package src.exam03;
+package src.exam03._return;
 
 public class CarExam {
 	
 	public static void main(String[] args) {
 		
 		Car mycar = new Car();
+		Car2 c2 = new Car2();
 		
+		c2.setGas(3);
+		c2.run();
 		mycar.setGas(5);
 		
 		boolean gasState = mycar.isLeftGas();

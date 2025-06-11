@@ -1,4 +1,4 @@
-package src.exam03;
+package src.exam03._return;
 
 public class Calculator {
 	
@@ -67,7 +67,23 @@ public class Calculator {
 		}
 		return sum;			
 	}
-		
+	
+	/**
+	 * 메소드명 : avg
+	 * 전달인자 : int
+	 * 리턴타입 : double
+	 */
+	
+	double avg(int x, int y) {
+		int sum = plus(x, y);
+		double result = (double)sum / 2;
+		return result;
+	}
+	
+	void execute(int a1, int a2) {
+		double result = avg(a1, a2);
+		System.out.println(a1 + "과 " + a2 + "의 평균은 " + result);
+	}
 		
 	
 }
