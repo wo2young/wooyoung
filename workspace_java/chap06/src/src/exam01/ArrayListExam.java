@@ -1,7 +1,6 @@
 package src.exam01;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ArrayListExam {
 
@@ -35,7 +34,7 @@ public class ArrayListExam {
 		for(int i=0; i<list.size();i++) {
 			System.out.println(list.get(i));
 		}
-		ArrayList<String> list2 = new ArrayList();
+		ArrayList<String> list2 = new ArrayList<String>();
 		list2.add("첫번째");
 		list2.add("두번째");
 		
@@ -45,6 +44,11 @@ public class ArrayListExam {
 		
 		//배열 쉽게하기
 //		Arrays.sort(null); order by와 같이 정렬해준다.
+		
+		
+		
+		
+		
 		
 	}
 
