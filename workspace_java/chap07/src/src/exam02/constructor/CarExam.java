@@ -5,7 +5,11 @@ public class CarExam {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		new Car();
+//		Car c = new Car(null);
+		Car c2 = new Car("검정");
+		
+	
+		
 
 	}
 

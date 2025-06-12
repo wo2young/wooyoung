@@ -19,27 +19,30 @@ public class exam_1002 {
 		
 		
 		// (-10000,-10000)부터 (10000,10000)까지 만들기
-		int size = 20000;
-		int offset = 10000;
-		int x1, y1, y2 = 0;
+		int a;
+		int b;
+		int plus = 10000;
+		int minus = -10000;
+		int x1 = 0; 
+		int y1 = 0; 
+		int y2 = 0;
 		int r1 = 13;
 		int x2 = 40;
 		int r2 = 37;
 		
-		// (x1 + y1) - (x3 + y3) = +-r1 인 값이 가질수 있는 좌표중 
-		// (x2 + y2) - (x3 + y3) = +-r2 값을 넣었을때 동일한 x3,y3의 좌표 개수
-		for(int i=0; i <= size; i++) {
-			for(int j=0; j <= size; j++) {
-				int x = i-offset;
-				int y = i-offset;
-			} 
+		
+		// (x1, y1) - = (x3, y3)  인 값이 가질수 있는 좌표중 
+		// (x2, y2) - = (x3, y3)  값을 넣었을때 동일한 x3,y3의 좌표 개수
+		
+		if(minus <= x1 && minus <= y1) {
+			if(x1<= plus && y1<= plus) {
+				
+				
+			}
+			
 		}
 		
 	
-//		if() {
-			
-			
-//		}
 		
 		
 	}
