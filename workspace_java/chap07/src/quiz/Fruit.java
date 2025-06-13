@@ -13,7 +13,6 @@ public class Fruit {
 	
 	// 생성자
 	Fruit(){
-		this.scan = scan;
 		cnt = 0;
 	}
 	// 메서드
@@ -29,10 +28,6 @@ public class Fruit {
 			}
 		} return 0; 	
 	}
-	
-	
-	
-	
 	
 	void all() { // 메뉴판
 		for(int i=0; i< name.length; i++) {
@@ -75,7 +70,15 @@ public class Fruit {
 	}
 	
 	void menu2() { // 결제완료 메서드
-		System.out.println("결제 완료 되었습니다.");
+		System.out.print("결제할 과일 이름을 입력하세요: ");
+        String fruitName = scan.next();
+        int total = pay(fruitName);
+        if (total > 0) {
+            System.out.println("총 결제 금액은 " + total + "원입니다.");
+        	System.out.println("결제 완료 되었습니다.");
+        } else {
+            System.out.println("잘못된 과일 이름입니다.");
+        }
 	}
 	void menu3() { // 종료 메서드
 		System.out.println("종료합니다.");
