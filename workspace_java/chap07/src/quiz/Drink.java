@@ -7,10 +7,10 @@ public class Drink {
 	int price; // 가격
 	int stock; // 재고
 
-	@Override
 	public String toString() {
 	    return drink + " (" + price + "원)";
 	}
+}
 	
 	
 	
@@ -77,4 +77,4 @@ public class Drink {
 //	}
 	
 	
-}
+

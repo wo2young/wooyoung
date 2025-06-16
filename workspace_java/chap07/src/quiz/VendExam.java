@@ -11,17 +11,18 @@ public class VendExam {
 		vend.init();
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
-		System.out.println("돈을 넣어주세요");
+//		System.out.println("돈을 넣어주세요");
 		
 		
 		while(run) {
+			System.out.println("돈을 넣어주세요");
 			int money = sc.nextInt();
 		    vend.setMoney(money);
 			if(money == 0) {
 				System.out.println("돈을 넣어주세요");
 			}
 		    
-		    System.out.println("1.음료 선택, 2.종료");
+		    System.out.println("1.음료 선택, 2.잔돈 반환");
 
 		    int select = sc.nextInt();
 
@@ -32,14 +33,16 @@ public class VendExam {
 	    	    System.out.print("\n선택 >> ");
 	    	    String name = sc.nextLine();  // 여기서 진짜 사용자 입력 받음
 	    	    vend.selectDrink(name);       // 음료 선택
+//	    	    System.out.println("종료");
+	    	    
 		    } 
 //	    	else if(select == 2) {
 //		        vend.getPenny();
 //		    } 
 	    	    else if(select == 2) {
-		        System.out.println("종료");
 		        System.out.println("잔돈 : " + money);
 		        System.out.println("잔돈을 가져가 주세요");
+		        System.out.println("종료");
 //		        vend.getPenny();
 		        run = false; // 종료
 		    } else {
