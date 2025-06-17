@@ -84,7 +84,7 @@ public class VendingMachine {
 	            if (vend[i][j].drink.equals(drinkName)) {
 	                found = true;
 	                if (money >= vend[i][j].price) {
-//	                    System.out.println(vend[i][j]);
+	                    System.out.println(vend[i][j]);
 	                    System.out.println("음료가 나왔습니다. 가져가주세요.");
 	                    money -= vend[i][j].price;
 
@@ -121,7 +121,7 @@ public class VendingMachine {
 //	return 0;
 //	}
 			
-	// 품목보기
+//	 품목보기
 	void print() {
 		for(int i=0; i<vend.length; i++) {
 			for(int j=0; j<vend[0].length; j++) {
