@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1"><caption>제목</caption>
+        <tr>
+            <th>내용1</th>
+            <th>내용2</th>
+            <th>내용3</th>
+            <th>내용4</th>
+            <th>내용5</th>
+        </tr>
+        <tr>
+            <td>두번째줄 내용1</td>
+            <td>두번째줄 내용2</td>
+            <td>두번째줄 내용3</td>
+            <td>두번째줄 내용4</td>
+            <td>두번째줄 내용5</td>
+        </tr>
+        <tr>
+            <td>세번째줄 내용1</td>
+            <td>세번째줄 내용2</td>
+            <td>세번째줄 내용3</td>
+            <td>세번째줄 내용4</td>
+            <td>세번째줄 내용5</td>
+        </tr>
+    </table>
+    <hr>
+    <table border="1"><caption>제목</caption>
+        <tr>
+            <th></th>
+            <td>행제목</td>
+            <td>행제목</td>
+            <td>행제목</td>
+            <td>행제목</td>
+        </tr> <!-- row 행개수-->
+        <tr>
+            <th>열제목</th> <!--제목은 th-->
+            <td>두번째줄 내용2</td><!--내용은 td-->
+            <td>두번째줄 내용3</td>
+            <td>두번째줄 내용4</td>
+            <td>두번째줄 내용5</td>
+        </tr>
+        <tr>
+            <th>열제목</th>
+            <td>세번째줄 내용2</td>
+            <td>세번째줄 내용3</td>
+            <td>세번째줄 내용4</td>
+            <td>세번째줄 내용5</td>
+        </tr>
+    </table>
+    <hr>
+    <table border="1">
+        <caption>테이블 내용 설명</caption>
+        <symmary>행제목, 그냥(아무거나)</symmary> <!-- caption이나 symmary 둘중 하나 정도는 써야한다.-->
+        <thead>
+            <tr>
+                <th  width = "200" height = "100"></th> <!-- width는 너비 height 높이 설정-->
+                <th>행제목</th>
+                <td>행제목</td>
+                <td>행제목</td>
+                <td>행제목</td>
+            </tr> <!-- row 행개수-->
+            </thead><!--시멘틱적인 컴퓨터가 잘 이해하도록 가능하면 쓰는거-->
+        <tbody>
+            <tr>
+                <th colspan = "3">열제목</th> <!--colspan은 열병합-->
+                <td>두번째줄 내용2</td><!--내용은 td-->
+                <td>두번째줄 내용3</td>
+                <!-- <td>두번째줄 내용4</td>
+                <td>두번째줄 내용5</td> -->
+            </tr>
+            <tr>
+                <th>열제목</th>
+                <td rowspan ="3">세번째줄 내용2</td> <!-- rowspan은 행병합-->
+                <td>세번째줄 내용3</td>
+                <td>세번째줄 내용4</td>
+                <td>세번째줄 내용5</td>
+            </tr>
+            <tr>
+                <th>열제목</th>
+                <td>세번째줄 내용2</td>
+                <td>세번째줄 내용3</td>
+                <td>세번째줄 내용4</td>
+                <!-- <td>세번째줄 내용5</td> -->
+            </tr>
+            <tr>
+                <th>열제목</th>
+                <td>세번째줄 내용2</td>
+                <td>세번째줄 내용3</td>
+                <td>세번째줄 내용4</td>
+                <!-- <td>세번째줄 내용5</td> -->
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+</html>
