@@ -26,6 +26,21 @@ public class Exam {
 		if( i == 1 ) {
 			System.out.println("팀장 김동현");
 		}
+		
+		int a = 0;
+		int b = 1;
+		
+		
+		boolean menu = true;
+		
+		while(menu) {
+			if(a > 0 && b < 10) {
+					System.out.println(a+b);
+					break;
+			} 
+			System.out.println("조건에 맞지 않습니다.");
+			break;
+		} 
 
 	}
 
