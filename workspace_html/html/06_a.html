@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#bottom">맨 아래로</a>
+    <p id="top">
+        id top 자리
+    </p>
+    <a href="http://naver.com">네이버</a>
+    <br>
+    <a href="http://google.com" target="_blank">구글</a>
+    <br>
+
+    <a  href = "http://comic.naver.com" target="_blank">
+                    <img
+                        alt = "맜있는 사이"
+                        width="100" 
+                        src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2025/03/04/upload_3691036553044374321_202x164.jpeg">    
+                    </img>>
+    </a>
+    <br>
+    
+    <a href="01_hello.html">hellp.html</a>
+    <br>
+
+    <p style = "height: 1000px;">
+        첫문단 1000px
+    </p>
+    <a href="#top">맨 위로</a>
+    <strong id ="bottom">
+        id bottom 자리
+    </strong>
+    <a href="01_hello.html">hello.html</a>
+    <br>
+
+    <!-- 상대주소 -->
+     <!-- 
+        내 위치를 기준으로 삼는 주소
+        .은 내폴더고 ..은 부모폴더
+        가장 마지막의 / 이후의 주소를 갈아 치운다
+     -->
+     <a href="test/hell.html">test/hell.html</a>
+     <br>
+     <a href="./test/hell.html">test/hell.html</a>
+     <br>
+
+     <!-- 절대 주소-->
+     <a href=""></a>
+        <!--
+        1. 프로토콜 (http 등)
+        2. //로 시작하거나 (http://)
+        3. /로 시작하거나
+        3-0. 주소체계란 ip:port/주소들
+        3-1. ip:port 다음 나오는 /룰 기준 주소로 한다
+        -->
+        <a href="http://naver.com">네이버</a>
+        <a href="//naver.com">네이버</a>
+        <!-- http:..127.0.0.1:5500/html/06_a.html-->
+        <a href="/html/06_html">/html/06_a.html</a>
+        <a href="/html/test/hell.html">/html/test/hell.html</a>
+        
+
+</body>
+</html>
