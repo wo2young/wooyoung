@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <h1>
+            회원정보<hr><hr>
+        </h1>
+        <fieldset>
+            <legend>인적사항</legend>
+                이름 : <input type="text" placeholder="ID 입력요망">
+                주민번호 : <input type="number">-<input type="number"><br>
+                 국적 : <select name="country"><br>
+                    <option value="France">프랑스</option>
+                    <option value="Korea" selected>내국인(대한민국)</option>
+                    <option value="USA">미국</option>
+                    <option value="Germany">독일</option>
+                    <option value="others">기타</option>
+                    </select><br>
+                취득 자격증 : <select name="computer"><br>
+                    <option value="computer1" selected>컴퓨터활용자격증 1급</option>
+                    <option value="computer2">컴퓨터활용자격증 2급</option>
+                    <option value="com">정보처리기사 1급</option>
+                    <option value="com1">정보처리기사 2급</option>
+                    </select>
+                </fieldset>
+        <fieldset>
+            <legend>성별 & 학년</legend>
+                성별 : <input type="radio" name="gender" value="male">남성
+                       <input type="radio" name="gender" value="female">여성<br>
+                학년 : <input type="radio" name="year" value="freshman">1학년
+                <input type="radio" name="year" value="sophomore"checked>2학년
+                <input type="radio" name="year" value="junior">3학년
+                <input type="radio" name="year" value="senior">4학년
+                    </fieldset>
+                </form>
+              
+</body>
+</html>
