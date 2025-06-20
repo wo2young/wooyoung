@@ -1,0 +1,66 @@
+#pixel .box1{
+    font-size: 16px;
+
+    background-color: rgb(255,0,0);
+}
+#pixel .box1 .box2{
+    font-size: 20px;
+
+    background-color: rgba(5, 5, 236, 0.5);
+}
+#pixel .box1 .box2 .box3{
+    font-size: 35px;
+}
+#percent .box1{
+    font-size: 150%;
+
+    background-color: rgba(0, 0, 236, 0.5);
+}
+#percent .box1 .box2{
+    font-size: 150%;
+
+    background-color: rgba(60, 141, 44, 0.5);
+}
+#percent .box1 .box2 .box3{
+    font-size: 150%;
+}
+#em .box1{
+    font-size: 1.5em;
+
+    border: 1px solid red;
+    margin: 10px;
+}
+#em .box1 .box2 {
+    font-size: 1.5em;
+
+    border: 1px solid red;
+    margin: 10px;
+    
+}
+#em .box1 .box2 .box3{
+    font-size: 1rem;
+
+    border: 1px solid red;
+    margin: 10px;
+}
+
+#v1, #v2, #v3, #v4 {
+    border: 1px solid red;
+    margin: 10px;
+}
+/* viewport height 화면의 높이를 1~100으로 쪼갠 크기 */
+#v1{
+    height: 100vh;
+}
+/* viewport width 화면의 너비를 1~100으로 쪼갠 크기 */
+#v2{
+     width: 100vw;
+}
+/* vmin : 너비나 높이중에 좁은 쪽을 1~100으로 쪼갠 크기*/
+#v3{
+     height: 100vmin;
+}
+/* vmax : 너비나 높이중에 큰 쪽을 1~100으로 쪼갠 크기*/
+#v4{
+     height: 100vmax;
+}

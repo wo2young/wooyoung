@@ -1,0 +1,122 @@
+/* css 주석 */
+
+/* 전체 선택자 */
+* {
+    color: rgb(0, 17, 255);
+}
+
+/* tag 선택자 */
+
+h2 {
+    font-size: 1000%;
+    color: coral;
+}
+h2:hover{
+    background-color: black;
+}
+h2:active{
+    color: red;
+    font-size:300px;
+}
+
+/* id 선택지 */
+#a1 {
+    color: black
+}
+#div1{
+    background-color: gray;
+}
+/*마우스 올렸을 때*/
+#div1:hover{
+    background-color: yellow;
+}
+/* 클릭했을때 */
+#div1:active{
+    color:black;
+    font-size:40px;
+}
+
+/* class 선택자 */
+.c1 {
+    background-color: green;
+}
+.bigText{
+    font-size: 30px;
+}
+.text1:focus{
+    background-color: yellow
+}
+/*누군가의 첫째*/
+li:first-child{
+    color: blueviolet;
+}
+/* ul :first-child{
+    font-size: 30px;
+} */
+/* 실제 등장하는 첫쨰*/
+/* ul:first-of-type{
+    text-decoration: underline;
+} */
+tr:nth-child(2n-1){
+    color: black;
+    background-color: grey;
+}
+h3:after{
+    content: "AFTER";
+    font-size: 50px;
+}
+/* li {
+    border: 1px solid greenyellow;
+}
+
+h3 {
+    border: 1px solid greenyellow;
+}
+    */
+li, h3 {
+    border: 1px solid greenyellow;
+}
+
+ul.a.b:hover{
+    color: brown;
+    font-size: 30px;
+}
+/* 속성 존재하는 요소 */
+[href]{
+    color: black;
+}
+/* 속성과 값이 모두 일치하는 요소 */
+[id = naver]{
+    font-size: 30px;
+}
+/* 값으로 시작하는 속성과 속성 값의 요소 */
+[href^=https]{
+    color : green;
+    font-size: 30px;
+}
+input[type=password]:focus{
+    background-color: yellow;
+}
+/*  부정 선택자 */
+/* input 태그 중에서 c3 클래스가 없는 모든 것 */
+input:not(.class){
+    color: green;
+}
+/* 속성 값에서 단어로 존재(공백으로 분리)하는 것을 찾아 줌 */
+/* .c4 는  [class~="c4"]의 줄임말*/
+[class~="c4"]{
+    color: green;
+}
+
+::selection{
+    background-color: aqua;
+}
+
+input[type=checkbox]:checked{
+    width: 50px;
+    height: 50px;
+}
+input[type=checkbox]:checked + span {
+    font-size: 40px;
+    color: darkolivegreen;
+}

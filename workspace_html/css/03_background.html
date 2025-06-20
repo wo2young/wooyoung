@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        #back{
+            height: 100vh;
+            width: 100vw;
+            border: 1px solid red;
+
+            background-image: url(./asset/피카츄_\(1\).png),url(./asset/여신\ 카리나.png);
+            background-repeat: no-repeat; /* repeat는 반복임, no를 쓰면 반복안함, 안쓰면 반복*/
+            /* background-size: 50% 70%; 사이즈 변경은 수동으론 */
+            /* background-size: cover; */ /* 가득 채워지게 알아서 늘어남*/
+            background-size: contain;
+            background-position: center;
+        }
+        #back2{
+            height: 200vh;
+            
+            background-image: url(./asset/여신\ 카리나.png);
+            background-size: cover;
+            background-attachment: fixed;
+
+             overflow: auto;
+            }
+        #back2{
+            width: 100vw;
+        }
+        #back3{
+            background-color: #fab;
+        }
+        #back4{
+            height: 500px;
+
+            /*
+                background : color || image || repeat || attachment || position
+            */
+            background: #808 url('./asset/여신\ 카리나.png') no-repeat center;
+        }
+    </style>
+<body>
+    <p id="back">
+        sleep image<br>
+        lol image<br>
+        poketmon image<br>
+    </p>
+
+    <div id="back3">
+        글씨 하나
+    </div>
+   <div id="back2">
+    <p>어떤 글자</p>
+   </div>
+   <div>
+    <p id="back4">글자 글자</p>
+   </div> 부중대장 소위따리 3사출신 
+   
+</body>
+</html>

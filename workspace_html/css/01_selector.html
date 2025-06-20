@@ -4,85 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href= "asset/01_selector.css">
+
     <style>
-        /* css 주석 */
+      
 
-        /* 전체 선택자 */
-        * {
-            color: rgb(0, 17, 255);
-        }
-
-        /* tag 선택자 */
-        
-        h2 {
-            font-size: 1000%;
-            color: coral;
-        }
-        h2:hover{
-            background-color: black;
-        }
-        h2:active{
-            color: red;
-            font-size:300px;
-        }
-
-        /* id 선택지 */
-        #a1 {
-            color: black
-        }
-        #div1{
-            background-color: gray;
-        }
-        /*마우스 올렸을 때*/
-        #div1:hover{
-            background-color: yellow;
-        }
-        /* 클릭했을때 */
-        #div1:active{
-            color:black;
-            font-size:40px;
-        }
-
-        /* class 선택자 */
-        .c1 {
-            background-color: green;
-        }
-        .bigText{
-            font-size: 30px;
-        }
-        .text1:focus{
-            background-color: yellow
-        }
-        /*누군가의 첫째*/
-        li:first-child{
-            color: blueviolet;
-        }
-        ul :first-child{
-            font-size: 30px;
-        }
-        /* 실제 등장하는 첫쨰*/
-        ul:first-of-type{
-            text-decoration: underline;
-        }
-        tr:nth-child(2n-1){
-            color: black;
-            background-color: grey;
-        }
-        h3:after{
-            content: "AFTER";
-            font-size: 200px;
-        }
-        /* li {
-            border: 1px solid greenyellow;
-        }
-        
-        h3 {
-            border: 1px solid greenyellow;
-        }
-         */
-        li, h3 {
-            border: 1px solid greenyellow;
-        }
         
     </style>
 
@@ -90,7 +16,7 @@
 <body>
     <h1>hello world</h1>
     <h2 title = "바보">김현민</h2>
-    <ul>
+    <ul class="b">
         <li class="c1 bigText">li 1</li>
         <li id="a1" class="c1"> li 2</li>
         <li>li 3</li>
@@ -101,7 +27,7 @@
     </div>
     <input type="text" class="text1">
     <hr>
-    <u1>
+    <u1 class="a">
         <li>1</li>
         <li>2</li>
         <li>3</li>
@@ -133,5 +59,12 @@
 </table>
 
 <h3>before after</h3>
+
+<a href="http://naver.com" id = "naver">http://naver.com</a><br>
+<a href="https://google.com">https://google.com</a>
+
+<br>
+<input type="checkbox"><span>체크</span>
+
 </body>
 </html>
