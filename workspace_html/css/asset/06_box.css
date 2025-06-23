@@ -1,0 +1,114 @@
+body{
+    border: 1px solid black;
+}
+.first{
+    border: 1px solid red;
+
+    /* margin-top: 50px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    margin-left: 20px; */
+    /* margin 축약형 */
+    /* 4개일때 top, right, bottom, left */
+    margin: 50px 40px 30px 20px;
+    /* 3개일때 : top 좌우 bottom */
+    margin: 50px 40px 30px; 
+    /* 2개일때 : 위아래 좌우  */
+    margin: 50px 40px;
+    /* 1개일때 : 상하좌우(정사각형)  */
+    margin: 30px;
+
+    border-width: 3px;
+    border-style: dotted;
+    border-color: blue;
+
+    border-right: 2px dashed green;
+
+    border-radius: 10px;
+
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+
+    /* padding 축약형 */
+    /* 4개일때 top, right, bottom, left */
+    padding: 20px 15px 10px 5px;
+    /* 3개일때 : top 좌우 bottom */
+    padding: 20px 15px 10px; 
+    /* 2개일때 : 위아래 좌우  */
+    padding: 20px 15px;
+    /* 1개일때 : 상하좌우(정사각형)  */
+    padding: 20px;
+
+    width: 50vw;
+    height: 200px;
+
+    background-color: lemonchiffon;
+}
+
+.second{
+    /* 너비와 높이는 padding+border까지 */
+    /* font-size: 12px; */
+    box-sizing: border-box;
+    margin: 30px;
+    border-width: 3px;
+    border-style: dotted;
+    border-color: blue;
+    padding: 20px;
+
+    width: 50vw;
+    height: 200px;
+
+    background-color: lemonchiffon;
+}
+
+.profile img{
+    border: 1px solid red;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    margin: 0 20px;
+}
+
+.chat-left{
+    border: 1px solid black;
+    background-color: yellow;
+    width: 100px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 0 10px 10px 10px;
+}
+
+/* .profile2 img{
+    border: 1px solid red;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+
+    margin: 0 20 0 500px;
+} */
+
+.chat-right{
+    border: 1px solid black;
+    background-color: yellow;
+    width: 100px;
+    text-align: center;
+    padding: 5px;
+    margin: 0 0 0 500px;
+    border-radius: 0 10px 10px 10px;
+}
+.third{
+    border: 1px solid red;
+    width: 70%;
+
+    min-width: 500px;
+    max-width: 600px;
+}
+

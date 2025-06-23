@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'MarinesBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/MarinesBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+#p1{
+    color: red;
+
+    text-decoration: underline;
+
+    font-family: 'MarinesBold';
+}
+
+#a1{
+    text-decoration: none;
+}
+input[type=checkbox]:checked + span{
+    text-decoration: line-through;
+    color:gray;
+}
+.size{
+    font-size: 200%;
+}
+
+.style{
+    font-style: italic;
+}
+em{
+    font-style: normal;
+}
+
+.fw-100{
+    font-weight: 100;
+}
+.fw-400{
+    font-weight: 400;
+}
+.fw-900{
+    font-weight: 900;
+}
+.fw-2000{
+    font-weight: 2000;
+}
+.fw-bold{
+    font-weight: bold;
+}
+.fake-h1{
+    font-size: 2em;
+    font-weight: bold;
+}
+.spacing{
+    letter-spacing: -0.1em;
+}
+.lh{
+    line-height: 200%;
+}
+.middle{ /* height와 line-height를 사용해 가운데 정렬*/
+    border: 1px solid red;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
