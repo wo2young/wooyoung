@@ -1,0 +1,49 @@
+.back{
+    width: 100vw;
+    height: 50vh;
+    background-image: url(https://html5up.net/uploads/demos/tessellate/images/header.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.back .first{
+    text-align: center;
+    padding-top: 10%;
+    padding: auto;
+
+    font-size: 200%;
+    font-weight: 200;
+    color: white;
+}
+.back .second{
+    text-align: center;
+
+    margin-bottom: 40px;
+
+    padding-top: 2%;
+    padding: auto;
+
+    font-size: 120%;
+    font-weight: 200;
+    color: white;
+}
+.back .third{
+    box-sizing: border-box;
+    width: 255px;
+    height: 55px;
+    border: 0.5px solid white;
+    
+    text-align: center;
+    margin: 1% auto;
+
+    padding: 1%;
+
+    font-size: 100%;
+    font-weight: 300;
+    color: white;
+
+    background-color: rgba(255, 255, 255, 0.233);
+    border-radius: 5px;
+}
+.back .but{
+    border-bottom: 1px dotted white;
+}
