@@ -1,0 +1,129 @@
+body{
+    background-color: black;
+    height: 200vh;
+    color: white;
+}
+
+div{
+    border: 1px solid greenyellow;
+}
+.parent{
+    width: 100px;
+    background-color: blue;
+    color: white;
+    margin: 20px;
+}
+.child{
+    width: 90px;
+    background-color: rgba(222, 0, 0, 0.5);
+}
+.relative{
+    /* 내가 가지고 있던 공간을 유지한다. */
+    position: relative;
+    top: 10px;
+    left: -10px;
+    left: 50%;
+}
+.absolute{
+    /* 부모중에 relative(없으면 body) 기준으로 이동 */
+    /* 내가 가지고 있던 공간은 없어진다. */
+    position: absolute;
+    left: 0px;
+    top: 0;
+}
+.absolute-bottom{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.fixed{
+    background-color: aqua;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+.sticky{
+    position: sticky;
+    top: 20px;
+}
+.rel{
+    position: relative;
+    color: black;
+}
+.rel:hover{
+    z-index: 99;
+}
+.z1{
+    background-color: red;
+
+    top: 5px;
+    left: 10px;
+    z-index: 3;
+}
+.z2{
+    background-color: cornflowerblue;
+    top: -10px;
+    left: -20px;
+    z-index: 2;
+}
+.z3{
+    background-color: gold;
+     top: -25px;
+    left: 40px;
+    z-index: 1;
+}
+
+ ul.main{
+    background-color: yellow;
+    position: relative;
+    top: -50px;
+    color: black;
+    
+}
+ ul.main:hover{
+    background-color: aqua;   
+}
+
+ ul.main + ul{
+    position: relative;
+    top: -66px;
+    background-color: violet;
+    display: none;
+}
+ul.main:hover + ul{
+    display: block;
+}
+ul.main + ul:hover{   
+    display: block;
+}
+.c1{
+    position: absolute;
+    top: 10px;
+    left: 200px;
+}
+.p1{
+    position: relative;
+}
+.p2{
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+
+    position: relative;
+}
+
+.c2{
+
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
