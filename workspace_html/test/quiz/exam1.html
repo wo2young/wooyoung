@@ -5,10 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        
+        #all{
+            display: inline-block;
+
+            /* border: 1px solid blue; */
+            width: 100px;
+            height: 500px;
+        }
+        #all .img{
+            /* border: 1px solid black; */
+            width: 100px;
+            height: 100px;
+            /* display: inline-block; */
+        }
+
+        /* .one.two.three.four.five > img{
+            width: 500px;
+            height: 500px;
+        } */
+        /* .big{
+            border: 1px solid black;
+            width: 500px;
+            height: 500px;
+            /* display: none; */
+        /* } */
+
+        /* #big > img {
+            position: relative;
+
+            display: inline-block;
+        } */
+        .one{
+            position: absolute;
+            top: 40px;
+            left: 200px;
+             z-index: 5;
+        }
+        .two{
+            position: absolute;
+            top: 40px;
+            left: 200px;
+            z-index: 4;
+        }
+        .three{
+            position: absolute;
+            top: 40px;
+            left: 200px;
+            z-index: 3;
+        }
+        .four{
+            position: absolute;
+            top: 40px;
+            left: 200px;
+            z-index: 2;
+        }
+        .five{
+            position: absolute;
+            top: 40px;
+            left: 200px;
+            z-index: 1;
+        }
+        div.img1:hover + .one {
+            z-index: 99;
+        }
+        div.img2:hover + .two {
+            z-index: 99;
+        }
+        div.img3:hover + .three {
+            z-index: 99;
+        }
+        div.img4:hover + .four {
+            z-index: 99;
+        }
+        div.img5:hover + .five {
+            z-index: 99;
+        }
+        div > img{
+            width: 100px;
+            height: 100px;
+        }
+        span > img{
+            width: 500px;
+            height: 500px;
+        }
     </style>
 </head>
 <body>
-    
+    <div id="all">
+            <div class="img1">
+                <img src="https://thumbnail8.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/7/6b7801e4-d222-42db-8eef-2fc07db5876c.jpg" alt="">
+            </div>
+             <span class="one">
+                <img src="https://thumbnail8.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/7/6b7801e4-d222-42db-8eef-2fc07db5876c.jpg" alt="">
+             </span>
+            <div class="img2">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/2/8e07f068-4bfc-4013-b819-9600e63453e6.jpg" alt="">
+            </div>
+            <span class="two">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/2/8e07f068-4bfc-4013-b819-9600e63453e6.jpg" alt="">
+            </span>
+            <div class="img3">
+                <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/3/768dce66-1d95-4e3b-ab93-304decdf3326.jpg" alt="">
+            </div>
+            <span class="three">
+                <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/3/768dce66-1d95-4e3b-ab93-304decdf3326.jpg" alt="">
+            </span>
+            <div class="img4">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/3/27c38d24-99df-4181-8413-8748a2229321.jpg" alt="">
+            </div>
+            <span class="four">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/3/27c38d24-99df-4181-8413-8748a2229321.jpg" alt="">
+            </span>
+            <div class="img5">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/0/6b0a169e-e9b8-4ff4-bc94-b94915189b8b.jpg" alt="">
+            </div>
+             <span class="five">
+                <img src="https://thumbnail10.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/0/6b0a169e-e9b8-4ff4-bc94-b94915189b8b.jpg" alt="">
+             </span>
+
+        <!-- <div id="big">
+           
+            
+            
+            
+           
+        </div> -->
+    </div>
 </body>
 </html>
