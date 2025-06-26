@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        article img{
+            border: 1px solid green;
+            float: left;
+        }
+        .box{
+            border: 1px solid red;
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+        .left{
+            border: 1px solid blue;
+            float: left;
+        }
+        .right{
+            /* position: relative;
+            left: 10px; */
+            border: 1px solid black;
+            float: right;
+        }
+
+        .d1{
+            background-color: rgba(255, 0, 0, 0.904);
+        }
+        .d2{
+            background-color: yellow;
+        }
+        .d3{
+            background-color: blue;
+        }
+        .claer{
+            clear: both;
+        }
+        .clearfix:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <img src="https://thumbnail8.coupangcdn.com/thumbnails/remote/48x48ex/image/retail/images/2024/09/10/15/7/6b7801e4-d222-42db-8eef-2fc07db5876c.jpg" alt="">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio minima iste iure voluptate ipsam saepe error voluptatum ipsa. Incidunt debitis sint alias temporibus, nisi beatae omnis accusamus perspiciatis eveniet obcaecati.
+    </article>
+    <div style="clear: both;"></div>
+
+    <div class="box left">1</div>
+    <div class="box left">2</div>
+    <div class="box right">3</div>
+    <div class="box right">4</div>
+    
+    <div style="clear: both;"></div>
+
+    <!-- <div style="overflow: hidden;"> -->
+    <div>
+        <div class="box d1 left">d1</div>
+        <div class="box d2 right">d2</div>
+        <div class="clear"></div>
+    </div>
+    <div class="d3">d3</div>
+    
+    <div class="claerfix">
+        <div class="box d1 left">d11</div>
+        <div class="box d2 right">d12</div>
+        <div class="clear"></div>
+    </div>
+    <div class="d3">d3</div>
+    
+</body>
+</html>
