@@ -5,22 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
+        .rotate{
+            border: 5px solid black;
+            height: 50vh;
+
+            display: flex;
+            justify-content: space-around;
+            align-items:center;
+        }
         .rotate>img{
             height: 500px;
             width: 500px;
         }
-        .rotate:hover{
-            transition: ease-in-out 0.5s;
-            transform: translate(10px, 20px);
-            transform: scale(3);
-            transform: rotate(-150deg);
+        /* .rotate:hover{
+             transition: ease-in-out 0.5s;
+            transform: translate(10px, 20px) scale(0.7) rotate(-180deg);
         }
+         .one:hover{
+            transform: scale(0.7); */
+         /* } */
+        .one:hover + .two{
+            transition: ease-in-out 0.7s;
+            transform: translate(10px, 20px) scale(0.7) rotate(-180deg);
+        }
+        .two:hover{
+            transition: ease-in-out 0.7s;
+            transform: translate(10px, 20px) scale(0.7) rotate(-180deg);
+        }
+         .two:hover ~ .one{
+            transform: scale(0.7);
+         }
+        
+        
     </style>
 </head>
 <body>
-    <div class="rotate">
-        <img src="https://media1.tenor.com/m/udteokRZzusAAAAd/xalem-yee.gif" alt="">
+    <div class="rotate one">
+        <img src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif" alt="">
+        <img src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif" alt="">
     </div>
+    <div class="rotate two">
+        <img src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif" alt="">
+        <img src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif" alt="">
+    </div>
+
+    <div class="rotate">
+        <img class="one" src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif">
+        <img class="two" src="https://media1.tenor.com/m/Jqud2e84eJwAAAAd/%EC%9D%B8%EC%A7%81-%EA%B0%90%EC%8A%A4%ED%8A%B8.gif">
+    </div>
+
+    <script>
+        const two = document.querySelector('.two');
+        const one = document.querySelector('.one');
+
+        two.addEventListener('mouseenter', () => {
+            one.style.transform = 'scale(0.7)';
+            one.style.transition = 'transform 0.5s ease-in-out';
+         });
+
+        two.addEventListener('mouseleave', () => {
+            one.style.transform = 'scale(1)';
+        });
+    </script>
      
 </body>
 </html>
