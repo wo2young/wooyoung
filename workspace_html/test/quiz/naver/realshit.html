@@ -65,38 +65,85 @@
             right: 0px;
         }
         .search {
+            position: relative;
             width: 700px;
-            height: 40px;
+            height: 60px;
             margin: 10px auto;
-
-            padding: 10px 10px; /* 왼쪽/오른쪽에 여백 확보 */
-            font-size: 2em;
-            border-radius: 30px;
             border: 1px solid rgb(49, 235, 2);
-            
-            background: url('./N images.png') no-repeat left 10px center, url('./돋보기.PNG') no-repeat right 10px center;
-            background-size: 40px 40px 40px 30px;
+            border-radius: 30px;
+            padding: 0 50px; /* 양쪽 아이콘 공간 확보 */
+            background-color: white;
         }
-        input{
-            width: 600px;
+         .search input {
+            width: 700px;
+            height: 58px;
+            font-size: 1.2em;
+            border: none;
+            outline: none;
+        }
+            .search .left-icon,
+            .search .right-icon {
+            position: absolute;
+            width: 50px;
             height: 40px;
-            vertical-align: top;
-
-            border: white;
-            /* display: none; */
-
-            font-size: 0.6em;
-            font-weight: 300;
-            /* color: rgba(128, 128, 128, 0.226); */
+            top: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+            .search .left-icon {
+            left: 10px;
+            background-image: url('./N images.png');
+        }
+            .search .right-icon {
+            right: 10px;
+            background-image: url('./돋보기.PNG');    
         }
         #under{
             height: 40px;
-            border: 1px solid red;
+            /* border: 1px solid red; */
             position: relative;
         }
         #undername > div{
             display: inline-block;
+            position: relative;
         }
+        #undername #one{
+            position: absolute;
+            left: 404px;
+        }
+        #undername #two{
+            position: absolute;
+            left: 474px;
+        }
+        #undername #three{
+            position: absolute;
+            left: 540px;
+        }
+        #undername #four{
+            position: absolute;
+            left: 612px;
+        }
+        #undername #five{
+            position: absolute;
+            left: 692px;
+        }
+        #undername #six{
+            position: absolute;
+            left: 764px;
+        }
+        #undername #seven{
+            position: absolute;
+            left: 829px;
+        }
+        #undername #eight{
+            position: absolute;
+            left: 912px;
+        }
+        #undername #nine{
+            position: absolute;
+            left: 980px;
+        }
+       
         #under #one{
             height: 40px;
             width: 40px;
@@ -105,7 +152,7 @@
             background-repeat: no-repeat;
             background-image: url(./sp_main.04eb92b7.png);
             position: absolute;
-            left: 300px;
+            left: 390px;
             
         }
         #under #two{
@@ -118,7 +165,7 @@
             background-repeat: no-repeat;
 
             position: absolute;
-            left: 365px;
+            left: 462px;
             /* top: 0.6px; */
         }
         #under #three{
@@ -130,7 +177,7 @@
             height: 40px;
 
             position: absolute;
-            left: 430px;
+            left: 534px;
             /* top: -1px; */
         }
         #under #four{
@@ -141,7 +188,7 @@
             width: 40px;
             height: 40px;
             position: absolute;
-            left: 495px;
+            left: 606px;
             /* top: 12px; */
         }
         #under #five{
@@ -153,7 +200,7 @@
             height: 40px;
 
             position: absolute;
-            left: 560px;
+            left: 678px;
             /* top: 12px; */
         }
         #under #six{
@@ -165,6 +212,7 @@
             height: 40px;
 
             position: absolute;
+            left: 750px;
         }
         #under #seven{
             background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
@@ -175,6 +223,7 @@
             height: 40px;
 
             position: absolute;
+            left: 822px;
         }
         #under #eight{
            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
@@ -185,8 +234,8 @@
             height: 40px;
 
             position: absolute;
-            /* left: 715px;
-            top: 12px; */
+            left: 894px;
+            /* top: 12px; */
         }
         #under #nine{
             background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
@@ -197,8 +246,8 @@
             height: 40px;
 
             position: absolute;
-            /* left: 765px;
-            top: 12px; */
+            left:966px;
+            
         }
         .main{
             /* margin: 70px 0; */
@@ -386,6 +435,19 @@
             height: 90px;
             width: 300px;
         }
+        button{
+            border: 1px white;
+            height: 50px;
+            width: 290px;
+            background-size: cover;
+            background-image: url(./로그인.png);
+            
+        }
+        a{
+            font-size: 1em;
+            font-weight: 300;
+            color: grey;
+        }
     </style>
 </head>
 <body>
@@ -396,32 +458,32 @@
         <div id="aram"></div>
         <a href="https://shopping.naver.com/cart"><div id="basket"></div></a>
     </div>
-    <div class="search">
-        <!-- <img src="./N images.png" alt=""> -->
-        <input type="text" placeholder="검색어를 입력해주세요">
-        <!-- <img src="./돋보기.PNG" alt=""> -->
+   <div class="search">
+         <a href="https://www.naver.com" class="left-icon"></a>
+         <input type="text" placeholder="검색어를 입력해주세요">
+        <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=&ackey=qo4mrmw8" class="right-icon"></a>
     </div>
     <div id="under">
-        <div id="one"></div>
-        <div id="two"></div>
-        <div id="three"></div>
-        <div id="four"></div>
-        <div id="five"></div>
-        <div id="six"></div>
-        <div id="seven"></div>
-        <div id="eight"></div>
-        <div id="nine"></div>
+        <a href="https://mail.naver.com"><div id="one"></div></a>
+        <a href="https://cafe.naver.com"><div id="two"></div></a>
+        <a href="https://blog.naver.com"><div id="three"></div></a>
+        <a href="https://shopping.naver.com/ns/home"><div id="four"></div></a>
+        <a href="https://news.naver.com/"><div id="five"></div></a>
+        <a href="https://finance.naver.com/"><div id="six"></div></a>
+        <a href="https://land.naver.com/"><div id="seven"></div></a>
+        <a href="https://map.naver.com"><div id="eight"></div></a>
+        <a href="https://comic.naver.com"><div id="nine"></div></a>
     </div>
     <div id="undername">
-        <div>메일</div>
-        <div>카페</div>
-        <div>블로그</div>
-        <div>스토어</div>
-        <div>뉴스</div>
-        <div>증권</div>
-        <div>부동산</div>
-        <div>지도</div>
-        <div>웹툰</div>
+        <div id="one">메일</div>
+        <div id="two">카페</div>
+        <div id="three">블로그</div>
+        <div id="four">스토어</div>
+        <div id="five">뉴스</div>
+        <div id="six">증권</div>
+        <div id="seven">부동산</div>
+        <div id="eight">지도</div>
+        <div id="nine">웹툰</div>
     </div>
     
 
@@ -481,8 +543,10 @@
         <!-- 오른쪽 작은 창들 -->
         <div class="right">
             <div id="login">네이버를 더 안정하고 편리하게 이용하세요 <br><br>
-                <button>로그인</button><br><br>
-                아이디 찾기 | 비밀번호 찾기 | 회원가입
+            <a href="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"><button></button></a>  <br><br>  
+               <a href="https://nid.naver.com/user2/api/route?m=routeIdInquiry"> 아이디 찾기 |</a> 
+               <a href="https://nid.naver.com/user2/api/route?m=routePwInquiry"> 비밀번호 찾기 | </a> 
+               <a href="https://nid.naver.com/nidregister.form?url=https%3A%2F%2Fwww.naver.com"> 회원가입 </a>
             </div>
             <div id="one"> 
                 <img src="https://ssl.pstatic.net/melona/libs/1537/1537838/e3035415e2d3dadaefb4_20250627180200187.jpg" alt="">
