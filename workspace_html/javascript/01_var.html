@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 한줄 주석
+        /* 범위 주석
+        */ 
+       console.log("Hello World");
+
+       // 변수 선언 1
+       var a = 10;
+       console.log('a : ' + a);
+        // 변수 선언 2
+        b = 20;
+        console.log('b : '+ b);
+        // 변수 선언 3
+        // let은 
+        let c = 30;
+        console.log('c : ' + c);
+        // 변수 선언 4
+        // const는 java에 final 개념
+        const d = 40;
+        console.log('d : ' + d);
+        // d = 50;
+
+        // console.log(e);
+
+        //var은 재선언 가능
+        var a = 20;
+        console.log('a : '+a)
+        b = 30; // 타입없이 쓴 이친구는 어디서든 쓸수 있는 변수가 되어버림(글로벌 변수)
+
+        c = 40;
+        // let과 const는 재선언이 불가함
+        // let c = 30;// 자바에 변수와 가장 유사하다.
+
+        //javascript는 java에 int와 같은 타입이 없음. 그냥 숫자든 문자든 사용가능
+        c = "김현민";
+        console.log("c : " + c);
+        console.log(typeof c);
+
+        let f = 1;
+        let g = "1";
+        console.log(f == g); // 값만 비교
+        console.log(f === g); // 값+타입까지 비교 and조건임 둘다 같아야함
+
+        let h;
+        console.log('h : ' + h);
+
+        console.log( 1.5 + 2 );
+        console.log( typeof 1.5 + 2 );
+
+        console.log( g + 2 );
+        console.log( g * 2 ); // 연산이 되는데 곱하기와 나누기, 나머지는 
+        console.log( g % 2 ); // 계산식으로 보고 문자를 숫자로 바꿔보고 바뀌면 계산하고 안되면 NaN으로 나온다. 
+        console.log(Number(g) + 2);
+        console.log(parseInt(8.5 + 2) );
+
+        h = "이것"
+        console.log(h * 2);
+        console.log(isNaN(h * 2));
+        console.log( 5/0);
+        console.log( isFinite(5/0));
+
+        console.log("이전");
+        alert("hello\nworld"); // 확인 전까지 밑에 내용이 안나옴
+        console.log("이후");
+
+        const result1 = confirm("찐이야?");
+        console.log('result1', result1);
+
+        const result2 = prompt('비번을 입력하세요');
+        console.log('result2', result2);
+
+        console.log('입력한 글씨는 ' + result2 + '입니다')
+        console.log(`입력한 글씨는 ${result2} 입니다`)
+        // 물결을 쉬프트 안누른 친구(백틱)로 감싸주면 엔터도 먹고 +도 안쓰고 좋음
+    
+        console.error("에러?");
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

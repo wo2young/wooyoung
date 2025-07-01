@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* margin: 20px; */
+            /* padding: 0 30px; */
+            text-align: center;
+            /* border-top: 2px solid black; */
+        }
+        .menu{
+            width: 1200px;
+            height: 30px;
+            position: relative;
+
+            /* border-top: 1px solid black; */
+        }
+        .menu > div{
+            display: inline-block;
+        }
+        .menu #menu{
+            height: 40px;
+            width: 40px;
+            background-image: url(./메뉴.PNG);
+            /* background-size: 463px 442px; */
+            position: absolute;
+            left: 30px;
+        }
+        .menu #pay{
+            height: 40px;
+            width: 40px;
+            background-image: url(./pay.png);
+
+            position: absolute;
+            left: 70px; 
+        }
+        .menu #chat{
+            height: 40px;
+            width: 40px;
+            background-image: url(./coxld.PNG);
+            background-repeat: no-repeat;
+
+            position: absolute;
+            right: 75px;
+        }
+        .menu #aram{
+            height: 40px;
+            width: 40px;
+            background-image: url(./알림.PNG);
+            
+            position: absolute;
+            right: 40px;
+            top: -5px;
+        }
+        .menu #basket{
+            height: 40px;
+            width: 40px;
+            background-image: url(./장바구니.PNG);
+            position: absolute;
+            
+            top: -2px;
+            right: 0px;
+        }
+        .search {
+            width: 700px;
+            height: 40px;
+            margin: 10px auto;
+
+            padding: 10px 10px; /* 왼쪽/오른쪽에 여백 확보 */
+            font-size: 2em;
+            border-radius: 30px;
+            border: 1px solid rgb(49, 235, 2);
+            
+            background: url('./N images.png') no-repeat left 10px center, url('./돋보기.PNG') no-repeat right 10px center;
+            background-size: 40px 40px 40px 30px;
+        }
+        input{
+            width: 600px;
+            height: 40px;
+            vertical-align: top;
+
+            border: white;
+            /* display: none; */
+
+            font-size: 0.6em;
+            font-weight: 300;
+            /* color: rgba(128, 128, 128, 0.226); */
+        }
+        #under{
+            height: 40px;
+            border: 1px solid red;
+            position: relative;
+        }
+        #undername > div{
+            display: inline-block;
+        }
+        #under #one{
+            height: 40px;
+            width: 40px;
+            background-size: 463px 442px;
+            background-position: -205px -219px;
+            background-repeat: no-repeat;
+            background-image: url(./sp_main.04eb92b7.png);
+            position: absolute;
+            left: 300px;
+            
+        }
+        #under #two{
+            height: 40px;
+            width: 40px;
+
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -41px -219px;
+            background-repeat: no-repeat;
+
+            position: absolute;
+            left: 365px;
+            /* top: 0.6px; */
+        }
+        #under #three{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: 0px -219px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+            left: 430px;
+            /* top: -1px; */
+        }
+        #under #four{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -41px -260px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 495px;
+            /* top: 12px; */
+        }
+        #under #five{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -270px -205px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+            left: 560px;
+            /* top: 12px; */
+        }
+        #under #six{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -123px -260px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+        }
+        #under #seven{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: 0px -260px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+        }
+        #under #eight{
+           background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -270px 0px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+            /* left: 715px;
+            top: 12px; */
+        }
+        #under #nine{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -164px -260px;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+            /* left: 765px;
+            top: 12px; */
+        }
+        .main{
+            /* margin: 70px 0; */
+            /* border: 1px solid red; */
+            height: 600px;
+            width: 1200px;
+            padding: 15px;
+            /* display: inline-block; */   
+        }
+        .left > div{
+            margin-bottom: 10px;
+        }
+        .right > div{
+            margin-bottom: 10px;
+        }
+        .main .left{
+            /* border: 1px solid blue; */
+
+            height: 570px;
+            width: 800px;
+            /* box-sizing: border-box; */
+            /* padding: 10px; */
+            margin: 15px;
+            margin-bottom: 0;
+            vertical-align: top;
+            display: inline-block;
+        }
+        .left > div{
+            margin-bottom: 15px;
+        }
+        .main .left .ani{
+            border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+            height: 120px;
+            width: 800px;
+            position: relative;
+            overflow: hidden;
+         }
+        .ani img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fade 17s infinite;
+            animation-fill-mode: both;
+        }
+        
+        .ani img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .ani img:nth-child(2) {
+            animation-delay: 8.5s;
+        }
+        
+         @keyframes fade {
+            0%   { opacity: 0; }
+            5%   { opacity: 1; }
+            45%  { opacity: 1; }
+            50%  { opacity: 0; }
+            100% { opacity: 0; }
+         }
+        
+        .main .left .news{
+            border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+
+            padding: 10px;
+            height: 300px;
+            width: 780px;
+        }
+        .main .left #first{
+            /* border: 1px solid rgba(0, 0, 0, 0.091); */
+            height: 50px;
+            width: 780px;
+
+            text-align: left;
+            font-size: 1.3em;
+
+            margin-bottom: 10px;
+        }
+        .main .left #second{
+           border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+            height: 50px;
+            width: 780px;
+
+            text-align: left;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            padding: 10px;
+
+            background-color: rgba(128, 128, 128, 0.068);
+        }
+        #second > #left{
+            display: inline-block;
+        }
+        #second > #right{
+            margin-left: 250px;
+            display: inline-block;
+        }
+        .main .left #table{
+            border: 1px solid rgba(0, 0, 0, 0.123);
+            height: 180px;
+            width: 780px;
+
+            display: grid;
+            grid-template-columns: 130px 130px 130px 130px 130px 130px;
+            grid-template-rows: 45px 45px 45px 45px;
+        }
+        #table > div{
+            border: 1px solid rgba(0, 0, 0, 0.123);
+            
+            /* width: 100%;
+            height: 80%; */
+        }
+         #table > div >img{
+
+            padding: 5px;
+            width: 80px;
+            height: 30px;
+             
+         }
+        
+        #underbar{
+            margin: 0 auto;
+            margin-top: 0;
+            border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+            height: 40px;
+            box-sizing: border-box;
+            padding: 5px;
+            
+        }
+        .main .right{
+            /* border: 1px solid blue; */
+
+            height: 570px;
+            width: 300px;
+
+            margin: 15px;
+
+            vertical-align: top;
+
+            display: inline-block;
+        }
+        .right > div{
+            margin-bottom: 20px;
+        }
+        .main .right #login{
+            border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+            height: 160px;
+            width: 300px;
+
+        }
+        .main .right #one{
+            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            background-size: 463px 442px;
+            background-position: -205px -219px;
+
+            border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+
+           height: 250px;
+            width: 300px;
+        }
+        #one > img{
+            height: 250px;
+            width: 300px;
+            /* margin-bottom: 10px; */
+        }
+        .main .right #two{
+             border: 1px solid rgba(0, 0, 0, 0.138);
+            border-radius: 10px;
+
+            height: 90px;
+            width: 300px;
+        }
+        #two > img{
+            height: 90px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <div id="menu"></div></a>
+        <a href="https://order.pay.naver.com/home"><div id="pay"></div></a>
+        <div id="chat"></div>
+        <div id="aram"></div>
+        <a href="https://shopping.naver.com/cart"><div id="basket"></div></a>
+    </div>
+    <div class="search">
+        <!-- <img src="./N images.png" alt=""> -->
+        <input type="text" placeholder="검색어를 입력해주세요">
+        <!-- <img src="./돋보기.PNG" alt=""> -->
+    </div>
+    <div id="under">
+        <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div>
+        <div id="four"></div>
+        <div id="five"></div>
+        <div id="six"></div>
+        <div id="seven"></div>
+        <div id="eight"></div>
+        <div id="nine"></div>
+    </div>
+    <div id="undername">
+        <div>메일</div>
+        <div>카페</div>
+        <div>블로그</div>
+        <div>스토어</div>
+        <div>뉴스</div>
+        <div>증권</div>
+        <div>부동산</div>
+        <div>지도</div>
+        <div>웹툰</div>
+    </div>
+    
+
+    <!-- 왼쪽 오른쪽 다 합친 친구 -->
+    <div class="main">
+
+        <!-- 왼쪽 큰 창들 -->
+        <div class="left">
+            <div class="ani">
+                <img src="https://ssl.pstatic.net/melona/libs/1535/1535899/7b69ff469864fc7032db_20250627165305187.jpg" alt="">    
+                <img src="https://ssl.pstatic.net/melona/libs/1535/1535899/22168d48f694a4c3af3d_20250627165307271.jpg" alt="">
+            </div>
+            <div class="news">
+                <div id="first">뉴스스탠드·언론사편집 / 엔터 / 스포츠LIVE / 경제 / 쇼핑투데이</div>
+                <div id="second">
+                    <div id="left">[2보] 대검 차장 노만석·서울중앙지검장 정진우…동부지검장 임은정</div>
+                    <div id="right">뉴스홈</div>
+                </div>
+                        
+                <div id="table">
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/920.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd174041516.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd182845526.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd18180929.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/117.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd182533332.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd161750512.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd173331727.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd17313279.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0421/nsd113059820.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2020/0610/nsd151458769.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd181542864.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/117.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd1750914.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/331.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/983.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/311.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/971.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/925.png"" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/013.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/up/2025/0418/nsd161857755.png" alt=""></div>
+                    <div><img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/447.png" alt=""></div>
+                </div>
+            </div>
+            <div id="underbar">
+               이전 페이지언론사 더보기1페이지전체/4
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- 오른쪽 작은 창들 -->
+        <div class="right">
+            <div id="login">네이버를 더 안정하고 편리하게 이용하세요 <br><br>
+                <button>로그인</button><br><br>
+                아이디 찾기 | 비밀번호 찾기 | 회원가입
+            </div>
+            <div id="one"> 
+                <img src="https://ssl.pstatic.net/melona/libs/1537/1537838/e3035415e2d3dadaefb4_20250627180200187.jpg" alt="">
+            </div>
+            <div id="two">
+                <img src="https://s.pstatic.net/static/www/mobile/edit/20250617_1095/upload_1750132891540Xhnu2.png" alt="">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // array(배열)은 변수의 집합
+        
+        // 배열 변수를 만드는 가장 쉬운 방법
+        let arr = [];
+        // 두번째 방법
+        let arr2 = new Array();
+
+        // 값을 미리 알고 있을 때
+        arr = [1,2,3];
+        arr = new Array(1,2,3);
+
+        console.log('arr[0] : ', arr[0])
+        arr[0] = 10;
+        console.log('arr[0] : ', arr[0])
+
+        console.log(arr)
+        console.log('arr : ', arr)
+        console.log('arr : ' + arr)
+
+        arr[10] = 10; //?? 씨방새가 그냥 만들어준다
+        console.log('arr : ', arr);
+        console.log('arr[20] : ', arr[20]); // 이건 선언 안 했다고 undefined가 나온다
+
+        // index에는 변수가 올 수 있고
+        // js의 변수는 아무거나 넣을 수 있음
+        // 아래의 경우 배열의 길이에 영향을 주지 않는다
+        arr["name"] = "우영";
+        console.log("arr :", arr);
+        console.log("arr :", arr[name]);
+        
+        console.log("arr :", arr.length);
+
+
+        const str = "휴먼교육센터"
+        // 이새끼가 싸가지 없이 const로 만들었는데 왜 갑자기 배열을 부르니까 "휴"가 나와
+        console.log('str[0]', str[0]);
+
+        for(let i=0; i<str.length; i++){
+            console.log(str[i]);
+        }
+
+        let 중식 = ['짜장면', '짬뽕', '탕수육', '짬짜면'];
+        let 양식 = ['피자', '파스타', '돈까스'];
+        let 파스타 = ['까르보나라', '봉골레', '토마토', '로제'];
+        let 음식 = [중식, 양식, 파스타];
+
+        for(i=0; i<음식.length; i++){
+            for(j=0; j<음식[i].length; j++){
+                console.log(음식[i][j]);
+            }
+        }
+        arr = [1,2,3,4];
+        // js에서 배열을 ArrayList처럼 메소드 사용하기
+        
+        // 마지막에 하나 추가
+        arr.push(5);
+        console.log(arr);
+
+        // 맨 처음에 하나 추가
+        arr.unshift(0);
+        console.log(arr);
+
+        // 맨 앞에거 빼서 돌려줌
+        // 원본이 바뀜
+        let shift = arr.shift();
+        console.log(arr);
+        console.log('shift',shift);
+
+        // 맨 뒤에거 하나 빼서 돌려줌
+        // 원본이 바뀜
+        let pop = arr.pop();
+        console.log(arr);
+        console.log('pop', pop);
+
+        // 순서를 거꾸로 만들어버림
+        arr.reverse();
+        console.log(arr);
+
+        // 오름차순으로 정렬해버림
+        arr = [7,3,9,5,7,4];
+        arr.sort();
+        console.log(arr);
+
+        arr = [7,3,9,5,7,4];
+        arr.sort(function(x, y){
+            return y - x
+        });
+        console.log(arr);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
