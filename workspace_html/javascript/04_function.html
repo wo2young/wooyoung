@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //function
+        //function 함수명(전달인자들){ }
+        function plus(x, y){
+            console.log('x', x)
+            console.log('y', y)
+
+            let z = x + y;
+            return z;
+        }
+        let a = plus(2, 3);
+        console.log('a :', a);
+        plus(2, plus(1, 2));
+
+        console.log(1,2,3,4,5,6);
+        function log( ...obj ){
+            console.log( typeof obj)
+        }
+        
+        log(1,2);
+        let f = [10, 20]
+        console.log(...f) // 이거랑
+        console.log(f[0], f[1]); // 이거랑 같음
+
+        let g = "console.log(123)";
+        eval(g); //String을 js로 변환
+
+        function print(){
+            console.log('print 실행')
+        }
+        let p = print;
+        console.log('typeof p : ', typeof p);
+        p();
+
+        let p2 = print();
+        console.log('p2 : ',p2)
+        
+        console.log(' typeof print : ',typeof print)
+
+        function print2(){
+            console.log('print3(거짓말) 실행')
+        }
+        print2();
+
+        function over(x){
+            console.log('x : ', x);
+        }
+        
+        function over(x,y){
+            console.log('x,y : ', x, y);
+        }
+        over(1)
+
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

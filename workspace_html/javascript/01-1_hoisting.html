@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // console.log("a :", a);
+
+        function test(){
+            if(true){
+                var b = 10; //var는 if문에 들어오기전에 만들어지고 여기서 할당만 함
+                            // 그게 호이스팅임
+                let c = 20; // 지역변수
+            }
+            console.log('b : ', b);
+            console.log('c : ', c); // 선언된 적이 없다
+        }
+        test();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

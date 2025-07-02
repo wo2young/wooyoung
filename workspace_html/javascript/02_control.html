@@ -34,6 +34,52 @@
             거짓 : false, 0, null, undefined, NaN
             이거 아니면 다 참임
         */
+        let arr =[10,20,30];
+        // arr.length
+        arr[10] = 100;
+        console.log('arr : ', arr)
+        arr['주소'] = '천안시'// leanth에 영향 없음
+        console.log('arr.length : ', arr.length);
+        console.log('arr : ', arr)
+
+        // for in문
+        for( let index in arr){
+            console.log('index : ', index);
+            console.log('index : ', arr[index]);
+        }
+        // for of문
+        // java에 향상된 for문
+        // 숫자가 아니면 못 가져옴
+        for( let obj of arr){
+            console.log('obj : ',obj)
+        }
+        
+        let array = [];
+        if(array[4] == undefined){
+            console.log('array[4] : ',array[4]);
+        }
+        array[4] += 'abc';
+        console.log('array[4] : ',array[4]);
+
+        // 주사위 2개의 합 별 조합
+        // let a=1;
+        let dice =[];
+        for(let j=1; j<=6; j++){
+            for(let i=1; i<=6; i++){
+                if(dice[i+j] != undefined ){
+                    dice[i+j] += `[${j}, ${i}]`;
+                    // console.log(dice[i+j])
+                } 
+                else{
+                    // dice[i+j] = '['+i +','+ j+']';
+                    dice[i+j] = `[${j}, ${i}]`
+                    // console.log(dice[i+j])
+                }
+            }
+        }
+        for(let z=2; z<=12; z++){
+            console.log(`합이 ${z} : `,dice[z])
+        }
     </script>
 </head>
 <body>

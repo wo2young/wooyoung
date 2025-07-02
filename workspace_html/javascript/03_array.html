@@ -51,8 +51,8 @@
         let 파스타 = ['까르보나라', '봉골레', '토마토', '로제'];
         let 음식 = [중식, 양식, 파스타];
 
-        for(i=0; i<음식.length; i++){
-            for(j=0; j<음식[i].length; j++){
+        for(let i=0; i<음식.length; i++){
+            for(let j=0; j<음식[i].length; j++){
                 console.log(음식[i][j]);
             }
         }
@@ -93,6 +93,57 @@
             return y - x
         });
         console.log(arr);
+
+        // splice
+        arr = [0,1,2,3,4,5];
+
+        // splice(시작index, count)
+        // 원본에서 잘라서 돌려준다
+        // 만약 시작index가 음수면 뒤에서 부터 센다
+        // 시작index만 쓰면 다 잘라서 돌려줌
+        // ctrl + x 느낌
+        let s = arr.splice(2,3);
+        console.log('arr : ', arr)
+        console.log('s : ',s)
+
+        arr = [0,1,2,3,4,5];
+        // 뒤에서 3번째부터 끝까지
+        s = arr.splice(-3);
+        
+        arr = [0,1,2,3,4,5];
+        s = arr.splice(1,2, '하나', '둘', '셋');
+        console.log('arr :', arr)
+        console.log('s :', s)
+
+        arr = [0,1,2,3,4,5];
+        let arr3 = [7,8,9];
+        arr.splice(2,0, ...arr3) // spread 연산자
+        console.log('arr : ', arr);
+
+        // slice
+        // 원본을 유지하면서 시작index 끝index 바로 앞까지
+        // ctrl + c 느낌
+        arr = [0,1,2,3,4,5];
+        s = arr.slice(2,3);
+        console.log('arr :', arr)
+        console.log('s :', s)
+
+        // join
+        let j = arr.join('-');
+        console.log('arr :', arr)
+        console.log('j :', j)
+        
+
+        let arr4 =j.split('-')
+        console.log('arr4 :', arr4)
+        console.log('j :', j)
+        const numArr = arr4.map(Number);
+        console.log('arr4 : ', arr4);
+
+        let arr5 = arr.concat(arr4)
+        console.log(arr5)
+
+        console.log(arr.toString())
 
     </script>
 </head>

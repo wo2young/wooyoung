@@ -409,10 +409,12 @@
 
         }
         .main .right #one{
-            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+            /* background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
             background-size: 463px 442px;
             background-position: -205px -219px;
-
+            background-repeat: no-repeat; */
+            position: relative;
+            overflow: hidden;
             border: 1px solid rgba(0, 0, 0, 0.138);
             border-radius: 10px;
 
@@ -420,9 +422,18 @@
             width: 300px;
         }
         #one > img{
-            height: 250px;
-            width: 300px;
+            height: 240px;
+            width: 290px;
             /* margin-bottom: 10px; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fade 17s infinite;
+            animation-fill-mode: both;
         }
         .main .right #two{
              border: 1px solid rgba(0, 0, 0, 0.138);
@@ -548,7 +559,8 @@
                <a href="https://nid.naver.com/user2/api/route?m=routePwInquiry"> 비밀번호 찾기 | </a> 
                <a href="https://nid.naver.com/nidregister.form?url=https%3A%2F%2Fwww.naver.com"> 회원가입 </a>
             </div>
-            <div id="one"> 
+            <div id="one">
+                <img src="https://ssl.pstatic.net/melona/libs/1535/1535023/c9a4e9d2a480d340a947_20250626102009590.jpg" alt="">
                 <img src="https://ssl.pstatic.net/melona/libs/1537/1537838/e3035415e2d3dadaefb4_20250627180200187.jpg" alt="">
             </div>
             <div id="two">
