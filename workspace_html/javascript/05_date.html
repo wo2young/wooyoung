@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let now = new Date();
+        console.log(now);
+
+        // 년도
+        const y = now.getFullYear();
+        console.log('년 :', y);
+
+        // 월 +1을 해야함
+        const M = now.getMonth();
+        console.log('월 :', M+1)
+        
+        // 일
+        const d = now.getDate();
+        console.log('일 :', d);
+
+        // 요일 일요일이 0임
+        const w = now.getDay();
+        console.log('요일 :', w);
+
+        // 시간
+        const h = now.getHours();
+        console.log('시간 :', h);
+
+        // 분
+        const mm = now.getMinutes();
+        console.log('분 :', mm);
+
+        // 초
+        const s = now.getSeconds();
+        console.log('초 :', s);
+
+        const iso = now.toISOString();
+        console.log('iso : ',iso);
+
+        let a = iso.split('T');
+        console.log('a : ',a[0]);
+        console.log(a[1].split('.')[0]);
+
+        let timestamp = now.getTime();
+        console.log(timestamp);
+        
+        let before = new Date().getTime();
+        for(let i=0; i<100; i++){
+            console.log(i);
+        }
+        let after = new Date().getTime();
+        console.log('after - before', after - before);
+
+        let time = new Date();
+        console.log(time.toISOString());
+
+        time.setHours(time.getHours() + 9)
+        console.log(time.toISOString());
+
+
+    </script>
+
+</head>
+<body>
+    <div id="clock"></div>
+    <script>
+
+        setInterval( 
+            function(){
+
+            let clock = new Date();
+            let bun = clock.getMinutes();
+            let cho = clock.getSeconds();
+            let text = '<strong>'+bun + '분' + cho + '초</strong>';
+        
+            document.querySelector("#clock").innerHTML = text;
+        }
+        , 999
+    )
+
+    </script>
+</body>
+</html>

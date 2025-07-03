@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let str = '집가고 싶다';
+
+        console.log('str.length :',str.length);
+        
+        // indexOf
+        // 전달인자와 동일한 글씨가 있는 경우
+        // 첫번째 만나는 요소의 첫 index를 돌려줌
+        // 동일한 글씨가 없을 경우 -1을 돌려줌
+        console.log('str.indexOf : ',str.indexOf('집'))
+        console.log('str.indexOf : ',str.indexOf('여주'))
+
+        // replace
+        // 첫번쨰 전달인자를 두번쨰 전달인자로 바꿔줌
+        // 기본적으로 처음 만나는 것만 한번 바꿔줌
+        let str2 = str.replace('집', '여주')
+        console.log('str : ', str)
+        console.log('str2 : ', str2)
+
+
+        let str3 = str.replace(/집/g, '여주')
+        console.log('str : ', str)
+        console.log('str3 : ', str3)
+
+        //substring
+        // 시작, 끝 바로 앞
+        let str4 = str.substring(2,6);
+        console.log('str : ', str)
+        console.log('str4 : ', str4)
+
+        // 시작, 몇개
+        let str5 = str.substr(3,4);
+        console.log('str : ', str)
+        console.log('str5 : ', str5)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
