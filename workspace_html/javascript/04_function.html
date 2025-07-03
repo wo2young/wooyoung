@@ -57,8 +57,92 @@
         }
         over(1)
 
-        
+        function jegob(su){
+            return su*su
+        }
 
+        // callback
+        // 달러를 원화로
+        function change_won_dollor(dollor){
+            return dollor * 1355;
+        }
+        // 원화를 달러로
+        function change_dollor_won(won){
+            return won / 1355;
+        }
+
+        // 환전 함수
+        // 전달인자 : 금액과 환율계산 함수 
+
+        function change( money, callback ){
+            console.log('환전을 시작합니다')
+            
+            if( typeof callback == 'function'){
+                let result = callback( money );
+                return result;
+            } 
+            else{
+                console.log('콜백 함수 없음');
+            }
+        }
+       const money = change(100, change_won_dollor);
+       console.log('환전된 금액은', money);
+       change(100); 
+
+       // 익명 함수
+       let noName = function(){
+        console.log('익명함수')
+       }
+       noName();
+
+    //     function noName(){
+    //     console.log('익명함수')
+    //    }
+       const m = 100;
+       change(m, noName);
+    
+       console,log('===================')
+       // setTimeout
+       // 첫번째 전달인자 : 실행할 함수(콜백함수)
+       // 두번째 전달인자 : 지연 시간 (1/1000초)
+    // setTimeout(noName,1000*3);
+
+       let st1 =  setTimeout(function (){
+        console.log('3초뒤 실행됨')
+        }
+        ,1000*3);
+        
+        console.log('콘솔 출력')
+        console.log('st1 : ' ,st1);
+        clearTimeout(st1)
+
+        let time = 30;
+        setTimeout(
+            function (){
+                console.log('3초뒤 실행됨2', time)
+            }
+        ,1000*3);
+
+        // function testCloser(){
+        //     setTimeout(
+        //         function (){
+        //             console.log('3초뒤 실행됨3', time)
+        //         }
+        //     ,1000*1);
+        // }
+
+        let si = setInterval(function(){
+            console.log('setInterval 실행')
+            console.log()
+        }, 1000 * 2)
+
+        setTimeout(function(){
+        clearInterval(si) // 예약취소
+        },5000)
+
+
+        // 화살표 함수
+        
     </script>
 </head>
 <body>
