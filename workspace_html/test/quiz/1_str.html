@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* css 공간*/
+    </style>
+</head>
+<body>
+    <!-- 여기는 html 공간 -->
+    <h1> 아이디만 출력</h1>
+
+
+    <script>
+        // 여기는 js공간
+       // 문제 1
+       // 어떤 이메일이라도 id를 출력하도록
+        function getEmailId(email){
+            return email.split("@")[0]
+        }
+        console.log(getEmailId("ywk5974@gmail.com")); // ywk5974가 나와야함
+        
+        // 문제 2
+        // 메일 주소 앞 두자리를 제외한 id는 *처리
+        function changeIdStar(email){
+            console.log((email.indexOf("@"))); // 
+            let id1 = email.substring(2, (email.indexOf("@")));
+            // console.log(id2);
+            let id2 = email.replace(id1, '**');
+            // console.log('id3 : ', id3);
+            return id2; 
+        }
+        console.log(changeIdStar('ywk02@naver.com'));
+
+        // 문제 3
+        // 인터넷 주소 중 2차 도메인 출력
+        // comic.naver.com에서 naver
+        // human.or.kr에서 or
+        function getMiddleUrl(url){
+            return url.split('.')[1];
+        }
+        console.log(getMiddleUrl('comic.naver.com'));
+         console.log(getMiddleUrl('human.or.kr'));
+
+    </script>
+</body>
+</html>
