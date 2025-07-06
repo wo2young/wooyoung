@@ -199,7 +199,7 @@ public class ForExam {
 		}
 		System.out.println();
 //		12단계
-		int row = 22;// 줄높이
+		int row = 10;// 줄높이
 //		String mark = "+";	
 //		String space = ".";
 		for (int j = 0; j <= row - 1; j++) {
