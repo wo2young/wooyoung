@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
     <style>
-        h1{
+        h1 {
             height: 100px;
         }
     </style>
@@ -23,10 +23,9 @@
         </tbody>
     </table>
 
-    <hr>
+    <hr />
     <table>
-        <tbody id="tbody2">
-        </tbody>
+        <tbody id="tbody2"></tbody>
     </table>
 
     <h1 id="h1">style 테스트</h1>
@@ -34,63 +33,65 @@
     <script>
         // createElement : DOM 요소 생성
         let div = document.createElement("div");
-        div.setAttribute('id','menu');
-        div.setAttribute('style','color: red; font-size: 1.3em;');
-        div.textContent = '점메추'
+        div.setAttribute("id", "menu");
+        div.setAttribute("style", "color: red; font-size: 1.3em;");
+        div.textContent = "점메추";
 
-        const tag = document.querySelector('#tag');
-        
+        const tag = document.querySelector("#tag");
+
         // append: 마지막 자식 요소로 추가된다
-        // DOM을 넣을 수 있다
-        // 글씨도 넣을 수 있다(tag는 text로 들어간다)
-        tag.append( div )
-        tag.append( '그냥 글씨' )
-        tag.append( '<strong>그냥 글씨</strong>' )
+        // DOM도 넣을 수 있고, 글씨도 넣을 수 있다 (tag는 text로 들어감)
+        tag.append(div);
+        tag.append("그냥 글씨");
+        tag.append("<strong>그냥 글씨</strong>"); // HTML 태그 문자열로 추가됨 (문자 그대로)
 
         let div2 = document.createElement("div");
-        div2.setAttribute('id','menu');
-        div2.setAttribute('style','color: red; font-size: 1.3em;');
-        div2.textContent = '점메추2'
+        div2.setAttribute("id", "menu");
+        div2.setAttribute("style", "color: red; font-size: 1.3em;");
+        div2.textContent = "점메추2";
 
         // appendChild : 마지막 자식 요소로 추가된다
-        // 여기는 DOM만 들어감 글씨는 안들어 가진다.
-        tag.appendChild( div2 )
-        // tag.appendChild( '글씨' ) 이건 안된다
+        // DOM만 들어감, 글씨는 들어가지 않는다.
+        tag.appendChild(div2);
+        // tag.appendChild('글씨') // 이건 에러 발생
 
         let div3 = document.createElement("div");
-        div3.setAttribute('id','menu');
-        div3.setAttribute('style','color: red; font-size: 1.3em;');
-        div3.textContent = '점메추3'
-        tag.prepend( div3)
-        // tag.after( div3 ) // after은 다음 형제요소로 추가
-        // tag.before( div3 ) berfore는 이전 형제요소로 추가
-        
-        const td = document.createElement("td")
-        const tr = document.createElement("tr")
-        
-        td.textContent = "첫번째 칸"
-        // td.innerText = '첫번째 칸';
+        div3.setAttribute("id", "menu");
+        div3.setAttribute("style", "color: red; font-size: 1.3em;");
+        div3.textContent = "점메추3";
+        tag.prepend(div3); // prepend는 첫번째 자식 요소로 추가함
+        // tag.after(div3) // after는 다음 형제 요소로 추가
+        // tag.before(div3) // before는 이전 형제 요소로 추가
 
-        tr.append(td)
-        document.querySelector('#tbody').append(tr)
+        const td = document.createElement("td");
+        const tr = document.createElement("tr");
 
-        tr.textContent = '<td>첫번쨰 칸</td>'
-        document.querySelector('#tbody').append(tr)
+        td.textContent = "첫번째 칸";
+        // td.innerText = '첫번째 칸';  // innerText도 가능
 
-        // for(let j=1; j<=5;j++){
-        //     const tr = document.createElement("tr")
-        //     for(let i=1; i<=10;i++){
-        //         const td = document.createElement("td")
-        //         tr.textContent = `<td>${i}번쨰 칸</td>`
-        //         document.querySelector('#tbofy').append(tr)
+        tr.append(td);
+        document.querySelector("#tbody").append(tr);
+
+        // 아래는 잘못된 사용 예: textContent는 HTML 해석 안함
+        tr.textContent = "<td>첫번쨰 칸</td>";
+        document.querySelector("#tbody").append(tr);
+
+        // // 주석 처리된 코드: 행과 열 여러 개 생성 시도 (오타 tbofy → tbody)
+        // for(let j=1; j<=5; j++){
+        //     const tr = document.createElement("tr");
+        //     for(let i=1; i<=10; i++){
+        //         const td = document.createElement("td");
+        //         tr.textContent = `<td>${i}번쨰 칸</td>`;  // 잘못된 방식, HTML이 문자열로 들어감
+        //         document.querySelector("#tbody").append(tr);
         //     }
         // }
 
-        const row1 = ['제목1', '작성자1'];
-        const row2 = ['제목2', '작성자2'];
-        const row3 = ['제목3', '작성자3'];
-        const row4 = ['제목4', '작성자4'];
-        const row5 = ['제목5', '작성자5'];
+        // 데이터 배열 준비
+        const row1 = ["제목1", "작성자1"];
+        const row2 = ["제목2", "작성자2"];
+        const row3 = ["제목3", "작성자3"];
+        const row4 = ["제목4", "작성자4"];
+        const row5 = ["제목5", "작성자5"];
         const row = [];
 
         row.push(row1);
@@ -100,22 +101,17 @@
         row.push(row5);
 
         /*
+        원하는 결과 예시:
         <tr>
             <td>제목1</td>
             <td>작성자1</td>
         </tr>
         */
-        const tbody2 = document.querySelector('#tbody2');
-        // for(let i=0;i<row.length;i++){
-        //     const html = `
-        //         <tr>
-        //             <td>${row[i][0]}</td>
-        //             <td>${row[i][1]}</td>
-        //         </tr>
-        //     `;
-        //     tbody2.innerHTML += html;
-        // } 
-        // for(let i=0;i<row.length;i++){
+
+        const tbody2 = document.querySelector("#tbody2");
+
+        // 주석 처리된 innerHTML 방식 (반복해서 덮어쓰는 단점 있음)
+        // for(let i=0; i<row.length; i++){
         //     const html = `
         //         <tr>
         //             <td>${row[i][0]}</td>
@@ -125,47 +121,63 @@
         //     tbody2.innerHTML += html;
         // }
 
-        // const tr = document.createElement("tr");
-        // const td = document.createElement("td");
-        for(let i=0;i<row.length;i++){
-            const tr = document.createElement('tr');
-            tr.innerHTML = ` 
-                        <td>${row[i][0]}</td>
-                        <td>${row[i][1]}</td>
+        // 올바른 동적 행 생성법 - createElement와 innerHTML 조합
+        for (let i = 0; i < row.length; i++) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${row[i][0]}</td>
+                <td>${row[i][1]}</td>
             `;
             tbody2.append(tr);
         }
-        const h1 = document.getElementById('h1')
 
-        const script = document.createElement('script')
-        script.innerHTML = 'alert(1)'
-        h1.after( script )
+        // h1 요소 선택
+        const h1 = document.getElementById("h1");
 
-        
-       
+        // script 태그 생성 및 삽입 (보통 이렇게 사용 안함, 예제용)
+        const script = document.createElement("script");
+        script.innerHTML = "alert(1)";
+        h1.after(script);
 
-        h1.style.color = 'red';
+        // 스타일 직접 변경
+        h1.style.color = "red";
 
-        console.log( 'typeof height :', typeof h1.style.height)
-        console.log( 'height :', h1.style.height);
+        console.log("typeof height :", typeof h1.style.height); // string
+        console.log("height :", h1.style.height); // 초기엔 빈 문자열
 
-        h1.style.height = 150+ 'px';
-        console.log('height :', h1.style.height)
+        h1.style.height = 150 + "px";
+        console.log("height :", h1.style.height); // "150px"
 
-        // css에서 -로 연결되는 프로퍼티 명은
-        // 카멜케이스로 변경하면 된다
-         h1.setAttribute('style', 'background-color: blue;');
-         h1.style.backgroundColor = "#ff00ff"
+        // CSS 프로퍼티명에 - 가 들어가면 카멜케이스로 변경해서 사용
+        h1.setAttribute("style", "background-color: blue;"); // 기존 스타일 덮어쓰기
+        h1.style.backgroundColor = "#ff00ff"; // 스타일 덮어쓰기 (cssText와 다름)
 
-         // js로 지정한 모든 스타일 덮어쓰기
-         h1.style.cssText = 'font-size: 40px'
+        // 전체 스타일 덮어쓰기 - 잘 안 쓰임
+        h1.style.cssText = "font-size: 40px";
 
-        // 잘 안쓰지만 기존에 css에 값을 가져오는 방법
+        // 기존 CSS 스타일 가져오기 (computedStyle)
         let w = window.getComputedStyle(h1, null).getPropertyValue("width");
-        console.log('h1.style.width :', h1.style.width);
-        console.log('w :', w);
-        h1.style.width = w - 100 +'px';
+        console.log("h1.style.width :", h1.style.width); // 인라인 스타일 없으면 빈 문자열
+        console.log("w :", w); // 계산된 스타일 값(예: "122px")
+
+        // 계산된 스타일은 문자열이므로 산술 연산 시 파싱 필요
+        h1.style.width = parseInt(w) - 100 + "px";
 
     </script>
+
+    <!--
+    전체 정리:
+    ★★★ [실무 필수] DOM 요소 생성 시 createElement() 사용 후 속성, 텍스트 할당
+    ★★★ [실무 필수] append() vs appendChild() 차이:
+        - append(): DOM 또는 문자열(텍스트) 추가 가능
+        - appendChild(): DOM만 추가 가능 (문자열 넣으면 에러)
+    ★★★ [실무 필수] textContent는 HTML 해석 안 함, innerHTML은 HTML 해석
+    ★★★ [실무 필수] 반복해서 innerHTML += 는 성능 저하 및 리플로우 위험 → createElement + append 권장
+    ★★★ [실무 필수] style 프로퍼티는 camelCase로 접근 (예: backgroundColor)
+    ★★★ [실무 필수] getComputedStyle()로 CSS 실제 적용값(픽셀 등) 읽기 가능
+    ★★ script 태그를 JS로 생성해 삽입하는 방식은 보통 권장하지 않음 (보안, 관리 문제)
+    ★★ style.cssText는 인라인 스타일 전체 덮어쓰기용, 사용 시 주의
+    ★★ innerText와 textContent는 거의 비슷하지만, 일부 차이 있음 (호환성 참고)
+    -->
 </body>
 </html>

@@ -15,26 +15,40 @@
     <script>
         setTimeout(function(){
             const text = document.querySelector('#id');
-            console.log('text :', text.value)
+            console.log('text :', text.value);
           
-            const pw = document.querySelector('#pw')
-            console.log('pw: ', pw.value)
+            const pw = document.querySelector('#pw');
+            console.log('pw: ', pw.value);
             
-            const date = document.querySelector('#date')
-            console.log('date: ', date.value)
-            date.value = '2002-10-30'
+            const date = document.querySelector('#date');
+            console.log('date: ', date.value);
+            date.value = '2002-10-30'; // 보충: input type="date" 의 value는 yyyy-mm-dd 형식 문자열이어야 함
 
             // const op = document.querySelector('#select option:checked');
-            // console.log(op, op.textContent)
+            // console.log(op, op.textContent);
 
             const textarea = document.querySelector('#textarea');
-            console.log('textarea :', textarea.value)
-            // textarea.value = '바뀐값\n다음줄'
+            console.log('textarea :', textarea.value);
+            // textarea.value = '바뀐값\n다음줄';
 
-            const view = document.querySelector('#view')
+            const view = document.querySelector('#view');
+            // replace(/\n/g,'<br>') : textarea에서 줄바꿈 문자를 <br>로 변환
+            // 하지만 innerText는 HTML 태그를 해석하지 않고 문자로 그대로 출력함
+            // 그래서 줄바꿈이 적용되지 않을 수 있음. innerHTML로 바꾸면 태그 해석됨
             view.innerText = textarea.value.replace(/\n/g,'<br>');
-        }, 1000 * 4)
-        
+        }, 1000 * 4);
+
+       /*
+        전체 정리:
+        ★★★ [중요] input, textarea 의 value 프로퍼티로 값을 읽고 쓸 수 있음  
+        ★★★ [중요] input type="date" 에는 yyyy-mm-dd 형식 문자열이 value로 들어가야 날짜가 잘 표시됨  
+
+        ★★★ [중요] textarea 내 줄바꿈(\n)을 HTML 줄바꿈 <br>로 바꾸려면 innerHTML 사용 추천  
+        ★★★ setTimeout은 비동기 함수로 일정 시간 뒤 실행됨 (DOM 준비 후 작업할 때 자주 사용)  
+
+        ★★ querySelector와 getElementById 모두 DOM 선택 시 많이 쓰임  
+        */
+
     </script>
 </body>
 </html>

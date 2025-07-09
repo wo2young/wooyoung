@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
     <style>
         #view {
             color: red;
         }
-
         .blue {
             color: blue;
         }
@@ -35,74 +34,73 @@
         <!-- <div class="div2 child">안쪽 .div2</div> -->
     </div>
 
-    <img alt="노윤서" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS-g2fmUgU8SXay1Fd6C7FMOw_YDs2zG2Na9FRP0X70LxiDc-zqf9TqVyqLv8Y3REz0ceMeFmrOZpoclmaa1Q6Lkaf6XJ9Pu2dvgKxGMGFiQg">
-
+    <img alt="노윤서" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS-g2fmUgU8SXay1Fd6C7FMOw_YDs2zG2Na9FRP0X70LxiDc-zqf9TqVyqLv8Y3REz0ceMeFmrOZpoclmaa1Q6Lkaf6XJ9Pu2dvgKxGMGFiQg" />
 
     <script>
         // document : html 문서 전체를 뜻함
 
         // getElementById : 
         //    속성 id의 값을 이용해서 dom을 가져온다
-        let title = document.getElementById('title')
-        console.log(title)
-        console.log(""+title)
+        let title = document.getElementById('title');
+        console.log(title);
+        console.log("" + title);
 
         // 요소가 없는 경우 null
-        let test = document.getElementById('test')
-        console.log( test )
+        let test = document.getElementById('test');
+        console.log(test);
 
         // id가 여러개인 경우 첫번째 DOM만 가져온다
-        let view = document.getElementById('view')
-        console.log( view )
+        let view = document.getElementById('view');
+        console.log(view);
 
         // tag 명으로 DOM 찾기
-        // 일치하는 모든 DOM을 배열로 돌려준다
+        // 일치하는 모든 DOM을 배열(HTMLCollection)로 돌려준다
         let divs = document.getElementsByTagName('div');
-        console.log( divs );
+        console.log(divs);
 
         // 하나만 있어도 한 개 짜리 배열
         let h1s = document.getElementsByTagName('h1');
-        console.log( h1s );
+        console.log(h1s);
         
         // 없어도 size가 0인 배열
         let human = document.getElementsByTagName('human');
-        console.log( human );
+        console.log(human);
 
         let div2s = document.getElementsByClassName('div2');
         console.log(div2s);
 
         // document : 문서 전체에서~
-        let parent = document.getElementById('parent')
-        console.log(parent)
+        let parent = document.getElementById('parent');
+        console.log(parent);
         // 특정 DOM 안에서 찾기
-        let div2ss = parent.getElementsByClassName('div2')
-        console.log(div2ss)
+        let div2ss = parent.getElementsByClassName('div2');
+        console.log(div2ss);
 
         // querySelector
         //    CSS 선택자를 이용할 수 있다
         //    하나의 DOM만 돌려준다
         //    여러개인 경우 처음 나온 DOM 하나만
         //    없으면 null
-        let qs1 = document.querySelector('#parent .div2')
-        console.log(qs1)
-        console.log('-----------------')
-        let qs2 = document.querySelector('.div2')
-        console.log(qs2)
+        let qs1 = document.querySelector('#parent .div2');
+        console.log(qs1);
+        console.log('-----------------');
+        let qs2 = document.querySelector('.div2');
+        console.log(qs2);
 
-        console.log( document.querySelector('#div2') )
-        
+        console.log(document.querySelector('#div2'));
+
         // querySelectorAll
-        //      배열로 돌려준다
+        //      배열(NodeList)로 돌려준다
         //      없으면 size 0 배열
-        let qs3 = document.querySelectorAll('.div2')
-        console.log(qs3)
-        
-        console.log( document.querySelectorAll('#div2') )
+        let qs3 = document.querySelectorAll('.div2');
+        console.log(qs3);
+
+        console.log(document.querySelectorAll('#div2'));
 
         // class 속성 값 조작
-        let child = document.querySelector('#parent .div2')
+        let child = document.querySelector('#parent .div2');
         // classList : class를 배열 형식으로 돌려줌
-        console.log( child.classList );
+        console.log(child.classList);
 
         // add : class 값 추가
         child.classList.add('blue');
@@ -119,19 +117,19 @@
         child.classList.toggle('blue');
 
         let isBlue = child.classList.contains('blue');
-        console.log(isBlue)
+        console.log(isBlue);
 
         // DOM.className : 모든 class를 문자로 돌려줌
-        console.log(child.className)
-        child.className = 'big'
+        console.log(child.className);
+        child.className = 'big';
 
-        if(isBlue){
+        if (isBlue) {
             child.classList.remove('blue');
         } else {
             child.classList.add('blue');
         }
 
-        document.querySelector('[data-food=마라]')
+        document.querySelector('[data-food=마라]');
 
         let img = document.querySelector('img');
 
@@ -141,25 +139,41 @@
 
         // 속성 값 가져오기
         let src = img.getAttribute('src');
-        console.log('src :', src)
+        console.log('src :', src);
         // 속성이 없으면 null
         let src2 = img.getAttribute('src2');
-        console.log('src2 :', src2)
+        console.log('src2 :', src2);
 
         // setAttribute(속성명, 속성값)
         //      속성이 없으면 속성을 만들고
         //      속성이 있으면 값을 덮어쓴다
-        img.setAttribute('data-human', '1강의실')
-        img.setAttribute('data-human', '10강의실')
+        img.setAttribute('data-human', '1강의실');
+        img.setAttribute('data-human', '10강의실');
 
-        setTimeout(function(){
-            img.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQZDkLLQmrtF5AJkwqIPdwI0bgKH9ce20n7Ggmv3ZFQfrJBXB293QUbApNfzqBcFjOeS9ozxmI4sSYkmNllz21-O5h0ztkLHtiYYM0aRSCR3j6RoupRr6WFU3lK0HZPfWQ-oOgSFL_CpSzK')
-        }, 3000)
+        setTimeout(function () {
+            img.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQZDkLLQmrtF5AJkwqIPdwI0bgKH9ce20n7Ggmv3ZFQfrJBXB293QUbApNfzqBcFjOeS9ozxmI4sSYkmNllz21-O5h0ztkLHtiYYM0aRSCR3j6RoupRr6WFU3lK0HZPfWQ-oOgSFL_CpSzK');
+        }, 3000);
 
         // 속성 지우기
-        img.removeAttribute('data-human')
+        img.removeAttribute('data-human');
 
-        img.remove()
+        // DOM 요소 자체를 지우기
+        img.remove();
+
     </script>
+    <!--
+   ★★★ [실무 필수] getElementById는 id 중복 시 첫 번째 요소만 반환함
+★★★ [실무 필수] getElementsByTagName, getElementsByClassName는 라이브 HTMLCollection 반환,
+                                                                 DOM 변동 시 자동 업데이트됨
+★★★ [실무 필수] querySelector는 첫 번째 일치 요소 반환, querySelectorAll은 정적 NodeList(배열 아님) 반환
+★★★ [실무 필수] classList (add, remove, toggle, contains)로 클래스 조작이 편리하고 안정적임
+★★★ [실무 필수] setAttribute는 속성 없으면 생성, 있으면 덮어쓰며,
+                  getAttribute, hasAttribute, removeAttribute도 자주 사용됨
+★★★ [실무 필수] 요소.remove()로 DOM 요소를 쉽게 삭제 가능
+★★ id는 문서 내에서 유일해야 하며, 중복 시 의도치 않은 동작 발생 가능
+★★ querySelectorAll 반환값은 배열이 아니므로 배열 메서드를 쓰려면 [...nodeList]로 변환 필요
+★★ 스타일 조작 시 style 객체의 프로퍼티를 카멜케이스로 사용하며, cssText로 한꺼번에 스타일 지정 가능
+
+(중요도 ★★★가 실무에서 반드시 알고 쓰는 부분입니다.)
 </body>
 </html>
