@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            width: 90vw;
+            height: 90vh;
+            margin: 0;
+            padding: 0;
+        }
+
+            button {
+            margin: 5px;
+        }
+
+            #poll {
+            border: 3px solid black;
+            height: 700px;
+            width: 1000px;
+            background-image: url(https://previews.123rf.com/images/kulyk/kulyk1504/kulyk150400001/38918687-soccer-goalpost-with-net-association-football-goal-on-field-qualitative-vector-illustration-for.jpg);
+            background-size: cover;
+            position: relative; /* 내부 자식 요소 절대 위치 시 기준 */
+        }
+
+            #btn4 {
+            border-radius: 10px;
+            background-image: url(https://png.pngtree.com/element_our/20190528/ourmid/pngtree-line-shutdown-image_1127659.jpg);
+            background-size: cover;
+            background-color: red;
+            width: 40px;
+            height: 40px;
+        }
+
+            #game {
+            width: 100px;
+            height: 140px;
+            position: absolute;
+            top: 300px;
+            left: 0;
+        }
+</style>
+</head>
+<!-- <body onload="javascropt:init()"> -->
+<body>
+  <div>
+    <div id="poll">
+      <!-- 버튼 영역 -->
+      <button type="button" id="btn4"></button><br><br><br><br><br>
+      <button type="button" id="btn1">버튼1</button>
+      <button type="button" id="btn2">버튼2</button>
+      <button type="button" id="btn3" onclick="btnClick();alert(1);">버튼3</button>
+
+      <!-- 로그인 영역 -->
+      <div>
+        아이디 : <input type="text" id="id"><br>
+        비밀번호 : <input type="password" id="pw"><br><br>
+        <input type="button" id="login" value="로그인">
+      </div>
+    </div>
+
+    <!-- 메시지 출력 영역 -->
+    <div id="console"></div>
+  </div>
+
+  <!-- 피카츄 이미지 -->
+  <img id="game" src="/css/asset/피카츄_(1).png" alt="피카츄">
+
+  <!-- JavaScript 파일 연결 -->
+  <script src="/javascript/asset/12_event.js"></script>
+  <script>
+    window.onload = bind;
+  </script>
+</body>
+</html>

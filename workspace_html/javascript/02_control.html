@@ -53,6 +53,8 @@
         for( let obj of arr){
             console.log('obj : ',obj)
         }
+
+      
         
         let array = [];
         if(array[4] == undefined){
@@ -80,6 +82,24 @@
         for(let z=2; z<=12; z++){
             console.log(`합이 ${z} : `,dice[z])
         }
+
+          // 함수 배우고 돌아온 나
+
+        // forEach와 map에 차이는 return이 없고 있고
+          console.log('함수 배우고 돌아옴')
+
+          const arr3 = ["A1", "B1", "C1", "D1"];
+          let r1 = arr3.forEach(function(element, index, array) {
+            console.log('element :',element) //이번 값
+            console.log('index :',index)    // 이번 index
+            console.log('array :',array)    // 원본 배열
+            // console.log('d :',d)
+            console.log('===============================')
+
+          })
+          console.log('r1 :', r1)
+          
+        
     </script>
 </head>
 <body>

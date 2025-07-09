@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="id" value="미리적은글"><br>
+    <input type="password" id="pw"><br>
+    <input type="date" id="date"><br>
+
+    <textarea id="textarea">초기값</textarea>
+    <div id="view"></div>
+    <script>
+        setTimeout(function(){
+            const text = document.querySelector('#id');
+            console.log('text :', text.value)
+          
+            const pw = document.querySelector('#pw')
+            console.log('pw: ', pw.value)
+            
+            const date = document.querySelector('#date')
+            console.log('date: ', date.value)
+            date.value = '2002-10-30'
+
+            // const op = document.querySelector('#select option:checked');
+            // console.log(op, op.textContent)
+
+            const textarea = document.querySelector('#textarea');
+            console.log('textarea :', textarea.value)
+            // textarea.value = '바뀐값\n다음줄'
+
+            const view = document.querySelector('#view')
+            view.innerText = textarea.value.replace(/\n/g,'<br>');
+        }, 1000 * 4)
+        
+    </script>
+</body>
+</html>

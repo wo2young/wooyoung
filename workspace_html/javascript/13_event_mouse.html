@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/javascript/asset/13_event_mouse.js"></script>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #f0f0f0;
+            position: relative;
+        }
+        .mouse{
+            border: 1px solid red;
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+
+            margin: 30px 30px;
+        }
+        .wrap{
+            display: flex;
+        }
+        #cursor{
+            height: 100px;
+            width: 100px;
+            
+            position: absolute;
+        }
+          #game {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 300px;
+            left: 100px;
+            cursor: grab;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div>
+            <div id="mouse" class="mouse"></div>
+            
+        </div>
+
+        <div id="view"></div>
+    </div>
+    <img id = "cursor" src="https://mblogthumb-phinf.pstatic.net/MjAxODA4MjBfMiAg/MDAxNTM0NzMyNDI3MTUy.3ISsQOEOPK1NQNUHU-Iw1aZMMvM3pJ5SYm-rbzkDof0g.8v3ebKedq6OPA7hiEPsw8Z8lqcNQ4BVdM_o3V15zQhsg.JPEG.libridgeglobal/%ED%95%80%EA%B3%BC%EC%A0%9C%EC%9D%B4%ED%81%AC.jpg?type=w800" alt="">
+
+    <img id="game" src="/css/asset/피카츄_(1).png" alt="피카츄">
+</body>
+</html>

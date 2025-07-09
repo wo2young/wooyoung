@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btn{
+            margin-right: 40px;
+        }
+    </style>
+    <script src="/javascript/asset/14_event_form.js"></script>
+</head>
+<body>
+    <form id="form" method="get" action="https://search.naver.com/search.naver">
+        <input type="text" id="keyword" name="query" placeholder="검색어를 입력하세요">
+        <select id="site">
+            <option value="1">네이버</option>
+            <option value="2">구글</option>
+        </select>
+        <button type="submit">검색</button>
+        <div>글자</div>
+    </form>
+
+    <div>
+        <hr>
+        <div>
+           
+        </div>
+        <input type="checkbox" class="chk" value="페퍼로니" data-price="2000">페퍼로니
+        <input type="checkbox" class="chk" value="베이컨" data-price="1500">베이컨
+        <input type="checkbox" class="chk" value="치즈" data-price="1000">치즈
+        <input type="checkbox" class="chk" value="파인애플" data-price="2500">파인애플
+        <br>
+        <input type="button" id="btn" value="선택">
+        <input type="checkbox" id="chk_All" value="모두 선택">모두 선택
+    </div>
+    <div id="result"></div>
+</body>
+</html>
