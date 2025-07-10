@@ -64,13 +64,13 @@ function bind(){
             event.preventDefault();
         })
     document.getElementById('btn').addEventListener('click', () => {
-        const checked = document.querySelectorAll('.chk:checked');
+        const checked = document.querySelectorAll('.chk:checked'); // query는 이게
         let total = 0;
     const selected = [...checked].map(el =>{  // 이새끼가 map이 안돼서 개오래 걸림
             const name = el.value            // 째는 배열이아니라서 [...]을 사용해야 함.
-            const price = parseInt(el.dataset.price);
-            total += price;
-            return `${name} ${price}원`;
+            const price = parseInt(el.dataset.price); // 문자로 넣어놔서 parseInt로 바꿈
+            total += price; // 이것도 아무생각앖이 쓰다가 위에다가 초기화식 만듬
+            return `${name} ${price}원`; // 배열에 한번에 넣기
 
     });
 
@@ -83,13 +83,13 @@ function bind(){
             +`\n total: ${total}원`;
         }  
     });
-     const all = document.getElementById('chk_All');
-        all.addEventListener('change', () => {
+     const all = document.getElementById('chk_All'); // 역시 이게 더 편한다
+        all.addEventListener('change', () => { // 갓갓 에로우 형님
         const topping = document.querySelectorAll('.chk');
-        topping.forEach(el => {
-            el.checked = all.checked;
+        topping.forEach(el => { // forEach는 아직 이해 안감
+            el.checked = all.checked; 
         });
-         topping.forEach(el => {
+         topping.forEach(el => { // 역시 해제는 만들기 쉽네
             el = all;
         });
     });
