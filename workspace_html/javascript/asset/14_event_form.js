@@ -1,15 +1,6 @@
 window.addEventListener('load', bind)
 
 function bind() {
-    const keyword = document.querySelector('#keyword');
-    const form = document.querySelector('#form');
-    const input = document.querySelector('#search');
-    const site = document.querySelector('#site');
-    const resultDiv = document.getElementById('result');
-    const all = document.getElementById('chk_All');  // 모두 선택 체크박스
-    const toppings = document.querySelectorAll('.chk');  // 개별 체크박스들
-    const btn = document.getElementById('btn');
-
     // focus 이벤트
     keyword.addEventListener('focus', () => {
         keyword.style.backgroundColor = 'yellow';
@@ -67,43 +58,25 @@ function bind() {
         event.preventDefault();
     });
 
-<<<<<<< HEAD
-        addEventListener('copy', (event)=>{
-            event.preventDefault();
-            alert('복사금지')
-        })
-        addEventListener('selectstart', (event)=>{
-            event.preventDefault();
-        })
-    document.getElementById('btn').addEventListener('click', () => {
+    // btn 클릭 이벤트
+    const keyword = document.querySelector('#keyword');
+    const form = document.querySelector('#form');
+    const input = document.querySelector('#search');
+    const site = document.querySelector('#site');
+    const resultDiv = document.getElementById('result');
+    const all = document.getElementById('chk_All');  // 모두 선택 체크박스
+    const toppings = document.querySelectorAll('.chk');  // 개별 체크박스들
+    const btn = document.getElementById('btn');
+    
+    btn.addEventListener('click', () => {
         const checked = document.querySelectorAll('.chk:checked'); // query는 이게
         let total = 0;
-    const selected = [...checked].map(el =>{  // 이새끼가 map이 안돼서 개오래 걸림
+        const selected = [...checked].map(el => {  // 이새끼가 map이 안돼서 개오래 걸림
             const name = el.value            // 째는 배열이아니라서 [...]을 사용해야 함.
             const price = parseInt(el.dataset.price); // 문자로 넣어놔서 parseInt로 바꿈
             total += price; // 이것도 아무생각앖이 쓰다가 위에다가 초기화식 만듬
             return `${name} ${price}원`; // 배열에 한번에 넣기
-
-    });
-
-        const resultDiv = document.getElementById('result');
-=======
-    // btn 클릭 이벤트
-    btn.addEventListener('click', () => {
-        const checked = document.querySelectorAll('.chk:checked');
-        let total = 0;
-
-        const selected = [...checked].map(el => {
-            // 이새끼가 map이 안돼서 개오래 걸림
-            // 째는 배열이 아니라서 [...]을 사용해야 함.
-
-            // 보충: NodeList는 배열 아님 → [...NodeList]로 배열로 바꿔줘야 map/filter 가능
-            const name = el.value;
-            const price = parseInt(el.dataset.price);
-            total += price;
-            return `${name} ${price}원`;
         });
->>>>>>> origin/main
 
         if (selected.length === 0) {
             resultDiv.innerText = '토핑 없음';
@@ -111,25 +84,17 @@ function bind() {
             resultDiv.innerText = '토핑 : ' + selected.join(', ') + `\n total: ${total}원`;
         }
 
-        // 모두 체크되었을 경우 "모두 선택" 체크박스도 체크되게
-        all.checked = (checked.length === toppings.length);
+        all.checked = (checked.length === toppings.length); // 모두 체크되었을 경우 "모두 선택"도 체크
+        // 보충: 체크된 개수가 전체 개수와 같을 때만 전체선택 체크박스를 체크함
     });
-<<<<<<< HEAD
-     const all = document.getElementById('chk_All'); // 역시 이게 더 편한다
-        all.addEventListener('change', () => { // 갓갓 에로우 형님
-        const topping = document.querySelectorAll('.chk');
-        topping.forEach(el => { // forEach는 아직 이해 안감
-            el.checked = all.checked; 
-        });
-         topping.forEach(el => { // 역시 해제는 만들기 쉽네
-            el = all;
-=======
 
-    // "모두 선택" 체크박스를 클릭했을 때 개별 체크박스들 상태 변경
-    all.addEventListener('change', () => {
-        toppings.forEach(el => {
+    const topping = document.querySelectorAll('.chk');
+
+    all.addEventListener('change', () => { // 갓갓 에로우 형님
+        topping.forEach(el => { // forEach는 아직 이해 안감
             el.checked = all.checked;
         });
+        // 보충: all.checked 값(true/false)을 그대로 개별 체크박스에 반영하는 구조
     });
 
     // 개별 체크박스를 클릭할 때마다 "모두 선택" 체크박스 상태 갱신
@@ -137,18 +102,28 @@ function bind() {
         el.addEventListener('change', () => {
             const checkedCount = document.querySelectorAll('.chk:checked').length;
             all.checked = (checkedCount === toppings.length);
-
             // 보충: 개별 체크 하나라도 해제되면 자동으로 "모두 선택"도 해제됨
->>>>>>> origin/main
         });
     });
 }
 
-/*
-전체 정리:
-★★★ [실무 필수] NodeList는 배열이 아니므로, map/filter 사용하려면 [...NodeList]로 배열 변환 필수
-★★★ [실무 필수] "모두 선택" 체크박스와 개별 체크박스 상태 동기화 구현 중요 (UX 측면)
-★★★ [실무 필수] form submit 이벤트에서 preventDefault 후 유효성 검사 후 submit 호출 권장
-★★ addEventListener로 여러 이벤트 핸들러 등록 가능, 중복 등록 주의
-★★ 복사 및 선택 방지 이벤트는 문서 단위로 걸어 사용자 행위 제한 가능
-*/
+
+
+// ------------------------------
+// [실무 기준 중요 포인트 ★★★]
+// ------------------------------
+
+// ★★★ NodeList는 배열이 아님
+// → map, forEach 등을 쓰려면 [...NodeList]로 전개해서 배열로 만들어야 한다
+
+// ★★★ dataset에서 가져온 값은 항상 문자열(string)
+// → parseInt(el.dataset.price) 또는 Number(el.dataset.price)로 숫자 변환 필수
+
+// ★★★ 이벤트 리스너는 중복해서 등록하면 안 됨
+// → 같은 이벤트(copy, selectstart 등)는 한 번만 addEventListener 해야 한다
+
+// ★★★ forEach에서 el => {...} 구조는 콜백함수임
+// → el은 해당 배열의 현재 요소이며, 외부 변수와 충돌 안 나게 잘 써야 함
+
+// ★★★ const 변수 선언은 한 번만 해야 함
+// → 같은 변수(all, resultDiv 등) 여러 번 const로 선언하면 에러 발생
