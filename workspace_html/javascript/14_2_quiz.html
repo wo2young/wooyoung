@@ -6,11 +6,18 @@
     <title>Document</title>
     <style>
         .box{
-            /* display: inline-block; */
+            display: inline-block;
             border: 1px solid black;
             width: 180px;
-            text-align: center;
+            height: 240px;
+            text-align: left;
             /* font-size: 20px; */
+        }
+        #chk{ 
+            text-align: right;            
+        }
+        #menu div{
+            color: gray;
         }
     </style>
     <script src="/javascript/asset/14_2_quiz.js"></script>
@@ -19,31 +26,45 @@
     <!-- 1번 -->
     <input type="text" id="nm" placeholder="이름을 입력하세요">
     <button id="btn">신청</button>
-     <div id="msg"></div>
+    <fieldset style="width: 90px;">
+        <legend>신청자 목록</legend>
+        <div id="msg"></div>
+    </fieldset>
+    
 
      <!-- 2번 -->
     <hr>
     <div class="box" id="one">
-        <h4>수령자</h4>
+        <h4 style="text-align: center;">수령자</h4>
+        <div>이름</div>
+        <input type="text">
+        <div>주소</div>
+        <input type="text">
+        <div>전화번호</div>
+        <input type="text">
+    </div>
+   
+    <div class="box" id="two" style="vertical-align: top;">
+        <h4 style="text-align: center;">배송자</h4>
         <div>이름</div>
         <input type="text"> 
         <div>주소</div>
         <input type="text">
-        <div>전화전호</div>
+        <div>전화번호</div>
         <input type="text">
     </div>
-    <input type="checkbox" id="chk">주문정보 같음
-    <div class="box" id="two">
-        <h4>배송자</h4>
-        <div>이름</div>
-        <input type="text"> 
-        <div>주소</div>
-        <input type="text">
-        <div>전화전호</div>
-        <input type="text">
-    </div>
-    <!-- 3번 -->
-     
-    
+    <input type="checkbox" id="chk" value="주문정보 같음"> 주문정보 같음
+    <!-- 3번 --> <hr>
+     <div id="menu" style="display: flex; justify-content: center;  gap: 80px;">
+        <div>전체</div>
+        <div>갤럭시 S</div>
+        <div>갤럭시 Z</div>
+        <div>갤럭시 A</div>
+        <div>악세서리</div>
+     </div><hr>
+     <!-- 4번 --> 
+     <!-- 이건 너무 귀찮음 -->
+        <hr>
+        5번
 </body>
 </html>
