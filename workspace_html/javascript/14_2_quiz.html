@@ -19,6 +19,28 @@
         #menu div{
             color: gray;
         }
+        #all{
+            border: 1px solid black; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-wrap: wrap;
+            margin-bottom: 100px;
+        }
+        #add{
+            margin-bottom: 10px;
+        }
+        #list{
+            border: 1px solid red;
+            width: 670px;
+            height: 50px;
+            padding: 0 20px;
+            box-sizing: border-box;   
+        }
+        #list input{
+            margin: 7px 7px;
+        }
+
     </style>
     <script src="/javascript/asset/14_2_quiz.js"></script>
 </head>
@@ -65,6 +87,25 @@
      <!-- 4번 --> 
      <!-- 이건 너무 귀찮음 -->
         <hr>
-        5번
+        <!-- 6번 -->
+        <div style="border: 1px solid black; width: 1000px;">
+                <h1 style="text-align: center;">TODOLIST</h1>
+            <div id="all">
+                <div id="add">   
+                    <input type="text" placeholder="뭐하게?" style="width: 600px; height: 60px; font-size: 1.5em;">
+                    <input type="button" value="+" style="width: 60px; height: 60px; margin-left: 10px; font-size: 1.5em;">
+                </div>
+                <div id="list">
+                    <input type="checkbox" name="" id="" style="width: 20px; height: 20px;">
+                    <input type="text" style="width: 450px; height: 30px;">
+                    <input type="button" value="수정" style="width: 30px; height: 30px;">
+                    <input type="button" value="삭제" style="width: 30px; height: 30px;">
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 </body>
 </html>
