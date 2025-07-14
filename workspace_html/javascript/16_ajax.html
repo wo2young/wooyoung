@@ -5,35 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Document</title>
   <script>
+    // 페이지가 로드되면 bind 함수 실행
     window.addEventListener('load', bind);
 
     function bind() {
-      // btn1 클릭 - jsonplaceholder API 호출
+      // btn1 클릭 - jsonplaceholder API 호출 (더미 JSON 데이터 가져오기)
       document.querySelector('#btn1').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
-        xhr.send();
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users'); // 비동기 GET 요청 준비
+        xhr.send(); // 요청 전송
 
         xhr.onload = function () {
-          console.log('다녀왔어');
-          const data = JSON.parse(xhr.responseText);
-          console.log(data);
-          console.log(data[0]);
-          console.log(data[0].username);
-          console.log(data[0].address);
-          console.log(data[0].address.geo);
-          console.log(data[0].address.geo.lat);
-          console.log(data[0].company.bs)
+          console.log('다녀왔어'); // 호출 완료 확인 로그
+          const data = JSON.parse(xhr.responseText); // JSON 문자열을 JS 객체로 파싱
+          console.log(data); // 전체 유저 배열
+          console.log(data[0]); // 첫 번째 유저 정보
+          console.log(data[0].username); // 첫 번째 유저의 username
+          console.log(data[0].address); // 주소 정보
+          console.log(data[0].address.geo); // 지리 정보
+          console.log(data[0].address.geo.lat); // 위도 정보
+          console.log(data[0].company.bs); // 회사 bs 정보
         };
       });
 
       // btn3 클릭 - 네이버 (CORS 우회)
       document.querySelector('#btn3').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
+        // CORS 우회를 위해 cors-anywhere 프록시 서버를 앞에 붙임
         xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.naver.com');
         xhr.send();
 
         xhr.onload = function () {
+          // 받아온 HTML 전체가 출력됨 (text 형식)
           console.log(xhr.responseText);
         };
       });
@@ -41,37 +44,71 @@
       // btn4 클릭 - 휴먼잡스 사이트 호출 (CORS 문제 발생 가능)
       document.querySelector('#btn4').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
+        // CORS 설정이 되어있지 않으면 브라우저가 차단함
         xhr.open('GET', 'http://humanjobs.co.kr');
         xhr.send();
 
         xhr.onload = function () {
-          console.log(xhr.responseText);
+          console.log(xhr.responseText); // 성공 시 HTML 반환
         };
       });
 
       // btn5 클릭 - 기상청 초단기실황 예보 API 호출
       document.querySelector('#btn5').addEventListener('click', function () {
         const serviceKey =
-          'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D';
+          'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D'; // 인증키 (URL 인코딩 상태)
+
+        // 초단기실황 예보 API URL 구성
         let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst';
-        url += '?serviceKey=' + serviceKey;
-        url += '&numOfRows=1000';
-        url += '&pageNo=1';
-        url += '&dataType=JSON';
-        url += '&base_date=20250714';
-        url += '&base_time=1400';
-        url += '&nx=63';
-        url += '&ny=110';
+        url += '?serviceKey=' + serviceKey; // 인증키
+        url += '&numOfRows=1000'; // 최대 데이터 개수
+        url += '&pageNo=1'; // 페이지 번호
+        url += '&dataType=JSON'; // 반환 형식
+        url += '&base_date=20250714'; // 기준 날짜 (예: 2025년 7월 14일)
+        url += '&base_time=1400'; // 기준 시간 (14시 00분 발표 데이터)
+        url += '&nx=63'; // 격자 X좌표
+        url += '&ny=110'; // 격자 Y좌표 (서울 중심 근처 위치)
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.send();
 
         xhr.onload = function () {
-          console.log(xhr.responseText);
+          console.log(xhr.responseText); // 날씨 JSON 응답 출력
         };
       });
     }
+
+    /*
+    ======================= 전체 정리 =======================
+
+    [XMLHttpRequest 기본 구조]
+    - xhr.open('GET', url) → 요청 설정 (GET 방식)
+    - xhr.send() → 요청 전송
+    - xhr.onload = function () { ... } → 응답 도착 시 실행
+
+    [JSON 처리]
+    - JSON.parse(responseText) → 문자열을 자바스크립트 객체로 변환 (실무에서 매우 자주 사용됨)
+
+    [CORS 개념]
+    - CORS(Cross-Origin Resource Sharing): 다른 출처(URL 도메인)의 데이터를 요청할 때 보안 때문에 막히는 현상
+    - 우회 방법: proxy 서버 사용 (`cors-anywhere`), 백엔드에서 중계
+    - 예: 네이버, 휴먼잡스는 브라우저에서 직접 호출 시 CORS 문제 발생
+
+    [기상청 날씨 API]
+    - base_date: 날짜 (YYYYMMDD 형식, 오늘 날짜로 바꾸면 다른 날씨 가능)
+    - base_time: 기준 시간 (단기 예보는 주로 0200, 0500, ..., 2300)
+    - nx, ny: 위치 좌표 (서울 중구 기준: nx=60, ny=127)
+    - 초단기실황 예보 API는 현재 날씨 상태를 제공 (강수형태, 기온, 습도 등)
+
+    [실무에서 중요한 항목]
+    ★ JSON.parse()
+    ★ xhr.open/send/onload
+    ★ CORS와 프록시 이해
+    ★ API 날짜/시간/위치 파라미터 수정법
+
+    ========================================================
+    */
   </script>
 </head>
 <body>

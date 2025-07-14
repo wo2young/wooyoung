@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>기상청 날씨 예보 실전</title>
+</head>
+<body>
+  <button id="btnWeather">날씨 데이터 출력</button>
+  <div id="weatherResult"></div>
+
+  <script>
+    document.querySelector('#btnWeather').addEventListener('click', () => {
+      const serviceKey = 'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D';
+
+      const base_date = '20250714';  // 오늘 날짜 YYYYMMDD
+      const base_time = '1400';      // 14시 기준 발표 시간
+      const nx = 63;  // x좌표 (서울시 강남구 근처 예시)
+      const ny = 110; // y좌표
+
+      let url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst';
+      url += `?serviceKey=${serviceKey}`;
+      url += '&numOfRows=1000';
+      url += '&pageNo=1';
+      url += '&dataType=JSON';
+      url += `&base_date=${base_date}`;
+      url += `&base_time=${base_time}`;
+      url += `&nx=${nx}`;
+      url += `&ny=${ny}`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error('API 요청 실패');
+          return response.json();
+        })
+        .then(data => {
+          const items = data.response.body.items.item;
+
+          const output = items.map(({ category, obsrValue }) => {
+            switch (category) {
+              case 'PTY': return `강수 형태: ${obsrValue === '0' ? '없음' : obsrValue}`;
+              case 'REH': return `습도: ${obsrValue}%`;
+              case 'RN1': return `1시간 강수량: ${obsrValue}mm`;
+              case 'T1H': return `기온: ${obsrValue}℃`;
+              case 'UUU': return `동서바람성분: ${obsrValue}m/s`;
+              case 'VEC': return `풍향: ${obsrValue}°`;
+              case 'VVV': return `남북바람성분: ${obsrValue}m/s`;
+              case 'WSD': return `풍속: ${obsrValue}m/s`;
+              default: return `${category}: ${obsrValue}`;
+            }
+          });
+
+          // 출력
+          document.getElementById('weatherResult').innerHTML =
+            '<h3>초단기실황 예보</h3>' +
+            '<ul>' + output.map(v => `<li>${v}</li>`).join('') + '</ul>';
+        })
+        .catch(err => {
+          document.getElementById('weatherResult').innerText = '에러 발생: ' + err.message;
+        });
+    });
+
+    /*
+    ======================= 전체 정리 =======================
+
+    [API 주소 및 구성]
+    - 기상청 초단기실황 예보 API:
+      https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst
+    - 필수 쿼리: serviceKey, base_date, base_time, nx, ny, dataType=JSON
+
+    [fetch 사용 흐름]
+    - fetch(url) → .then(res => res.json()) → .then(data => ... 파싱)
+    - 오류 대응은 .catch()로 처리
+
+    [날짜/시간 조절법]
+    - base_date: 'YYYYMMDD' 형식으로 오늘 날짜 지정
+    - base_time: 발표 시간 (단기: 0200, 0500, 0800, ..., 2300)
+
+    [화면 출력]
+    - map()으로 항목 설명 생성 후 innerHTML로 삽입
+
+    [실무에서 자주 쓰는 패턴]
+    ★ fetch → .then → .then → .catch 흐름
+    ★ JSON 구조 파악 후 원하는 항목만 가공
+    ★ innerHTML로 동적 출력
+    ★ API 응답 실패 대응
+
+    ========================================================
+    */
+  </script>
+</body>
+</html>
