@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 예보 데이터 파싱</title>
+</head>
+<body>
+     <button id="btnWeather">날씨 데이터 출력</button>
+
+     <script>
+    document.querySelector('#btnWeather').addEventListener('click', () => {
+      const response = {
+        "response": {
+          "header": {"resultCode": "00","resultMsg": "NORMAL_SERVICE"},
+          "body": {
+            "dataType": "JSON",
+            "items": {
+              "item": [
+                {"category": "PTY", "obsrValue": "0"},
+                {"category": "REH", "obsrValue": "91"},
+                {"category": "RN1", "obsrValue": "11"},
+                {"category": "T1H", "obsrValue": "23"},
+                {"category": "UUU", "obsrValue": "-2.2"},
+                {"category": "VEC", "obsrValue": "80"},
+                {"category": "VVV", "obsrValue": "-0.3"},
+                {"category": "WSD", "obsrValue": "2.3"}
+              ]
+            },
+            "pageNo": 1,
+            "numOfRows": 10,
+            "totalCount": 8
+          }
+        }
+      };
+
+      const items = response.response.body.items.item;
+
+      items.forEach(({ category, obsrValue }) => {
+        switch (category) {
+          case 'PTY':
+            console.log(`강수 형태: ${obsrValue === "0" ? "없음" : obsrValue}`);
+            break;
+          case 'REH':
+            console.log(`습도: ${obsrValue}%`);
+            break;
+          case 'RN1':
+            console.log(`1시간 강수량: ${obsrValue}mm`);
+            break;
+          case 'T1H':
+            console.log(`기온: ${obsrValue}℃`);
+            break;
+          case 'UUU':
+            console.log(`동서바람성분: ${obsrValue}m/s`);
+            break;
+          case 'VEC':
+            console.log(`풍향: ${obsrValue}°`);
+            break;
+          case 'VVV':
+            console.log(`남북바람성분: ${obsrValue}m/s`);
+            break;
+          case 'WSD':
+            console.log(`풍속: ${obsrValue}m/s`);
+            break;
+          default:
+            console.log(`${category}: ${obsrValue}`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

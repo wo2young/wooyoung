@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        const array = [];
+        // 배열 : 값을 순서로 관리
+
+        // json : 값을 key로 관리, 넣은 순서는 보장하지 않는다
+
+        // json 선언
+        let json = {}
+        const k3 = 'v2'    
+        json = {
+            "key": "value",       // 문자열 키는 반드시 쌍따옴표(JSON 규칙)
+            "num": 123,
+            'k1': 'v1',           // 따옴표는 JS에선 가능하지만, JSON 표준은 쌍따옴표만 허용
+            k2: k3,               // 변수 k2가 키가 됨 → "k2": "v2"
+            k4: array,            // k4에 배열 참조
+            k5: function(){
+                console.log('함수 실행')  // JSON 표준에는 함수 저장 불가 (JS 객체에서는 가능)
+            },
+            k6: {
+                c1: 'c_v1',
+                c2: 'c_v2'
+            }
+        }
+
+        console.log('json :', json);  // 객체 출력
+        console.log('json :' + json); // 문자열 결합 시 → [object Object]
+
+        // 값에 접근
+        // 배열처럼 접근
+        console.log("json['key'] : ", json['key'])
+        console.log("json['k6']['c1'] : ", json['k6']['c1'])
+
+        // 프로퍼티처럼 접근(js에서만 가능)
+        console.log('json.key : ', json.key)
+        console.log('json.k6.c1 : ', json.k6.c1)
+
+        json.k4.push(1)
+        json.k4.push(2)
+        console.log('json.k4 : ', json.k4)  // [1, 2]
+
+        json.k5()  // 함수 실행
+
+        // 키가 있으면 값을 덮어쓰고
+        // 키가 없으면 추가
+        json.key = 'value2'
+        console.log('json.key : ', json.key)  // 덮어쓰기
+
+        json.key2 = 'val'
+        console.log('json.key2 : ', json.key2)
+        console.log('json.key3 : ', json.key3)  // undefined (없음)
+
+        // 오타 있음 (lengt → length)
+        console.log('json.k4.lengt :', json.k4.lengt)  
+        json.k4.lengt = 5
+        console.log('json.k4.lengt :', json.k4.lengt)
+        console.log('json.k4:', json.k4)  // 실제 배열에는 영향 없음 (length는 자동 관리)
+
+        // 네트워크는 모든 걸 문자로 전송해야 한다.
+        // json을 문자열로 만들어 줌
+        // 단, 값이 함수인 건 제외.
+        const str = JSON.stringify(json)
+        console.log('str : ', str)  // 함수 k5는 빠짐
+
+        const json2 = JSON.parse(str)
+        console.log('json2 : ', json2)  // 복원됨 (단, k5는 없음)
+
+        // 이게 json문법 배열일 경우 중괄호를{} 대괄호로[]
+        console.log(JSON.parse('{"a" : 1}'));  // 정상 파싱
+
+        const arrJson = [{
+            empno: '7788',
+            ename: 'Scott',
+        }, {
+            empno: '1234',
+            ename: 'Allen'
+        }]
+        const emp = JSON.stringify(arrJson)
+        console.log(emp)              // 문자열로 전환
+        console.log(JSON.parse(emp))  // 다시 객체로 변환
+
+        // for in은 index를 뽑아줌
+        // json에서 index는 key
+        for(let k in json){
+            console.log('k :', k, json[k])  // key와 그 값 출력
+        }
+
+        // json의 모든 key를 배열로 가져오기
+        const keys = Object.keys(json);
+        console.log('keys : ', keys)
+
+        /*
+==================== 전체 정리 (실무 중요도 포함) ====================
+
+1. JSON vs Array
+- 배열은 순서로 관리, JSON은 키(key)로 관리됨
+- JSON은 순서를 보장하지 않음
+→ ★★☆
+
+2. 객체 선언 및 키 작성
+- JS 객체에서는 문자열 키에 따옴표 생략 가능
+- JSON 표준에선 키도 무조건 쌍따옴표로 감싸야 함
+→ ★★★
+
+3. 접근 방식
+- 배열 접근: json['key']  
+- 프로퍼티 접근: json.key  
+→ 둘 다 가능하지만 key 이름에 공백이나 특수문자 있으면 대괄호 방식만 가능  
+→ ★★★
+
+4. 배열/함수/중첩 객체 포함 가능
+- JS 객체는 배열, 함수, 중첩 객체 모두 포함 가능  
+- 단, 함수는 JSON.stringify 시 무시됨
+→ ★★★
+
+5. 문자열 변환 & 역변환
+- `JSON.stringify(obj)` → 문자열 전환
+- `JSON.parse(str)` → 문자열 → 객체
+- 주로 Ajax, fetch, localStorage에서 활용
+→ ★★★ (실무 핵심 패턴)
+
+6. JSON은 네트워크 전송 단위
+- 반드시 문자열이어야 전송 가능  
+- 문자열로 만들면 크기 줄고, 전송이 쉬워짐
+→ ★★★
+
+7. 객체 순회
+- `for...in`은 key 순회용  
+- `Object.keys(obj)` → key 배열만 가져옴  
+→ ★★☆
+
+8. 기타 실수
+- 오타 예: `.lengt` → `.length`  
+- JS에서는 동적으로 속성 추가, 수정 가능 (json.k3 = "abc")
+→ ★★☆
+
+=======================================================================
+*/
+
+    </script>
+</body>
+</html>

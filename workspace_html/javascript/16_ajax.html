@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document</title>
+  <script>
+    window.addEventListener('load', bind);
+
+    function bind() {
+      // btn1 클릭 - jsonplaceholder API 호출
+      document.querySelector('#btn1').addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+        xhr.send();
+
+        xhr.onload = function () {
+          console.log('다녀왔어');
+          const data = JSON.parse(xhr.responseText);
+          console.log(data);
+          console.log(data[0]);
+          console.log(data[0].username);
+          console.log(data[0].address);
+          console.log(data[0].address.geo);
+          console.log(data[0].address.geo.lat);
+          console.log(data[0].company.bs)
+        };
+      });
+
+      // btn3 클릭 - 네이버 (CORS 우회)
+      document.querySelector('#btn3').addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.naver.com');
+        xhr.send();
+
+        xhr.onload = function () {
+          console.log(xhr.responseText);
+        };
+      });
+
+      // btn4 클릭 - 휴먼잡스 사이트 호출 (CORS 문제 발생 가능)
+      document.querySelector('#btn4').addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://humanjobs.co.kr');
+        xhr.send();
+
+        xhr.onload = function () {
+          console.log(xhr.responseText);
+        };
+      });
+
+      // btn5 클릭 - 기상청 초단기실황 예보 API 호출
+      document.querySelector('#btn5').addEventListener('click', function () {
+        const serviceKey =
+          'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D';
+        let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst';
+        url += '?serviceKey=' + serviceKey;
+        url += '&numOfRows=1000';
+        url += '&pageNo=1';
+        url += '&dataType=JSON';
+        url += '&base_date=20250714';
+        url += '&base_time=1400';
+        url += '&nx=63';
+        url += '&ny=110';
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+
+        xhr.onload = function () {
+          console.log(xhr.responseText);
+        };
+      });
+    }
+  </script>
+</head>
+<body>
+  <button type="button" id="btn1">ajax 실행</button>
+  <button type="button" id="btn3">네이버 실행</button>
+  <button type="button" id="btn4">휴먼 실행</button>
+  <!-- 웹소켓 때문에 안들어가짐-->
+  <button type="button" id="btn5">날씨예보</button>
+</body>
+</html>
