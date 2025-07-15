@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(() => {
+            init();
+        });
+
+        function init() {
+            const list_h1 = $('h1');
+            console.log(list_h1);    // jQuery 배열 객체
+            console.log(list_h1[0]); // pure javascript 요소
+                                      // 없으면 비어있는 배열이 온다
+                                      // querySelectorAll에 해당
+
+            // text()는 innerText
+            $('h1').text('TLqkf');
+
+            // html()은 innerHTML에 해당
+            $('h1').html('<a href="javascript:void(0)">a tag</a>');
+
+            console.log($('#parent'));
+
+            // 클래스 추가
+            $('#parent').addClass('c1');
+            $('#parent').addClass('c2 c3'); // 이런식으로 한번에도 쓸 수 있음
+
+            // 클래스 제거
+            $('#parent').removeClass('c2 c3');
+
+            // 클래스 있으면 제거, 없으면 추가
+            $('#parent').toggleClass('c2');
+
+            console.log($('#parent').hasClass('c2'));
+
+            // 전달인자가 하나면
+            // getAttribute 속성의 값 가져오기
+            let human = $('#chk').attr('data-human');
+            console.log(human);
+
+            // 전달인자 두 개면
+            // setAttribute
+            $('#chk').attr('data-human', 123);
+            $('#chk').attr('data-game', '윷놀이');
+
+            // data() : data-속성명에서 속성명만 사용할 수 있다
+            console.log($('#chk').data('game'));
+
+            // 개발자 도구에서 안보이는 속성 추가
+            $('#chk').data('dinner', '찌게');
+            console.log($('#chk').data('dinner'));
+
+            // removeAttribute 속성 삭제
+            $('#chk').removeAttr('data-game');
+
+            // $()안에 html 태그를 넣으면
+            // createElement 해줌
+            let child2 = $('<div class="child2">자식2</div>');
+            console.log(child2[0]);
+
+            // 자식의 마지막에 요소 추가
+            $('#parent').append(child2);
+
+            // 자식의 맨 앞에 요소 추가
+            $('#parent').prepend('<div class="child2">자식2</div>');
+
+            // 내용 비우기
+            // $('#parent')[0].innerHTML = "";
+            // $('#parent').html('');
+            $('#parent').empty();
+
+            // 태그 삭제
+            $('#parent').remove();
+        }
+    </script>
+</head>
+<body>
+    <h1>첫번째</h1>
+    <h1>두번째</h1>
+    <h1>세번째</h1>
+
+    <div id="parent">
+        부모
+        <div class="child">자식</div>
+    </div>
+
+    <input type="checkbox" id="chk" class="cb1" value="1"
+           data-human="값" checked="checked"><br>
+</body>
+</html>
+
+<!-- 전체 정리 (실무 핵심 중심) -->
+
+<!-- 
+[1] 요소 선택 및 접근
+- $('선택자') → document.querySelectorAll과 유사 (jQuery 객체 반환)
+- $('#id')[0] → 순수 DOM 반환
+
+[2] 텍스트/HTML 조작
+- .text('문자열') → innerText 변경 (실무에서 자주 사용)
+- .html('<태그>') → innerHTML 삽입 (스크립트 삽입 주의)
+
+[3] 클래스 제어
+- .addClass(), .removeClass(), .toggleClass(), .hasClass() → 상태 변경 제어에 유용
+- 여러 클래스 한 번에 추가/삭제 가능 (공백으로 구분)
+
+[4] 속성 제어
+- .attr('속성') → getAttribute()
+- .attr('속성', 값) → setAttribute()
+- .removeAttr('속성') → removeAttribute()
+- .data('속성명') → data- 속성 읽기/쓰기 (HTML 상에서 data-*만 가능, 추가는 jQuery 내부 저장소에 있음)
+
+[5] 요소 생성 및 추가
+- $('<태그>') → jQuery 객체로 새 요소 생성 (createElement와 유사)
+- .append(), .prepend() → 자식 요소 추가
+
+[6] 요소 제거 및 초기화
+- .empty() → 내부 자식 요소만 제거 (자기 자신은 남김)
+- .remove() → 요소 자체도 DOM에서 완전히 삭제
+
+[주의]
+- jQuery로 DOM 조작 시 React 같은 프레임워크와 혼용 주의
+- 텍스트는 .text(), HTML 삽입은 .html()
+-->
