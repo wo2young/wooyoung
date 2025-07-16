@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,85 +11,79 @@
       display: flex;
       justify-content: space-around;
     }
+    #historyView {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      white-space: pre-line;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script>
     let cnt = 0
-    // 페이지가 로드되면 bind 함수 실행
+    const chatHistory = []; // [추가 주석] 전체 대화 저장 (Gemini context 유지용)
+
     window.addEventListener('load', bind);
 
     function bind() {
-      // btn1 클릭 - jsonplaceholder API 호출 (더미 JSON 데이터 가져오기)
+      // btn1 - jsonplaceholder API
       document.querySelector('#btn1').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users'); // 비동기 GET 요청 준비
-        xhr.send(); // 요청 전송
-
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+        xhr.send();
         xhr.onload = function () {
-          console.log('다녀왔어'); // 호출 완료 확인 로그
-          const data = JSON.parse(xhr.responseText); // JSON 문자열을 JS 객체로 파싱
-          console.log(data); // 전체 유저 배열
-          console.log(data[0]); // 첫 번째 유저 정보
-          console.log(data[0].username); // 첫 번째 유저의 username
-          console.log(data[0].address); // 주소 정보
-          console.log(data[0].address.geo); // 지리 정보
-          console.log(data[0].address.geo.lat); // 위도 정보
-          console.log(data[0].company.bs); // 회사 bs 정보
+          console.log('다녀왔어');
+          const data = JSON.parse(xhr.responseText);
+          console.log(data);
+          console.log(data[0]);
+          console.log(data[0].username);
+          console.log(data[0].address);
+          console.log(data[0].address.geo);
+          console.log(data[0].address.geo.lat);
+          console.log(data[0].company.bs);
         };
       });
 
-      // btn3 클릭 - 네이버 (CORS 우회)
+      // btn3 - 네이버 (CORS 우회)
       document.querySelector('#btn3').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
-        // CORS 우회를 위해 cors-anywhere 프록시 서버를 앞에 붙임
         xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.naver.com');
         xhr.send();
-
         xhr.onload = function () {
-          // 받아온 HTML 전체가 출력됨 (text 형식)
           console.log(xhr.responseText);
         };
       });
 
-      // btn4 클릭 - 휴먼잡스 사이트 호출 (CORS 문제 발생 가능)
+      // btn4 - 휴먼잡스
       document.querySelector('#btn4').addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
-        // CORS 설정이 되어있지 않으면 브라우저가 차단함
         xhr.open('GET', 'http://humanjobs.co.kr');
         xhr.send();
-
         xhr.onload = function () {
-          console.log(xhr.responseText); // 성공 시 HTML 반환
+          console.log(xhr.responseText);
         };
       });
 
-      // btn5 클릭 - 기상청 초단기실황 예보 API 호출
+      // btn5 - 기상청 날씨 API
       document.querySelector('#btn5').addEventListener('click', function () {
-        const serviceKey =
-          'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D'; // 인증키 (URL 인코딩 상태)
-
-        // 초단기실황 예보 API URL 구성
+        const serviceKey = 'DwnrMHnqdu9OKW6tSEzQpz8E3iwseBfyEksrEmZmKRpfxsXbCfLUp5Ek%2FF29JB723JPu%2BZDJui1l5ZSiqBtUNA%3D%3D';
         let url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst';
-        url += '?serviceKey=' + serviceKey; // 인증키
-        url += '&numOfRows=1000'; // 최대 데이터 개수
-        url += '&pageNo=1'; // 페이지 번호
-        url += '&dataType=JSON'; // 반환 형식
-        url += '&base_date=20250714'; // 기준 날짜 (예: 2025년 7월 14일)
-        url += '&base_time=1400'; // 기준 시간 (14시 00분 발표 데이터)
-        url += '&nx=63'; // 격자 X좌표
-        url += '&ny=110'; // 격자 Y좌표 (서울 중심 근처 위치)
+        url += '?serviceKey=' + serviceKey;
+        url += '&numOfRows=1000';
+        url += '&pageNo=1';
+        url += '&dataType=JSON';
+        url += '&base_date=20250714';
+        url += '&base_time=1400';
+        url += '&nx=63';
+        url += '&ny=110';
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.send();
-
         xhr.onload = function () {
-          // console.log(xhr.responseText); // 날씨 JSON 응답 출력
           const data = JSON.parse(xhr.responseText)
-          // console.log(data.response.body.items.item)
           const items = data.response.body.items.item
           console.log(items)
-
 
           const div = document.createElement('div')
           let content = ''
@@ -117,32 +110,28 @@
           div.innerHTML = content;
           document.body.append(div);
         }
-
       })
-      document.querySelector('#btn6')
-        .addEventListener('click', function () {
 
-          const url = 'https://cors-anywhere.herokuapp.com/https://www.naver.com'
-          const option = {
-            method: 'get' // json
-          }
-          fetch(url, option).then(function (response) {
-            return response.json()
-          }).then(function (data) {
-            console.log(data)
-          }).catch(function (error) {
-            console.log(error)
-          })
+      // btn6 - fetch
+      document.querySelector('#btn6').addEventListener('click', function () {
+        const url = 'https://cors-anywhere.herokuapp.com/https://www.naver.com'
+        const option = { method: 'get' }
+        fetch(url, option).then(function (response) {
+          return response.json()
+        }).then(function (data) {
+          console.log(data)
+        }).catch(function (error) {
+          console.log(error)
         })
-      // ajax를 jQuery로 사용하는 방법
+      })
+
+      // btn7 - jQuery ajax
       $('#btn7').off('click').on('click', function () {
-        // 스피너-로딩중 표시
         $.ajax({
           url: 'https://naver.com',
           type: 'get',
           success: function (data) {
             console.log('성공')
-            // json일 경우 알아서 json으로 넘어옴
             console.log(data)
           },
           error: function (data) {
@@ -154,21 +143,8 @@
           }
         })
       })
-      // js에서 일부러 에러 만드는 방법
-      try {
-        console.log(1, "실행")
-        // throw new Error('에러') 
-        // 에러가 없으면 1 2 5가 나오고 에러가 있으면 다 나온다
-        console.log(2, "여전히 실행 중")
-      } catch (err) {
-        // catch는 조건문처럼 error가 있을때만 실행
-        console.log(3, 'catch')
-        console.log(4, err)
-      } finally {
-        console.log(5, '무조건 실행')
-      }
-      console.log('me?')
 
+      // btn8 - jQuery done/fail/always
       $('#btn8').off('click').on('click', function () {
         $.ajax({
           url: 'https://jsonplaceholder.typicode.com/users',
@@ -184,67 +160,87 @@
         })
       })
 
+      // btn9 - Telegram
       $('#btn9').off('click').on('click', function () {
         let msg = $('#msg2').text().replace('\n', '%0a')
         $.ajax({
-          url: 'https://api.telegram.org/bot8017294032:AAHnGMoyK4fgW5cdfvC3HujN91pdpH2QeFw/sendMessage?chat_id=7721485499&text=' + msg,
+          url: 'https://api.telegram.org/bot<token>/sendMessage?chat_id=<chat_id>&text=' + msg,
           type: 'get',
         })
       })
+
+      // btn10 - Gemini API + context 유지
       $('#btn10').on('click', function () {
         let msg = $('#msg2').val()
+        chatHistory.push("나: " + msg);
+
+        const contents = chatHistory.map(text => {
+          if (text.startsWith("나: ")) {
+            return { role: "user", parts: [{ text: text.replace("나: ", "") }] }
+          } else {
+            return { role: "model", parts: [{ text: text.replace("제미나이: ", "") }] }
+          }
+        });
+
+        contents.push({ role: "user", parts: [{ text: msg }] });
+
         const key = 'AIzaSyBlUUYUxrGyzMqvI1i7O_IgAUWr80iC9l4'
-        const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key'+key
+        const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + key
         const data = {
-          key: key,
-          contents: {
-            role: 'user',
-            parts: [{
-              text: msg
-            }]
+          contents: contents,
+          generationConfig: {
+            maxOutputTokens: 200
           }
         }
+
         const xhr = new XMLHttpRequest();
         xhr.open('post', url)
         xhr.setRequestHeader('Content-Type', 'application/json')
         xhr.send(JSON.stringify(data))
         xhr.onload = function(){
-          console.log('제미나이')
-          console.log('xhr.responseText')
           const response = JSON.parse(xhr.responseText)
-          const answer = response.candidates[0].content.parts[0]
+          const answer = response.candidates[0].content.parts[0].text 
+          chatHistory.push("제미나이: " + answer);
+          $('#gemini').text(answer)
+          $('#historyView').text(chatHistory.join('\n'));
         }
-      }) // 1도 이해 안감 ㅈ됨
-
-
+      })
     }
+
     /*
     ======================= 전체 정리 =======================
 
-    [XMLHttpRequest 기본 구조]
-    - xhr.open('GET', url) → 요청 설정 (GET 방식)
-    - xhr.send() → 요청 전송
-    - xhr.onload = function () { ... } → 응답 도착 시 실행
+    [전체 구조]
+    - 입력할 때마다 chatHistory 배열에 나와 제미나이 대화가 계속 쌓임
+    - btn1~btn9 기존 ajax 예제들 다 유지
+    - btn10은 chatHistory를 Gemini에 통째로 보내 과거 대화 context 유지
+    - #gemini에는 최신 답변, #historyView에는 전체 대화 기록 출력
 
-    [JSON 처리]
-    - JSON.parse(responseText) → 문자열을 자바스크립트 객체로 변환 (실무에서 매우 자주 사용됨)
+    [XHR 기본 구조]
+    - xhr.open(method, url)
+    - xhr.send()
+    - xhr.onload = function() { JSON.parse(xhr.responseText) }
 
-    [CORS 개념]
-    - CORS(Cross-Origin Resource Sharing): 다른 출처(URL 도메인)의 데이터를 요청할 때 보안 때문에 막히는 현상
-    - 우회 방법: proxy 서버 사용 (`cors-anywhere`), 백엔드에서 중계
-    - 예: 네이버, 휴먼잡스는 브라우저에서 직접 호출 시 CORS 문제 발생
+    [fetch]
+    - fetch(url).then(res=>res.json()).then(data=>{}).catch(err=>{})
+    - 최신 문법: async/await으로 더 많이 사용
 
-    [기상청 날씨 API]
-    - base_date: 날짜 (YYYYMMDD 형식, 오늘 날짜로 바꾸면 다른 날씨 가능)
-    - base_time: 기준 시간 (단기 예보는 주로 0200, 0500, ..., 2300)
-    - nx, ny: 위치 좌표 (서울 중구 기준: nx=60, ny=127)
-    - 초단기실황 예보 API는 현재 날씨 상태를 제공 (강수형태, 기온, 습도 등)
+    [$.ajax (jQuery)]
+    - $.ajax({ url, type, success, error, complete })
+    - .done / .fail / .always 도 자주 사용
 
-    [실무에서 중요한 항목]
-    ★ JSON.parse()
-    ★ xhr.open/send/onload
-    ★ CORS와 프록시 이해
-    ★ API 날짜/시간/위치 파라미터 수정법
+    [Gemini 핵심 포인트 ★★★]
+    ★ URL ?key= 빠지면 API 동작 안함
+    ★ body에 contents는 반드시 배열
+    ★ response.candidates[0].content.parts[0].text 구조
+    ★ API KEY는 .env로 숨겨야 보안 유지
+
+    [실무에서 중요한 포인트 ★★★]
+    ★ 대화형 AI는 반드시 context(과거 대화)를 유지해야 자연스럽게 이어짐
+    ★ 배열로 쌓아두면 언제든 JSON.stringify(chatHistory)로 API에 다시 보낼 수도 있음
+    ★ maxOutputTokens / temperature로 답변 스타일 조절
+    ★ console.log(JSON.stringify(data, null, 2)) 쓰면 구조 보기 편함
+    ★ 콘솔로 구조 확인 후 경로 지정 필수
 
     ========================================================
     */
@@ -255,13 +251,11 @@
   <button type="button" id="btn1">ajax 실행</button>
   <button type="button" id="btn3">네이버 실행</button>
   <button type="button" id="btn4">휴먼 실행</button>
-  <!-- 웹소켓 때문에 안들어가짐-->
   <button type="button" id="btn5">날씨예보</button>
   <button type="button" id="btn6">fetch</button>
   <button type="button" id="btn7">jQuery</button>
   <button type="button" id="btn8">jQuery2</button>
-  <br>
-  <hr>
+  <br><hr>
   <textarea id="msg"></textarea>
   <br>
   <button id="btn9">텔레그램</button>
@@ -271,6 +265,7 @@
   <button id="btn10">제미나이</button>
   <br>
   <div id="gemini"></div>
+  <div id="historyView"></div>
   <hr>
   <div class="tr">
     <div class="td">시간</div>
@@ -279,5 +274,4 @@
     <div class="td">습도</div>
   </div>
 </body>
-
 </html>
