@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Document</title>
   <style>
-    .tr{
+    .tr {
       width: 400px;
       border: 1px solid black;
       display: flex;
       justify-content: space-around;
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script>
     let cnt = 0
     // 페이지가 로드되면 bind 함수 실행
@@ -88,11 +90,11 @@
           // console.log(data.response.body.items.item)
           const items = data.response.body.items.item
           console.log(items)
-          
-          
+
+
           const div = document.createElement('div')
           let content = ''
-         const seenTimes = new Set();
+          const seenTimes = new Set();
           items.forEach(({ fcstTime }) => {
             if (!seenTimes.has(fcstTime)) {
               seenTimes.add(fcstTime);
@@ -100,43 +102,122 @@
             }
           });
           items.forEach(({ category, fcstValue }) => {
-          switch(category) {
-            case 'T1H':
-            content +=`<div class="td">${fcstValue}도</div>`
-            break;
-            case 'RN1':
-            content +=`<div class="td">${fcstValue === "0" ? "0" : fcstValue}</div>`
-            break;
-            case 'REH':
-              content +=`<div class="td">${fcstValue}%</div>`
-              break;
-          };
-        });
-        div.innerHTML = content;
-        document.body.append(div);
-      }
-      
-    })
-    document.querySelector('#btn6')
-      .addEventListener('click', function () {
-        
-        const url = 'https://cors-anywhere.herokuapp.com/https://www.naver.com'
-        const option = {
-          method: 'get' // json
+            switch (category) {
+              case 'T1H':
+                content += `<div class="td">${fcstValue}도</div>`
+                break;
+              case 'RN1':
+                content += `<div class="td">${fcstValue === "0" ? "0" : fcstValue}</div>`
+                break;
+              case 'REH':
+                content += `<div class="td">${fcstValue}%</div>`
+                break;
+            };
+          });
+          div.innerHTML = content;
+          document.body.append(div);
         }
-        fetch(url, option).then(function(response){
-          return response.json()
-        }). then(function(data){
-          console.log(data)
-        }).catch(function(error){
-          console.log(error)
+
+      })
+      document.querySelector('#btn6')
+        .addEventListener('click', function () {
+
+          const url = 'https://cors-anywhere.herokuapp.com/https://www.naver.com'
+          const option = {
+            method: 'get' // json
+          }
+          fetch(url, option).then(function (response) {
+            return response.json()
+          }).then(function (data) {
+            console.log(data)
+          }).catch(function (error) {
+            console.log(error)
+          })
         })
-    })
-    
-    
+      // ajax를 jQuery로 사용하는 방법
+      $('#btn7').off('click').on('click', function () {
+        // 스피너-로딩중 표시
+        $.ajax({
+          url: 'https://naver.com',
+          type: 'get',
+          success: function (data) {
+            console.log('성공')
+            // json일 경우 알아서 json으로 넘어옴
+            console.log(data)
+          },
+          error: function (data) {
+            console.log('실패')
+            console.log('ERROR', data)
+          },
+          complete: function () {
+            console.log('무조건 실행')
+          }
+        })
+      })
+      // js에서 일부러 에러 만드는 방법
+      try {
+        console.log(1, "실행")
+        // throw new Error('에러') 
+        // 에러가 없으면 1 2 5가 나오고 에러가 있으면 다 나온다
+        console.log(2, "여전히 실행 중")
+      } catch (err) {
+        // catch는 조건문처럼 error가 있을때만 실행
+        console.log(3, 'catch')
+        console.log(4, err)
+      } finally {
+        console.log(5, '무조건 실행')
+      }
+      console.log('me?')
 
-  }
+      $('#btn8').off('click').on('click', function () {
+        $.ajax({
+          url: 'https://jsonplaceholder.typicode.com/users',
+          type: 'get',
+        }).done(function (data) {
+          console.log('성공')
+          console.log(data)
+        }).fail(function (data) {
+          console.log('실패')
+          console.log('ERROR', data)
+        }).always(function () {
+          console.log('무조건 실행')
+        })
+      })
 
+      $('#btn9').off('click').on('click', function () {
+        let msg = $('#msg2').text().replace('\n', '%0a')
+        $.ajax({
+          url: 'https://api.telegram.org/bot8017294032:AAHnGMoyK4fgW5cdfvC3HujN91pdpH2QeFw/sendMessage?chat_id=7721485499&text=' + msg,
+          type: 'get',
+        })
+      })
+      $('#btn10').on('click', function () {
+        let msg = $('#msg2').val()
+        const key = 'AIzaSyBlUUYUxrGyzMqvI1i7O_IgAUWr80iC9l4'
+        const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key'+key
+        const data = {
+          key: key,
+          contents: {
+            role: 'user',
+            parts: [{
+              text: msg
+            }]
+          }
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open('post', url)
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(JSON.stringify(data))
+        xhr.onload = function(){
+          console.log('제미나이')
+          console.log('xhr.responseText')
+          const response = JSON.parse(xhr.responseText)
+          const answer = response.candidates[0].content.parts[0]
+        }
+      }) // 1도 이해 안감 ㅈ됨
+
+
+    }
     /*
     ======================= 전체 정리 =======================
 
@@ -169,6 +250,7 @@
     */
   </script>
 </head>
+
 <body>
   <button type="button" id="btn1">ajax 실행</button>
   <button type="button" id="btn3">네이버 실행</button>
@@ -176,12 +258,26 @@
   <!-- 웹소켓 때문에 안들어가짐-->
   <button type="button" id="btn5">날씨예보</button>
   <button type="button" id="btn6">fetch</button>
-  <br><hr>
+  <button type="button" id="btn7">jQuery</button>
+  <button type="button" id="btn8">jQuery2</button>
+  <br>
+  <hr>
+  <textarea id="msg"></textarea>
+  <br>
+  <button id="btn9">텔레그램</button>
+  <hr>
+  <textarea id="msg2"></textarea>
+  <br>
+  <button id="btn10">제미나이</button>
+  <br>
+  <div id="gemini"></div>
+  <hr>
   <div class="tr">
     <div class="td">시간</div>
     <div class="td">온도</div>
     <div class="td">강수량</div>
     <div class="td">습도</div>
-</div>
+  </div>
 </body>
+
 </html>

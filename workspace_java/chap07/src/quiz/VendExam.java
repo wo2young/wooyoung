@@ -11,12 +11,11 @@ public class VendExam {
 		vend.init();
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
-<<<<<<< HEAD
 		System.out.println("돈을 넣어주세요");
 		int i = 0;
-=======
+
 //		System.out.println("돈을 넣어주세요");
->>>>>>> origin/main
+
 		
 		
 		while(run) {
@@ -37,7 +36,6 @@ public class VendExam {
 	    	    System.out.print("\n선택 >> ");
 	    	    String name = sc.nextLine();  // 여기서 진짜 사용자 입력 받음
 	    	    vend.selectDrink(name);       // 음료 선택
-<<<<<<< HEAD
 	    	    i++;
 	    	} 
 //	    	else if(select == 2) {
@@ -45,7 +43,7 @@ public class VendExam {
 //		    } 
     	    else if(select == 2) {
 		        System.out.println("종료");
-=======
+
 //	    	    System.out.println("종료");
 	    	    
 		    } 
@@ -53,7 +51,6 @@ public class VendExam {
 //		        vend.getPenny();
 //		    } 
 	    	    else if(select == 2) {
->>>>>>> origin/main
 		        System.out.println("잔돈 : " + money);
 		        System.out.println("잔돈을 가져가 주세요");
 		        System.out.println("종료");

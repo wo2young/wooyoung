@@ -8,6 +8,7 @@
     <script>
         $(() => {
             init();
+            bind();
         });
 
         function init() {
@@ -68,6 +69,9 @@
             // 자식의 맨 앞에 요소 추가
             $('#parent').prepend('<div class="child2">자식2</div>');
 
+            $('#parent').after('<div id="parent2">sj</div>')
+            $('#parent').before('<div id="parent3">sk</div>')
+
             // 내용 비우기
             // $('#parent')[0].innerHTML = "";
             // $('#parent').html('');
@@ -75,6 +79,76 @@
 
             // 태그 삭제
             $('#parent').remove();
+
+            // CSS 적용
+            $('#input1').css('backgroundColor', 'yellow')
+            
+            // DOM에 적용된 실제 CSS 값 읽기
+            console.log($('#input1').css('backgroundColor'))
+            console.log($('#input1').css('fontSize'))
+            console.log($('#input1').css('width'))
+            console.log($('#input1').width())
+            // 너비를 300으로 지정
+            $('#input1').width(300)
+
+            
+
+        }
+        function bind() {
+            // $('#btn1').click(function(){})
+            $('#btn1').on('click', function(event){
+                console.log(this === event.currentTarget)
+                // this와 currentTarget 검색해보기
+                // 값 가져오기
+                // $('#input1')[0].value
+                console.log($('#input1').val())
+                // 값 바꾸기
+                $('#input1').val('추추')
+                })
+
+                // check 여부 확인
+            console.log($('#chk').prop('checked'))
+            // check 상태 바꾸기
+            $('#chk').prop('checked', true)
+
+            $('.btn').on('click', function(event){
+                console.log('버튼')
+                console.log(event.target)
+                console.log(this)
+
+                bind()
+            })
+            $('.btn').off('click')
+            // 이벤트종류.식별자로 bind하고
+            $('.btn').on('click', function(){
+                console.log('버튼 dom')
+                bind()
+            })
+            $('.btn').on('click.ajax', function(){
+                console.log('버튼 ajax')
+            })
+            // 이벤트종류.식별자로 특정 이벤트만 unbind할 수 있다
+            $('.btn').off('click.ajax')
+
+            $('#parent10').on('click', function(event){
+                console.log('this', this)
+                console.log('event.target', event.target)
+            })
+            $('.child10').on('click', function(event){
+            // event.stopPropagation()
+                return false;                    
+            })
+            $('#btn3').on('click', function(){
+            //     $('.child10').hide() // display: none 적용
+            //     $('.child10').show() // display 삭제
+            //     $('.child10').fadeToggle() // 천처히 사라짐
+            // $('.child10').slideToggle()
+                $('.child10').animate({
+                    width: "300px",
+                    height: "+=10px"
+                })
+            })
+             
         }
     </script>
 </head>
@@ -90,6 +164,15 @@
 
     <input type="checkbox" id="chk" class="cb1" value="1"
            data-human="값" checked="checked"><br>
+    <input type="text" id="input1"> 
+    <input type="button" id="btn1" class="btn" value="버튼1"></input>
+    <input type="button" id="btn2" class="btn" value="버튼2"></input>
+    <input type="button" id="btn3" class="btn" value="버튼3"></input>
+
+     <div id="parent10">
+        부모10
+        <div class="child10" style="border: 1px solid red; height: 100px; background-color: yellow;">자식10</div>
+    </div>
 </body>
 </html>
 
