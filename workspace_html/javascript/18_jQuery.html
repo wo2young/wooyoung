@@ -27,7 +27,9 @@
             console.log($('#parent'));
 
             // 클래스 추가
+            $()
             $('#parent').addClass('c1');
+            
             $('#parent').addClass('c2 c3'); // 이런식으로 한번에도 쓸 수 있음
 
             // 클래스 제거
@@ -156,11 +158,12 @@
     <h1>첫번째</h1>
     <h1>두번째</h1>
     <h1>세번째</h1>
-
+    
     <div id="parent">
         부모
         <div class="child">자식</div>
     </div>
+    
 
     <input type="checkbox" id="chk" class="cb1" value="1"
            data-human="값" checked="checked"><br>

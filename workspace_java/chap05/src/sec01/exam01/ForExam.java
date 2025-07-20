@@ -165,7 +165,7 @@ public class ForExam {
 		for (int j = 1; j <= 5; j++) {
 			System.out.println();
 			for (int n = 4; n >= j; n--) {
-				System.out.print(space);
+				System.out.print(" ");
 			}
 			for (int p = 5; p >= 6 - j; p--) {
 				System.out.print(mark);
