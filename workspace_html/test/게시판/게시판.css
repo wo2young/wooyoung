@@ -1,0 +1,51 @@
+.gub {
+    position: relative;
+
+    margin-left: 60px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+#gub_menu {
+    position: absolute;
+    left: 700px;
+    top: -90px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.gub_items {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+}
+.title {
+    box-sizing: border-box;
+
+    padding: 20px;
+    /* position: absolute;
+    top: 100px; */
+
+    height: 220px;
+    width: 1020px;
+
+    position: relative;
+    top: 150px;
+    left: -1030px;
+    display: block;
+    border: 1px solid grey;
+}
+#title1 {
+    color: black;
+    font-size: 1.5em;
+}
+#title2 {
+    color: black;
+    font-size: 2.5em;
+}
+#link {
+    position: absolute;
+    font-size: 18px;
+    color: gray;
+}
