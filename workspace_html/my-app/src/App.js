@@ -2,24 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const name = "김우영"
+  const year=2025;
+
+  return(
+    // 1. 하나의 부모 요소로 감싸자
+    <div>
+      <h1>안녕하세여, {name}!</h1>
+      <h2>react와 함께하는 {year}년!</h2>
+      <p>이것은 첫번쨰 react 컴포넌트입니다.</p>
+      </div>
+  )
 }
 
 export default App;
