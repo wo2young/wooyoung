@@ -1,5 +1,7 @@
 package QuizTime;
 
+import java.util.Arrays;
+
 public class Cafe {
 	
 	// 필드
@@ -21,11 +23,10 @@ public class Cafe {
 	    }
 	 
 	 public Cafe() {}
-//	 public Cafe() {}
 	 
 	// 메서드
 	public void open() {
-		System.out.println("가게 open");
+		System.out.println("가게 문여는 중");
 	}
 	public void order() {
 		System.out.println( menu + "주문");
@@ -33,6 +34,9 @@ public class Cafe {
 	public void pay() {
 		System.out.println( price + "원 결제 완료");
 	}
+//	public void make() {
+//		System.out.println( Arrays.toString(menu) + " 만들기");
+//	}
 	public void make() {
 		System.out.println( menu + " 만들기");
 	}
@@ -43,7 +47,7 @@ public class Cafe {
 		System.out.println("설거지 좋아~");
 	}
 	public void close() {
-		System.out.println("행복한 마감입니다");
+		System.out.println("다 나가주세요");
 	}
 	
 	

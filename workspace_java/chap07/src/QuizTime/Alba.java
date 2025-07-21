@@ -2,17 +2,17 @@ package QuizTime;
 
 public class Alba {
 	
-	void Compoce(Compoce compoce) {
+	void CompoceHi(Compoce compoce) {
 		System.out.println("어서오세요 손님 컴포즈입니다");
 	}
 
-	void Starbucks(Starbucks starbucks) {
+	void StarbucksHi(Starbucks starbucks) {
 		System.out.println("어서오세요 손님 스타벅스입니다");
 	}
 	
 	
 	
-	void drive(Cafe cafe) {
+	void macro(Cafe cafe) {
 		
 		cafe.order();
 		cafe.pay();
