@@ -1,0 +1,205 @@
+/* === 기본 설정 === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f6f7;
+}
+
+/* === 헤더 상단 아이콘 영역 === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1200px;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.left-icons a,
+.right-icons a {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('naver/img/sp_main.04eb92b7.png');
+  background-size: 463px 442px;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+#menu       { background-position: -311px -166px; }
+#pay        { background-position: -248px -260px; }
+#chat       { background-position: -99px -316px; }
+#alarm      { background-position: -311px -232px; }
+#cart       { background-position: -33px -316px; }
+
+.left-icons a {
+  margin-left: 10px;
+}
+
+.right-icons a {
+  margin-right: 10px;
+}
+
+/* === 검색창 영역 === */
+.search-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.logo {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-image: url('./naver/img/N_images.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  margin-right: 20px;
+}
+
+.search-section input {
+  width: 500px;
+  height: 40px;
+  border: 2px solid #03c75a;
+  border-radius: 20px;
+  padding: 0 15px;
+  font-size: 1rem;
+}
+
+.search-btn {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #03c75a;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* === 서비스 아이콘 네비게이션 === */
+.icon-nav {
+  width: 100%;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  background-color: white;
+}
+
+.icon-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-links li {
+  margin: 0 10px;
+}
+
+.icon-links a {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-image: url('naver/img/sp_main.04eb92b7.png');
+  background-size: 463px 442px;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+#mail   { background-position: -205px -219px; }
+#cafe   { background-position: -41px -219px; }
+#blog   { background-position: 0px -219px; }
+#store  { background-position: -41px -260px; }
+#news   { background-position: -270px -205px; }
+#stock  { background-position: -123px -260px; }
+#estate { background-position: 0px -260px; }
+#map    { background-position: -270px 0px; }
+#webtoon{ background-position: -164px -260px; }
+
+/* === 메인 레이아웃 === */
+.main {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  margin: 20px auto;
+}
+
+.left {
+  width: 800px;
+}
+
+.right {
+  width: 300px;
+}
+
+.news-banner img,
+.ad-box img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.news-grid h3 {
+  margin: 20px 0 10px 0;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.news-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.news-icons li img {
+  width: 100%;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* === 로그인 박스 === */
+.login-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-box p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.login-btn {
+  width: 100%;
+  height: 40px;
+  background-color: #03c75a;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-links {
+  margin-top: 10px;
+}
+
+.login-links a {
+  color: #888;
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin: 0 5px;
+}
+
+/* === 광고 박스 === */
+.ad-box {
+  margin-top: 20px;
+}

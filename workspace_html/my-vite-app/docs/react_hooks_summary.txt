@@ -1,0 +1,73 @@
+# React 자주 사용하는 Hook 정리
+
+## 1. useState
+- 상태(state)를 저장하고 변경할 수 있게 해주는 Hook.
+- 컴포넌트가 다시 렌더링되도록 트리거함.
+
+```jsx
+const [count, setCount] = useState(0);
+setCount(count + 1);
+```
+
+## 2. useEffect
+- 컴포넌트가 렌더링될 때, 값이 변경될 때 특정 동작 수행.
+- 주로 API 호출, 구독, 타이머 설정 등에 사용.
+
+```jsx
+useEffect(() => {
+  console.log("컴포넌트 마운트됨");
+}, []);  // 의존성 배열이 비어있으면 처음 한 번만 실행
+```
+
+## 3. useRef
+- DOM 요소에 접근하거나, 리렌더링 없이 값을 저장할 때 사용.
+- 상태와는 달리 값이 바뀌어도 렌더링되지 않음.
+
+```jsx
+const inputRef = useRef();
+<input ref={inputRef} />
+```
+
+## 4. useContext
+- 전역 데이터를 여러 컴포넌트에 전달할 때 사용.
+- Redux 없이 전역 상태 관리 가능.
+
+```jsx
+const MyContext = createContext();
+const value = useContext(MyContext);
+```
+
+## 5. useMemo
+- 계산 비용이 큰 연산의 결과를 메모이제이션하여 성능 최적화.
+
+```jsx
+const result = useMemo(() => heavyFunction(data), [data]);
+```
+
+## 6. useCallback
+- 함수를 메모이제이션하여 컴포넌트 리렌더링 시 동일한 함수 유지.
+
+```jsx
+const memoizedFn = useCallback(() => {
+  doSomething();
+}, [dependencies]);
+```
+
+## 7. useReducer
+- 상태를 dispatch(action) 방식으로 처리 (Redux 스타일).
+
+```jsx
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+## 8. useId
+- 고유한 ID를 생성할 때 사용. form label 연결 등에서 활용.
+
+```jsx
+const id = useId();
+<label htmlFor={id}>이름</label>
+<input id={id} />
+```
+
+## 9. useLayoutEffect
+- useEffect보다 먼저 실행됨. DOM 읽기/쓰기 작업에 적합.

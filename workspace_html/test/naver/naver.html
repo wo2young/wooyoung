@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAVER Clone</title>
+  <!-- <link rel="stylesheet" href="naver.css" /> -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f6f7; }
+
+    .sprite {
+      background-image: url("naver/img/sp_main.04eb92b7.png");
+      background-repeat: no-repeat;
+      background-size: 463px 442px;
+      display: inline-block;
+    }
+
+    header.header {
+      display: flex; justify-content: space-between;
+      padding: 10px 20px; background: white;
+    }
+    .left-icons a, .right-icons a {
+      width: 30px; height: 30px; margin-right: 10px;
+    }
+    #menu     { background-position: -311px -166px; }
+    #pay      { background-position: -248px -260px; }
+    #chat     { background-position: -99px -316px; }
+    #alarm    { background-position: -311px -232px; }
+    #cart     { background-position: -33px -316px; }
+
+    .search-section {
+      display: flex; align-items: center;
+      padding: 20px; background: white; border-bottom: 1px solid #ddd;
+    }
+    .logo {
+      background-position: -123px -316px;
+      width: 45px; height: 45px; margin-right: 10px;
+    }
+    input[type="text"] {
+      flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px;
+    }
+    .search-btn {
+      background-position: -82px -316px;
+      width: 32px; height: 32px; margin-left: 10px;
+      border: none; background-color: transparent;
+    }
+
+    nav.icon-nav {
+      background: white; padding: 10px 0;
+    }
+    .icon-links {
+      display: flex; justify-content: space-around;
+    }
+    .icon-links a {
+      width: 36px; height: 36px;
+    }
+    #mail   { background-position: -205px -219px; }
+    #cafe   { background-position: -41px -219px; }
+    #blog   { background-position: 0px -219px; }
+    #store  { background-position: -41px -260px; }
+    #news   { background-position: -270px -205px; }
+    #stock  { background-position: -123px -260px; }
+    #estate { background-position: 0px -260px; }
+    #map    { background-position: -270px 0px; }
+    #webtoon{ background-position: -164px -260px; }
+
+    main.main {
+      display: flex; padding: 20px;
+    }
+    .left {
+      flex: 2; margin-right: 20px;
+    }
+    .news-banner img, .ad-box img {
+      width: 100%; border-radius: 8px;
+    }
+    .news-grid {
+      margin-top: 20px;
+    }
+    .news-icons {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: 10px; margin-top: 10px;
+    }
+    .news-icons img {
+      width: 100%; border: 1px solid #ddd;
+    }
+
+    aside.right {
+      flex: 1;
+    }
+    .login-box {
+      background: white; padding: 20px; border-radius: 8px;
+      margin-bottom: 20px; text-align: center;
+    }
+    .login-btn {
+      background: #03c75a; color: white; padding: 10px 20px;
+      border: none; border-radius: 5px; font-weight: bold;
+    }
+    .login-links a {
+      color: #888; font-size: 13px; margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="left-icons">
+      <a href="#" id="menu" class="sprite" title="메뉴"></a>
+      <a href="https://order.pay.naver.com/home" id="pay" class="sprite" title="네이버페이"></a>
+    </div>
+    <div class="right-icons">
+      <a href="#" id="chat" class="sprite" title="채팅"></a>
+      <a href="#" id="alarm" class="sprite" title="알림"></a>
+      <a href="#" id="cart" class="sprite" title="장바구니"></a>
+    </div>
+  </header>
+
+  <section class="search-section">
+    <a href="#" class="logo sprite" title="네이버로 이동"></a>
+    <input type="text" placeholder="검색어를 입력해 주세요" />
+    <button type="button" class="sprite search-btn" aria-label="검색"></button>
+  </section>
+
+  <nav class="icon-nav">
+    <ul class="icon-links">
+      <li><a href="https://mail.naver.com" class="sprite" id="mail" title="메일"></a></li>
+      <li><a href="https://cafe.naver.com" class="sprite" id="cafe" title="카페"></a></li>
+      <li><a href="https://blog.naver.com" class="sprite" id="blog" title="블로그"></a></li>
+      <li><a href="https://shopping.naver.com" class="sprite" id="store" title="스토어"></a></li>
+      <li><a href="https://news.naver.com" class="sprite" id="news" title="뉴스"></a></li>
+      <li><a href="https://finance.naver.com" class="sprite" id="stock" title="증권"></a></li>
+      <li><a href="https://land.naver.com" class="sprite" id="estate" title="부동산"></a></li>
+      <li><a href="https://map.naver.com" class="sprite" id="map" title="지도"></a></li>
+      <li><a href="https://comic.naver.com" class="sprite" id="webtoon" title="웹툰"></a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <section class="left">
+      <div class="news-banner">
+        <img src="naver/img/banner.jpg" alt="뉴스 배너" />
+      </div>
+      <div class="news-grid">
+        <h3>뉴스스탠드</h3>
+        <ul class="news-icons">
+          <li><img src="naver/img/news1.png" alt="뉴스1" /></li>
+          <li><img src="naver/img/news2.png" alt="뉴스2" /></li>
+          <li><img src="naver/img/news3.png" alt="뉴스3" /></li>
+          <li><img src="naver/img/news4.png" alt="뉴스4" /></li>
+          <li><img src="naver/img/news5.png" alt="뉴스5" /></li>
+          <li><img src="naver/img/news6.png" alt="뉴스6" /></li>
+        </ul>
+      </div>
+    </section>
+    <aside class="right">
+      <div class="login-box">
+        <p>네이버를 더 안전하고 편리하게 이용하세요</p>
+        <button class="login-btn">NAVER 로그인</button>
+        <div class="login-links">
+          <a href="#">아이디 찾기</a> |
+          <a href="#">비밀번호 찾기</a> |
+          <a href="#">회원가입</a>
+        </div>
+      </div>
+      <div class="ad-box">
+        <img src="naver/img/ad.jpg" alt="광고" />
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
