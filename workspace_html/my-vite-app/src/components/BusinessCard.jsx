@@ -1,11 +1,11 @@
 // BusinessCard.jsx
 import { useState } from 'react';
 function BusinessCard ({ name, email }){
-    const [position, setPosition] = useState('사원') // 기본값은 사원
+    const [position, setPosition] = useState('개발자') // 기본값은 사원
 
     // 버튼 클릭 시 직책 변경 함수
     const togglePosition = () => {
-        setPosition(prev => (prev === '사원' ? '대리' : '사원'));
+        setPosition(prev => (prev === '개발자' ? '백앤드' : '개발자'));
     }; 
 
     return(
@@ -27,4 +27,4 @@ function BusinessCard ({ name, email }){
     // - 상태가 바뀌면 자동으로 화면이 다시 렌더링됨
 }
 
-export default BusinessCard;
+export default BusinessCard; // 이 명함을 수출합니다
