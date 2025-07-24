@@ -4,6 +4,7 @@
 import './App.css'
 import BusinessCard from './components/BusinessCard';  // 명함 컴포넌트 import
 import Book from './components/Book';
+import Counter from './components/Counter';
 function App() {
    // ↓ 아래는 분리했으니 더 이상 필요 없음
    // const name = "김우영"
@@ -43,7 +44,8 @@ function App() {
       }
    ]
    return (
-      <div className='book-list'>
+      <div className='count'>
+         <Counter/>
          {/* { people.map((person, index) => (
             <BusinessCard
             key={index} // 실무에서는 고유ID
@@ -51,7 +53,7 @@ function App() {
             email={person.email}
             />
          ))} */}
-         { book.map((num, index) => (
+         {/* { book.map((num, index) => (
             <Book
             key={index}
             title={num.title}
@@ -59,7 +61,7 @@ function App() {
             price={num.price}
             imgSrc={num.imgSrc}
             />
-         ))}
+         ))} */}
       
 
       

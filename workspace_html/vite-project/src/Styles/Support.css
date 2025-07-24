@@ -1,0 +1,183 @@
+.support-page {
+  font-family: 'sans-serif';
+}
+
+/* 헤더 전체 */
+.support-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff4e8;
+  padding: 15px 40px;
+}
+
+/* 왼쪽 로고 */
+.header-left {
+  flex: 1;
+}
+.logo-img {
+  height: 50px;
+}
+
+/* 가운데 메뉴 */
+.header-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.header-center a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* 오른쪽 마이페이지 + 로그아웃 */
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+.header-right a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+/* 로그아웃 버튼 */
+.logout {
+  background: none;
+  border: 2px solid #000;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* 메인 영역 */
+.support-main {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* 채팅 박스 */
+.chat-box {
+  margin: 30px auto;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.chat-title {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.chat-date {
+  text-align: right;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 채팅 내용 */
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 공통 구조 */
+.chat-bot,
+.chat-user {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* 봇 메시지 - 왼쪽 정렬 */
+.chat-bot {
+  justify-content: flex-start;
+}
+
+.chat-user {
+  display: flex;
+  justify-content: flex-end;  /* 말풍선을 오른쪽으로 */
+  align-items: flex-start;
+  flex-direction: row;        /* 🔥 정방향으로 배치 (말풍선 → 프로필 순서 유지됨) */
+}
+
+/* 프로필 공통 */
+.chat-profile {
+  font-size: 0.8rem;
+  background: #ffccaa;
+  border-radius: 50%;
+  padding: 10px;
+  width: 60px;
+  text-align: center;
+}
+
+.chat-user .chat-profile {
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  padding: 10px;
+  width: 60px;
+  text-align: center;
+}
+
+/* 말풍선 공통 */
+.chat-bubble {
+  background: white;
+  border: 1px solid #e1e1e1;
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 60%;
+}
+
+.chat-user .chat-bubble {
+  background: #fffaf4;
+  border: 1px solid #e1e1e1;
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 60%;
+
+  margin-left: 0;        /* ⛔ 기존 왼쪽 마진 제거 */
+  margin-right: 10px;    /* ✅ 오른쪽 여백 추가 */
+  text-align: left;      /* 혹시 우측 정렬된 텍스트 있으면 좌측 정렬 */
+}
+
+/* 버튼들 */
+.chat-buttons {
+  margin-top: 10px;
+  margin-left: 70px;
+}
+.chat-buttons button {
+  margin-right: 10px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 5px;
+}
+
+/* 입력창 */
+.chat-input-area {
+  margin-top: 30px;
+  border-top: 1px dotted gray;
+  padding-top: 20px;
+}
+
+.chat-input-area input {
+  width: 90%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
