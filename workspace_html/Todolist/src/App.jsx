@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg'; // (사용 안 함) 리액트 로고
 import viteLogo from '/vite.svg';           // (사용 안 함) Vite 로고
 import './App.css';                         // CSS 스타일 import
 import Todo from './components/Todo';       // Todo 컴포넌트 import
-import { Paper, List } from '@mui/material'; // MUI 종이 UI 컴포넌트 + 리스트
+import { Paper, List, Container } from '@mui/material'; // MUI 종이 UI 컴포넌트 + 리스트
+import AddTodo from './components/AddTodo';
 
 function App() {
     // 상태로 할 일 목록을 저장
@@ -19,6 +20,16 @@ function App() {
             done: false,
         },
     ]);
+
+    const addItem = (item) => {
+    const newItem = {
+      ...item,
+      id: new Date().getTime().toString(), // 고유 ID 부여
+      done: false,                         // 처음엔 미완료
+    };
+     setItems([...items, newItem]); // 리스트에 추가
+  };
+  
 
     // 리스트에 항목이 있을 경우만 렌더링
     let todoItems = items.length > 0 && (
@@ -37,7 +48,14 @@ function App() {
     );
 
     // App 컴포넌트 전체 UI
-    return <div className="App">{todoItems}</div>;
+    return (
+        <div className="App">
+            <Container maxWidth="md">
+                <AddTodo addItem={addItem}/> 
+                <div>{todoItems}</div>
+            </Container>
+        </div>
+    )
 }
 
 export default App;
