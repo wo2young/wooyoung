@@ -1,0 +1,215 @@
+@import './reset.css';
+@import './common.css';
+
+.wrapper {
+    min-width: 1340px;
+}
+.header {
+    width: 1280px;
+    height: 261px;
+    margin: 0 auto;
+    /* background: #f00; */
+    padding: 64px 0 42px;
+    position: relative;
+}
+.header .group-search {
+    display: flex;
+    position: absolute;
+    top: 64px;
+    left: 50%;
+    z-index: 10;
+    width: 706px;
+    border: 1px solid #03c75a;
+    border-radius: 33px;
+    background-color: #fff;
+    transform: translateX(-50%);
+}
+.header .group-search .logo {}
+.header .group-search .logo a {
+    display: block;
+    margin-right: 12px;
+    padding: 17px 17px 17px 27px;
+}
+.header .group-search .logo svg {
+    width: 24px;
+    height: 24px;
+}
+.header .group-search .logo path {
+    fill: #03c75a;
+}
+.header .group-search form {
+    flex: 1;
+}
+.header .group-search fieldset {
+    display: flex;
+    height: 100%;
+}
+.header .group-search .input-text {
+    flex: 1;
+    border: 0;
+    outline: none;
+
+    color: #000;
+    padding: 17px 0;
+    background-color: rgba(0,0,0,0);
+    font-size: 2rem;
+    line-height: 24px;
+    font-weight: bold;
+}
+.header .group-search .btn-keyboard {
+    padding: 0 3px;
+}
+.header .group-search .btn-help {
+    padding: 6px;
+}
+.header .group-search .btn-search {
+    padding: 0 27px 0 10px;
+}
+
+.header .group-search [class*="btn-"] {
+    display: flex;
+    align-items: center;
+}
+
+.header .group-search .btn-keyboard::before {
+    content: '';
+    background-position: -226px -254px;
+    width: 24px;
+    height: 16px;
+}
+.header .group-search .btn-help::before {
+    content: '';
+    background-position: -318px -247px;
+    width: 10px;
+    height: 6px;
+}
+.header .group-search .btn-search::before {
+    width: 25px;
+    height: 25px;
+    content: '';
+    background-position: -295px -329px;
+}
+.header .search-right-banner a {
+    position: absolute;
+    top: 78px;
+    right: 0;
+}
+.header .search-right-banner a img {
+    width: 162px;
+    height: 40px;
+}
+
+.gnb {
+    width: 676px;
+    margin: 72px auto 0;
+}
+.gnb .nav-list{
+    display: flex;
+    gap: 4px;
+}
+.gnb .nav-item {
+    flex: 1;
+}
+.gnb .nav-item .link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+.gnb .nav-item [class*="ico-"]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+.gnb .nav-item [class*="ico-"]::before{
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -3px;
+    background-position: 0px -128px;
+    width: 54px;
+    height: 54px;
+}
+.gnb .nav-item [class*="ico-"]::after{
+    width: 44px;
+    height: 44px;
+    content: '';
+    position: relative;
+}
+.gnb .nav-item .name {}
+.gnb .nav-item .ico-mail::after{
+    background-position: -250px -90px;
+}
+.gnb .nav-item .ico-cafe::after{
+    background-position: -250px 0px;
+}
+
+.gnb .nav-item .ico-blog::after {
+    background-position: -201px -98px;
+}
+.gnb .nav-item .ico-shopping::after {
+    background-position: -90px -209px;
+}
+.gnb .nav-item .ico-news::after {
+    background-position: 0px -209px;
+}
+.gnb .nav-item .ico-stock::after {
+    background-position: -180px -209px;
+}
+.gnb .nav-item .ico-estate::after {
+    background-position: -45px -209px;
+}
+.gnb .nav-item .ico-map::after {
+    background-position: -201px 0px;
+}
+.gnb .nav-item .ico-webtoon::after {
+    background-position: -225px -209px;
+}
+.gnb .nav-item .ico-ellip::after {
+    background-position: -250px -135px;
+}
+
+.header .util-area {
+    display: flex;
+    position: absolute;
+    top: 18px;
+    left: -10px;
+    gap: 10px;
+}
+.header .util-area.right {
+    left: auto;
+    right: -10px;
+}
+.header .util-area [class*="btn-"]{
+    display: flex;
+    padding: 10px;
+}
+.header .util-area [class*="btn-"]::before{
+    width: 26px;
+    height: 26px;
+    content: "";
+}
+
+.header .util-area .btn-menu::before{
+    background-position: -82px -329px;
+}
+
+.header .util-area .btn-pay{
+    padding: 7px;
+}
+.header .util-area .btn-pay::before{
+    background-position: -295px -177px;
+    width: 32px;
+    height: 32px;
+}
+
+.header .util-area .btn-talk::before{
+    background-position: -190px -329px;
+}
+
+.header .util-area .btn-alert::before{
+    background-position: -136px -329px;
+}

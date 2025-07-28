@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+:root {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    cursor: default;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    -moz-tab-size: 4;
+    tab-size: 4
+}
+
+html,
+body {
+    height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+fieldset {
+    border: 0;
+}
+
+/* 세팅 
+    px - 픽셀
+    rem - html 기반
+    em - 부모기반
+    vw - 뷰포트
+*/
+
+html {
+    font-size: 10.5px;
+    line-height: 10.5px;
+}
+
+body {
+    color: #101010;
+    font-size: 12px;
+    line-height: 16px;
+    /* 적용안되면 밑으로 내려가는 */
+    font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+}
+
+strong {
+    font-weight: bold;
+}
+/*
+    고딕
+    sans-serif
+*/
+/*
+    명조
+    serif 
+*/
