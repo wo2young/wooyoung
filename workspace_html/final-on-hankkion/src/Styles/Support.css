@@ -1,0 +1,164 @@
+.support-page {
+  background: #f9f9f9;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.support-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* 수평 가운데 정렬 */
+  justify-content: center; /* 수직 가운데 정렬은 필요 시 추가 */
+  margin-top: 40px;
+  gap: 16px;                /* 제목과 챗봇 박스 사이 여백 */
+  padding: 20px;
+}
+
+.chat-box {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: 800px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.chat-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin: 0 20px 8px;
+}
+
+.chat-date {
+  text-align: right;
+  font-weight: bold;
+  margin: 0 20px 20px;
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 0 20px;
+}
+
+/* === AI 챗봇 메시지 === */
+.chat-bot {
+  display: flex;
+  align-items: flex-start;
+}
+
+.chat-profile {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #ffccaa;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.chat-profile img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chat-bubble {
+  background: #fff6f1;
+  border: 1.5px solid #ffc894;
+  padding: 16px 24px;
+  border-radius: 20px;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  max-width: 440px;
+  text-align: left;
+  white-space: pre-line;
+  word-break: break-word;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+/* === 사용자 메시지 === */
+.chat-user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.chat-bubble.user {
+  background: #fff;
+  border: 1.5px solid #ddd;
+  padding: 14px 22px;
+  border-radius: 20px;
+  font-size: 1.12rem;
+  max-width: 440px;
+  text-align: left;
+  white-space: pre-line;
+  word-break: break-word;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  margin-right: 10px;
+}
+
+.chat-profile.user {
+  width: 70px;
+  height: 70px;
+  min-width: 44px;
+  border: 2px solid #bbb;
+  background: #fff;
+  color: #555;
+  font-size: 0.88rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* === 입력창 === */
+.chat-input-area {
+  display: flex;
+  margin: 30px 20px 0;
+  padding-top: 20px;
+  border-top: 1px dashed #ccc;
+  gap: 12px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 16px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.chat-input-area input:focus {
+  border-color: #ffccaa;
+}
+
+.chat-input-area button {
+  min-width: 84px;
+  padding: 14px 0;
+  background: #ffa44c;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chat-input-area button:hover {
+  background: #ff9800;
+}

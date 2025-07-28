@@ -1,0 +1,227 @@
+/* ====== input, 버튼 등 전체 폼 구성 요소 간 gap으로만 간격 통일 ====== */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;   /* ← 인풋/체크박스/버튼 등 전체 간격 완전히 통일! */
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin: 0;   /* ← 절대 margin-bottom 넣지 마세요! (중복됨) */
+}
+
+/* ====== input 디자인 완전 통일 ====== */
+.input-group input,
+.input-group input[type="email"],
+.input-group input[type="text"],
+.input-group input[type="password"] {
+  width: 100%;
+  min-height: 54px;
+  height: 54px;
+  border-radius: 11px;
+  font-size: 1.09rem;
+  line-height: 1.3;
+  border: 1.7px solid #ddd !important;
+  background: #fff !important;
+  padding: 26px 17px 12px 17px;
+  outline: none !important;
+  transition: border 0.15s, background 0.13s;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: #222 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  box-shadow: none !important;
+}
+
+/* placeholder, autofill, hover, focus 등 모두 동일 */
+.input-group input::placeholder {
+  color: #b0b0b0 !important;
+  opacity: 1;
+}
+.input-group input:focus {
+  border: 1.7px solid #ffa44c !important;
+  background: #fff !important;
+}
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:focus,
+.input-group input:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+  box-shadow: 0 0 0 1000px #fff inset !important;
+  border: 1.7px solid #ffa44c !important;
+  -webkit-text-fill-color: #222 !important;
+}
+.input-group input,
+.input-group input:focus,
+.input-group input:hover {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ====== 플로팅 라벨 ====== */
+.input-group label {
+  position: absolute;
+  left: 16px;
+  top: 21px;
+  font-size: 1.09rem;
+  color: #b0b0b0 !important;
+  pointer-events: none;
+  background: transparent;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  font-weight: 500;
+  line-height: 1.2;
+  user-select: none;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group label.active {
+  top: 8px;
+  left: 14px;
+  font-size: 0.85rem;
+  color: #b0b0b0 !important;
+  background: #fff;
+  padding: 0 3px;
+  z-index: 2;
+}
+
+/* ====== 버튼 크기/디자인 강제 통일 ====== */
+.login-btn, .passkey-btn {
+  width: 100% !important;
+  font-size: 1.16rem !important;
+  font-weight: bold !important;
+  border-radius: 12px !important;
+  padding: 15px 0 12px !important;
+  min-height: 50px !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  transition: background 0.13s, color 0.13s, border 0.13s !important;
+  outline: none !important;
+}
+.login-btn {
+  background: #ffa900 !important;
+  color: #fff !important;
+  border: none !important;
+}
+.login-btn:hover,
+.login-btn:focus,
+.login-btn:active {
+  background: #ff9800 !important;
+  color: #fff !important;
+  border: none !important;
+}
+.passkey-btn {
+  background: #fff !important;
+  color: #ffa900 !important;
+  border: 2px solid #ffa900 !important;
+}
+.passkey-btn:hover,
+.passkey-btn:focus,
+.passkey-btn:active {
+  background: #ffa900 !important;
+  color: #fff !important;
+  border: 2px solid #ffa900 !important;
+}
+
+/* ====== 나머지(컨테이너, 탭, 옵션 등 기존과 동일) ====== */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  width: 100%;
+  overflow-x: hidden;
+}
+.logo-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+  cursor: pointer;
+}
+.main-logo {
+  width: 230px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.login-container {
+  width: 100%;
+  max-width: 410px;
+  margin: 30px auto;
+  padding: 32px 16px 16px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 14px 0 rgba(165,140,89,0.07);
+  border: 1.7px solid #e8e8e8;
+}
+.login-tabs {
+  display: flex;
+  margin-bottom: 27px;
+}
+.login-tabs button {
+  flex: 1 1 50%;
+  background: #fafafa;
+  border: none;
+  padding: 20px 0 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  border-radius: 14px 14px 0 0;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  transition: background 0.13s, border-bottom 0.18s;
+}
+.login-tabs button.active {
+  background: #fff;
+  border-bottom: 4px solid #ffa44c;
+  color: #111;
+}
+.login-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.keep-login-label {
+  font-size: 1.14rem;
+  color: #22313e;
+  margin-left: 6px;
+  cursor: pointer;
+}
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+  font-size: 1.13rem;
+}
+.login-links a {
+  color: #22313e;
+  text-decoration: none;
+  padding: 3px 2px;
+  transition: color 0.14s;
+  font-weight: 500;
+}
+.login-links a:hover {
+  color: #ffa900;
+}
+.login-error {
+  color: #d2323a;
+  background: #fff2f2;
+  border-radius: 5px;
+  font-size: 1.03rem;
+  padding: 8px 11px;
+  text-align: center;
+  margin: -8px 0 5px 0;
+  border: 1px solid #f8b2b2;
+}
+@media (max-width: 600px) {
+  .login-container {
+    padding: 18px 2vw;
+    max-width: 99vw;
+  }
+}

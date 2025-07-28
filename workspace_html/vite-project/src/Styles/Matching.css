@@ -1,0 +1,87 @@
+/* 전체 초기화 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+/* 2열 전체 컨테이너 */
+.container {
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 80px); /* 헤더 제외한 전체 높이 */
+}
+
+/* 좌우 영역 */
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
+  border-right: 1px solid #ccc;
+}
+
+.column:last-child {
+  border-right: none;
+}
+
+.column:hover {
+  background-color: #b0ce2c;
+}
+
+/* 텍스트 */
+.text {
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #1c1c1c;
+}
+
+/* 버튼 */
+.mbutton {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.7em 2em;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  transition: background-color 0.3s ease;
+}
+
+.mbutton:hover {
+  background-color: #fbecdc;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .column {
+    width: 100%;
+    height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .column:last-child {
+    border-bottom: none;
+  }
+}

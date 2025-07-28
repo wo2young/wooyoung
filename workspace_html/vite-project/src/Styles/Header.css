@@ -1,0 +1,63 @@
+header .header-login-btn {
+  background: #fffbe6 !important;
+  color: #ff9800 !important;
+  border: 1.5px solid #ff9800 !important;
+  border-radius: 7px;
+  padding: 5px 16px;
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.07rem;
+  min-width: 92px;
+  height: 36px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  outline: none;
+}
+header .header-login-btn:hover,
+header .header-login-btn:focus {
+  background: #ff9800 !important;
+  color: #fff !important;
+  border-color: #ff9800 !important;
+}
+
+.login-form .login-btn {
+  width: 100%;
+  font-size: 1.19rem;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 18px 0 15px;
+  min-height: 52px;
+  background: #ffa900 !important;
+  color: #fff !important;
+  border: none !important;
+  margin-bottom: 18px;
+  box-sizing: border-box;
+  display: block;
+  transition: background 0.13s, color 0.13s, border 0.13s;
+}
+.login-form .login-btn:hover,
+.login-form .login-btn:focus {
+  background: #d87c00 !important;
+}
+
+.login-form .passkey-btn {
+  width: 100%;
+  font-size: 1.19rem;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 18px 0 15px;
+  min-height: 52px;
+  background: #fff !important;
+  color: #ffa900 !important;
+  border: 2.2px solid #ffa900 !important;
+  margin-bottom: 22px;
+  box-sizing: border-box;
+  display: block;
+  transition: background 0.13s, color 0.13s, border 0.13s;
+}
+.login-form .passkey-btn:hover,
+.login-form .passkey-btn:focus {
+  background: #ffa900 !important;
+  color: #fff !important;
+}

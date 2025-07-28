@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>골프장 조명 관리</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f7fa; color: #333; }
+    header { position: fixed; top: 0; width: 100%; background: #1a2a3a; color: #fff;
+             padding: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+    header input { padding: 8px; font-size: 1rem; width: 200px; }
+    main { padding: 100px 20px 40px; max-width: 1000px; margin: auto; }
+    .course { background: #fff; margin-bottom: 16px; border-radius: 8px; overflow: hidden; }
+    .course-header { padding: 16px; display: flex; justify-content: space-between;
+                     align-items: center; cursor: pointer; border-bottom: 1px solid #ddd; }
+    .course-header:hover { background: #f0f4f8; }
+    .course-header .summary { font-weight: bold; }
+    .controls { display: flex; gap: 16px; align-items: center; }
+    .controls button { padding: 8px 12px; border: none; border-radius: 4px;
+                       cursor: pointer; font-size: 0.95rem; }
+    button.on { background: #2ecc71; color: white; }
+    button.off { background: #e74c3c; color: white; }
+    .course-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .hall { padding: 12px 16px; border-bottom: 1px solid #eee; display: flex;
+            justify-content: space-between; align-items: center; }
+    .hall:last-child { border-bottom: none; }
+    .hall-controls { display: flex; gap: 8px; align-items: center; }
+    .hall-range { display: flex; align-items: center; gap: 4px; }
+    .hall-range input[type=range] { width: 120px; }
+    @media (max-width: 600px) {
+      .controls, .hall-controls { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><h1>조명 관리 시스템</h1></div>
+    <div><input type="search" placeholder="코스/홀 검색…" aria-label="검색"></div>
+  </header>
+
+  <main id="container">
+    <!-- 코스 컴포넌트 반복 -->
+    <div class="course" data-course="코스1">
+      <div class="course-header" aria-expanded="false" role="button" tabindex="0">
+        <span class="summary">코스1 – On 3개 / Off 20개</span>
+        <div class="controls">
+          <button class="on wide">전체 ON</button>
+          <button class="off wide">전체 OFF</button>
+          <div class="hall-range">
+            밝기: <input type="range" min="0" max="100" step="10" value="0"><input type="number" min="0" max="100" step="10" value="0" style="width:50px;">
+          </div>
+        </div>
+      </div>
+      <div class="course-content">
+        <!-- 홀 반복 -->
+        <!-- 예: 홀 #1 -->
+        <div class="hall" data-hall="홀1">
+          <div>홀1</div>
+          <div class="hall-controls">
+            <button class="on">ON</button>
+            <button class="off">OFF</button>
+            <div class="hall-range">
+              <input type="range" min="0" max="100" step="10" value="0">
+              <input type="number" min="0" max="100" step="10" value="0" style="width:50px;">
+            </div>
+          </div>
+        </div>
+        <!-- 반복 끝 -->
+      </div>
+    </div>
+    <!-- 코스 반복 끝 -->
+  </main>
+
+  <script>
+    document.querySelectorAll('.course-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const expanded = header.getAttribute('aria-expanded') === 'true';
+        const content = header.nextElementSibling;
+        header.setAttribute('aria-expanded', String(!expanded));
+        if (!expanded) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+      header.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') header.click();
+      });
+    });
+
+    function syncHall(hallEl, command, brightness) {
+      const range = hallEl.querySelector('input[type=range]');
+      const number = hallEl.querySelector('input[type=number]');
+      const btnOn = hallEl.querySelector('button.on');
+      const btnOff = hallEl.querySelector('button.off');
+      if (command === 'on') {
+        btnOn.disabled = true; btnOff.disabled = false;
+        range.value = brightness; number.value = brightness;
+      } else if (command === 'off') {
+        btnOff.disabled = true; btnOn.disabled = false;
+        range.value = 0; number.value = 0;
+      } else if (command === 'brightness') {
+        btnOn.disabled = false; btnOff.disabled = false;
+        range.value = brightness; number.value = brightness;
+      }
+    }
+
+    document.querySelectorAll('.hall').forEach(hall => {
+      const btnOn = hall.querySelector('button.on');
+      const btnOff = hall.querySelector('button.off');
+      const range = hall.querySelector('input[type=range]');
+      const number = hall.querySelector('input[type=number]');
+
+      btnOn.addEventListener('click', () => syncHall(hall, 'on', range.value));
+      btnOff.addEventListener('click', () => syncHall(hall, 'off', 0));
+      range.addEventListener('input', () => syncHall(hall, 'brightness', range.value));
+      number.addEventListener('input', () => {
+        let v = parseInt(number.value,10);
+        if (isNaN(v)|| v<0) v=0; if (v>100) v=100;
+        syncHall(hall, 'brightness', v);
+      });
+    });
+
+    document.querySelectorAll('.course').forEach(course => {
+      const hdr = course.querySelector('.course-header');
+      const btnOnAll = hdr.querySelector('button.on');
+      const btnOffAll = hdr.querySelector('button.off');
+      const rngAll = hdr.querySelector('input[type=range]');
+      const numAll = hdr.querySelector('input[type=number]');
+      const halls = course.querySelectorAll('.hall');
+
+      btnOnAll.addEventListener('click', () => {
+        halls.forEach(h => syncHall(h, 'on', rngAll.value));
+      });
+      btnOffAll.addEventListener('click', () => {
+        halls.forEach(h => syncHall(h, 'off', 0));
+      });
+      rngAll.addEventListener('input', () => {
+        halls.forEach(h => syncHall(h, 'brightness', rngAll.value));
+        numAll.value = rngAll.value;
+      });
+      numAll.addEventListener('input', () => {
+        let v = parseInt(numAll.value,10);
+        if (isNaN(v)|| v<0) v=0; if (v>100) v=100;
+        rngAll.value = v;
+        halls.forEach(h => syncHall(h, 'brightness', v));
+      });
+    });
+  </script>
+</body>
+</html>

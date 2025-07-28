@@ -1,0 +1,162 @@
+/* SignupPage.css */
+.signup-root {
+  background: #fff;
+  min-height: 100vh;
+}
+
+.signup-center-wrap {
+  width: 100vw;
+  min-height: calc(100vh - 110px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 0 100px 0;
+}
+
+.signup-card {
+  border: 1.5px solid #f6e7d8;
+  border-radius: 0;
+  background: #fff;
+  padding: 54px 60px 44px 60px;
+  margin-top: 60px;
+  min-width: 480px;
+  max-width: 580px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.signup-title {
+  font-size: 2.1rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: -1.5px;
+  color: #222;
+}
+
+/* ----------- Form 일렬 정렬 핵심 ----------- */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.signup-field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.09rem;
+}
+
+.signup-field label {
+  width: 108px;           /* 라벨 너비 고정 */
+  min-width: 108px;
+  text-align: right;
+  font-weight: 500;
+  font-size: 1.05em;
+  color: #37332b;
+  letter-spacing: -0.5px;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.signup-field input,
+.signup-field .addr,
+.signup-field .addrDetail {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 13px;
+  font-size: 1.08rem;
+  background: #faf8f4;
+  border: 1.4px solid #e7dbc9;
+  border-radius: 0;
+  outline: none;
+  color: #2b2d2d;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+.signup-field input:focus {
+  border: 1.4px solid #ffb45b;
+  background: #fff;
+}
+
+/* 주민번호 row */
+.rrn-row {
+  gap: 16px;      /* ← 기존 10px에서 20px으로 늘리면 딱 적당 */
+}
+
+.rrn-row input[name="rrn1"],
+.rrn-row input[name="rrn2"] {
+  width: 120px;   /* 필요에 따라 110~130px로 조절 가능 */
+  max-width: 120px;
+  text-align: center;
+  flex: unset;
+}
+
+.rrn-dash {
+  width: 18px;    /* ← 대시(-) 간격도 약간 넓게 */
+  display: inline-block;
+  text-align: center;
+  color: #ccc;
+  font-size: 1.13em;
+}
+
+/* 주소 row */
+.addr-row input.addr {
+  flex: 2.1;
+  margin-right: 7px;
+}
+.addr-row input.addrDetail {
+  flex: 1.2;
+  max-width: 120px;
+}
+
+/* 에러 메시지 */
+.signup-error {
+  color: #d2323a;
+  background: #fff2f2;
+  border-radius: 5px;
+  font-size: 1.03rem;
+  padding: 8px 11px;
+  text-align: center;
+  margin: -8px 0 5px 0;
+  border: 1px solid #f8b2b2;
+}
+
+/* 버튼 */
+.signup-btn {
+  background: #f7e2bf;
+  color: #433622;
+  border: 1.5px solid #ebd4b9;
+  border-radius: 0;
+  font-size: 1.12rem;
+  font-weight: bold;
+  padding: 11px 0;
+  margin-top: 7px;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+.signup-btn:hover {
+  background: #ffebb8;
+  border: 1.5px solid #ffae40;
+}
+
+/* 반응형 */
+@media (max-width: 650px) {
+  .signup-card {
+    min-width: 90vw;
+    padding: 32px 7vw 22px 7vw;
+  }
+  .signup-title { font-size: 1.4rem; }
+  .signup-field label { min-width: 78px; width: 78px; font-size: 1em; }
+  .rrn-row input[name="rrn1"],
+  .rrn-row input[name="rrn2"] { width: 88px; max-width: 88px; }
+}
+
+@media (max-width: 480px) {
+  .signup-center-wrap { padding: 0; }
+  .signup-card { padding: 18px 3vw 10px 3vw; min-width: 0; }
+  .signup-title { margin-bottom: 22px; }
+  .signup-field label { min-width: 64px; width: 64px; font-size: 0.98em; }
+}
+
