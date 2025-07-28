@@ -3,23 +3,13 @@ import reactLogo from './assets/react.svg'; // (사용 안 함) 리액트 로고
 import viteLogo from '/vite.svg';           // (사용 안 함) Vite 로고
 import './App.css';                         // CSS 스타일 import
 import Todo from './components/Todo';       // Todo 컴포넌트 import
-import { Paper, List, Container } from '@mui/material'; // MUI 종이 UI 컴포넌트 + 리스트
+// import { Paper, List, Container } from '@mui/material'; // MUI 종이 UI 컴포넌트 + 리스트
 import AddTodo from './components/AddTodo';
+import { Paper, List, Container, Button } from '@mui/material';
 
 function App() {
     // 상태로 할 일 목록을 저장
-    const [items, setItems] = useState([
-        {
-            id: '0',
-            title: 'Sample Todo1',
-            done: true, // 완료 상태 표시
-        },
-        {
-            id: '1',
-            title: 'Sample Todo2',
-            done: false,
-        },
-    ]);
+    const [items, setItems] = useState([]);
 
     const addItem = (item) => {
     const newItem = {
@@ -29,8 +19,25 @@ function App() {
     };
      setItems([...items, newItem]); // 리스트에 추가
   };
-  
 
+  const deleteItem=(item)=>{
+    const newItems=items.filter((e)=> e.id !== item.id);
+    
+    const confirmDelete = window.confirm('정말로 삭제하시겠습니까?')
+
+
+    const updateItems = [...newItems]
+    setItems(updateItems);
+    alert('삭제되었습니다')
+    console.log("updateItems : ", updateItems);
+  }
+  const alldelete = () => {
+  const ok = window.confirm('정말로 모든 할 일을 삭제하시겠습니까?');
+  if (ok) {
+    setItems([]);
+    alert('전체 삭제되었습니다.');
+    }
+    };
     // 리스트에 항목이 있을 경우만 렌더링
     let todoItems = items.length > 0 && (
         <Paper
@@ -41,7 +48,7 @@ function App() {
         >
             <List>
                 {items.map((item) => (
-                    <Todo item={item} key={item.id} />
+                    <Todo item={item} key={item.id} deleteItem={deleteItem} />
                 ))}
             </List>
         </Paper>
@@ -51,6 +58,9 @@ function App() {
     return (
         <div className="App">
             <Container maxWidth="md">
+                <Button variant="contained" color="error" onClick={alldelete}>
+                    전체 삭제
+                </Button>
                 <AddTodo addItem={addItem}/> 
                 <div>{todoItems}</div>
             </Container>
