@@ -1,0 +1,90 @@
+.support-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fcead5;
+  padding: 12px 32px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.header-logo-img {
+  width: 220px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.header-nav-wrapper {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  position: relative;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.08rem;
+  gap: 55px;
+  position: relative;
+}
+
+.header-nav a {
+  color: #222;
+  text-decoration: none;
+  padding: 0 22px;   /* 구분선 간격 넓히기 */
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.5px;
+}
+
+.header-nav a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -25%;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 18px;
+  background-color: #bbb;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.mypage-link {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.header-login-btn {
+  background: #ff9800;
+  color: #fff;
+  border: 1.5px solid #ff9800;
+  border-radius: 7px;
+  padding: 5px 16px;
+  font-weight: 700;
+  font-size: 1.07rem;
+  min-width: 92px;
+  height: 36px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  outline: none;
+}
+
+.header-login-btn:hover,
+.header-login-btn:focus {
+  background: #ff7b00;
+  color: #fff;
+  border-color: #ff9800;
+}

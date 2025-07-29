@@ -1,0 +1,219 @@
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 410px;
+  margin: 30px auto;
+  padding: 32px 16px 16px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 14px rgba(165,140,89,0.07);
+  border: 1.7px solid #e8e8e8;
+}
+
+.login-logo-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+  cursor: pointer;
+}
+
+.login-main-logo {
+  width: 230px;
+  object-fit: contain;
+  display: block;
+}
+
+.login-tabs {
+  display: flex;
+  margin-bottom: 27px;
+}
+
+.login-tab-button {
+  flex: 1 1 50%;
+  background: #fafafa;
+  border: none;
+  padding: 20px 0 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  border-radius: 14px 14px 0 0;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  transition: background 0.13s, border-bottom 0.18s;
+}
+
+.login-tab-button.active {
+  background: #fff;
+  border-bottom: 4px solid #ffa44c;
+  color: #111;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.login-input-group {
+  position: relative;
+  width: 100%;
+  /* margin: 0; */
+}
+
+.login-input-group:not(:last-child) {
+  margin-bottom: 22px;
+}
+
+.login-input {
+  background: #fff !important;
+  border: 1.7px solid #ddd !important;
+  color: #222 !important;
+  width: 100%;
+  height: 64px;
+  padding: 26px 17px 16px;
+  margin: 0 !important;
+  font-size: 1.09rem;
+  line-height: 1.3;
+  border-radius: 11px !important;
+  /* border: 1.7px solid #ddd; */
+  background: #fff;
+  /* color: #222; */
+  box-sizing: border-box;
+  font-family: inherit;
+  appearance: none;
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* 플로팅 구조에선 placeholder는 " " (공백)만 사용해야 함! */
+.login-input::placeholder {
+  color: transparent;
+}
+
+/* autofill 대응 */
+.login-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  box-shadow: 0 0 0 1000px #fff inset;
+  -webkit-text-fill-color: #222;
+}
+
+.login-label {
+  position: absolute;
+  left: 16px;
+  top: 20px;
+  font-size: 1.05rem;
+  color: #b0b0b0;
+  pointer-events: none;
+  font-weight: 500;
+  user-select: none;
+  background: transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+/* 플로팅 조건 (입력값 있거나 포커스 or active) */
+.login-input:focus + .login-label,
+.login-input:not(:placeholder-shown) + .login-label,
+.login-label.active {
+  top: 6px;
+  left: 14px;
+  font-size: 0.82rem;
+  background: #fff;
+  padding: 0 3px;
+  z-index: 99;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.keep-login-label {
+  font-size: 1.14rem;
+  color: #22313e;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.login-error {
+  color: #d2323a;
+  background: #fff2f2;
+  border-radius: 5px;
+  font-size: 1.03rem;
+  padding: 8px 11px;
+  text-align: center;
+  margin: -8px 0 5px 0;
+  border: 1px solid #f8b2b2;
+}
+
+.login-btn, .passkey-btn {
+  width: 100%;
+  font-size: 1.16rem;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 15px 0 12px;
+  min-height: 50px;
+  transition: background 0.13s, color 0.13s, border 0.13s;
+}
+
+.login-btn {
+  background: #ffa900;
+  color: #fff;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.login-btn:hover {
+  background: #ff9800;
+}
+
+.passkey-btn {
+  background: #fff;
+  color: #ffa900;
+  border: 2px solid #ffa900;
+}
+
+.passkey-btn:hover {
+  background: #ffa900;
+  color: #fff;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+  font-size: 1.13rem;
+}
+
+.login-links a {
+  color: #22313e;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 3px 2px;
+  transition: color 0.14s;
+}
+
+.login-links a:hover {
+  color: #ffa900;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding: 18px 2vw;
+    max-width: 99vw;
+  }
+}

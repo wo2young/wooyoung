@@ -1,0 +1,4 @@
+input::placeholder {
+  transform: translateY(5px);
+  display: inline-block;
+}
