@@ -1,0 +1,176 @@
+body{
+    padding: 0;
+}
+.admin-stats-main-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  /* margin: 0 auto; */
+}
+
+.admin-stats-content {
+  display: flex;
+  flex-direction: column;  /* 세로 정렬 */
+  gap: 28px;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.admin-stats-content-box {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-bottom: 0;
+  max-width: 1100px;
+  min-width: 1000px;
+}
+
+.admin-stats-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-stats-chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  color: #999;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.admin-stats-pie-chart-layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.admin-stats-ranked-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.admin-stats-rank-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-stats-ranked-list .admin-stats-rank-item {
+  /* ...기존 스타일... */
+  border-bottom: 1.1px solid #e0e0e0;
+  padding-bottom: 13px;
+  margin-bottom: 13px;
+}
+.admin-stats-ranked-list .admin-stats-rank-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.admin-stats-rank-num { font-weight: bold; width: 20px; }
+.admin-stats-rank-label { width: 70px; }
+.admin-stats-rank-bar-bg {
+  flex-grow: 1;
+  background-color: #e0e0e0;
+  height: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.admin-stats-rank-bar {
+  height: 100%;
+  background-color: #ff9800;
+}
+.admin-stats-rank-percent { width: 50px; font-weight: bold; text-align: right; }
+.admin-stats-rank-count { width: 50px; color: #666; text-align: right; }
+
+.admin-stats-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.admin-stats-dropdown-btn {
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  padding: 8px 20px;
+  border: 1px solid #000;
+  width: 220px;
+  text-align: left;
+}
+#admin-stats-date-dropdown .admin-stats-dropdown-btn {
+  width: 70px;
+  text-align: center;
+  padding: 6px 0;
+  margin: 0;
+}
+/* ▼ 드롭다운 관련 스타일 ▼ */
+.admin-stats-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.admin-stats-dropdown-btn {
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  padding: 8px 20px;
+  border: 1px solid #000;
+  width: 220px;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.admin-stats-dropdown-btn:hover,
+.admin-stats-dropdown-btn:focus {
+  background: #444;
+}
+.admin-stats-dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #2d2d2d;
+  min-width: 180px;
+  border: 1px solid #000;
+  z-index: 10;
+  left: 0;
+  margin-top: 2px;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+.admin-stats-dropdown-menu.show {
+  display: block;
+}
+.admin-stats-dropdown-menu a {
+  color: white;
+  padding: 11px 18px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  white-space: nowrap;
+  border-top: 1px solid #222;
+  font-size: 1rem;
+  transition: background 0.12s;
+}
+.admin-stats-dropdown-menu a:first-child {
+  border-top: none;
+}
+.admin-stats-dropdown-menu a:hover {
+  background-color: #444;
+}
+#admin-stats-date-dropdown .admin-stats-dropdown-btn {
+  width: 70px !important;
+  min-width: 70px;
+  max-width: 80px;
+  text-align: center;
+  padding: 8px 0;
+}
+#admin-stats-date-dropdown .admin-stats-dropdown-menu {
+  min-width: 70px;
+}

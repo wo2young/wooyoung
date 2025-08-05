@@ -8,14 +8,17 @@
 html, body {
   height: 100%;
   width: 100%;
+  min-width: 300px;
   font-family: sans-serif;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 /* 2열 전체 컨테이너 */
 .container {
   display: flex;
   width: 100vw;
+  min-width: 300px;
   height: calc(100vh - 80px); /* 헤더 제외한 전체 높이 */
 }
 
@@ -28,6 +31,9 @@ html, body {
   align-items: center;
   transition: background-color 0.5s ease;
   border-right: 1px solid #ccc;
+  min-width: 0;
+  min-height: 200px;
+  padding: 20px;
 }
 
 .column:last-child {
@@ -46,6 +52,7 @@ html, body {
   font-weight: bold;
   font-size: 1.3rem;
   color: #1c1c1c;
+  word-break: keep-all;
 }
 
 /* 버튼 */
@@ -67,21 +74,49 @@ html, body {
   background-color: #fbecdc;
 }
 
-/* 반응형 */
+/* ===== 반응형 ===== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     height: auto;
+    min-width: 300px;
   }
-
   .column {
     width: 100%;
+    min-width: 0;
     height: 50vh;
     border-right: none;
     border-bottom: 1px solid #ccc;
+    padding: 16px 6vw;
   }
-
   .column:last-child {
     border-bottom: none;
+  }
+  .text {
+    font-size: 1.08rem;
+  }
+  .mbutton {
+    font-size: 16px;
+    padding: 0.6em 1.5em;
+  }
+}
+
+/* 극소형 기기 */
+@media (max-width: 389px) {
+  .container {
+    min-width: 0;
+    width: 100vw;
+    padding: 0;
+  }
+  .column {
+    padding: 8px 2vw;
+    min-height: 120px;
+  }
+  .text {
+    font-size: 0.97rem;
+  }
+  .mbutton {
+    font-size: 0.92rem;
+    padding: 0.5em 1.2em;
   }
 }

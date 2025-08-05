@@ -1,0 +1,274 @@
+.mhbody { 
+  font-family: 'Noto Sans KR', sans-serif; 
+  background: #fff; 
+  color: #333; 
+  /* padding: 0 30px; */
+}
+
+.mhHeader {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.mhtop-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;   /* 왼쪽 정렬 */
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 0 auto;                /* 가운데 정렬(컨테이너랑 똑같이) */
+  width: 100%;
+  max-width: 1200px;              /* mhcontainer와 동일하게 맞춤 */
+  margin-bottom: 28px;           /* 아래와 간격 */
+  margin-top: -10px;             /* 위로 살짝 올리고 싶을 때 (값은 조절 가능) */
+}
+
+.mhtop-bar > * {
+  margin: 0 !important;
+}
+
+.mhbtn {
+  padding: 9px 22px;
+  border: 1.5px solid #bbb;
+  background: #fff;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 96px;
+  white-space: nowrap;       /* 한 줄 고정 */
+  text-align: center;        /* 글자 가로 중앙 정렬 */
+  display: flex;             /* 세로도 중앙 맞추기 위해 flex */
+  justify-content: center;   /* flex 가로 중앙 */
+  align-items: center;       /* flex 세로 중앙 */
+}
+
+.mhbtn.active {
+   padding: 7px 20px;
+  border: 2px solid #7fd3f7;
+  background: #f3fbff;
+}
+
+.mhbtn:hover {
+  background: #f8f8f8;
+}
+.mhcontainer {
+  max-width: 1200px;  /* 예시: 기존 1200px/1000px 등에서 900px로 줄이기 */
+  margin: 0 auto;
+  /* gap, padding 등은 그대로 두세요 */
+}
+
+.mhsearch-box {
+  padding: 10px 18px;
+  border: 1.5px solid #ddd;
+  border-radius: 18px;
+  width: 290px;
+  max-width: 38vw;
+  background: #fff;
+  color: #222;
+  font-size: 16px;
+  font-weight: 400;
+  transition: border 0.2s;
+  box-shadow: none;
+}
+
+.mhsearch-box::placeholder {
+  color: #b6b6b6;
+  font-size: 15px;
+  opacity: 1;
+}
+
+.mhdropdown {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.mhdropdown.show {
+  opacity: 1;
+  max-height: 300px;
+}
+.mhdropdown p {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: 0.2s;
+}
+.mhdropdown p:last-child {
+  border-bottom: none;
+}
+.mhdropdown p:hover {
+  background: #f3fbff;
+}
+
+.mhcontainer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.mhrequest-list {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mhcard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 12px;
+  background: #fff;
+  gap: 15px;
+  min-height: 100px;
+}
+
+.mhprofile {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #eee;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.mhprofile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mhinfo { flex: 1; }
+.mhinfo p { margin: 3px 0; }
+
+.mhrequest-text {
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 4px 0;
+  color: #222;
+}
+
+.mhtag-box { 
+  display: flex; 
+  gap: 6px; 
+  margin-top: 6px; 
+}
+
+.mhtag {
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  padding: 4px 12px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.mhtime-box {
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  background: #fdfdfd;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mhaccept-btn {
+  background: #fbecdc;
+  border-radius: 8px;
+  padding: 10px 16px;
+  height: 60px;
+  min-width: 60px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.mhaccept-btn:hover {
+  background: #f9d8b6;
+}
+
+/* 사이드바 */
+.mhsidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mhad-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  min-height: 150px;
+}
+
+.mhdone-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 260px;
+  justify-content: flex-start;
+}
+
+.mhdone-request {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+@media (max-width:700px){
+  .mhcontainer{
+    display: inline;
+  }
+  .mhad-box{
+    margin-top: 30px;
+  }
+}
+@media (max-width:425px){
+  .mhcard{
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  h1{
+    font-size: 27px;
+  }
+  .mhprofile {
+  width: 90px;
+  height: 90px;
+  }
+  .mhaccept-btn{
+    width:50%;
+    display: block;
+    margin: 0 auto;
+  }
+
+}

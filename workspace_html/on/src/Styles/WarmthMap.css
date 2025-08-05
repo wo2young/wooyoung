@@ -1,4 +1,32 @@
-input::placeholder {
-  transform: translateY(5px);
-  display: inline-block;
+.warmthmap-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  width: 100vw;  
+  max-width: 100vw;
+  box-sizing: border-box;
+  padding: 0 2vw;
+}
+
+.warmthmap-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 22px;
+  text-align: center;
+  word-break: keep-all;
+  max-width: 90vw;
+  line-height: 1.2;
+}
+
+@media (max-width: 500px) {
+  .warmthmap-title {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    padding: 0 4px;
+  }
+  .warmthmap-main {
+    margin-top: 15px;
+    padding: 0 2vw;
+  }
 }

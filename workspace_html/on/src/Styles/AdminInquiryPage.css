@@ -1,0 +1,307 @@
+.admin-inquiry-root {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  background: #faf7f3;
+}
+
+.admin-inquiry-main-content-vertical {
+  flex: 1 1 auto;
+  width: 100%;
+  display: block;
+  padding: 44px 0 0 0;
+}
+
+.admin-inquiry-list-box {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1.5px solid #eee;
+  border-radius: 9px;
+  padding: 30px 30px 18px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  min-width: 520px;
+}
+
+.admin-inquiry-list-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.admin-inquiry-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin-bottom: 14px;
+}
+
+.admin-inquiry-list-table th,
+.admin-inquiry-list-table td {
+  padding: 13px 12px;
+  border-bottom: 1.5px solid #e5e3e3;
+  font-size: 1.09rem;
+  text-align: left;
+}
+
+.admin-inquiry-list-table th {
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  border-bottom: 2px solid #222;
+}
+
+.admin-inquiry-list-table td {
+  color: #222;
+  background: #fff;
+}
+
+.admin-inquiry-list-table tr.selected-row td {
+  background: #e4f2fa;
+  font-weight: bold;
+}
+
+.admin-inquiry-list-title-cell {
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.admin-inquiry-pagination {
+  text-align: center;
+  margin: 19px 0 0 0;
+}
+
+.admin-inquiry-pagination a {
+  display: inline-block;
+  padding: 8px 13px;
+  border: 1.1px solid #ddd;
+  margin: 0 2px;
+  background: #fff;
+  font-size: 1.07rem;
+  border-radius: 5px;
+  color: #212121;
+}
+
+.admin-inquiry-pagination a.active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+  font-weight: bold;
+}
+
+.admin-inquiry-pagination a.disabled {
+  background: #f9f9f9;
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* 상세 내용 영역 */
+.admin-inquiry-detail-box {
+  width: 100%;
+  min-width: 380px;
+  background: #fff;
+  border: 1.5px solid #eee;
+  border-radius: 9px;
+  padding: 34px 30px 30px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.admin-inquiry-detail-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.admin-inquiry-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 18px;
+}
+
+.detail-label {
+  background: #f5f5f5;
+  padding: 6px 15px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.05rem;
+}
+
+.detail-value {
+  background: #fff;
+  padding: 6px 17px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.05rem;
+}
+
+.detail-title-value {
+  min-width: 100px;
+  max-width: 210px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-reply-btn {
+  background: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 5px;
+  margin-left: auto;
+  font-size: 1.06rem;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.detail-reply-btn:hover {
+  background: #2e9241;
+}
+
+.admin-inquiry-detail-content-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.detail-content {
+  min-height: 80px;
+  border: 1px solid #ccc;
+  background: #fafbfc;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 1.09rem;
+  margin-top: 7px;
+  line-height: 1.5;
+}
+
+.detail-reply-form {
+  margin: 13px 0 14px 0;
+  padding: 0;
+  display: none;
+}
+
+.detail-reply-form.show {
+  display: block;
+}
+
+.detail-reply-textarea {
+  width: 100%;
+  min-height: 65px;
+  border: 1.1px solid #bbb;
+  padding: 9px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.detail-reply-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.detail-reply-cancel-btn,
+.detail-reply-submit-btn {
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.03rem;
+  padding: 8px 17px;
+  cursor: pointer;
+}
+
+.detail-reply-cancel-btn {
+  background: #f44336;
+  color: #fff;
+}
+
+.detail-reply-submit-btn {
+  background: #4caf50;
+  color: #fff;
+}
+
+/* 제재 버튼과 드롭다운 */
+.admin-inquiry-detail-action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  position: relative;
+}
+
+.bad-user-label {
+  color: #e41c1c;
+  font-weight: bold;
+}
+
+.bad-user-value {
+  font-weight: bold;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 15px;
+  color: #222;
+}
+
+.detail-sanction-btn {
+  background: #d9534f;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 19px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.03rem;
+  cursor: pointer;
+  transition: background 0.13s;
+  position: relative;
+}
+
+.detail-sanction-btn:hover {
+  background: #ac2724;
+}
+
+.admin-user-sanction-container {
+  position: relative;
+}
+
+.admin-user-sanction-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  width: 110px;
+  padding: 4px 0;
+}
+
+.admin-user-sanction-dropdown a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #222;
+  text-decoration: none;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.admin-user-sanction-dropdown a:last-child {
+  border-bottom: none;
+}
+
+.admin-user-sanction-dropdown a:hover {
+  background-color: #f3f3f3;
+}

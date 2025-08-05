@@ -1,0 +1,194 @@
+.INGB {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background-color: #fffaf5;
+    color: #333;
+}
+
+.INGM {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    padding: 40px;
+    gap: 40px;
+    min-height: 80vh;
+    background: transparent;
+}
+
+.INGleft,
+.INGright {
+    border: 1px solid #ddd;
+    padding: 20px;
+    min-height: 100px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.INGcenter {
+    text-align: center;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 3px 15px rgba(220, 160, 80, 0.05);
+    padding: 28px 0 30px;
+}
+
+.INGcenter h1 {
+    color: #E3BC9A;
+    margin-bottom: 8px;
+}
+
+/* 상태 표시 영역 */
+.INGstatus {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #666;
+}
+
+.INGstatus span {
+    vertical-align: middle;
+}
+
+.INGstatus {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #666;
+}
+
+#INGdots {
+    display: inline-block;
+    /* 최대 3개의 점(...) 길이에 맞춰 3ch 확보 */
+    width: 3ch;
+    /* 왼쪽 정렬로 점이 왼쪽에서만 늘어나도록 */
+    text-align: left;
+}
+
+.INGicon-box {
+    margin: 16px auto;
+    width: 250px;
+    height: 250px;
+    border: 2px dashed #f6bc4d;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.INGicon-box img {
+    width: 230px;
+    height: 230px;
+}
+
+.INGvolunteer {
+    margin: 12px 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.INGvolunteer span.INGname {
+    color: #2a64d8;
+}
+
+.INGtimer {
+    font-size: 40px;
+    font-weight: 700;
+    color: #f6bc4d;
+    margin-bottom: 15px;
+}
+
+.INGbuttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+#INGcompleteBtn,
+#INGcancelBtn {
+    font-size: 20px;
+    border: none;
+    background-color: #fce8d5;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #e0bda7;
+    border-radius: 8px;
+    padding: 13px 0;
+    width: 180px;
+    transition: transform 0.2s ease, background 0.2s;
+    box-shadow: 0 2px 10px rgba(210, 150, 60, 0.03);
+}
+
+.INGbuttons button:active {
+    transform: scale(0.95);
+}
+
+#INGcompleteBtn:hover,
+#INGcancelBtn:hover {
+    background-color: #ffd7b3;
+}
+
+#INGreportBtn {
+    font-size: 20px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #e0bda7;
+    border-radius: 8px;
+    padding: 13px 0;
+    width: 180px;
+    transition: transform 0.2s ease, background 0.2s;
+    box-shadow: 0 2px 10px rgba(210, 150, 60, 0.03);
+}
+
+#INGreportBtn:hover {
+    background-color: #f82929;
+}
+
+/* 반응형 (태블릿/모바일) */
+@media (max-width: 1100px) {
+    main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 18px;
+    }
+
+    .INGleft,
+    .INGright,
+    .INGcenter {
+        margin-bottom: 18px;
+    }
+}
+
+@media (max-width: 840px) {
+    main {
+        padding: 4vw 0.5vw;
+    }
+
+    .INGbuttons button {
+        width: 100%;
+        min-width: 0;
+        font-size: 17px;
+        padding: 10px 0;
+    }
+
+    .INGtimer {
+        font-size: 36px;
+    }
+}
+@media (max-width: 770px){
+    .INGtimer{
+        font-size: 30px;
+    }
+    .INGM{
+        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;   /* 가로(교차축) 가운데 */
+    }
+    .INGleft{
+        width: 280px;
+    }
+}

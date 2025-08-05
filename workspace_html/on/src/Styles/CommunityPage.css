@@ -1,0 +1,205 @@
+.comm-root {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.comm-main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 44px 0 64px 0;
+  background: #fff;
+}
+.comm-sidebar-wrap {
+  flex: none;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.comm-board-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.comm-board-card {
+  width: 100%;
+  max-width: 1100px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 14px 0 rgba(200,180,120,0.10);
+  padding: 46px 60px 44px 60px;
+  margin-top: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 게시판 타이틀 & 버튼 */
+.comm-board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.comm-board-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  padding-left: 2px;
+}
+.comm-write-btn {
+  background: #fde9d9;
+  color: #e49013;
+  font-weight: 600;
+  border: none;
+  border-radius: 7px;
+  font-size: 1.05rem;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.comm-write-btn:hover {
+  background: #fbd3b4;
+}
+
+/* 게시판 테이블 */
+.comm-board-table {
+  width: 100%;
+  min-width: 340px;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 1.06rem;
+  margin-top: 0;
+  background: #fff;
+  border-radius: 11px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px 0 #f3ecd9cc;
+}
+.comm-board-table th,
+.comm-board-table td {
+  border: 1px solid #eee;
+  padding: 13px 7px;
+  text-align: center;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.comm-board-table th {
+  background: #fff6ea;
+  color: #b97a23;
+  font-weight: bold;
+  font-size: 1.08rem;
+}
+.comm-board-title-btn {
+  all: unset;
+  cursor: pointer;
+  color: #254699;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.comm-board-title-btn:hover {
+  color: #e49013;
+}
+.comm-board-empty {
+  color: #bbb;
+  font-size: 1.06rem;
+  text-align: center;
+  padding: 34px 0;
+}
+
+/* ====== 반응형 ====== */
+@media (max-width: 1200px) {
+  .comm-board-card {
+    max-width: 98vw;
+    padding: 20px 2vw 20px 2vw;
+  }
+  .comm-sidebar-wrap { min-width: 90px; }
+}
+@media (max-width: 800px) {
+  .comm-main {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+  .comm-sidebar-wrap {
+    min-width: 76px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .comm-board-section,
+  .comm-board-card {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 12px 2vw 20px 2vw;
+  }
+  .comm-board-title {
+    font-size: 1.05rem;
+    padding: 0;
+  }
+  .comm-write-btn {
+    font-size: 0.88rem;
+    padding: 6px 11px;
+  }
+  .comm-board-table th,
+  .comm-board-table td {
+    font-size: 0.9rem;
+    padding: 8px 3px;
+  }
+}
+
+/* 극단적 모바일 400px 이하 */
+@media (max-width: 400px) {
+  .comm-main,
+  .comm-board-section,
+  .comm-board-card {
+    padding: 4px 1vw 10px 1vw;
+    border-radius: 0;
+    overflow-x: auto;
+  }
+  .comm-board-header {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  .comm-board-title {
+    font-size: 0.85rem;
+    text-align: left;
+    padding: 0;
+  }
+  .comm-write-btn {
+    font-size: 0.68rem;
+    padding: 4px 7px;
+    border-radius: 5px;
+  }
+  .comm-sidebar-wrap {
+    min-width: 34px;
+  }
+  .comm-board-table th,
+  .comm-board-table td {
+    font-size: 0.7rem;
+    padding: 3px 1px;
+  }
+  .comm-board-empty {
+    font-size: 0.79rem;
+    padding: 14px 0;
+  }
+}
+.comm-main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 58px 0 64px 0; /* 기존보다 위 패딩 +14px (헤더 공간) */
+  background: #fff;
+}
+@media (max-width: 480px) {
+  .comm-main {
+    flex-direction: column;
+    gap: 0;
+    padding: 8vw 0 10vw 0; /* 모바일에서 헤더 여백, 아래도 살짝 */
+  }
+}

@@ -1,0 +1,164 @@
+.comm-board {
+  width: 100%;
+  background: #fff;
+  border-radius: 13px;
+  padding: 18px 24px 30px 24px;
+  box-shadow: 0 2px 18px #f2e0cb1a;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+/* ⬇️ 게시판 상단부(제목+버튼) 레이아웃 중앙/오른쪽 배치 */
+.comm-board-header {
+  display: flex;
+  justify-content: center;   /* 가운데 정렬 */
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* 제목 왼쪽, 버튼 오른쪽(좁아져도 한 줄) */
+.comm-board-title {
+  flex: none;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #353948;
+  margin: 0 16px 0 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.comm-write-btn {
+  flex: none;
+  background: #fde6d4;
+  border: 1.2px solid #f8c188;
+  border-radius: 8px;
+  font-size: 1.07rem;
+  padding: 7px 19px;
+  color: #e87e1d;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.13s, border 0.13s;
+  margin-left: 6px;
+}
+.comm-write-btn:hover {
+  background: #ffd6a1;
+  border-color: #ecb363;
+}
+
+/* 테이블 */
+.comm-board-table {
+  width: 100%;
+  min-width: 340px;
+  overflow-x: auto;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 1.04rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0.5px 2px #e1cdb42e;
+}
+.comm-board-table th, .comm-board-table td {
+  border: 1px solid #faedcd;
+  padding: 13px 0;
+  text-align: center;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.comm-board-table th {
+  background: #fff7ed;
+  color: #955a14;
+  font-weight: 700;
+  font-size: 1.04rem;
+  letter-spacing: 0.01em;
+}
+.comm-board-table td {
+  color: #34323e;
+}
+.comm-board-table tr {
+  transition: background 0.14s;
+}
+.comm-board-table tr:hover {
+  background: #fff8ee;
+}
+.comm-board-title-btn {
+  all: unset;
+  cursor: pointer;
+  color: #222;
+  font-weight: 500;
+  font-size: 1.08rem;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.14s;
+}
+.comm-board-title-btn:hover {
+  color: #e6782c;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.comm-board-empty {
+  text-align: center;
+  color: #aaa;
+  background: #fff8ee;
+  font-size: 1.05rem;
+  height: 54px;
+}
+.comm-board-notice-row {
+  background: #fff8d9 !important;
+  color: #de751b;
+  font-weight: 600;
+}
+
+/* 태블릿 이하 */
+@media (max-width: 820px) {
+  .comm-board {
+    padding: 13px 10px 20px 10px;
+  }
+  .comm-board-header {
+    gap: 10px;
+  }
+  .comm-board-title {
+    font-size: 1.4rem;
+  }
+  .comm-write-btn {
+    font-size: 0.97rem;
+    padding: 6px 13px;
+  }
+  .comm-board-table th, .comm-board-table td {
+    padding: 8px 0;
+    font-size: 0.98rem;
+  }
+}
+
+/* 모바일 400px 이하 */
+@media (max-width: 400px) {
+  .comm-board {
+    padding: 6px 2vw 13px 2vw;
+    border-radius: 8px;
+  }
+  .comm-board-header {
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  .comm-board-title {
+    font-size: 1.08rem;
+    text-align: center;
+    margin: 0 8px 0 0;
+    width: auto;
+    flex: none;
+    white-space: nowrap;
+  }
+  .comm-write-btn {
+    font-size: 0.83rem;
+    padding: 4px 7px;
+    border-radius: 6px;
+    flex: none;
+  }
+  .comm-board-table th, .comm-board-table td {
+    font-size: 0.88rem;
+    padding: 5px 0;
+  }
+}

@@ -1,0 +1,95 @@
+.googlemap-searchbar {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;  /* stretch로 하면 높이 맞춤 */
+  gap: 0;
+  margin: 0 auto 16px auto;
+  padding: 0;
+  background: transparent;
+  z-index: 10;
+}
+
+.googlemap-searchbar-input {
+  flex: 1 1 0;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 56px;
+  font-size: 18px;
+  padding: 0 18px;
+  border: 1.5px solid #b6c2d7;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  /* margin-left, margin-top 모두 제거 */
+  display: flex;
+  align-items: center;
+}
+.googlemap-searchbar-input::placeholder {
+  font-size: 1em;   /* placeholder 폰트도 입력창에 맞게 */
+  color: #b0b0b0;
+}
+
+.googlemap-searchbar-button {
+  min-width: 0 !important;
+  width: auto !important;
+  height: 56px;
+  padding: 0 38px;
+  font-size: 22px;
+  border: none;
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0 8px 8px 0;  /* 오른쪽만 둥글게 */
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top, margin-left 모두 제거 */
+}
+.googlemap-searchbar-button:disabled {
+  background: #ff7b00;
+  cursor: not-allowed;
+}
+
+/* ---------------- 반응형 ---------------- */
+@media (max-width: 800px) {
+  .googlemap-searchbar-input {
+    height: 40px;
+    font-size: 1rem;
+    padding: 0 9px;
+    border-radius: 6px 0 0 6px;
+  }
+  .googlemap-searchbar-input::placeholder {
+    font-size: 0.92em;
+  }
+  .googlemap-searchbar-button {
+    height: 40px;
+    font-size: 1rem;
+    padding: 0 19px;
+    border-radius: 0 6px 6px 0;
+  }
+}
+
+@media (max-width: 389px) {
+  .googlemap-searchbar-input {
+    height: 28px;
+    font-size: 0.88rem;
+    padding: 0 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .googlemap-searchbar-input::placeholder {
+    font-size: 0.82em;
+  }
+  .googlemap-searchbar-button {
+    height: 28px;
+    font-size: 0.83rem;
+    padding: 0 9px;
+    border-radius: 0 4px 4px 0;
+  }
+}

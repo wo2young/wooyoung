@@ -24,6 +24,10 @@ main {
     border-radius: 12px;
 }
 
+.right{
+    display: none;
+}
+/* 중앙 컨텐츠 박스 */
 .center {
     text-align: center;
     background: #fff;
@@ -32,12 +36,13 @@ main {
     padding: 28px 0 30px 0;
 }
 
+/* 모래시계 SVG 바탕 */
 .status-icon {
     border-radius: 3px;
     padding: 30px;
     display: inline-block;
     margin: 20px 0;
-    background-color: #c08a15;
+    background-color: #ffe08c;   /* 연노랑톤: SVG 궤적 색상과 통일감, 원하는 컬러로 변경 */
 }
 
 /* 버튼 스타일 */
@@ -48,11 +53,10 @@ main {
     margin-top: 30px;
     align-items: center;
 }
-
 .buttons button {
     font-size: 20px;
     border: none;
-    background-color: #fce8d5;
+    background-color: #fce8d5;  /* 연한 베이지 */
     color: #333;
     font-weight: bold;
     cursor: pointer;
@@ -63,198 +67,21 @@ main {
     transition: transform 0.2s ease, background 0.2s;
     box-shadow: 0 2px 10px rgba(210, 150, 60, 0.03);
 }
-
 .buttons button:active {
     transform: scale(0.95);
 }
-
 .buttons button:hover {
     background-color: #ffd7b3;
 }
 
-/* 애니메이션 로더 (모래시계) */
+/* 애니메이션 SVG의 크기만 별도(필요시) */
 .loader {
+    /* --dur은 SVG 애니메이션용 */
     --dur: 2s;
     display: block;
     margin: auto;
-    width: 14em;
-    height: auto;
-}
-
-.loader__glare-top,
-.loader__glare-bottom,
-.loader__model,
-.loader__motion-thick,
-.loader__motion-medium,
-.loader__motion-thin,
-.loader__sand-drop,
-.loader__sand-fill,
-.loader__sand-grain-left,
-.loader__sand-grain-right,
-.loader__sand-line-left,
-.loader__sand-line-right,
-.loader__sand-mound-top,
-.loader__sand-mound-bottom {
-    animation-duration: var(--dur);
-    animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
-    animation-iteration-count: infinite;
-}
-
-.loader__glare-top { animation-name: glare-top; }
-.loader__glare-bottom { animation-name: glare-bottom; }
-.loader__model {
-    animation-name: loader-flip;
-    transform-origin: 12.25px 16.75px;
-}
-.loader__motion-thick,
-.loader__motion-medium,
-.loader__motion-thin {
-    transform-origin: 26px 26px;
-}
-.loader__motion-thick { animation-name: motion-thick; }
-.loader__motion-medium { animation-name: motion-medium; }
-.loader__motion-thin { animation-name: motion-thin; }
-.loader__sand-drop { animation-name: sand-drop; }
-.loader__sand-fill { animation-name: sand-fill; }
-.loader__sand-grain-left { animation-name: sand-grain-left; }
-.loader__sand-grain-right { animation-name: sand-grain-right; }
-.loader__sand-line-left { animation-name: sand-line-left; }
-.loader__sand-line-right { animation-name: sand-line-right; }
-.loader__sand-mound-top { animation-name: sand-mound-top; }
-.loader__sand-mound-bottom {
-    animation-name: sand-mound-bottom;
-    transform-origin: 12.25px 31.5px;
-}
-
-/* 애니메이션 키프레임 */
-@keyframes loader-flip {
-    from { transform: translate(13.75px, 9.25px) rotate(-180deg); }
-    24%, to { transform: translate(13.75px, 9.25px) rotate(0); }
-}
-@keyframes glare-top {
-    from { stroke: rgba(255, 255, 255, 0); }
-    24%, to { stroke: white; }
-}
-@keyframes glare-bottom {
-    from { stroke: white; }
-    24%, to { stroke: rgba(255, 255, 255, 0); }
-}
-@keyframes motion-thick {
-    from {
-        animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(0.67turn);
-    }
-    20% {
-        animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
-        stroke: rgb(32, 32, 32);
-        stroke-dashoffset: 141.11;
-        transform: rotate(1turn);
-    }
-    40%, to {
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(1.33turn);
-    }
-}
-@keyframes motion-medium {
-    from, 8% {
-        animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(0.5turn);
-    }
-    20% {
-        animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
-        stroke: white;
-        stroke-dashoffset: 147.53;
-        transform: rotate(0.83turn);
-    }
-    32%, to {
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(1.17turn);
-    }
-}
-@keyframes motion-thin {
-    from, 4% {
-        animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(0.33turn);
-    }
-    24% {
-        animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
-        stroke: rgb(53, 53, 53);
-        stroke-dashoffset: 134.7;
-        transform: rotate(0.67turn);
-    }
-    44%, to {
-        stroke: rgba(255, 255, 255, 0);
-        stroke-dashoffset: 153.94;
-        transform: rotate(1turn);
-    }
-}
-@keyframes sand-drop {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 1;
-    }
-    70%, to { stroke-dashoffset: -107; }
-}
-@keyframes sand-fill {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 55;
-    }
-    70%, to { stroke-dashoffset: -54; }
-}
-@keyframes sand-grain-left {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 29;
-    }
-    70%, to { stroke-dashoffset: -22; }
-}
-@keyframes sand-grain-right {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 27;
-    }
-    70%, to { stroke-dashoffset: -24; }
-}
-@keyframes sand-line-left {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 53;
-    }
-    70%, to { stroke-dashoffset: -55; }
-}
-@keyframes sand-line-right {
-    from, 10% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        stroke-dashoffset: 14;
-    }
-    70%, to { stroke-dashoffset: -24.5; }
-}
-@keyframes sand-mound-top {
-    from, 10% {
-        animation-timing-function: linear;
-        transform: translate(0, 0);
-    }
-    15% {
-        animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
-        transform: translate(0, 1.5px);
-    }
-    51%, to { transform: translate(0, 13px); }
-}
-@keyframes sand-mound-bottom {
-    from, 31% {
-        animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
-        transform: scale(1, 0);
-    }
-    56%, to { transform: scale(1, 1); }
+    width: 56px;   /* px로 고정 */
+    height: 56px;
 }
 
 /* 반응형 (태블릿/모바일) */
@@ -279,3 +106,15 @@ main {
         padding: 10px 0;
     }
 }
+
+/*
+----------------------------
+SVG 색상 변경 요약 (참고)
+----------------------------
+  - 바깥 원 stroke: #ffe08c, #ffae00, #d1b58a
+  - 모래/본체: #ffd74b, #ffe4ad, #ffdca7, #ffeaad
+  - 곡선/유리: #e9c17b, #eddca7
+  - status-icon 배경: #ffe08c (연노랑)
+  컬러 포인트를 바꾸고 싶으면 위 HEX값만 변경
+----------------------------
+*/

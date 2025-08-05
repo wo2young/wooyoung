@@ -1,69 +1,103 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { LoadScript } from "@react-google-maps/api";
 
-import WarmthMapPage from './components/WarmthMap';
-
+import WarmthMapPage from './Pages/WarmthMap';
 import Home from './Pages/Home';
 import LoginPage from './Pages/LoginPage';
 import SignupPage from './Pages/SignupPage';
+import SignupSelect from './Pages/SignupSelect';
 import MatchingPage from './Pages/MatchingPage';
+import MatchingWaitPage from './Pages/MatchingWaitPage';
 import Support from './Pages/Support';
 import MyPage from './Pages/MyPage';
 import WaitingPage from './Pages/WaitingPage';
 import HelpPage from './Pages/HelpPage';
 import MileageUsagePage from './Pages/MileageUsagePage';
+import FindIdPage from './Pages/FindIdPage';
+import FindPwPage from './Pages/FindPwPage';
+import MeetingWaitPage from './Pages/MeetingWaitPage';
+import CommunityPage from './Pages/CommunityPage';
+import MeetingPage from './Pages/Meeting';
+import MeetingDone from './Pages/MeetingDone';
 
-// 기본 계정 초기 설정 (생략 가능하면 별도 파일로 분리해도 좋아요)
-const defaultUser = {
-  name: '김우영',
-  rrn: '021030-1111222',
-  addr: '경기도 여주시',
-  addrDetail: '',
-  id: 'wooyoung02',
-  pw: 'qwe123',
-  phone: '010-1111-2222',
-  email: 'ywk02@gmail.com',
-  mileage: 13250,
-};
+// 관리자페이지 컴포넌트 import
+import AdminUser from './Pages/AdminUser';
+import AdminInquiryPage from "./Pages/AdminInquiryPage";
+import AdminPostManagePage from './Pages/AdminPostManage';
+import AdminSystemSetting from './Pages/AdminSystemSetting'; // 추가!
+import AdminStatistics from './Pages/AdminStatistics';
 
-let users = JSON.parse(localStorage.getItem('users') || '[]');
-if (users.length === 0) {
-  users = [defaultUser];
-} else {
-  const idx = users.findIndex(u => u.id === defaultUser.id);
-  if (idx !== -1) {
-    users[idx] = { ...users[idx], ...defaultUser };
-  } else {
-    users.push(defaultUser);
-  }
+// 관리자 포함 users를 최초 1회만 세팅 (이미 있으면 무시)
+if (!localStorage.getItem('users')) {
+  localStorage.setItem('users', JSON.stringify([
+    {
+      id: 'kimwooyoung',
+      pw: 'admin1234',
+      name: '김우영',
+      role: 'admin'
+    },
+    {
+      id: 'kimdonghyun',
+      pw: 'admin1234',
+      name: '김동현',
+      role: 'admin'
+    },
+    {
+      id: 'shimjaewon',
+      pw: 'admin1234',
+      name: '심재원',
+      role: 'admin'
+    },
+    {
+      id: 'hayonggoon',
+      pw: 'admin1234',
+      name: '하용군',
+      role: 'admin'
+    }
+  ]));
 }
-localStorage.setItem('users', JSON.stringify(users));
 
-const found = users.find(u => u.id === defaultUser.id);
-if (found) {
-  localStorage.setItem('loggedUser', JSON.stringify(found));
-  localStorage.setItem('isLoggedIn', 'true');
-}
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 function App() {
+  if (!GOOGLE_MAPS_API_KEY) {
+    return <div>Google Maps API 키가 .env에 없습니다.</div>;
+  }
+
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/matching" element={<MatchingPage />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/wait" element={<WaitingPage />} />
-          <Route path="/help" element={<HelpPage />} />
-          <Route path="/mileage" element={<MileageUsagePage />} />
-          <Route path="/warmthmap" element={<WarmthMapPage />} />
-          {/* 404 페이지 임시 처리 */}
-          <Route path="*" element={<div>404 페이지를 찾을 수 없습니다.</div>} />
-        </Routes>
-      </Router>
+      <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} language="ko">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/signup-select" element={<SignupSelect />} />
+            <Route path="/matching" element={<MatchingPage />} />
+            <Route path="/matching-wait" element={<MatchingWaitPage />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/wait" element={<WaitingPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/mileage" element={<MileageUsagePage />} />
+            <Route path="/warmthmap" element={<WarmthMapPage />} />
+            <Route path="/find-id" element={<FindIdPage />} />
+            <Route path="/find-pw" element={<FindPwPage />} />
+            <Route path="/meeting-wait" element={<MeetingWaitPage />} />
+            <Route path="/meeting" element={<MeetingPage />} />
+            <Route path="/meeting-done" element={<MeetingDone />} />
+            <Route path="/community" element={<CommunityPage />} />
+            {/* 관리자 페이지 라우트 추가 */}
+            <Route path="/admin" element={<AdminUser />} />
+            <Route path="/admin/inquiry" element={<AdminInquiryPage />} />
+            <Route path="/admin/post" element={<AdminPostManagePage />} />
+            <Route path="/admin/setting" element={<AdminSystemSetting />} /> {/* 시스템 설정 페이지 */}
+            <Route path="/admin/stats" element={<AdminStatistics />} />
+            <Route path="*" element={<div>404 페이지를 찾을 수 없습니다.</div>} />
+          </Routes>
+        </Router>
+      </LoadScript>
     </AuthProvider>
   );
 }

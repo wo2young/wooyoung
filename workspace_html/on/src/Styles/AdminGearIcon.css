@@ -1,0 +1,30 @@
+.gear-grid {
+  position: relative;
+  width: 110px;  /* 전체 크기 조절 */
+  height: 100px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.gear {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: url('../assets/icons/admin.png') no-repeat center/contain;
+  opacity: 0.88;
+}
+
+/* 평행사변형 형태 & 회전 조정 */
+.gear-1 { top: 23px;  left: -12px; transform: rotate(-33deg); }
+.gear-2 { top: 23px;  left: 30px; transform: rotate(22deg); }
+.gear-3 { top: 65px; left: -17px;  transform: rotate(22deg); }
+.gear-4 { top: 65px; left: 25px; transform: rotate(-16deg); }
+
+/* hover 시 맞물림 회전 */
+.gear-grid:hover .gear-1 { animation: gear-cw 1.1s linear infinite; }
+.gear-grid:hover .gear-2 { animation: gear-ccw 1.1s linear infinite; }
+.gear-grid:hover .gear-3 { animation: gear-ccw 1.1s linear infinite; }
+.gear-grid:hover .gear-4 { animation: gear-cw 1.1s linear infinite; }
+
+@keyframes gear-cw { 100% { transform: rotate(347deg); } }
+@keyframes gear-ccw { 100% { transform: rotate(-347deg); } }

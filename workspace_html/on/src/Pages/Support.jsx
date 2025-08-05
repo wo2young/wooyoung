@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '../Styles/Support.css';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
 import SupportPopup from '../components/SupportPopup';
 import chatbotImg from '../assets/chatbot.png';
 
@@ -12,22 +12,31 @@ function Support() {
       text: '안녕하세요. 한끼온 AI입니다.\n궁금하신 내용을 간단한 문장으로 입력해 주세요.'
     }
   ]);
-  const [showPopup, setShowPopup] = useState(true);
+  const [popupCollapsed, setPopupCollapsed] = useState(false);
+
+  // 👇 스크롤 내릴 ref
+  const messagesEndRef = useRef(null);
+
+  // 메시지 바뀌면 자동 스크롤
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   const today = new Date();
   const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
 
-  const API_KEY = 'AIzaSyBlUUYUxrGyzMqvI1i7O_IgAUWr80iC9l4';
+  const API_KEY = 'AIzaSyBlUUYUxrGyzMqvI1i7O_IgAUWr80iC9l4'; // 실제 발급키로 교체!
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
-
-    const userText = input;
+  // 챗봇 메시지 전송
+  const handleSend = async (q = null) => {
+    const userText = q !== null ? q : input;
+    if (!userText.trim()) return;
     setInput('');
     const updatedMessages = [...messages, { type: 'user', text: userText }];
     setMessages(updatedMessages);
 
-    // === Gemini API 구성 ===
     const conversation = [
       {
         role: 'user',
@@ -67,23 +76,31 @@ function Support() {
     }
   };
 
+  // 인풋 Enter 전송
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') handleSend();
   };
 
+  // 팝업 내리기/올리기 토글
+  const handleTogglePopup = () => setPopupCollapsed(prev => !prev);
+
+  // 팝업 FAQ/카드 클릭 시 질문+전송, 팝업내리기
+  const handlePopupQuestion = (questionText) => {
+    setPopupCollapsed(true); // 팝업을 내려서 챗봇만 보이게
+    setTimeout(() => handleSend(questionText), 0);
+  };
+
   return (
-    <><Header />
-    <div className="support-page">
-      {showPopup ? (
-        <SupportPopup onClose={() => setShowPopup(false)} />
-      ) : (
+    <Layout>
+      <div className="support-page">
         <main className="support-main">
           <h2>고객 센터</h2>
           <p className="sub-title">무엇을 도와드릴까요?</p>
           <section className="chat-box">
             <div className="chat-title">한끼온 Chat AI</div>
             <div className="chat-date">{dateStr}</div>
-            <div className="chat-content">
+            {/* 스크롤 자동 이동 가능하게 overflow-y: auto와 ref */}
+            <div className="chat-content" style={{ overflowY: 'auto', maxHeight: 440 }}>
               {messages.map((msg, i) =>
                 msg.type === 'bot' ? (
                   <div key={i} className="chat-bot">
@@ -100,6 +117,8 @@ function Support() {
                   </div>
                 )
               )}
+              {/* 이 div가 맨 아래로 스크롤 이동을 트리거 */}
+              <div ref={messagesEndRef} />
             </div>
             <div className="chat-input-area">
               <input
@@ -110,13 +129,18 @@ function Support() {
                 onKeyDown={handleKeyPress}
                 autoFocus
               />
-              <button onClick={handleSend}>전송</button>
+              <button onClick={() => handleSend()}>전송</button>
             </div>
           </section>
         </main>
-      )}
-    </div>
-    </>
+        {/* SupportPopup 항상 화면 아래 */}
+        <SupportPopup
+          collapsed={popupCollapsed}
+          onToggle={handleTogglePopup}
+          onQuestion={handlePopupQuestion}
+        />
+      </div>
+    </Layout>
   );
 }
 

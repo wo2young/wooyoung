@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // 꼭 import!
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import '../Styles/LoginPage.css';
 import logoImg from '../assets/logo.png';
 
@@ -10,15 +10,21 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
+  const [isMobile, setIsMobile] = useState(false); // 모바일 환경 판별
   const navigate = useNavigate();
-  const { login } = useAuth(); // ★ 추가!
+  const { login } = useAuth();
+
+  // 마운트 시 User-Agent 체크해서 모바일 여부 판단
+  useEffect(() => {
+    const check = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    setIsMobile(check);
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (!username || !password) {
       setError('아이디/비밀번호를 입력해주세요.');
     } else {
-      // AuthContext의 login 함수 호출!
       const success = login(username, password);
       if (success) {
         setError('');
@@ -61,7 +67,7 @@ function LoginPage() {
               type={tab === 'email' ? 'email' : 'text'}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder=" "   // 반드시 공백 한 칸만!
+              placeholder=" "
               required
               autoComplete="username"
             />
@@ -102,16 +108,38 @@ function LoginPage() {
           <button
             type="button"
             className="passkey-btn"
-            onClick={() => alert('패스키 로그인이 아직 지원되지 않습니다.')}
+            disabled={!isMobile}
+            onClick={() => {
+              if (!isMobile) {
+                alert('패스키 로그인(지문/얼굴인식)은 휴대폰에서만 지원됩니다.');
+              } else {
+                alert('패스키 로그인 준비 중! (실제 구현시 연동)');
+              }
+            }}
+            style={!isMobile ? { background: "#eee", color: "#999", cursor: "not-allowed" } : {}}
           >
             패스키 로그인
           </button>
+          {!isMobile && (
+            <div style={{ color: "#999", fontSize: "0.95em", marginTop: "4px", textAlign: "center" }}>
+              ※ 패스키 로그인(지문/얼굴인식)은<br />휴대폰(스마트폰)에서만 지원됩니다.
+            </div>
+          )}
         </form>
 
         <div className="login-links">
-          <a href="/find-id">아이디 찾기</a>
-          <a href="/find-pw">비밀번호 찾기</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signup'); }}>회원가입</a>
+          <Link to="/find-id">아이디 찾기</Link>
+          <Link to="/find-pw">비밀번호 찾기</Link>
+          {/* 회원가입은 signup-select로 이동 */}
+          <a
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              navigate('/signup-select');
+            }}
+          >
+            회원가입
+          </a>
         </div>
       </div>
     </div>

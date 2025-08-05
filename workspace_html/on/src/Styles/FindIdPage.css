@@ -1,0 +1,201 @@
+.FID {
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff;
+  color: #22313e;
+  min-width: 300px;  /* <- 글로벌에서도 선언 추천 */
+}
+
+.FIDcontainer {
+  width: 100%;
+  max-width: 370px;
+  min-width: 250px;
+  text-align: center;
+  padding: 30px 20px 25px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(165,140,89,0.08);
+  border: 1.6px solid #e8e8e8;
+}
+
+.FIDh1 {
+  color: #e09a5b;
+  font-size: 2rem;
+  margin-bottom: 33px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.FIDinput-box {
+  background: #fafafa;
+  border: 1.7px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  padding: 0 13px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  box-sizing: border-box;
+  transition: border-color 0.13s;
+}
+
+.FIDinput-box:focus-within {
+  border-color: #ffa44c;
+}
+
+.FIDinput-box input {
+  border: none;
+  width: 100%;
+  background: transparent;
+  font-size: 1.24rem;
+  color: #222;
+  outline: none;
+  text-align: left;
+  font-family: inherit;
+  height: 42px;
+  line-height: 42px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.FIDinput-box input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.FIDinput-box input::placeholder {
+  color: #b8b8b8;
+  font-size: 1.13rem;
+  text-align: left;
+}
+
+.FIDbtn {
+  width: 100%;
+  padding: 15px 0 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.11rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s;
+  min-height: 48px;
+}
+
+.FIDbtn-primary {
+  background: #ff9800;
+  color: #fff;
+}
+.FIDbtn-primary:hover {
+  background: #ff7b00;
+}
+.FIDbtn-secondary {
+  background: #f3f3f3;
+  color: #22313e;
+  margin-top: 8px;
+}
+.FIDbtn-secondary:hover {
+  background: #ff9800;
+  color: #fff;
+}
+
+.FIDlinks {
+  margin-top: 24px;
+  font-size: 1.02rem;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.FIDlinks a {
+  color: black;
+  text-decoration: none;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: color 0.14s;
+}
+.FIDlinks a:hover {
+  background: none;
+  color: #ff9800;
+}
+
+/* 500px 이하: 모바일 최적화 */
+@media (max-width: 500px) {
+  .FIDcontainer {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 20px 3vw;
+    border-radius: 10px;
+  }
+  .FIDh1 {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+  }
+  .FIDinput-box {
+    height: 44px;
+    padding: 0 7px;
+    border-radius: 7px;
+    margin-bottom: 13px;
+  }
+  .FIDinput-box input {
+    font-size: 1.01rem;
+    height: 28px;
+    line-height: 28px;
+  }
+  .FIDinput-box input::placeholder {
+    font-size: 0.98rem;
+  }
+  .FIDbtn {
+    padding: 11px 0 9px;
+    font-size: 0.97rem;
+    min-height: 37px;
+    border-radius: 7px;
+  }
+  .FIDlinks {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    gap: 10px;
+  }
+}
+
+/* 극소형 모바일 (390px 이하) */
+@media (max-width: 389px) {
+  .FIDcontainer {
+    max-width: 100vw;
+    padding: 14px 1vw;
+    border-radius: 6px;
+  }
+  .FIDh1 {
+    font-size: 0.97rem;
+    margin-bottom: 13px;
+  }
+  .FIDinput-box {
+    height: 36px;
+    border-radius: 6px;
+    margin-bottom: 9px;
+    padding: 0 3px;
+  }
+  .FIDinput-box input {
+    font-size: 0.87rem;
+    height: 22px;
+    line-height: 22px;
+  }
+  .FIDbtn {
+    padding: 7px 0 6px;
+    font-size: 0.81rem;
+    min-height: 30px;
+    border-radius: 6px;
+  }
+  .FIDlinks {
+    margin-top: 9px;
+    font-size: 0.88rem;
+    gap: 5px;
+  }
+}

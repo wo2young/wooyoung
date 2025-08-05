@@ -1,0 +1,118 @@
+.DONEB {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background-color: #fffaf5;
+    color: #333;
+}
+
+.DONEM {
+    display:grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    padding: 40px;
+    gap: 40px;
+    min-height: 80vh;
+    background: transparent;
+}
+
+.DONEleft,
+.DONEright {
+    border: 1px solid #ddd;
+    padding: 20px;
+    min-height: 100px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.DONEcenter {
+    text-align: center;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 3px 15px rgba(220, 160, 80, 0.05);
+    padding: 28px 0 30px;
+}
+
+.DONEcenter h1 {
+    color: #E3BC9A;
+    margin-bottom: 8px;
+}
+
+/* 상태 표시 영역 */
+#DONEstatic {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.DONEstatus span {
+    vertical-align: middle;
+}
+
+.DONEicon-box {
+    margin: 16px auto;
+    width: 250px;
+    height: 250px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DONEicon-box img {
+    width: 230px;
+    height: 230px;
+}
+
+.DONEmsg {
+    margin: 12px 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+.DONEpoint{
+    font-size: 32px;
+    color:#f6bc4d;
+    font-weight: 700;
+}
+.DONEbuttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.DONEbuttons button {
+    font-size: 20px;
+    border: none;
+    background-color: #fce8d5;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #e0bda7;
+    border-radius: 8px;
+    padding: 13px 0;
+    width: 180px;
+    transition: transform 0.2s ease, background 0.2s;
+    box-shadow: 0 2px 10px rgba(210, 150, 60, 0.03);
+}
+
+.DONEbuttons button:active {
+    transform: scale(0.95);
+}
+
+.DONEbuttons button:hover {
+    background-color: #ffd7b3;
+}
+.DONEclickAd{
+    font-size: 15px;
+}
+
+/* 반응형 (태블릿/모바일) */
+@media (max-width:768px){
+    .DONEM{
+        display : block;
+    }
+}
+@media (max-width:375px ){
+    #DONEstatic{
+        font-size: 25px;
+    }
+}

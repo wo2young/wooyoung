@@ -1,10 +1,19 @@
-import React, { useEffect, useRef } from "react";
-import Header from "../components/Header"; // 헤더 위치에 맞게 경로 수정!
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../components/Hourglass";
 import "../styles/WaitingPage.css";
+import Layout from "../components/Layout";
 
 function WaitingPage() {
   const connectingRef = useRef(null);
+  const navigate = useNavigate();
+  const { state = {} } = useLocation();
 
+  // ===== 모달 상태 =====
+  const [isRequestModalOpen, setRequestModalOpen] = useState(false);
+  const [isCancelConfirmOpen, setCancelConfirmOpen] = useState(false);
+
+  // ===== 로딩 애니메이션 =====
   useEffect(() => {
     const textBase = "봉사자 연결중";
     const dots = ["", ".", "..", "..."];
@@ -18,100 +27,71 @@ function WaitingPage() {
     return () => clearInterval(interval);
   }, []);
 
-  return (
+  // ===== 매칭 성공시 이동 =====
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (localStorage.getItem("matchStatus") === "accepted") {
+        // detail이 반드시 전달되도록 상태 통째로 넘겨줌
+        navigate("/meeting-wait", { state });
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [navigate, state]);
+
+  // ===== 요청 취소 =====
+  const handleCancel = () => {
+    if (state?.id) {
+      const reqs = JSON.parse(localStorage.getItem("helpRequests") || "[]");
+      const filtered = reqs.filter(r => r.id !== state.id);
+      localStorage.setItem("helpRequests", JSON.stringify(filtered));
+    }
+    alert("요청이 취소되었습니다.");
+    navigate("/");
+  };
+
+  // ===== 추가 요청 =====
+  const handleAddRequest = () => {
+    navigate("/help");
+  };
+
+  // ===== 요청내용 모달 =====
+  const detailText =
+    state.detail?.trim()
+    || state.content?.trim()
+    || state.description?.trim()
+    || "내용 없음";
+
+  const requestDetails = (
     <div>
-      <Header />
+      <p><b>제목:</b> {state.title || state.request || "제목 없음"}</p>
+      <p><b>상세 내용:</b> {detailText}</p>
+      {state.problem && <p><b>불편 사항:</b> {state.problem}</p>}
+      {state.time && <p><b>약속 시간:</b> {state.time}</p>}
+      {state.place && <p><b>약속 장소:</b> {state.place}</p>}
+    </div>
+  );
+
+  return (
+    <Layout>
       <main>
         <a href="">
-          <div className="left" title="협력업체 광고">
-            협력업체 광고
-          </div>
+          <div className="left" title="협력업체 광고">협력업체 광고</div>
         </a>
-
         <div className="center">
           <h1>한끼온+</h1>
           <h2>요청이 접수되었습니다</h2>
           <h3>잠시만 기다려 주세요</h3>
-
           <div className="status-icon">
-            {/* 모래시계 SVG */}
-            <svg aria-label="loader being flipped clockwise and circled by three white curves fading in and out"
-              role="img" height="56px" width="56px" viewBox="0 0 56 56" className="loader">
-              <clipPath id="sand-mound-top">
-                <path
-                  d="M 14.613 13.087 C 15.814 12.059 19.3 8.039 20.3 6.539 C 21.5 4.789 21.5 2.039 21.5 2.039 L 3 2.039 C 3 2.039 3 4.789 4.2 6.539 C 5.2 8.039 8.686 12.059 9.887 13.087 C 11 14.039 12.25 14.039 12.25 14.039 C 12.25 14.039 13.5 14.039 14.613 13.087 Z"
-                  className="loader__sand-mound-top"></path>
-              </clipPath>
-              <clipPath id="sand-mound-bottom">
-                <path
-                  d="M 14.613 20.452 C 15.814 21.48 19.3 25.5 20.3 27 C 21.5 28.75 21.5 31.5 21.5 31.5 L 3 31.5 C 3 31.5 3 28.75 4.2 27 C 5.2 25.5 8.686 21.48 9.887 20.452 C 11 19.5 12.25 19.5 12.25 19.5 C 12.25 19.5 13.5 19.5 14.613 20.452 Z"
-                  className="loader__sand-mound-bottom"></path>
-              </clipPath>
-              <g transform="translate(2,2)">
-                <g transform="rotate(-90,26,26)" strokeLinecap="round" strokeDashoffset="153.94"
-                  strokeDasharray="153.94 153.94" stroke="hsl(0,0%,100%)" fill="none">
-                  <circle transform="rotate(0,26,26)" r="24.5" cy="26" cx="26" strokeWidth="2.5"
-                    className="loader__motion-thick"></circle>
-                  <circle transform="rotate(90,26,26)" r="24.5" cy="26" cx="26" strokeWidth="1.75"
-                    className="loader__motion-medium"></circle>
-                  <circle transform="rotate(180,26,26)" r="24.5" cy="26" cx="26" strokeWidth="1"
-                    className="loader__motion-thin"></circle>
-                </g>
-                <g transform="translate(13.75,9.25)" className="loader__model">
-                  <path
-                    d="M 1.5 2 L 23 2 C 23 2 22.5 8.5 19 12 C 16 15.5 13.5 13.5 13.5 16.75 C 13.5 20 16 18 19 21.5 C 22.5 25 23 31.5 23 31.5 L 1.5 31.5 C 1.5 31.5 2 25 5.5 21.5 C 8.5 18 11 20 11 16.75 C 11 13.5 8.5 15.5 5.5 12 C 2 8.5 1.5 2 1.5 2 Z"
-                    fill="hsl(var(--hue),90%,85%)"></path>
-                  <g strokeLinecap="round" stroke="hsl(35,90%,90%)">
-                    <line y2="20.75" x2="12" y1="15.75" x1="12" strokeDasharray="0.25 33.75"
-                      strokeWidth="1" className="loader__sand-grain-left"></line>
-                    <line y2="21.75" x2="12.5" y1="16.75" x1="12.5" strokeDasharray="0.25 33.75"
-                      strokeWidth="1" className="loader__sand-grain-right"></line>
-                    <line y2="31.5" x2="12.25" y1="18" x1="12.25" strokeDasharray="0.5 107.5"
-                      strokeWidth="1" className="loader__sand-drop"></line>
-                    <line y2="31.5" x2="12.25" y1="14.75" x1="12.25" strokeDasharray="54 54"
-                      strokeWidth="1.5" className="loader__sand-fill"></line>
-                    <line y2="31.5" x2="12" y1="16" x1="12" strokeDasharray="1 107" strokeWidth="1"
-                      stroke="hsl(35,90%,83%)" className="loader__sand-line-left"></line>
-                    <line y2="31.5" x2="12.5" y1="16" x1="12.5" strokeDasharray="12 96"
-                      strokeWidth="1" stroke="hsl(35,90%,83%)" className="loader__sand-line-right"></line>
-                    <g strokeWidth="0" fill="hsl(35,90%,90%)">
-                      <path
-                        d="M 12.25 15 L 15.392 13.486 C 21.737 11.168 22.5 2 22.5 2 L 2 2.013 C 2 2.013 2.753 11.046 9.009 13.438 L 12.25 15 Z"
-                        clipPath="url(#sand-mound-top)"></path>
-                      <path
-                        d="M 12.25 18.5 L 15.392 20.014 C 21.737 22.332 22.5 31.5 22.5 31.5 L 2 31.487 C 2 31.487 2.753 22.454 9.009 20.062 Z"
-                        clipPath="url(#sand-mound-bottom)"></path>
-                    </g>
-                  </g>
-                  <g strokeWidth="2" strokeLinecap="round" opacity="0.7" fill="none">
-                    <path
-                      d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
-                      stroke="hsl(0,0%,100%)" className="loader__glare-top"></path>
-                    <path transform="rotate(180,12.25,16.75)"
-                      d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
-                      stroke="hsla(0,0%,100%,0)" className="loader__glare-bottom"></path>
-                  </g>
-                  <rect height="2" width="24.5" fill="hsl(var(--hue),90%,50%)"></rect>
-                  <rect height="1" width="19.5" y="0.5" x="2.5" ry="0.5" rx="0.5"
-                    fill="hsl(var(--hue),90%,57.5%)"></rect>
-                  <rect height="2" width="24.5" y="31.5" fill="hsl(var(--hue),90%,50%)"></rect>
-                  <rect height="1" width="19.5" y="32" x="2.5" ry="0.5" rx="0.5"
-                    fill="hsl(var(--hue),90%,57.5%)"></rect>
-                </g>
-              </g>
-            </svg>
+            <Loader />
           </div>
-
           <h3 ref={connectingRef}>봉사자 연결중...</h3>
           <p>소요 시간 10분 예상</p>
-
           <div className="buttons">
-            <button>요청 내용</button>
-            <button>요청 취소</button>
-            <button>추가 요청</button>
+            <button onClick={() => setRequestModalOpen(true)}>요청 내용</button>
+            <button onClick={() => setCancelConfirmOpen(true)}>요청 취소</button>
+            <button onClick={handleAddRequest}>추가 요청</button>
           </div>
         </div>
-
         <div className="right">
           요청 대기중인 목록
           <br />
@@ -124,7 +104,138 @@ function WaitingPage() {
           <a href="">뽀뽀</a>
         </div>
       </main>
-    </div>
+
+      {/* ===== 요청 내용 모달 ===== */}
+      {isRequestModalOpen && (
+        <div className="modal-overlay" onClick={() => setRequestModalOpen(false)}>
+          <div
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: "14px",
+              maxWidth: 340,
+              margin: "120px auto",
+              padding: "30px 24px",
+              boxShadow: "0 6px 32px 0 rgba(0,0,0,0.18)",
+              position: "relative",
+              zIndex: 1001,
+              textAlign: "left"
+            }}
+          >
+            <button
+              onClick={() => setRequestModalOpen(false)}
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 14,
+                background: "none",
+                border: "none",
+                fontSize: 22,
+                cursor: "pointer"
+              }}
+              aria-label="닫기"
+            >
+              ×
+            </button>
+            <h2 style={{
+              marginTop: 0,
+              marginBottom: 16,
+              color: "#24304b",
+              fontWeight: 900,
+              letterSpacing: "-1px"
+            }}>요청 상세 내용</h2>
+            {requestDetails}
+          </div>
+        </div>
+      )}
+
+      {/* ===== 요청 취소 확인 모달 ===== */}
+      {isCancelConfirmOpen && (
+        <div className="modal-overlay" onClick={() => setCancelConfirmOpen(false)}>
+          <div
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: "#fff",
+              borderRadius: "14px",
+              maxWidth: 320,
+              margin: "160px auto",
+              padding: "26px 20px 18px 20px",
+              boxShadow: "0 6px 32px 0 rgba(0,0,0,0.14)",
+              position: "relative",
+              zIndex: 1000,
+              textAlign: "center"
+            }}
+          >
+            <button
+              onClick={() => setCancelConfirmOpen(false)}
+              style={{
+                position: "absolute",
+                top: 8,
+                right: 12,
+                background: "none",
+                border: "none",
+                fontSize: 22,
+                cursor: "pointer"
+              }}
+              aria-label="닫기"
+            >
+              ×
+            </button>
+            <h2 style={{ margin: "0 0 20px 0", fontSize: "1.16rem" }}>정말 요청을 취소하시겠습니까?</h2>
+            <div style={{ display: "flex", gap: "18px", justifyContent: "center", marginTop: 12 }}>
+              <button
+                onClick={() => {
+                  setCancelConfirmOpen(false);
+                  handleCancel();
+                }}
+                style={{
+                  padding: "6px 22px",
+                  fontWeight: "bold",
+                  background: "#ff9800",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "7px",
+                  cursor: "pointer"
+                }}
+              >
+                확인
+              </button>
+              <button
+                onClick={() => setCancelConfirmOpen(false)}
+                style={{
+                  padding: "6px 22px",
+                  fontWeight: "bold",
+                  background: "#ddd",
+                  color: "#333",
+                  border: "none",
+                  borderRadius: "7px",
+                  cursor: "pointer"
+                }}
+              >
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== 팝업 오버레이 스타일 ===== */}
+      <style>
+        {`
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.23);
+          z-index: 1000;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+        `}
+      </style>
+    </Layout>
   );
 }
 

@@ -1,0 +1,75 @@
+/* AdminHeader.css - 2번 관리자 네비 스타일 */
+.support-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  background: #fff4ea;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  padding: 0 34px;
+  border-bottom: 1.5px solid #f6d6be;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.header-logo-img {
+  width: 220px;
+  height: 54px;
+  object-fit: contain;
+}
+.header-nav-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.header-nav {
+  display: flex;
+  gap: 38px;
+}
+.header-nav a {
+  color: #222;
+  font-size: 19px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: 5px;
+  transition: all .15s;
+  background: none;
+}
+.header-nav a:hover {
+  color: #d2462f;
+  background: #ffe7dd;
+}
+.header-nav .admin-nav-link {
+  background: #d2462f;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 7px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.header-login-btn {
+  background: #ff9800;
+  color: #fff;
+  border: 1.5px solid #ff9800;
+  border-radius: 7px;
+  padding: 5px 16px;
+  font-weight: 700;
+  font-size: 1.07rem;
+  min-width: 92px;
+  height: 36px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  outline: none;
+}
+
+.header-login-btn:hover,
+.header-login-btn:focus {
+  background: #ff7b00;
+  color: #fff;
+  border-color: #ff9800;
+}

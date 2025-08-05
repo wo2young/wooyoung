@@ -6,17 +6,20 @@
   background: #fff;
   width: 100%;
   overflow-x: hidden;
+  min-width: 300px;
 }
 
 .login-container {
   width: 100%;
   max-width: 410px;
+  min-width: 250px;
   margin: 30px auto;
   padding: 32px 16px 16px;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 2px 14px rgba(165,140,89,0.07);
   border: 1.7px solid #e8e8e8;
+  box-sizing: border-box;
 }
 
 .login-logo-wrap {
@@ -28,7 +31,8 @@
 }
 
 .login-main-logo {
-  width: 230px;
+  width: 120px;
+  max-width: 75vw;
   object-fit: contain;
   display: block;
 }
@@ -67,40 +71,34 @@
 .login-input-group {
   position: relative;
   width: 100%;
-  /* margin: 0; */
 }
 
 .login-input-group:not(:last-child) {
   margin-bottom: 22px;
 }
 
+/* ======== 인풋, 라벨: 세로 넉넉 + 라벨 확실히 위로(PC, 모바일 전체 공통) ======== */
 .login-input {
   background: #fff !important;
   border: 1.7px solid #ddd !important;
   color: #222 !important;
   width: 100%;
-  height: 64px;
-  padding: 26px 17px 16px;
+  height: 56px;               /* 높이 넉넉하게 */
+  padding: 21px 17px 12px;    /* 위 패딩 넉넉(라벨+입력 모두 중앙) */
   margin: 0 !important;
-  font-size: 1.09rem;
-  line-height: 1.3;
+  font-size: 1.07rem;
+  line-height: 1.4;
   border-radius: 11px !important;
-  /* border: 1.7px solid #ddd; */
-  background: #fff;
-  /* color: #222; */
   box-sizing: border-box;
   font-family: inherit;
   appearance: none;
   outline: none;
   box-shadow: none !important;
 }
-
-/* 플로팅 구조에선 placeholder는 " " (공백)만 사용해야 함! */
 .login-input::placeholder {
   color: transparent;
 }
 
-/* autofill 대응 */
 .login-input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px #fff inset;
   box-shadow: 0 0 0 1000px #fff inset;
@@ -109,27 +107,28 @@
 
 .login-label {
   position: absolute;
-  left: 16px;
-  top: 20px;
-  font-size: 1.05rem;
+  left: 17px;
+  top: 22px;               /* input 중앙쯤에서 시작 */
+  font-size: 1.02rem;
   color: #b0b0b0;
   pointer-events: none;
   font-weight: 500;
   user-select: none;
   background: transparent;
-  transition: all 0.18s ease;
+  transition: all 0.21s cubic-bezier(.4,0,.2,1);
   white-space: nowrap;
+  z-index: 2;
 }
 
-/* 플로팅 조건 (입력값 있거나 포커스 or active) */
+/* input에 글자 있거나 포커스 시, label이 input 박스 "위로 확실히" 올라감 */
 .login-input:focus + .login-label,
 .login-input:not(:placeholder-shown) + .login-label,
 .login-label.active {
-  top: 6px;
-  left: 14px;
-  font-size: 0.82rem;
+  top: -10px;          /* input 테두리 위쪽까지 확실히! */
+  left: 13px;
+  font-size: 0.87rem;
   background: #fff;
-  padding: 0 3px;
+  padding: 0 6px;
   z-index: 99;
 }
 
@@ -153,8 +152,9 @@
   font-size: 1.03rem;
   padding: 8px 11px;
   text-align: center;
-  margin: -8px 0 5px 0;
+  margin: -8px 0 5px 20;
   border: 1px solid #f8b2b2;
+ 
 }
 
 .login-btn, .passkey-btn {
@@ -174,17 +174,13 @@
   margin-top: 10px;
   margin-bottom: 18px;
 }
-
-.login-btn:hover {
-  background: #ff9800;
-}
+.login-btn:hover { background: #ff9800; }
 
 .passkey-btn {
   background: #fff;
   color: #ffa900;
   border: 2px solid #ffa900;
 }
-
 .passkey-btn:hover {
   background: #ffa900;
   color: #fff;
@@ -198,7 +194,6 @@
   margin-top: 13px;
   font-size: 1.13rem;
 }
-
 .login-links a {
   color: #22313e;
   text-decoration: none;
@@ -206,14 +201,67 @@
   padding: 3px 2px;
   transition: color 0.14s;
 }
+.login-links a:hover { color: #ffa900; }
 
-.login-links a:hover {
-  color: #ffa900;
-}
-
+/* ====== 반응형 ====== */
+/* 태블릿 이하(600px)에서는 높이만 살짝 줄이기, 충분히 여유 있게 */
 @media (max-width: 600px) {
   .login-container {
-    padding: 18px 2vw;
+    padding: 12px 1vw;
     max-width: 99vw;
+    min-width: 0;
+  }
+  .login-main-logo {
+    width: 130px;
+  }
+  .login-tab-button {
+    font-size: 1.01rem;
+    padding: 12px 0 6px;
+  }
+  .login-btn, .passkey-btn {
+    font-size: 0.98rem;
+    padding: 10px 0 7px;
+    min-height: 40px;
+  }
+  .login-input {
+    height: 49px;
+    padding: 18px 12px 9px;
+    font-size: 0.98rem;
+  }
+  .login-label {
+    left: 13px;
+    top: 17px;
+    font-size: 0.96rem;
+  }
+  .login-input:focus + .login-label,
+  .login-input:not(:placeholder-shown) + .login-label,
+  .login-label.active {
+    top: -12px;           /* 모바일에서 더 확실히 올림 */
+    left: 10px;
+    font-size: 0.77rem;
+    padding: 0 6px;
+  }
+}
+
+/* 극소형 기기(389px 이하)에서는 폰트만 더 줄이고 위로 확실히 */
+@media (max-width: 389px) {
+  .login-container {
+    max-width: 97vw;
+    min-width: 0;
+    padding: 4px 1vw;
+  }
+  .login-main-logo { width: 75px; }
+  .login-tab-button { font-size: 0.79rem; padding: 6px 0 2px; }
+  .login-input { height: 41px; padding: 14px 6px 7px; font-size: 0.91rem; }
+  .login-btn, .passkey-btn { font-size: 0.8rem; padding: 5px 0 4px; min-height: 22px; }
+  .login-links { font-size: 0.78rem; gap: 3px; }
+  .login-label { font-size: 0.89rem; left: 7px; top: 12px; }
+  .login-input:focus + .login-label,
+  .login-input:not(:placeholder-shown) + .login-label,
+  .login-label.active {
+    top: -15px;
+    left: 5px;
+    font-size: 0.65rem;
+    padding: 0 3px;
   }
 }

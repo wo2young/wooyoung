@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.7",
+    "chart.js": "^4.5.0",
+    "date-fns": "^4.1.0",
     "react": "^19.1.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
     "react-kakao-maps-sdk": "^1.2.0",
-    "react-router-dom": "^7.7.0"
+    "react-router-dom": "^7.7.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

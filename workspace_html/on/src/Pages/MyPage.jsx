@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/MyPage.css';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
 import { useAuth } from '../contexts/AuthContext';
 import userDefaultImg from '../assets/user.png';
 
@@ -92,8 +92,7 @@ function MyPage() {
   const myMileage = myUser?.mileage ?? 0;
 
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="mypage-root">
         <div className="profile-multi-row">
           <div className="profile-card mini">
@@ -219,7 +218,7 @@ function MyPage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

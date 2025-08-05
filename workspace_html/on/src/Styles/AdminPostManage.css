@@ -1,0 +1,185 @@
+.admin-post-container {
+  width: 100%;
+  max-width: 1400px;
+  /* margin: 0 auto; */
+}
+
+/* 추가: 사이드바+본문을 가로로 나란히! */
+.admin-post-layout {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 600px;
+}
+
+/* 추가: 본문 영역 스타일 */
+.admin-post-main {
+  flex: 1 1 0;
+  padding-left: 40px;   /* 사이드바와의 간격 */
+  padding-right: 10px;
+  min-width: 0;
+  background-color: transparent;
+}
+
+/* ↓ 이하 기존 CSS 그대로 유지 (수정 없음) */
+.admin-post-title {
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+.admin-post-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    background: #fff;
+}
+
+.admin-post-table th,
+.admin-post-table td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.admin-post-table th {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+.admin-post-selected {
+    background-color: #eef;
+}
+
+.admin-post-btn-delete {
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #c00;
+    border: 1px solid #c00;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.admin-post-btn-delete:hover {
+    background: #fdd;
+}
+
+.admin-post-pagination {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.admin-post-pagination a {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 4px 8px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.admin-post-current,
+.admin-post-pagination a:hover {
+    background: #f0f0f0;
+}
+
+.admin-post-detail {
+    display: none;
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.admin-post-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.admin-post-row label {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.admin-post-value {
+    font-weight: 500;
+}
+
+.admin-post-row button {
+    margin-left: auto;
+    padding: 4px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.admin-post-row .admin-post-btn-delete {
+    background: #fde8e8;
+    color: #c00;
+    border: 1px solid #c00;
+}
+
+.admin-post-row .admin-post-btn-block {
+    background: #eee;
+    color: #333;
+    border: 1px solid #999;
+    margin-left: 8px;
+}
+
+#admin-post-sanction-container {
+    display: none;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#admin-post-sanction-container label {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+#admin-post-sanction-select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#admin-post-sanction-apply-btn {
+    padding: 4px 12px;
+    border: none;
+    background: #f6bc4d;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#admin-post-sanction-apply-btn:hover {
+    background: #e5ac3a;
+}
+
+.admin-post-content {
+    margin-top: 12px;
+}
+
+.admin-post-content label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+#admin-post-detail-content {
+    width: 100%;
+    height: 120px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    background: #fafafa;
+}

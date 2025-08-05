@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
+import Layout from '../components/Layout';
 import '../Styles/MileageUsagePage.css';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -7,12 +7,12 @@ const STORES = [
   { name: '재홍이의 인생 족발', img: '이미지URL1.png' },
   { name: '재민이의 여행 치킨', img: '이미지URL2.png' },
   { name: '재준이의 참 횟집', img: '이미지URL3.png' },
-  { name: '승국 짜장', img: '' },
-  { name: '승국 짬뽕', img: '' },
-  { name: '승국 쌀국수', img: '' },
-  { name: '승국 칼국수', img: '' },
-  { name: '승국 피자', img: '' },
-  { name: '승국 탕수육', img: '' },
+  { name: '동현 짜장', img: '' },
+  { name: '동현 짬뽕', img: '' },
+  { name: '동현 쌀국수', img: '' },
+  { name: '동현 칼국수', img: '' },
+  { name: '동현 피자', img: '' },
+  { name: '동현 탕수육', img: '' },
   // ...더 채우기...
 ];
 
@@ -36,8 +36,7 @@ function MileageUsagePage() {
   const myMileage = myUser?.mileage ?? 0;
 
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="container">
         <div className="main-content">
           <h2 className="page-title">마일리지 사용처</h2>
@@ -89,7 +88,7 @@ function MileageUsagePage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

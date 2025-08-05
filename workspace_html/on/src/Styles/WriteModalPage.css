@@ -1,0 +1,107 @@
+.community-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+.community-modal-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 600px;         /* 넓게 */
+  min-height: 400px;    /* 더 높게 */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.community-modal-input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+}
+.community-modal-input:focus {
+  border-color: #ffbb66;
+}
+
+.community-modal-textarea {
+  height: 200px;      /* 더 큰 글쓰기 공간 */
+  padding: 12px;
+  font-size: 15px;
+  resize: none;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+}
+.community-modal-textarea:focus {
+  border-color: #ffbb66;
+}
+
+.community-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.community-modal-buttons button {
+  padding: 8px 18px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fde9d9;
+  color: #c37111;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+.community-modal-buttons button:hover {
+  background: #ffe1b2;
+  color: #bc6907;
+}
+
+/* 이미지 업로드 영역 */
+.community-upload-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.community-upload-area input[type="file"] {
+  font-size: 13px;
+}
+
+.community-image-preview-inline {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.community-image-preview-container {
+  position: relative;
+  margin-top: 10px;
+}
+.community-image-preview {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+.community-delete-image-button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.community-delete-image-button:hover {
+  background: #e33b2e;
+}
