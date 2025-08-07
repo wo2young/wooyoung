@@ -12,6 +12,9 @@ public class OrderExam {
 		MemberDTO m1 = new MemberDTO();
 		MemberDTO m2 = new MemberDTO();
 		MemberDTO m3 = new MemberDTO();
+		System.out.println(m1);
+		System.out.println(m1.toString());
+		
 		
 		m1.name = "이름1";
 		m1.age = 25;
