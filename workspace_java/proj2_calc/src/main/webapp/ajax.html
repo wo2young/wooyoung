@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX 요청 예제</title>
+</head>
+<body>
+
+	<!-- 버튼 두 개: 각각 GET 요청과 POST 요청을 테스트 -->
+	<button id="get">get</button>
+	<button id="post">post</button>	
+	
+	<script>
+		// ===== GET 버튼 클릭 이벤트 =====
+		document.querySelector("#get").addEventListener("click", function() {
+			const xhr = new XMLHttpRequest(); // AJAX 객체 생성
+
+			// GET 요청 준비 (쿼리스트링 방식으로 데이터 전달: num1=100)
+			xhr.open('get', 'req?num1=100'); 
+
+			// 서버에 요청 전송 (GET이므로 send에 본문 데이터 없음)
+			xhr.send();
+
+			// 요청 완료 후 실행될 콜백
+			xhr.onload = function() {
+				console.log(xhr.responseText); 
+				// 예: {"k":123} 이런 JSON 문자열이 출력됨
+
+				const data = JSON.parse(xhr.responseText); 
+				// JSON 문자열을 JS 객체로 변환
+
+				console.log(data.k);     // key "k" 값 접근 (123)
+				console.log(data["k"]);  // key "k" 값 접근 (배열 접근 문법)
+			}
+		});
+
+		// ===== POST 버튼 클릭 이벤트 =====
+		document.querySelector("#post").addEventListener("click", function() {
+			const xhr = new XMLHttpRequest(); // AJAX 객체 생성
+
+			// POST 요청 준비 (URL에는 쿼리스트링 없음)
+			xhr.open('post', 'req'); 
+
+			// POST 요청 시 전송할 데이터 형식 지정
+			// x-www-form-urlencoded → HTML form 전송 방식과 동일
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			// 요청 전송 (본문에 데이터 포함: num2=12345)
+			xhr.send("num2=12345");
+			
+			// 요청 완료 후 실행될 콜백
+			xhr.onload = function() {
+				console.log(xhr.responseText); 
+				// 예: {"k":456} 출력
+
+				const data = JSON.parse(xhr.responseText); 
+				// JSON 문자열 → JS 객체 변환
+
+				console.log(data.k);     // key "k" 값
+				console.log(data["k"]);  // 같은 값 (다른 접근 방식)
+			}
+		});
+	</script>
+</body>
+</html>
+
+<!--
+================ 전체 정리 ================
+1) GET 버튼 클릭 → GET 요청 전송
+   - xhr.open('get', 'req?num1=100')
+   - URL에 쿼리스트링 방식으로 데이터 포함
+   - 서버에서는 request.getParameter("num1")로 읽음
+
+2) POST 버튼 클릭 → POST 요청 전송
+   - xhr.open('post', 'req')
+   - xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+     → 폼 데이터 전송 방식 지정
+   - xhr.send("num2=12345") → 본문에 데이터 포함
+   - 서버에서는 request.getParameter("num2")로 읽음
+
+3) 서버 응답 처리
+   - xhr.responseText : 서버에서 보낸 응답(문자열)
+   - JSON.parse() : 문자열 → 객체 변환
+   - data.k / data["k"] : JSON 객체의 속성 접근
+===========================================
+-->

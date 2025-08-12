@@ -5,6 +5,8 @@ public class StringExam {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		System.gc();
+		
 		String s1 = "영일이삼사오육칠팔구삼사";
 		
 //		char c = s1.charAt(100); //범위 예외
@@ -124,11 +126,40 @@ public class StringExam {
         // 키 query의 값이 검색어
         // 검색어만 출력
 		
+		String s5 = " 글씨 중간공백 ";
+		System.out.println("[" + s5 + "]" );
+		System.out.println("[" + s5.trim() + "]" );
 		
+		String menu = "깁밥,라면,돈까스,제육덮밥";
+		String[] menus = menu.split(",");
+		System.out.println(menus.length);
+		for(String m : menus) {
+			System.out.println(m);
+		}
 		
+		String url = "blog.naver.com";
+		// split 정규 표현시을 사용(문자 이님에 주의)
+//		String[] urls = url.split("."); 이건 안됨
+//		String[] urls = url.split("\\."); // 방법1
+		String[] urls = url.split("[.]"); // 방법2
+		System.out.println(urls.length);
 		
+		String a = "a";
+		a += "b";
+		a = a + "c";
 		
+		// StringBuffer
+		// 메오리를 효율적으로 사용한다
+		// StringBuilder보다 쪼금 느림
+		// 대신 스레드에 안전하다)Thread-safe)
+		StringBuffer sb = new StringBuffer("a");
+		sb.append("b");
+		sb.append("c");
+		String d = sb.toString();
 		
+		StringBuilder sbb = new StringBuilder("a");
+		sbb.append("b");
+		String d2 = sbb.toString();
 	}	
 
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>parameter 연습</h1>
+
+<!-- 
+    method="get" → URL 뒤에 쿼리스트링 형태로 파라미터가 붙어서 전송됨 (?key=value&key=value...)
+    method="post" → HTTP body에 파라미터가 담겨 전송됨 (주소창에는 안 보임)
+
+    action="..." → 폼 전송 시 요청할 URL (상대경로/절대경로/전체 URL 가능)
+    name="..." → 서버에서 request.getParameter("name값") 으로 꺼낼 수 있는 key
+-->
+
+<!-- 예시: 절대 URL로 요청 (LAN IP 사용 시) -->
+<!-- <form method="get" action="http://192.168.0.24:8080/proj2_calc/req"> -->
+
+<!-- 예시: 컨텍스트 경로부터 절대경로 -->
+<!-- <form method="get" action="/proj2_calc/req"> -->
+
+<!-- 현재 문서 경로 기준 상대경로 → /현재폴더/req 로 요청됨 -->
+<form method="get" action="req">
+
+    <!-- text: 일반 문자열 입력, value 속성은 초기값 -->
+	num1 : <input type="text" name="num1" value="abcd"><br>
+
+    <!-- password: 입력 내용은 브라우저에서 마스킹됨 -->
+	pw : <input type="password" name="pw"><br>
+	
+    <!-- checkbox: 같은 name을 여러 개 두면 배열처럼 전달됨 → request.getParameterValues("check") -->
+	<input type="checkbox" name="check" value="check1">체크1
+	<input type="checkbox" name="check" value="check2">체크2
+	<input type="checkbox" name="check" value="check3">체크3
+	
+    <!-- hidden: 화면에 표시되지 않지만 값은 전송됨 -->
+	<input type="hidden" name="hidden1" value="hival"><br>
+	
+	버튼은 전송 안됨
+    <!-- type="button" → 기본 동작이 없고, submit 되지 않음 (JS 이벤트로만 동작) -->
+	<input type="button" name="btn1" value="btn11">
+	<button type="button" name="btn2" value="btn22">버튼2</button><br>
+	
+    <!-- radio: 같은 name을 여러 개 두면 한 개만 선택 가능, 선택된 value가 전송됨 -->
+	<input type="radio" name="radio1" value="r1" checked>라디오1
+	<input type="radio" name="radio1" value="r2">라디오2
+	<input type="radio" name="radio1" value="r3">라디오3
+	<input type="radio" name="radio1" value="r4">라디오4<br>
+	
+    <!-- date: 날짜 선택 UI 제공, value 형식은 yyyy-MM-dd -->
+	<input type="date" name="date1" value="2025-08-12"><br>
+
+    <!-- number: 숫자만 입력 가능, 브라우저에서 기본 숫자 입력 UI 제공 -->
+	<input type="number" name="number1"><br>
+	
+    <!-- div는 form 전송과 무관 (value 속성 무시됨) -->
+	<div name="div1" value="div11">div</div>
+	
+    <!-- select: 선택 옵션 중 value 속성이 전송됨 -->
+	<select name="select1" value="select11">
+		<option value="op1">옵션1</option>
+		<option value="op2">옵션2</option>
+		<option value="op3">옵션3</option>
+		<option value="op4">옵션4</option>
+	</select><br>
+	
+    <!-- textarea: value 속성 무시, 내용(text node)이 초기값 -->
+	<textarea name="textarea1" value="t1">초기값
+	엔터
+	</textarea>
+
+    <!-- type="submit": 클릭 시 form 전송 -->
+	<input type="submit" value="get 전송">
+</form>	
+
+<!-- POST 방식 전송 예제 -->
+<form method="post" action="req">
+	<!-- text 입력 값: 서버에서는 request.getParameter("num2") -->
+	<input type="text" name="num2">
+	<input type="submit" value="post 전송">
+</form>
+	
+<!-- 
+전체 정리:
+1) name 속성이 서버 파라미터 키가 된다. value는 초기값.
+2) GET 방식: 주소창에 값이 노출되고 길이 제한 존재, 캐싱 가능. 보안 민감정보에 부적합.
+3) POST 방식: body에 담겨 전송, 주소창에 값이 안 보임. 주로 데이터 등록/수정에 사용.
+4) 체크박스/라디오/셀렉트는 name이 같을 경우 다중값 전달 가능 → getParameterValues() 사용.
+5) hidden input은 사용자 입력 없이 고정값을 서버에 전송할 때 사용.
+6) type="button"은 폼 전송 안 함, JS 이벤트 처리 용도.
+7) textarea는 value 속성 대신 태그 안의 내용이 값이 된다.
+-->
+</body>
+</html>
