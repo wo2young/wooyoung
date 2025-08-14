@@ -1075,3 +1075,5 @@ order by empno;
 select e.empno, e.ename, d.dname, d.loc
 from emp e left outer join dept d on e.deptno = d.deptno
 order by d.dname;
+
+select * from emp;

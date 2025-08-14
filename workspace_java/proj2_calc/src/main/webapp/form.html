@@ -81,6 +81,23 @@
 	<input type="text" name="num2">
 	<input type="submit" value="post 전송">
 </form>
+
+<hr>
+
+<form method="post" action="forward">
+	<!-- text 입력 값: 서버에서는 request.getParameter("num2") -->
+	<input type="text" name="text">
+	<input type="submit" value="forward로 post 전송">
+</form>
+
+<hr>
+
+<form method="post" action="redirect">
+	<!-- text 입력 값: 서버에서는 request.getParameter("num2") -->
+	<input type="text" name="text">
+	<input type="submit" value="redirect로 post 전송">
+</form>
+
 	
 <!-- 
 전체 정리:

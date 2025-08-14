@@ -1,6 +1,7 @@
 package sec01.exam01;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 // Tomcat 9.x 이므로 javax.servlet.* 사용이 맞다. (Tomcat 10+ 는 jakarta.*)
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +38,12 @@ public class calcSum extends HttpServlet {
 
         // 주의: 빈 문자열("")이나 null 이면 Integer.parseInt에서 NumberFormatException 발생
         // 실무에서는 try-catch로 검증/기본값 처리 필요. 여기서는 원본 로직 유지.
-		int num1 = Integer.parseInt(str1);
-		int num2 = Integer.parseInt(str2);
-
-		int sum = num1 + num2;
-
+		try {
+			int num1 = Integer.parseInt(str1);
+			int num2 = Integer.parseInt(str2);
+	
+			int sum = num1 + num2;
+		
         // 화면에 직접 보이지 않는 서버 콘솔 로그. 브라우저는 이 출력을 볼 수 없다.
 		// System.out.println(num1);
 		// System.out.println(num2);
@@ -53,9 +55,12 @@ public class calcSum extends HttpServlet {
         // response.setContentType("text/html; charset=UTF-8"); // 권장 표기
 
         // 간단한 HTML로 결과 출력
-		response.getWriter().println("<h1>NUM1 " + num1 + "</h1>");
-		response.getWriter().println("<h1>NUM2 " + num2 + "</h1>");
-		response.getWriter().println("<h1>SUM " + sum + "</h1>");
+			response.getWriter().println("<h1>NUM1 " + num1 + "</h1>");
+			response.getWriter().println("<h1>NUM2 " + num2 + "</h1>");
+			response.getWriter().println("<h1>SUM " + sum + "</h1>");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
