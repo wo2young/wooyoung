@@ -1077,3 +1077,32 @@ from emp e left outer join dept d on e.deptno = d.deptno
 order by d.dname;
 
 select * from emp;
+
+create table tbl_todo (
+    tno number primary key,
+    title varchar2(4000) not null,
+    dueDate date,
+    finished number(1)
+);
+select * from tbl_todo;
+
+create sequence seq_tbl_todo;
+
+insert into tbl_todo (tno, title, duedate, finished)
+values (seq_tbl_todo.nextval, '연습1', null, 0);
+
+insert into tbl_todo (tno, title, duedate, finished)
+values (seq_tbl_todo.nextval, '연습1', null, 0);
+
+insert into tbl_todo (tno, title, duedate, finished)
+values (seq_tbl_todo.nextval, '연습1', DATE '2025-08-18', 0);
+
+insert into tbl_todo (tno, title, duedate, finished)
+values (seq_tbl_todo.nextval, '연습1', DATE '2025-08-19', 0);
+
+commit;
+
+select * from tbl_todo;
+
+--drop table tbl_todo;
+--drop table seq_tbl_todo;

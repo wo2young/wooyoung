@@ -26,4 +26,23 @@
     <!--
     <Manager pathname="" />
     -->
+    <Resource
+	    name="jdbc/oracle"
+	    auth="container"
+	    type="javax.sql.DataSource"
+	    driverClassName="oracle.jdbc.driver.OracleDriver"
+	    url="jdbc:oracle:thin:@125.181.132.133:51521:xe"
+	    username="scott4_11"
+	    password="tiger"
+	    maxTotal="50"
+	     maxWaitMillis="-1"
+    />
+    <!--
+    	name : JDBC 이름, 변경 가능
+    	auth : 컨테이너를 자원 관리자로 지정, 권한 
+    	type : 리턴타입
+    	maxTotal : 최대 몇개까지의 커넥션을 관리할 지
+    	maxWaitMillis : 커넥션 회수를 기다리는 시간
+    	(새로 연결될 때까지 최대 대기 시간)
+    -->
 </Context>
