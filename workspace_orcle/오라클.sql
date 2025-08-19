@@ -1104,5 +1104,19 @@ commit;
 
 select * from tbl_todo;
 
+delete tbl_todo
+where tno = 2;
+
+select *
+from tbl_todo
+where tno = 5;
+
+Update tbl_todo
+set title = '바꾸기',
+    duedate = '2025-01-01',
+    finished = 1
+where tno = 5;
+
+commit;
 --drop table tbl_todo;
 --drop table seq_tbl_todo;
