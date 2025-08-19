@@ -1118,5 +1118,32 @@ set title = '바꾸기',
 where tno = 5;
 
 commit;
+
+create table tb_todo (
+    tno number primary key,
+    title varchar2(4000) not null,
+    dueDate date,
+    finished number(1)
+);
+create sequence seq_tb_todo;
+
+select * from tb_todo;
+
+insert into tb_todo (tno, title, duedate, finished)
+values (seq_tb_todo.nextval, '연습1', null, 0);
+
+insert into tb_todo (tno, title, duedate, finished)
+values (seq_tb_todo.nextval, '연습2', DATE '2024-12-31', 0);
+
+insert into tb_todo (tno, title, duedate, finished)
+values (seq_tb_todo.nextval, '연습3', DATE '2025-08-11', 0);
+
+insert into tb_todo (tno, title, duedate, finished)
+values (seq_tb_todo.nextval, '연습4', DATE '2025-08-18', 0);
+
+insert into tb_todo (tno, title, duedate, finished)
+values (seq_tb_todo.nextval, '연습5', DATE '2025-08-19', 0);
+
+
 --drop table tbl_todo;
 --drop table seq_tbl_todo;
