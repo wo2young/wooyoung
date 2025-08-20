@@ -1145,5 +1145,15 @@ insert into tb_todo (tno, title, duedate, finished)
 values (seq_tb_todo.nextval, '연습5', DATE '2025-08-19', 0);
 
 
+select * from emp2;
+
+create table emp2
+as select * from emp;
+    
+select * from emp2
+where empno = 7369;
+
+commit;
+
 --drop table tbl_todo;
 --drop table seq_tbl_todo;
