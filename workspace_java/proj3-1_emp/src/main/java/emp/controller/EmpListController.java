@@ -27,8 +27,9 @@ public class EmpListController extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
-		out.println("<h1>회원목록<h1>");
-		out.println("<table border=1cellspacing=0 cellpadding=5>");
+		out.println("<h1>회원목록</h1>");
+		out.println("<a href='signup.html'>회원가입</a>");
+		out.println("<table border=1 cellspacing=0 cellpadding=5>");
 		out.println("   <tr>");		
 		out.println("      <th>empno</th>");		
 		out.println("      <th>ename</th>");		

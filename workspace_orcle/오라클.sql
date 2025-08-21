@@ -1155,5 +1155,29 @@ where empno = 7369;
 
 commit;
 
+create table movie (
+    movie_id number primary key,
+    title varchar2(4000),
+    img_url varchar2(4000),
+    open_date date
+);
+
+create sequence seq_movie;
+
+insert into movie (movie_id, title, img_url, open_date)
+values (seq_tb_todo.nextval, '영화1', 'https://111111', DATE '2025-08-11');
+
+insert into movie (movie_id, title, img_url, open_date)
+values (seq_tb_todo.nextval, '영화2', 'https://222222', DATE '2025-08-13');
+
+insert into movie (movie_id, title, img_url, open_date)
+values (seq_tb_todo.nextval, '영화3', 'https://333333', DATE '2025-08-19');
+
+commit;
+
+drop table movie;
+drop sequence seq_movie;
+select * from movie;
+
 --drop table tbl_todo;
 --drop table seq_tbl_todo;

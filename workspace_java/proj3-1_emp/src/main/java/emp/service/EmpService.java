@@ -21,4 +21,10 @@ public class EmpService {
 	public int removeEmp(EmpDTO dto) {
 		return dao.deleteEmp(dto);
 	}
+	public int addEmp(EmpDTO dto) {
+		return dao.insertEmp(dto);
+	}
+	public int updateEmp(EmpDTO dto) {
+		return dao.updateEmp(dto);
+	}
 }

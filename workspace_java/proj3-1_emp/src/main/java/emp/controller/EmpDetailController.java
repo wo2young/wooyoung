@@ -41,7 +41,7 @@ public class EmpDetailController extends HttpServlet {
         	EmpDTO empDTO2 = empService.getOneemp(empDTO);
         	
         	PrintWriter out = response.getWriter();
-        	out.println("<table border=1>");
+        	out.println("<table border=1 cellspacing=0 cellpadding=5>");
         	out.println("	<tr><td>empno</td><td>"+empDTO2.getEmpno()+"</td></tr>");
         	out.println("	<tr><td>ename</td><td>"+empDTO2.getEname()+"</td></tr>");
         	out.println("	<tr><td>job</td><td>"+empDTO2.getJob()+"</td></tr>");
@@ -54,6 +54,11 @@ public class EmpDetailController extends HttpServlet {
 
         	out.println("<form method='post' action='remove'>");
         	out.println("	<input type='submit' value='삭제'>");
+        	out.println("	<input type='hidden' name='empno' value='"+ empDTO2.getEmpno() + "'>");
+        	out.println("</form>");
+        	
+        	out.println("<form method='get' action='edit'>");
+        	out.println("	<input type='submit' value='수정'>");
         	out.println("	<input type='hidden' name='empno' value='"+ empDTO2.getEmpno() + "'>");
         	out.println("</form>");
         	
