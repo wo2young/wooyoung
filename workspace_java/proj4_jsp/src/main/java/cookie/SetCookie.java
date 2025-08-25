@@ -29,7 +29,7 @@ public class SetCookie extends HttpServlet {
         
         // 12초짜리 쿠키
         Cookie c3 = new Cookie("showPopup", "N");
-        c3.setMaxAge(1);   // ← c3으로 수정!
+        c3.setMaxAge(1);   // 1초로 수정함!
         response.addCookie(c3);
     }
 }

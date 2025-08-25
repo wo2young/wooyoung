@@ -1179,5 +1179,26 @@ drop table movie;
 drop sequence seq_movie;
 select * from movie;
 
+drop table list;
+
+create table list (
+    num number,
+    ename varchar2(4000),
+    empno varchar2(4000),
+    level_type number(3)
+);
+
+create sequence seq_list;
+
+insert into list (num, ename, empno, level_type)
+values (seq_list.nextval, 'rladndud', 'qwe123', '3');
+
+insert into list (num, ename, empno, level_type)
+values (seq_list.nextval, 'gkdydrns', 'qwe1234', '2');
+
+insert into list (num, ename, empno, level_type)
+values (seq_list.nextval, 'rlaehdgus', 'qwe12345', '1');
+
+commit;
 --drop table tbl_todo;
 --drop table seq_tbl_todo;
