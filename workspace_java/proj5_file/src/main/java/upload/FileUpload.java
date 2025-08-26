@@ -20,11 +20,12 @@ public class FileUpload extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String encoding = "utf-8";
+		
 		request.setCharacterEncoding(encoding);
 		System.out.println("getParameter : "+request.getParameter("title"));
 		try {
 			// File : 파일 또는 디렉토리(폴더)를 관리하는 class
-			File currentDirPath = new File("C:\\temp\\upload");
+			File currentDirPath = new File("C:\\tmp\\upload");
 			
 			// 세팅
 			DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -68,9 +69,12 @@ public class FileUpload extends HttpServlet {
 				} // end if
 			} // end for
 			
+			// db
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }
