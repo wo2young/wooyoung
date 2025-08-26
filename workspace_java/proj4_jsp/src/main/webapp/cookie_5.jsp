@@ -64,14 +64,9 @@
 </script>
 </head>
 <body>
-
 	<div class="popup">
-
 		공지입니다. <br>꼭 보세요<br>
 		<br> <input type="checkbox" id="noShow">10초 동안 보지 않기
-
 	</div>
-
-
 </body>
 </html>
