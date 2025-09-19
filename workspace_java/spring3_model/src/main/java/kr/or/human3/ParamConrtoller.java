@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -144,9 +147,8 @@ public class ParamConrtoller {
 			String id,
 			
 			// @RequestParam("pw") String pw  가 의도한 바에 가까움
-			// 현재는 value="name"으로 되어 있어 "pw"가 아닌 "name" 파라미터를 pw 변수에 바인딩함
 			// 학습 목적상 현 상태 유지. 실무에선 @RequestParam("pw")로 맞춰야 혼동 없음.
-			@RequestParam(value="name", required=true) String pw,
+			@RequestParam(value="pw", required=true) String pw,
 			
 			// 필수가 아님, 값이 없으면 null
 			@RequestParam(value="name", required=false) 
@@ -184,7 +186,7 @@ public class ParamConrtoller {
 		MemberDTO memberDTO = new MemberDTO();
 		
 		System.out.println("id: "+ id);
-		System.out.println("pw: "+ pw);   // 현재는 name 파라미터 값이 들어옴(의도 주의)
+		System.out.println("pw: "+ pw);   
 		System.out.println("name: "+ name);
 		System.out.println("age: "+ age);
 		System.out.println("tel: "+ tel);
@@ -278,6 +280,83 @@ public class ParamConrtoller {
 	@RequestMapping("/join8")
 	public void join8(String id, MemberDTO dto) {
 		
+	}
+	
+	@RequestMapping("/cal/1")
+	public void cal() {
+		System.out.println("1월? 달력");
+	}
+	
+	@RequestMapping("/cal/{month}")
+	public void cal2(
+			
+			@PathVariable("month")
+			int mon
+			
+			) {
+		System.out.println(mon + "월 달력");
+	}
+	
+	@RequestMapping("/lunch/{store}/order/{menu}")
+	public void lunch(
+			
+			@PathVariable("store")
+			String store,
+			
+			@PathVariable("menu")
+			String menu
+			
+			) {
+		System.out.println(store + "에서 " + menu + "를 준비 합니다");
+	}
+	
+	@RequestMapping("/join9")
+	public String join9() {
+		return "join";
+	}
+	
+	@RequestMapping("/join10")
+	public String join10() {
+		return "redirect:join3.do";
+	}
+
+	@RequestMapping("/join11")
+	public String join11() {
+		return "forward:join3.do";
+	}
+	
+	@RequestMapping("/join12")
+	public String join12(String id, Model model ) {
+		
+		System.out.println("/join12 실행, id: "+ id);
+		
+		model.addAttribute("id", id);
+		
+		return "result";
+	}
+	
+	@RequestMapping(value="/join13")
+	public String join13() {
+		return "join";
+	}
+	
+	@RequestMapping(value={"/join14", "join15"})
+	public String join14() {
+		return "join";
+	}
+	
+	@RequestMapping(value="/join16", method=RequestMethod.POST)
+	public String doPost() {
+		return "join";
+	}
+		@RequestMapping(value="/join16", method=RequestMethod.GET)
+		public String doGet() {
+			return "join";
+	}
+
+	@RequestMapping(value="/join16", method= {RequestMethod.GET, RequestMethod.POST})
+	public String join16() {
+		return "join";
 	}
 }
 
