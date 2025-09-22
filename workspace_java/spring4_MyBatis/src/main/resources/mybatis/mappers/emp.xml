@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp">
+	
+	<select id="selectEmp" resultType="kr.or.human4.dto.EmpDTO">
+		select * from emp2
+	</select>
+
+<!-- 	<select id="selectOneEmp" resultType="kr.or.human4.dto.EmpDTO"> -->
+	<select id="selectOneEmp" resultType="empDTO">
+		select * from emp2
+		where empno = 1111
+	</select>
+
+<!-- 	<select id="selectOneEmpMap" resultType="java.util.HashMap"> -->
+	<select id="selectOneEmpMap" resultType="hashMap">
+		select * from emp2
+		where empno = 1111
+	</select>
+
+<!-- 	<select id="selectEmpno" resultType="empDTO" parameterType="java.lang.Inreger"> -->
+	<select id="selectEmpno" resultType="empDTO" parameterType="int">
+		select * from emp2
+		where empno = #{_parameter}
+	</select>
+
+	<select id="selectEname" resultType="empDTO" parameterType="String">
+		select * from emp2
+		where ename like '%' || #{_paraeter} || '%'
+	</select>
+	
+</mapper>
+
+
+
+

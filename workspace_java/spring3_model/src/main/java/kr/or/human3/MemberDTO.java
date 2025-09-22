@@ -2,6 +2,11 @@ package kr.or.human3;
 
 import lombok.Data;
 
+//@Getter
+//@Setter
+//@ToString
+//@RequiredArgsContructor
+//@EqualsAndHashCode
 @Data
 public class MemberDTO {
 	

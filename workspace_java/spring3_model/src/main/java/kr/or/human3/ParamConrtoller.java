@@ -358,6 +358,11 @@ public class ParamConrtoller {
 	public String join16() {
 		return "join";
 	}
+
+	@RequestMapping("/join")
+	public void join17() {
+		System.out.println("/join 실행");
+	}
 }
 
 /*
