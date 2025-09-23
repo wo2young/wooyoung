@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp.dynamic">
+	<select id="selectEmpAll" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+	</select>
+	
+	<select id="selectEmpEname" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+		where ename = #{ename}
+	</select>
+	
+	<select id="selectEmpJob" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+		where job = #{job}
+	</select>
+	
+	<select id="selectEmp" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+		where 1=1
+		<if test="ename != null and ename !='' ">
+			and lower(ename) like lower('%' || #{ename} || '%')
+		</if>
+		<if test="job != null and job !='' ">
+			and lower(job) like lower('%' || #{job} || '%')
+		</if>
+	</select>
+</mapper>
+
+
+
+

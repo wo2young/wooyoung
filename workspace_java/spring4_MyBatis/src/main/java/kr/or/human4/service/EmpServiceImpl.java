@@ -47,4 +47,9 @@ public class EmpServiceImpl implements EmpService{
 	public List getEname(String ename){
 		return empDAO.selectEname(ename);
 	}
+
+	@Override
+	public int addEmp(EmpDTO dto){
+		return empDAO.insertEmp2(dto);
+	}
 }

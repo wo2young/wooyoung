@@ -54,7 +54,7 @@ public class EmpController {
 	}
 	
 	@RequestMapping("/empno")
-	public String empno(Model model, int empno) {
+	public String empnoEmp(Model model, int empno) {
 		
 		List list = empService.getEmpno(empno);
 		
@@ -77,4 +77,24 @@ public class EmpController {
 		return "emp";
 	}
 	
+	@RequestMapping("/insert")
+	public String addEmp2(Model model, EmpDTO dto) {
+		
+		int add = empService.addEmp(dto);
+		
+		//////////////////////////////////////////////
+		
+		return "redirect:/listEmp";
+	}
+	
+	@RequestMapping("/empDetail")
+	public String empDetail(Model model, int empno) {
+		
+		List list = empService.getEmpno(empno);
+		
+		model.addAttribute("list", list);
+		
+		return "detail";
+	}
+
 }

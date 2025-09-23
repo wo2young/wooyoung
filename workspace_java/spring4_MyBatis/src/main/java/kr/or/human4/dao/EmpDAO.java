@@ -11,4 +11,5 @@ public interface EmpDAO {
 	Map selectOneEmpMap();
 	List selectEmpno(int empno);
 	List selectEname(String ename);
+	int insertEmp2(EmpDTO dto);
 }

@@ -54,4 +54,9 @@ public class EmpDAOImpl implements EmpDAO{
 	public List selectEname(String ename){
 		return sqlSession.selectList("mapper.emp.selectEname", ename);
 	}
+	
+	@Override
+	public int insertEmp2(EmpDTO dto){
+		return sqlSession.insert("mapper.emp.insertEmp2", dto);
+	}
 }

@@ -15,5 +15,6 @@ public interface EmpService {
 	public Map getMap();
 	public List getEmpno(int empno);
 	public List getEname(String ename);
+	public int addEmp(EmpDTO dto);
 	
 }

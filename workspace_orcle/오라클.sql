@@ -1188,7 +1188,12 @@ create table list (
     level_type number(3)
 );
 
-create sequence seq_list;
+select * from emp2;
+
+
+create sequence seq_emp2;
+
+select seq_emp2.nextval from dual;
 
 insert into list (num, ename, empno, level_type)
 values (seq_list.nextval, 'rladndud', 'qwe123', '3');
