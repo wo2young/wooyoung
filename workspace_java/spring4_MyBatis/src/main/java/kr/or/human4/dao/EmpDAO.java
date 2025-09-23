@@ -6,10 +6,18 @@ import java.util.Map;
 import kr.or.human4.dto.EmpDTO;
 
 public interface EmpDAO {
-	List<EmpDTO> selectEmpList();
-	EmpDTO selectOneEmp();
-	Map selectOneEmpMap();
-	List selectEmpno(int empno);
-	List selectEname(String ename);
-	int insertEmp2(EmpDTO dto);
+
+	public List<EmpDTO> selectEmpList();
+	public EmpDTO selectOneEmp();
+	public Map selectOneEmpMap();
+	public List selectEmpno(int empno);
+	public List selectEname(String ename);
+	public List selectEmpnoEname(EmpDTO dto);
+	public int insertEmp2(EmpDTO dto);
+
+	public EmpDTO selectOneEmpno(int empno);
+	public int updateEmp2(EmpDTO dto);
+	public int deleteEmp2(EmpDTO dto);
+	
+	public List<EmpDTO> selectEmp(EmpDTO empDTO);
 }

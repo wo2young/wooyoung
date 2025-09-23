@@ -12,7 +12,7 @@
     </settings>
     
     <typeAliases>
-    	<typeAlias type="kr.or.human4.dto.EmpDTO" alias="empDTO"/>
+    	<typeAlias type="kr.or.human4.dto.EmpDTO" alias="empDTO" />
     </typeAliases>
 
 </configuration>
