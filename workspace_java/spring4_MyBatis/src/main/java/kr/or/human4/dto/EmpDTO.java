@@ -1,6 +1,7 @@
 package kr.or.human4.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -23,5 +24,7 @@ public class EmpDTO {
 	
 	private String keyword;
 	private String type;
+	
+	private List empnos;
 	
 }

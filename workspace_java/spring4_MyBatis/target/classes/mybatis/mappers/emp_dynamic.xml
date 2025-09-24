@@ -3,8 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.emp.dynamic">
-
-	<select id="selectEmpAll" resultType="empDTO" parameterType="empDTO">
+		<select id="selectEmpAll" resultType="empDTO" parameterType="empDTO">
 		select * from emp2
 	</select>
 	<select id="selectEmpEname" resultType="empDTO" parameterType="empDTO">
@@ -53,6 +52,20 @@
 			
 			</choose>
 		</where>
+	</select>
+	
+	<select id="foreach" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+	<!--	where empno in (1,2,3,4) -->
+	<where>
+		empno in
+		<foreach item="item" collection="empnos" 
+					open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	
+	
+	</where>
 	</select>
 	
 </mapper>

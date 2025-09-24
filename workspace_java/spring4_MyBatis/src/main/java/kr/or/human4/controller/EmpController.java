@@ -3,16 +3,22 @@ package kr.or.human4.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.human4.dto.EmpDTO;
 import kr.or.human4.service.EmpService;
 
 @Controller
 public class EmpController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmpController.class);
 	
 	@Autowired
 	EmpService empService;
@@ -132,6 +138,45 @@ public class EmpController {
 		List<EmpDTO> list = empService.selectEmp(dto);
 
 		model.addAttribute("list", list);
+		
+		return "emp";
+	}
+	
+	@RequestMapping("/choice")
+	public String choice(
+			
+			Model model,
+			
+			@RequestParam("empnos")
+			String[] empnos1,
+			
+			@RequestParam("empnos")
+			List empnos2,
+			
+			@ModelAttribute
+			EmpDTO empDTO
+			) {
+		System.out.println("String[] : ");
+		for(String empno : empnos1){
+			System.out.println(empno);
+		}
+
+		System.out.println("List : "+ empnos2);
+
+		System.out.println("EmpDTO : "+ empDTO.getEmpnos());
+		
+		List<EmpDTO> list = empService.foreach(empDTO);
+		model.addAttribute("list", list);
+		
+		return "emp";
+	}
+	
+	@RequestMapping("/log4j")
+	public String log4j() {
+		
+		logger.info("안녕");
+		logger. warn("위험");
+		logger. error("에러임");
 		
 		return "emp";
 	}
