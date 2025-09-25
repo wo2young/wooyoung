@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<definition name="baseLayout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		<put-attribute name="title" value="롤체지지"/>
+	</definition>
+
+	<definition name="baseLayout2" template="/WEB-INF/views/layout/layout2.jsp">
+	</definition>
+	
+	<definition name="seven" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/content/sevenknight.jsp"/>
+	</definition>
+
+	<definition name="mabi" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/content/mabinogi.jsp"/>
+	</definition>
+
+	<definition name="tft" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/content/TFT.jsp"/>
+	</definition>
+
+	<definition name="*.tiles" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/content/{1}.jsp"/>
+	</definition>
+
+	<definition name="*/*.tiles" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
+	<definition name="login" extends="baseLayout2">
+		<put-attribute name="content" value="/WEB-INF/views/content/sevenknight.jsp"/>
+	</definition>
+</tiles-definitions>
