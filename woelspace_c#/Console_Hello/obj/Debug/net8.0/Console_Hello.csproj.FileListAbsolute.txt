@@ -1,0 +1,15 @@
+D:\workspace\woelspace_c#\Console_Hello\bin\Debug\net8.0\Console_Hello.exe
+D:\workspace\woelspace_c#\Console_Hello\bin\Debug\net8.0\Console_Hello.deps.json
+D:\workspace\woelspace_c#\Console_Hello\bin\Debug\net8.0\Console_Hello.runtimeconfig.json
+D:\workspace\woelspace_c#\Console_Hello\bin\Debug\net8.0\Console_Hello.dll
+D:\workspace\woelspace_c#\Console_Hello\bin\Debug\net8.0\Console_Hello.pdb
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.GeneratedMSBuildEditorConfig.editorconfig
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.AssemblyInfoInputs.cache
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.AssemblyInfo.cs
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.csproj.CoreCompileInputs.cache
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.sourcelink.json
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.dll
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\refint\Console_Hello.dll
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.pdb
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\Console_Hello.genruntimeconfig.cache
+D:\workspace\woelspace_c#\Console_Hello\obj\Debug\net8.0\ref\Console_Hello.dll

@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>골프장 조명 관리</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,7 +48,7 @@
           <button class="on wide">전체 ON</button>
           <button class="off wide">전체 OFF</button>
           <div class="hall-range">
-            밝기: <input type="range" min="0" max="100" step="10" value="0"><input type="number" min="0" max="100" step="10" value="0" style="width:50px;">
+            밝기: <input type="range" min="0" max="100" step="10" value="0" title="Text input"><input type="number" min="0" max="100" step="10" value="0" style="width:50px;" title="Text input">
           </div>
         </div>
       </div>
@@ -60,8 +61,8 @@
             <button class="on">ON</button>
             <button class="off">OFF</button>
             <div class="hall-range">
-              <input type="range" min="0" max="100" step="10" value="0">
-              <input type="number" min="0" max="100" step="10" value="0" style="width:50px;">
+              <input type="range" min="0" max="100" step="10" value="0" title="Text input">
+              <input type="number" min="0" max="100" step="10" value="0" style="width:50px;" title="Text input">
             </div>
           </div>
         </div>
