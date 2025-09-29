@@ -12,3 +12,62 @@ build/
 
 # tools 폴더 무시
 tools/
+
+# =========================
+# C# / .NET / Visual Studio
+# =========================
+
+# 빌드 산출물(모든 하위 폴더)
+**/[Bb]in/
+**/[Oo]bj/
+**/[Rr]elease*/
+**/[Dd]ebug*/
+**/[Tt]est[Rr]esults/
+**/[Pp]ublish/
+**/[Pp]ublished/
+
+# Visual Studio 캐시/사용자 설정
+.vs/
+*.user
+*.suo
+*.rsuser
+*.sln.docstates
+
+# Rider / 기타 IDE
+.idea/
+
+# 로그/캐시/임시
+*.log
+*.cache
+
+# NuGet 패키지(레거시 packages.config 사용 시)
+packages/
+*.nupkg
+*.snupkg
+!packages/repositories.config
+!packages/build/**
+
+# 배포 패키지/스토어 번들
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# 외부 라이브러리 폴더(직접 넣은 경우)
+lib/
+libs/
+third_party/
+external/
+
+# WebView/CEF 계열 런타임(용량 큼)
+CefSharp/
+cef_binary_*/
+ChromiumEmbedded/
+runtimes/
+WebView2/
+EBWebView/
+wv2cache/
+
+# Windows 잡파일
+Thumbs.db
+Desktop.ini

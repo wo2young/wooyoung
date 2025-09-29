@@ -4,39 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            padding: 100px;
+        }
+        .calc{
+            border: blue solid 1px;
+            padding: 1px;
+            height: 568px;
+            width: 613px;
+        }
+        td {
+            background-color: rgb(147, 147, 147);
+            height: 100px;
+            width: 150px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+        }
+        button{
+            background-color: rgb(218, 218, 218);
+            height: 100px;
+            width: 150px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+        }
+        input{
+            margin: 3px;
+            height: 150px;
+            width: 602px;
+            font-size: 70px;
+            font-weight: 700;
+            text-align: right;
+        }
+        .equals{
+            height: 100px;
+            width: 302px;
+        }
+    </style>
 </head>
 <body>
-
-    <div class="up">
-
+    <div class="calc">
+        <div class="up">
+            <input type="text" id="calc-input" value="" placeholder="0" title="Calculator Input">
+        </div>
+        <div class="down">
+            <table>
+                <tr>
+                    <td><button type="button" class="number">7</button></td>
+                    <td><button type="button" class="number">8</button></td>
+                    <td><button type="button" class="number">9</button></td>
+                    <td><button type="button" class="divide">➗</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="number">4</button></td>
+                    <td><button type="button" class="number">5</button></td>
+                    <td><button type="button" class="number">6</button></td>
+                    <td><button type="button" class="multiply">✖</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="number">1</button></td>
+                    <td><button type="button" class="number">2</button></td>
+                    <td><button type="button" class="number">3</button></td>
+                    <td><button type="button" class="minus">➖</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button">0</button></td>
+                    <td colspan="2"><button type="button" class="equals">=</button></td>
+                    <td><button type="button" class="plus">➕</button></td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="down">
-        <table>
-            <tr>
-                <td>⏪</td>
-                <td>⏩</td>
-                <td>🆑</td>
-                <td>🔙</td>
-            </tr>
-             <tr>
-                <td>0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣➕➖✖➗</td>
-                <td>⏩</td>
-                <td>🆑</td>
-                <td>🔙</td>
-            </tr>
-             <tr>
-                <td>⏪</td>
-                <td>⏩</td>
-                <td>🆑</td>
-                <td>🔙</td>
-            </tr>
-             <tr>
-                <td>⏪</td>
-                <td>⏩</td>
-                <td>🆑</td>
-                <td>🔙</td>
-            </tr>
-        </table>
-    </div>
+
+    <script>
+        window.addEventListener('load', bind)
+        function bind(){
+
+            const number = document.querySelector('number');
+            const result = document.querySelector('equals');
+            const plus = document.querySelector('plus');
+            const minus = document.querySelector('minus');
+            const multiply = document.querySelector('multiply'); 
+            const divide = document.querySelector('divide');
+
+            btn.addEventListener('click',() => {
+                
+                })    
+        }
+
+    </script>
 </body>
 </html>
