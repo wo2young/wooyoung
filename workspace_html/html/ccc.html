@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        body {
             padding: 100px;
         }
-        .calc{
-            border: blue solid 1px;
+
+        .calc {
+            background-color: black;
             padding: 1px;
-            height: 574px;
-            width: 613px;
+            height: 581px;
+            width: 618px;
         }
+
         td {
-            background-color: rgb(147, 147, 147);
             height: 100px;
             width: 150px;
             text-align: center;
             font-size: 30px;
             font-weight: 700;
         }
-        button{
+
+        button {
             background-color: rgb(218, 218, 218);
             height: 100px;
             width: 150px;
@@ -30,7 +33,11 @@
             font-size: 30px;
             font-weight: 700;
         }
-        input{
+
+        /* button :hover{
+            background-color: aliceblue;
+        } */
+        input {
             margin: 3px;
             height: 150px;
             width: 602px;
@@ -38,12 +45,14 @@
             font-weight: 700;
             text-align: right;
         }
-        .equals{
+
+        #equals {
             height: 100px;
             width: 302px;
         }
     </style>
 </head>
+
 <body>
     <div class="calc">
         <div class="up">
@@ -52,48 +61,97 @@
         <div class="down">
             <table>
                 <tr>
-                    <td><button type="button" class="number">7</button></td>
-                    <td><button type="button" class="number">8</button></td>
-                    <td><button type="button" class="number">9</button></td>
-                    <td><button type="button" class="divide">➗</button></td>
+                    <td><button type="button" class="number" value="7">7</button></td>
+                    <td><button type="button" class="number" value="8">8</button></td>
+                    <td><button type="button" class="number" value="9">9</button></td>
+                    <td><button type="button" id="divide" value="/">➗</button></td>
                 </tr>
                 <tr>
-                    <td><button type="button" class="number">4</button></td>
-                    <td><button type="button" class="number">5</button></td>
-                    <td><button type="button" class="number">6</button></td>
-                    <td><button type="button" class="multiply">✖</button></td>
+                    <td><button type="button" class="number" value="4">4</button></td>
+                    <td><button type="button" class="number" value="5">5</button></td>
+                    <td><button type="button" class="number" value="6">6</button></td>
+                    <td><button type="button" id="multiply" value="*">✖️</button></td>
                 </tr>
                 <tr>
-                    <td><button type="button" class="number">1</button></td>
-                    <td><button type="button" class="number">2</button></td>
-                    <td><button type="button" class="number">3</button></td>
-                    <td><button type="button" class="minus">➖</button></td>
+                    <td><button type="button" class="number" value="1">1</button></td>
+                    <td><button type="button" class="number" value="2">2</button></td>
+                    <td><button type="button" class="number" value="3">3</button></td>
+                    <td><button type="button" id="minus" value="-">➖</button></td>
                 </tr>
                 <tr>
-                    <td><button type="button">0</button></td>
-                    <td colspan="2"><button type="button" class="equals">=</button></td>
-                    <td><button type="button" class="plus">➕</button></td>
+                    <td><button type="button" class="number" value="0">0</button></td>
+                    <td colspan="2"><button type="button" id="equals" value="=">=</button></td>
+                    <td><button type="button" id="plus" value="+">➕</button></td>
                 </tr>
             </table>
         </div>
     </div>
 
     <script>
-        window.addEventListener('load', bind)
-        function bind(){
+        window.addEventListener('load', bind);
 
-            const number = document.querySelector('number');
-            const result = document.querySelector('equals');
-            const plus = document.querySelector('plus');
-            const minus = document.querySelector('minus');
-            const multiply = document.querySelector('multiply'); 
-            const divide = document.querySelector('divide');
+        function bind() {
+            const input = document.querySelector('#calc-input');
+            const numbers = document.querySelectorAll('.number');
+            const plus = document.querySelector('#plus');
+            const minus = document.querySelector('#minus');
+            const multiply = document.querySelector('#multiply');
+            const divide = document.querySelector('#divide');
+            const equals = document.querySelector('#equals');
 
-            btn.addEventListener('click',() => {
-                
-                })    
+            let arr = []; 
+            let re = ""; // 현재 입력 중인 숫자
+
+            // 숫자 버튼 클릭
+            numbers.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    re += btn.value;         // 현재 숫자 이어붙이기
+                    input.value = re;        // 화면에는 숫자만 표시
+                });
+            });
+
+            // 연산자 버튼 클릭
+            function pushOp(op) {
+                if (re !== "") {
+                    arr.push(parseInt(re)); // 지금까지 입력된 숫자 저장
+                    re = "";                   // 초기화
+                }
+                if (arr.length > 0) {
+                    arr.push(op);                  // 연산자 저장
+                    input.value = op;               // 화면에는 연산자만 표시
+                }
+            }
+
+            plus.addEventListener('click', () => pushOp('+'));
+            minus.addEventListener('click', () => pushOp('-'));
+            multiply.addEventListener('click', () => pushOp('*'));
+            divide.addEventListener('click', () => pushOp('/'));
+
+            // = 버튼 클릭
+            equals.addEventListener('click', () => {
+                if (re !== "") {
+                    arr.push(parseInt(re)); // 마지막 숫자 저장
+                }
+
+                // arr 배열 예: [77, '+', 3, '*', 2]
+                // 아주 단순히 왼쪽부터 계산 (우선순위 무시)
+                let result = arr[0];
+
+                for (let i = 1; i < arr.length; i += 2) {
+                    const op = arr[i];
+                    const num = arr[i + 1];
+                    if (op === '+') result += num;
+                    else if (op === '-') result -= num;
+                    else if (op === '*') result *= num;
+                    else if (op === '/') result /= num;
+                }
+
+                input.value = result; // 결과 표시
+                arr = [];            // 초기화
+                re = "";
+            });
         }
-
     </script>
 </body>
+
 </html>
