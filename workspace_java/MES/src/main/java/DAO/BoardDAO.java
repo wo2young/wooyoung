@@ -24,27 +24,28 @@ public class BoardDAO {
 
     private Connection c() throws SQLException { return ds.getConnection(); }
 
-    // BigDecimal/NULL 안전 변환 헬퍼(사용자 주석 유지)
-    private Long getNullableLong(ResultSet rs, String col) throws SQLException {
-        long v = rs.getLong(col);       // NULL이면 0
-        return rs.wasNull() ? null : v; // 진짜 NULL 판별
-    }
-
-    // -------------------- 목록 / 카운트 (공지 항상 포함) --------------------
+    // -------------------- 목록 / 카운트 --------------------
     public List<BoardPostDTO> list(Integer categoryId, String keyword, int startRow, int endRow) throws SQLException {
         String sql =
             "SELECT * FROM ( " +
-            "  SELECT p.*, ROW_NUMBER() OVER( " +
-            "         ORDER BY CASE WHEN p.is_notice='Y' THEN 0 ELSE 1 END, p.created_at DESC) rn " +
+            "  SELECT p.*, u.login_id AS writer_login_id, " +
+            "         ROW_NUMBER() OVER( " +
+            "           ORDER BY CASE WHEN p.category_id = 1 THEN 0 ELSE 1 END, p.created_at DESC) rn " +
             "  FROM BoardPost p " +
+            "  JOIN USER_T u ON u.user_id = p.created_by " +
             "  WHERE p.is_deleted='N' " +
-            "    AND ( (? IS NULL) OR (p.category_id = ? OR p.is_notice='Y') ) " +
+            "    AND ( (? IS NULL) OR (p.category_id = ? OR p.category_id=1) ) " + // ✅ 공지(category_id=1)는 항상 포함
             "    AND (? IS NULL OR (p.title LIKE '%'||?||'%' OR DBMS_LOB.INSTR(p.content, ?) > 0)) " +
             ") t WHERE t.rn BETWEEN ? AND ?";
 
         try (Connection con = c(); PreparedStatement ps = con.prepareStatement(sql)) {
-            if (categoryId == null) { ps.setNull(1, Types.INTEGER); ps.setNull(2, Types.INTEGER); }
-            else { ps.setInt(1, categoryId); ps.setInt(2, categoryId); }
+            if (categoryId == null) { 
+                ps.setNull(1, Types.INTEGER); 
+                ps.setNull(2, Types.INTEGER); 
+            } else { 
+                ps.setInt(1, categoryId); 
+                ps.setInt(2, categoryId); 
+            }
 
             if (keyword == null || keyword.isEmpty()) {
                 ps.setNull(3, Types.VARCHAR);
@@ -70,11 +71,16 @@ public class BoardDAO {
         String sql =
             "SELECT COUNT(*) FROM BoardPost p " +
             " WHERE p.is_deleted='N' " +
-            "   AND ( (? IS NULL) OR (p.category_id = ? OR p.is_notice='Y') ) " +
+            "   AND ( (? IS NULL) OR (p.category_id = ? OR p.category_id=1) ) " + // ✅ 공지글 항상 카운트 포함
             "   AND (? IS NULL OR (p.title LIKE '%'||?||'%' OR DBMS_LOB.INSTR(p.content, ?) > 0))";
         try (Connection con = c(); PreparedStatement ps = con.prepareStatement(sql)) {
-            if (categoryId == null) { ps.setNull(1, Types.INTEGER); ps.setNull(2, Types.INTEGER); }
-            else { ps.setInt(1, categoryId); ps.setInt(2, categoryId); }
+            if (categoryId == null) { 
+                ps.setNull(1, Types.INTEGER); 
+                ps.setNull(2, Types.INTEGER); 
+            } else { 
+                ps.setInt(1, categoryId); 
+                ps.setInt(2, categoryId); 
+            }
 
             if (keyword == null || keyword.isEmpty()) {
                 ps.setNull(3, Types.VARCHAR);
@@ -93,7 +99,11 @@ public class BoardDAO {
 
     // -------------------- 게시글 --------------------
     public BoardPostDTO findById(long postId) throws SQLException {
-        String sql = "SELECT * FROM BoardPost WHERE post_id = ?";
+        String sql =
+            "SELECT p.*, u.login_id AS writer_login_id " +
+            "FROM BoardPost p " +
+            "JOIN USER_T u ON u.user_id = p.created_by " +
+            "WHERE p.post_id = ?";
         try (Connection con = c(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setLong(1, postId);
             try (ResultSet rs = ps.executeQuery()) { return rs.next() ? mapPost(rs) : null; }
@@ -151,11 +161,10 @@ public class BoardDAO {
         }
     }
 
-    // -------------------- 댓글 (트리: 0/1단계) --------------------
-    // 계층 제한을 DB가 보장하므로 단순 정렬로 충분
+    // -------------------- 댓글 --------------------
     public List<BoardCommentDTO> listCommentsTree(long postId) throws SQLException {
         String sql =
-            "SELECT cm.*, u.name AS writer_name, " +
+            "SELECT cm.*, u.login_id AS writer_name, " +
             "       CASE WHEN cm.parent_id IS NULL THEN 1 ELSE 2 END AS lvl " +
             "  FROM BoardComment cm " +
             "  JOIN USER_T u ON u.user_id = cm.created_by " +
@@ -177,7 +186,6 @@ public class BoardDAO {
                     d.setUpdatedAt(rs.getTimestamp("updated_at"));
                     d.setWriterName(rs.getString("writer_name"));
 
-                    // BigDecimal 캐스팅 금지 → 헬퍼 사용
                     d.setParentId(getNullableLong(rs, "parent_id"));
                     d.setRootId(getNullableLong(rs, "root_id"));
                     d.setDepth(rs.getInt("depth"));
@@ -190,7 +198,6 @@ public class BoardDAO {
         }
     }
 
-    // DB 트리거가 depth/root_id/parent_depth를 자동 세팅하므로 단순 INSERT
     public int addComment(long postId, String content, long userId, Long parentId) throws SQLException {
         final String sql =
             "INSERT INTO BoardComment (post_id, parent_id, content, created_by) VALUES (?,?,?,?)";
@@ -209,6 +216,20 @@ public class BoardDAO {
             ps.setLong(1, commentId);
             ps.setLong(2, userId);
             ps.setInt(3, isAdmin ? 1 : 0);
+            return ps.executeUpdate();
+        }
+    }
+
+    /** ✅ 댓글 수정 기능 추가 */
+    public int updateComment(long commentId, String newContent, long userId, boolean isAdmin) throws SQLException {
+        String sql = "UPDATE BoardComment " +
+                     "SET content=?, updated_at=SYSTIMESTAMP " +
+                     "WHERE comment_id=? AND is_deleted='N' AND (created_by=? OR ?=1)";
+        try (Connection con = c(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newContent);
+            ps.setLong(2, commentId);
+            ps.setLong(3, userId);
+            ps.setInt(4, isAdmin ? 1 : 0);
             return ps.executeUpdate();
         }
     }
@@ -279,14 +300,17 @@ public class BoardDAO {
         d.setCreatedBy(rs.getLong("created_by"));
         d.setCreatedAt(rs.getTimestamp("created_at"));
         d.setUpdatedAt(rs.getTimestamp("updated_at"));
+
+        String loginId = rs.getString("writer_login_id");
+        d.setWriterLoginId(loginId);
+        d.setWriterName(loginId);
+
         return d;
     }
 
-    // =========================
-    // 전체 정리
-    // - DB가 depth/root_id 제약을 보장하므로 addComment는 단순 INSERT로 축소
-    // - 조회는 root_id, depth, created_at 정렬로 계층 표현(0/1단계)
-    // - getGeneratedKeys 미동작 대비 CURRVAL 보강 유지
-    // - 페이징 서브쿼리 별칭 t 사용 확인
-    // =========================
+    // -------------------- 헬퍼 --------------------
+    private Long getNullableLong(ResultSet rs, String col) throws SQLException {
+        long v = rs.getLong(col);
+        return rs.wasNull() ? null : v;
+    }
 }

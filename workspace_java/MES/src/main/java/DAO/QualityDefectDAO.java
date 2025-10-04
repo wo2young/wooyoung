@@ -25,13 +25,14 @@ public class QualityDefectDAO {
         }
     }
 
-    // ✅ 불량 등록
+    // ✅ 불량 등록 (DB에만 insert, FAIL_QTY는 그대로 둠)
     public boolean insert(QualityDefectDTO dto) {
-        String sql = "INSERT INTO QUALITY_DEFECT " +
-                     "(DEFECT_ID, RESULT_ID, DETAIL_CODE, QUANTITY, REGISTERED_BY, CREATED_AT) " +
-                     "VALUES (SEQ_QUALITY_DEFECT.NEXTVAL, ?, ?, ?, ?, SYSTIMESTAMP)";
+        String insertSql = "INSERT INTO QUALITY_DEFECT " +
+                           "(DEFECT_ID, RESULT_ID, DETAIL_CODE, QUANTITY, REGISTERED_BY, CREATED_AT) " +
+                           "VALUES (SEQ_QUALITY_DEFECT.NEXTVAL, ?, ?, ?, ?, SYSTIMESTAMP)";
+
         try (Connection conn = ds.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(insertSql)) {
 
             ps.setInt(1, dto.getResult_id());
             ps.setString(2, dto.getDefect_code());
@@ -45,21 +46,22 @@ public class QualityDefectDAO {
         }
     }
 
-    // ✅ 이번주 실적번호 조회 (작업자 이름 + 품목명 포함, DONE 제외)
+    // ✅ 전체 실적번호 조회 (FAIL_QTY - 등록된 불량수량 합계)
     public List<QualityDefectDTO> getThisWeekResults() {
         String sql =
             "SELECT r.RESULT_ID, r.ORDER_ID, r.WORKER_ID, " +
             "       r.GOOD_QTY, r.FAIL_QTY, r.WORK_DATE, " +
             "       u.NAME AS WORKER_NAME, " +
-            "       im.ITEM_NAME " +
+            "       im.ITEM_NAME, " +
+            "       (r.FAIL_QTY - NVL(SUM(q.QUANTITY),0)) AS REMAIN_FAIL_QTY " +
             "FROM PRODUCTION_RESULT r " +
             "JOIN PRODUCTION_ORDER o ON r.ORDER_ID = o.ORDER_ID " +
             "JOIN PRODUCTION_TARGET t ON o.TARGET_ID = t.TARGET_ID " +
             "JOIN ITEM_MASTER im ON t.ITEM_ID = im.ITEM_ID " +
             "LEFT JOIN USER_T u ON r.WORKER_ID = u.USER_ID " +
-            "WHERE r.WORK_DATE >= TRUNC(SYSDATE, 'IW') " +
-            "  AND r.WORK_DATE <  TRUNC(SYSDATE, 'IW') + 7 " +
-            "  AND UPPER(o.STATUS) <> 'DONE' " +
+            "LEFT JOIN QUALITY_DEFECT q ON r.RESULT_ID = q.RESULT_ID " +
+            "GROUP BY r.RESULT_ID, r.ORDER_ID, r.WORKER_ID, " +
+            "         r.GOOD_QTY, r.FAIL_QTY, r.WORK_DATE, u.NAME, im.ITEM_NAME " +
             "ORDER BY r.WORK_DATE DESC";
 
         List<QualityDefectDTO> list = new ArrayList<>();
@@ -74,6 +76,13 @@ public class QualityDefectDAO {
                 dto.setWorker_id(rs.getInt("WORKER_ID"));
                 dto.setWorker_name(rs.getString("WORKER_NAME"));
                 dto.setItem_name(rs.getString("ITEM_NAME"));
+
+                // ✅ 원본 FAIL_QTY
+                dto.setDefect_quantity(rs.getInt("FAIL_QTY"));
+
+                // ✅ 남은 FAIL_QTY (보여줄 용도)
+                dto.setRemain_fail_qty(rs.getInt("REMAIN_FAIL_QTY"));
+
                 list.add(dto);
             }
         } catch (Exception e) {
@@ -98,7 +107,7 @@ public class QualityDefectDAO {
                 CodeDetailDTO dto = new CodeDetailDTO();
                 dto.setDetail_code(rs.getString("DETAIL_CODE"));
                 dto.setCode_id(rs.getString("CODE_ID"));
-                dto.setCode_dname(rs.getString("CODE_DNAME"));
+                dto.setCode_Dname(rs.getString("CODE_DNAME"));
                 list.add(dto);
             }
         } catch (Exception e) {

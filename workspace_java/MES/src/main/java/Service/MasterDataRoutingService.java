@@ -1,6 +1,7 @@
 package Service;
 
 import DAO.MasterDataRoutingDAO;
+import DAO.ProductionOrderDAO;
 import yaDTO.RoutingDTO;
 import yaDTO.RoutingViewDTO;
 
@@ -10,6 +11,18 @@ import java.util.List;
 
 public class MasterDataRoutingService {
 	private final MasterDataRoutingDAO dao = new MasterDataRoutingDAO();
+	private final ProductionOrderDAO orderDao = new ProductionOrderDAO();
+	
+	public List<RoutingViewDTO> getByOrder(int orderId) {
+        try {
+            int itemId = orderDao.findItemIdByOrder(orderId).orElse(-1);
+            if (itemId == -1) return Collections.emptyList();
+            return dao.listViewByItem(itemId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 	
 	public List<RoutingViewDTO> listAllView() {
 	    try {

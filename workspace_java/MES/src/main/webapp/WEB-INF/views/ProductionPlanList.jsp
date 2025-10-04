@@ -6,25 +6,21 @@
 
 <c:set var="uri" value="${pageContext.request.requestURI}" />
 <c:set var="cxt" value="${pageContext.request.contextPath}" />
-
+<div class="ppage-tabs">
+  <a href="${cxt}/productionPlan?tab=plan"
+     class="ppage-tab ${param.tab eq 'plan' ? 'active' : ''}">
+    생산 목표 등록
+  </a>
+  <a href="${cxt}/productionPlan/list?tab=list"
+     class="ppage-tab ${param.tab eq 'list' ? 'active' : ''}">
+    생산 목표 조회
+  </a>
+</div>
 <div class="wrap dark">
 
-  <!-- 상단 탭 -->
-  <nav class="ppage-tabs" aria-label="목표 탭">
-    <a href="${cxt}/productionPlan"
-       class="ppage-tab ${fn:endsWith(uri, '/productionPlan') ? 'active' : ''}"
-       <c:if test="${fn:endsWith(uri, '/productionPlan')}">aria-current="page"</c:if>>
-      생산 목표 등록
-    </a>
-    <a href="${cxt}/productionPlan/list"
-       class="ppage-tab ${fn:endsWith(uri, '/list') ? 'active' : ''}"
-       <c:if test="${fn:endsWith(uri, '/list')}">aria-current="page"</c:if>>
-      생산 목표 조회
-    </a>
-  </nav>
+
 
   <main class="container">
-    <h2 class="page-title">목표 조회</h2>
 
     <!-- 알림 -->
     <c:if test="${not empty sessionScope.msg}">
@@ -142,49 +138,61 @@
         </div>
 
         <!-- 페이징 (1~5만 노출, 콤팩트) -->
-        <div class="pagination pagination-compact" role="navigation" aria-label="페이지 이동">
-          <c:set var="hasPrev" value="${currentPage > 1}" />
-          <c:set var="hasNext" value="${currentPage < totalPage}" />
-          <c:set var="prevPage" value="${currentPage - 1}" />
-          <c:set var="nextPage" value="${currentPage + 1}" />
-          <c:set var="endPage" value="${totalPage > 5 ? 5 : totalPage}" />
+<!-- 페이징 -->
+<div class="pagination pagination-compact" role="navigation" aria-label="페이지 이동">
+  <c:set var="hasPrev" value="${currentPage > 1}" />
+  <c:set var="hasNext" value="${currentPage < totalPage}" />
+  <c:set var="prevPage" value="${currentPage - 1}" />
+  <c:set var="nextPage" value="${currentPage + 1}" />
 
-          <c:url var="firstUrl" value="/productionPlan/list">
-            <c:param name="page" value="1"/>
-            <c:param name="searchStart" value="${param.searchStart}"/>
-            <c:param name="searchEnd" value="${param.searchEnd}"/>
-          </c:url>
-          <c:url var="prevUrl" value="/productionPlan/list">
-            <c:param name="page" value="${prevPage}"/>
-            <c:param name="searchStart" value="${param.searchStart}"/>
-            <c:param name="searchEnd" value="${param.searchEnd}"/>
-          </c:url>
-          <c:url var="nextUrl" value="/productionPlan/list">
-            <c:param name="page" value="${nextPage}"/>
-            <c:param name="searchStart" value="${param.searchStart}"/>
-            <c:param name="searchEnd" value="${param.searchEnd}"/>
-          </c:url>
-          <c:url var="lastUrl" value="/productionPlan/list">
-            <c:param name="page" value="${totalPage}"/>
-            <c:param name="searchStart" value="${param.searchStart}"/>
-            <c:param name="searchEnd" value="${param.searchEnd}"/>
-          </c:url>
+  <!-- 현재 페이지 기준으로 startPage, endPage 계산 -->
+  <c:set var="startPage" value="${currentPage - 2 > 1 ? currentPage - 2 : 1}" />
+  <c:set var="endPage" value="${startPage + 4 < totalPage ? startPage + 4 : totalPage}" />
 
-          <a class="page-link square ${!hasPrev ? 'disabled first' : 'first'}" href="${hasPrev ? firstUrl : '#'}" aria-label="처음">&laquo;</a>
-          <a class="page-link square ${!hasPrev ? 'disabled prev' : 'prev'}"  href="${hasPrev ? prevUrl  : '#'}" aria-label="이전">&lsaquo;</a>
+  <c:url var="firstUrl" value="/productionPlan/list">
+    <c:param name="page" value="1"/>
+    <c:param name="searchStart" value="${param.searchStart}"/>
+    <c:param name="searchEnd" value="${param.searchEnd}"/>
+  </c:url>
+  <c:url var="prevUrl" value="/productionPlan/list">
+    <c:param name="page" value="${prevPage}"/>
+    <c:param name="searchStart" value="${param.searchStart}"/>
+    <c:param name="searchEnd" value="${param.searchEnd}"/>
+  </c:url>
+  <c:url var="nextUrl" value="/productionPlan/list">
+    <c:param name="page" value="${nextPage}"/>
+    <c:param name="searchStart" value="${param.searchStart}"/>
+    <c:param name="searchEnd" value="${param.searchEnd}"/>
+  </c:url>
+  <c:url var="lastUrl" value="/productionPlan/list">
+    <c:param name="page" value="${totalPage}"/>
+    <c:param name="searchStart" value="${param.searchStart}"/>
+    <c:param name="searchEnd" value="${param.searchEnd}"/>
+  </c:url>
 
-          <c:forEach var="p" begin="1" end="${endPage}">
-            <c:url var="pageUrl" value="/productionPlan/list">
-              <c:param name="page" value="${p}"/>
-              <c:param name="searchStart" value="${param.searchStart}"/>
-              <c:param name="searchEnd" value="${param.searchEnd}"/>
-            </c:url>
-            <a class="page-link square ${p == currentPage ? 'active' : ''}" href="${pageUrl}">${p}</a>
-          </c:forEach>
+  <!-- 처음/이전 -->
+  <a class="page-link square ${!hasPrev ? 'disabled first' : 'first'}"
+     href="${hasPrev ? firstUrl : '#'}" aria-label="처음">&laquo;</a>
+  <a class="page-link square ${!hasPrev ? 'disabled prev' : 'prev'}"
+     href="${hasPrev ? prevUrl  : '#'}" aria-label="이전">&lsaquo;</a>
 
-          <a class="page-link square ${!hasNext ? 'disabled next' : 'next'}" href="${hasNext ? nextUrl : '#'}" aria-label="다음">&rsaquo;</a>
-          <a class="page-link square ${!hasNext ? 'disabled last' : 'last'}" href="${hasNext ? lastUrl : '#'}" aria-label="마지막">&raquo;</a>
-        </div>
+  <!-- 번호 출력 (현재 페이지 기준 5개) -->
+  <c:forEach var="p" begin="${startPage}" end="${endPage}">
+    <c:url var="pageUrl" value="/productionPlan/list">
+      <c:param name="page" value="${p}"/>
+      <c:param name="searchStart" value="${param.searchStart}"/>
+      <c:param name="searchEnd" value="${param.searchEnd}"/>
+    </c:url>
+    <a class="page-link square ${p == currentPage ? 'active' : ''}" href="${pageUrl}">${p}</a>
+  </c:forEach>
+
+  <!-- 다음/마지막 -->
+  <a class="page-link square ${!hasNext ? 'disabled next' : 'next'}"
+     href="${hasNext ? nextUrl : '#'}" aria-label="다음">&rsaquo;</a>
+  <a class="page-link square ${!hasNext ? 'disabled last' : 'last'}"
+     href="${hasNext ? lastUrl : '#'}" aria-label="마지막">&raquo;</a>
+</div>
+
       </c:otherwise>
     </c:choose>
   </main>
@@ -305,6 +313,14 @@
 </script>
 
 <style>
+:root {
+  --bg:#0b111c;
+  --surface:#0f1626;
+  --line:#253150;
+  --muted:#9fb0d6;
+  --accent:#60a5fa;
+  --accent-2:#f59e0b;
+}
   /* ===== 테마 ===== */
   .dark{
     --bg:#0b111c; --surface:#0f1626; --surface-2:#0d1423;
@@ -314,7 +330,14 @@
     --danger:#ef4444;
     --header-h:56px; --tab-h:48px;
   }
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);overflow-x:hidden;}
+  html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Pretendard, sans-serif;
+  overflow-x: hidden;
+}
   .wrap.dark{min-height:100vh;background:var(--bg)!important;}
   .wrap.dark .container{background:var(--bg)!important;}
   .container{max-width:1100px;margin:0 auto;padding:20px 16px 48px;}
@@ -329,10 +352,41 @@
   .table-wrap::-webkit-scrollbar-corner{background:var(--surface)}
 
   /* 탭 */
-  .ppage-tabs{display:flex;gap:16px;padding:0 16px;border-bottom:1px solid var(--line);position:sticky;top:var(--header-h);z-index:5;}
-  .ppage-tab{display:inline-block;padding:12px 2px;color:var(--muted);font-weight:600;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;line-height:1;text-decoration:none;}
-  .ppage-tab:hover{color:#e7ecff;border-bottom-color:#3b4e78}
-  .ppage-tab.active{color:#fff;border-bottom-color:var(--accent)}
+
+
+/* 헤더보다 낮은 z-index 주기 */
+.ppage-tabs {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+
+  position: relative;   /* sticky 대신 relative */
+  top: 0;               /* header 바로 아래 */
+  z-index: 5;
+}
+
+.ppage-tab {
+  display: inline-block;
+  padding: 12px 2px;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s;
+  text-decoration: none;
+}
+
+.ppage-tab:hover {
+  color: #e7ecff;
+  border-bottom-color: #3b4e78;
+}
+
+.ppage-tab.active {
+  color: #fff;
+  border-bottom-color: var(--accent);
+  font-weight: 700;
+}
+
 
   /* 검색 바 */
   .search-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:14px 0 16px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;}
@@ -348,7 +402,7 @@
   .btn:active{transform:translateY(1px)}
   .btn-primary{background:var(--accent);color:#0b1020;border-color:transparent}
   .btn-ghost{background:transparent}
-  .btn-sm{height:32px;padding:0 10px;font-size:13px;white-space:nowrap}
+  .{height:32px;padding:0 10px;font-size:13px;white-space:nowrap}
   .btn-danger{background:var(--danger);color:#fff;border-color:transparent}
   .btn-group{display:inline-flex;gap:8px;align-items:center;flex-wrap:nowrap;white-space:nowrap;}
   .data-table td.actions form{display:inline-block;margin:0;}
@@ -530,4 +584,24 @@
   /* 필요 시 완전 차단하려면 아래 주석 해제
   html, body { overflow: hidden !important; }
   */
+  /* 기존 .btn-ghost 스타일 밑에 추가 */
+.btn-ghost:hover {
+  background:#fff;
+  color:#111827; /* 진한 글자색 */
+  border-color:transparent;
+}
+.btn-group .btn-sm:hover {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+/* 삭제 버튼 hover - 더 강렬한 빨강 */
+.btn-group .btn-sm.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.25) !important; /* 더 선명한 빨강빛 배경 */
+  color: #ff6666 !important;                      /* 밝은 레드 글씨 */
+  border: 1px solid #ff6666 !important;           /* 동일 톤 테두리 */
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);     /* 붉은빛 글로우 */
+}
+
 </style>

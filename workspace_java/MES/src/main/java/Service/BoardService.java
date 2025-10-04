@@ -57,22 +57,22 @@ public class BoardService {
     public long write(BoardPostDTO d) throws SQLException {
         if (d.getTitle() == null || d.getTitle().isBlank())      throw new IllegalArgumentException("title empty");
         if (d.getContent() == null || d.getContent().isBlank())  throw new IllegalArgumentException("content empty");
-        if (d.getCategoryId() <= 0)                               throw new IllegalArgumentException("categoryId empty");
-        if (!dao.existsCategory(d.getCategoryId()))               throw new IllegalArgumentException("invalid categoryId");
+        if (d.getCategoryId() <= 0)                              throw new IllegalArgumentException("categoryId empty");
+        if (!dao.existsCategory(d.getCategoryId()))              throw new IllegalArgumentException("invalid categoryId");
         return dao.insert(d);
     }
 
     public int edit(BoardPostDTO d, long userId, boolean isAdmin) throws SQLException {
         if (d.getTitle() == null || d.getTitle().isBlank())      throw new IllegalArgumentException("title empty");
         if (d.getContent() == null || d.getContent().isBlank())  throw new IllegalArgumentException("content empty");
-        if (d.getCategoryId() <= 0)                               throw new IllegalArgumentException("categoryId empty");
-        if (!dao.existsCategory(d.getCategoryId()))               throw new IllegalArgumentException("invalid categoryId");
+        if (d.getCategoryId() <= 0)                              throw new IllegalArgumentException("categoryId empty");
+        if (!dao.existsCategory(d.getCategoryId()))              throw new IllegalArgumentException("invalid categoryId");
         return dao.update(d, userId, isAdmin);
     }
 
-    // 작성자 본인만 삭제(관리자 우회 금지) — DAO엔 false로 고정 전달
-    public int delete(long postId, long userId) throws SQLException {
-        return dao.softDelete(postId, userId, /*isAdmin*/ false);
+    // 📌 글 삭제 (관리자 → 모든 글, 일반 사용자 → 본인 글만)
+    public int delete(long postId, long userId, boolean isAdmin) throws SQLException {
+        return dao.softDelete(postId, userId, isAdmin);
     }
 
     // -------------------- 댓글 (트리) --------------------
@@ -86,14 +86,22 @@ public class BoardService {
         if (parentId != null) {
             Integer parentDepth = getCommentDepth(parentId);
             if (parentDepth == null) throw new IllegalArgumentException("parent comment not found");
-            if (parentDepth >= 1)     throw new IllegalArgumentException("reply-to-reply is not allowed");
+            if (parentDepth >= 1)    throw new IllegalArgumentException("reply-to-reply is not allowed");
         }
         return dao.addComment(postId, content, userId, parentId);
     }
 
-    // 댓글 삭제: 작성자 본인만 (관리자 우회 금지)
-    public int deleteComment(long commentId, long userId) throws SQLException {
-        return dao.deleteComment(commentId, userId, /*isAdmin*/ false);
+    // 📌 댓글 삭제 (관리자 → 모든 댓글, 일반 사용자 → 본인 댓글만)
+    public int deleteComment(long commentId, long userId, boolean isAdmin) throws SQLException {
+        return dao.deleteComment(commentId, userId, isAdmin);
+    }
+
+    // 📌 댓글 수정 (관리자 → 모든 댓글, 일반 사용자 → 본인 댓글만)
+    public int updateComment(long commentId, String newContent, long userId, boolean isAdmin) throws SQLException {
+        if (newContent == null || newContent.isBlank()) {
+            throw new IllegalArgumentException("comment content required");
+        }
+        return dao.updateComment(commentId, newContent, userId, isAdmin);
     }
 
     // -------------------- 좋아요 --------------------
@@ -113,7 +121,7 @@ public class BoardService {
     // =========================
     // 전체 정리
     // - DB 제약으로 이미 대댓글 금지이지만, 서비스 레벨 선제 체크로 UX 개선
-    // - 목록/조회/수정/삭제는 기존 정책 유지
+    // - 글 삭제/댓글 삭제/댓글 수정은 관리자 or 작성자만 가능
     // - 좋아요 토글 후 like_cnt 동기화 유지
     // =========================
 }

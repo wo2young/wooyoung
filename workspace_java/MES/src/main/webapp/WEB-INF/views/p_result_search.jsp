@@ -63,8 +63,8 @@ h2{ margin:0 0 14px 0; font-size:20px; }
 .btn:hover{ background:var(--accent-light); box-shadow:0 0 0 3px rgba(245,158,11,.18); color:#111827; }
 .btn-secondary{ background:transparent; color:var(--accent); border:1px solid var(--accent); }
 .btn-secondary:hover{ background:var(--accent); color:#111827; border-color:var(--accent); }
-.btn-reset{ background:#2563EB; color:#fff; border:1px solid #2563EB; }
-.btn-reset:hover{ background:#1E4ED8; border-color:#1E4ED8; color:#fff; box-shadow:0 0 0 3px rgba(37,99,235,.25); }
+.btn-reset{ background:white; color:#fff; border:1px solid #2563EB; }
+.btn-reset:hover{ background:white; border-color:white; color:white; box-shadow:0 0 0 3px rgba(37,99,235,.25); }
 
 /* Table */
 table{ width:100%; border-collapse:collapse; margin-top:6px; table-layout:fixed; }

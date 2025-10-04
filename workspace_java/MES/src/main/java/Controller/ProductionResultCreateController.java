@@ -50,9 +50,9 @@ public class ProductionResultCreateController extends HttpServlet {
         List<Map<String,Object>> orders = service.getOpenOrders();
         req.setAttribute("orders", orders);
 
-        // 탭 활성화(충돌 대비해 둘 다 셋팅)
-        req.setAttribute("resultTab", "create");   // 탭 전용 변수
-        req.setAttribute("currentPage", "create"); // 레거시/기존 JSP 호환
+        // 탭 활성화
+        req.setAttribute("resultTab", "create");
+        req.setAttribute("currentPage", "create");
 
         // 플래시 메시지
         if ("1".equals(req.getParameter("success"))) req.setAttribute("message", "작업실적이 등록되었습니다.");

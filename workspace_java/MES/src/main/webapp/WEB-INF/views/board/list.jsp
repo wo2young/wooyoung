@@ -38,7 +38,6 @@
       display:flex;gap:8px;align-items:center;flex-wrap:wrap;
       background:var(--panel-bg); border:1px solid var(--line); border-radius:12px; padding:10px;
     }
-    .toolbar label{display:flex;align-items:center;gap:8px;color:var(--muted)}
     .toolbar input[type="text"]{
       padding:8px 10px; border:1px solid var(--line); border-radius:8px;
       background:var(--input-bg); color:var(--text-color); min-height:36px;
@@ -51,8 +50,6 @@
     .btn:hover { background:var(--hover); transform:translateY(-1px); }
     .btn-search { background:var(--accent); border-color:var(--accent); color:#111827; font-weight:600; }
     .btn-search:hover { background:var(--accent-light); border-color:var(--accent-light); color:#111827; }
-    .btn-reset { background:#1e3a8a; border-color:#1e3a8a; color:#e6ebff; font-weight:600; }
-    .btn-reset:hover { background:#2563eb; border-color:#2563eb; color:#fff; }
 
     .card{ background:var(--panel-bg); border:1px solid var(--line); border-radius:12px; overflow:hidden }
     table{ width:100%; border-collapse:collapse; table-layout:fixed }
@@ -75,19 +72,82 @@
     .pagination{
       display:flex;gap:8px;margin:14px 0; align-items:center;flex-wrap:wrap;justify-content:center;
     }
-    .pagination .page-numbers{ display:flex; gap:8px; }
-    .pagination button, .page-number-btn{
+    .pagination a, .pagination span{
       padding:6px 12px; border:1px solid var(--line); border-radius:8px; background:var(--input-bg);
-      color:var(--text-color); cursor:pointer; min-width:34px; text-align:center; line-height:1;
+      color:var(--text-color); min-width:34px; text-align:center; line-height:1; text-decoration:none;
     }
-    .pagination button:hover:not(:disabled), .page-number-btn:hover:not(:disabled){ background:var(--hover); }
-    .page-number-btn.active{ background:var(--accent); border-color:var(--accent); color:#111827; }
-    .pagination button:disabled{ opacity:.5; cursor:not-allowed; }
+    .pagination a:hover{ background:var(--hover); }
+    .pagination .active{ background:var(--accent); border-color:var(--accent); color:#111827; }
+    .pagination .disabled{ opacity:.5; cursor:not-allowed; }
 
-    @media (max-width:640px){
-      .page-head{flex-direction:column;align-items:flex-start}
-      .title-cell{min-width:160px}
-      thead th:nth-child(2){width:120px}
+    /* ✅ 챗봇 관련 추가 */
+    .chatbot-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 28px;
+      background: var(--accent);
+      color: #111827;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      text-align: center;
+      line-height: 55px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+    .chatbot-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      height: 400px;
+      background: var(--panel-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      padding: 10px;
+      z-index: 1000;
+    }
+    .chatbot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+    #chatLog {
+      width: 100%;
+      height: 280px;
+      margin-bottom: 8px;
+      padding: 5px;
+      resize: none;
+      background: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    #userInput {
+      width: 70%;
+      padding: 5px;
+      background: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    #sendBtn {
+      padding: 6px 12px;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #sendBtn:hover {
+      background: var(--accent-light);
     }
   </style>
 </head>
@@ -95,7 +155,7 @@
   <main class="wrap">
     <div class="page-head">
       <h2>게시판</h2>
-      <p class="muted">※ 각 카테고리 목록에도 <b>공지</b> 글은 항상 함께 표시됩니다.</p>
+      <p class="muted">※ <b>공지</b> 카테고리 글은 항상 제목 옆에 표시됩니다.</p>
     </div>
 
     <!-- 탭 -->
@@ -111,36 +171,28 @@
       </c:forEach>
     </div>
 
-    <!-- 검색/행동 바 -->
+    <!-- 검색/글쓰기 -->
     <form class="toolbar" method="get" action="${ctx}/board">
-      <label>카테고리
-        <input type="text" name="categoryId" value="${param.categoryId}" placeholder="예: 1" style="width:90px"/>
-      </label>
-      <label>검색
-        <input type="text" name="keyword" value="${param.keyword}" placeholder="제목 또는 본문 키워드"/>
-      </label>
+      <input type="text" name="keyword" value="${param.keyword}" placeholder="제목 또는 본문 키워드"/>
       <button class="btn btn-search" type="submit">검색</button>
-      <a class="btn btn-reset" href="${ctx}/board">처음으로</a>
       <a class="btn" href="${ctx}/board/write">글쓰기</a>
     </form>
 
-    <!-- ✅ 반드시 '전체 목록'이 여기 렌더링되어야 클라 페이징 가능 -->
+    <!-- 목록 -->
     <div class="card" style="margin-top:10px">
-      <table id="boardTable">
+      <table>
         <thead>
           <tr>
-            <th style="width:90px">ID</th>
             <th style="width:160px">카테고리</th>
             <th>제목</th>
+            <th style="width:120px">작성자</th>
             <th style="width:170px">작성일</th>
             <th style="width:90px" class="right">조회</th>
           </tr>
         </thead>
         <tbody>
-          <%-- allPosts가 있으면 우선 사용, 없으면 posts 사용 (둘 중 하나엔 반드시 '전체'가 들어와야 함) --%>
-          <c:forEach var="p" items="${empty allPosts ? posts : allPosts}">
+          <c:forEach var="p" items="${posts}">
             <tr>
-              <td>${p.postId}</td>
               <td>
                 <c:set var="catName" value="" />
                 <c:forEach var="c" items="${categories}">
@@ -157,111 +209,97 @@
                   <a class="title-link" href="${ctx}/board/view?id=${p.postId}">
                     <c:out value="${p.title}"/>
                   </a>
-                  <c:if test="${p.isNotice == 'Y'}">
+                  <!-- ✅ 카테고리가 공지(1)일 때 빨간 라벨 -->
+                  <c:if test="${p.categoryId == 1}">
                     <span class="badge">공지</span>
                   </c:if>
                 </div>
               </td>
+              <td><c:out value="${p.writerLoginId}"/></td>
               <td><fmt:formatDate value="${p.createdAt}" pattern="yyyy-MM-dd HH:mm"/></td>
               <td class="right">${p.viewCnt}</td>
             </tr>
           </c:forEach>
+          <c:if test="${empty posts}">
+            <tr><td colspan="5" style="text-align:center">게시글이 없습니다.</td></tr>
+          </c:if>
         </tbody>
       </table>
     </div>
 
-    <!-- 페이지네이션 (클라 전용) -->
-    <div class="pagination" id="boardPager" aria-label="페이지네이션">
-      <button type="button" class="page-number-btn" data-act="first" aria-label="첫 페이지">≪</button>
-      <button type="button" class="page-number-btn" data-act="prev"  aria-label="이전 페이지">‹</button>
-      <div class="page-numbers" data-role="page-numbers"></div>
-      <button type="button" class="page-number-btn" data-act="next"  aria-label="다음 페이지">›</button>
-      <button type="button" class="page-number-btn" data-act="last"  aria-label="마지막 페이지">≫</button>
+    <!-- ✅ 페이징 -->
+    <div class="pagination">
+      <c:if test="${page > 1}">
+        <a href="${ctx}/board?page=1&categoryId=${param.categoryId}&keyword=${param.keyword}">≪</a>
+        <a href="${ctx}/board?page=${page-1}&categoryId=${param.categoryId}&keyword=${param.keyword}">‹</a>
+      </c:if>
+      <c:if test="${page <= 1}">
+        <span class="disabled">≪</span>
+        <span class="disabled">‹</span>
+      </c:if>
+
+      <c:forEach var="p" begin="${startPage}" end="${endPage}">
+        <a class="${p == page ? 'active' : ''}"
+           href="${ctx}/board?page=${p}&categoryId=${param.categoryId}&keyword=${param.keyword}">${p}</a>
+      </c:forEach>
+
+      <c:if test="${page < totalPages}">
+        <a href="${ctx}/board?page=${page+1}&categoryId=${param.categoryId}&keyword=${param.keyword}">›</a>
+        <a href="${ctx}/board?page=${totalPages}&categoryId=${param.categoryId}&keyword=${param.keyword}">≫</a>
+      </c:if>
+      <c:if test="${page >= totalPages}">
+        <span class="disabled">›</span>
+        <span class="disabled">≫</span>
+      </c:if>
     </div>
   </main>
 
- <script>
-  (function(){
-    const pager   = document.getElementById('boardPager');
-    const table   = document.getElementById('boardTable');
-    if(!pager || !table) return;
+   <!-- ✅ 챗봇 아이콘 -->
+  <div class="chatbot-icon" onclick="toggleChatbot()">🤖</div>
 
-    const tbody   = table.querySelector('tbody');
-    const numsBox = pager.querySelector('[data-role="page-numbers"]');
-    const btnFirst= pager.querySelector('[data-act="first"]');
-    const btnPrev = pager.querySelector('[data-act="prev"]');
-    const btnNext = pager.querySelector('[data-act="next"]');
-    const btnLast = pager.querySelector('[data-act="last"]');
+  <!-- ✅ 챗봇 팝업 -->
+  <div id="chatbotPopup" class="chatbot-popup">
+    <div class="chatbot-header">
+      <span>또야또야 MES AI</span>
+      <button onclick="toggleChatbot()">X</button>
+    </div>
+    <!-- ✅ 처음부터 인사말 박혀 있음 -->
+    <textarea id="chatLog" readonly>봇: 안녕하세요! MES 고객센터입니다 😊
+궁금한 점을 물어봐주세요♡
 
-    const size = 10; // 페이지당 10개
-    const getRows = () => Array.from(tbody.querySelectorAll('tr'));
+</textarea><br>
+    <input type="text" id="userInput" placeholder="메시지를 입력하세요" />
+    <button id="sendBtn" onclick="sendMessage()">전송</button>
+  </div>
 
-    // URL ?page= 를 초기 페이지로 사용(옵션)
-    function getInitialPage(){
-      const p = parseInt(new URLSearchParams(location.search).get('page'), 10);
-      return Number.isFinite(p) && p > 0 ? p : 1;
-    }
-    let page = getInitialPage();
-
-    function calcTotalPages(){
-      const rows = getRows();
-      const t = Math.ceil((rows.length || 0) / size);
-      // ✅ 최소 1페이지는 유지해서 페이징 바가 절대 사라지지 않도록
-      return Math.max(1, t);
+  <script>
+    function toggleChatbot() {
+      const popup = document.getElementById("chatbotPopup");
+      popup.style.display = (popup.style.display === "none" || popup.style.display === "") 
+        ? "block" : "none";
     }
 
-    function render(){
-      const rows = getRows();
-      const total = calcTotalPages();
+    async function sendMessage() {
+      const userText = document.getElementById("userInput").value;
+      if (!userText.trim()) return;
 
-      // ✅ 항상 보이게 (이 줄 때문에 사라졌었음)
-      // pager.style.display = (total <= 1) ? 'none' : 'flex';  // 제거!
+      const chatLog = document.getElementById("chatLog");
+      chatLog.value += "사용자: " + userText + "\n";
 
-      // 경계 보정
-      if(page > total) page = total;
-      if(page < 1) page = 1;
-
-      // 표시/비표시
-      const start = (page - 1) * size;
-      const end   = start + size;
-      rows.forEach((tr, i) => {
-        tr.style.display = (i >= start && i < end) ? '' : 'none';
+      const res = await fetch("<c:out value='${ctx}'/>/chatbot", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "message=" + encodeURIComponent(userText)
       });
 
-      // 숫자 버튼 생성 (최소 1개는 보장)
-      numsBox.innerHTML = '';
-      const maxBtns = Math.min(total, 7);
-      let startP = Math.max(1, page - Math.floor(maxBtns/2));
-      let endP   = Math.min(total, startP + maxBtns - 1);
-      if(endP - startP + 1 < maxBtns){
-        startP = Math.max(1, endP - maxBtns + 1);
-      }
-      for(let p = startP; p <= endP; p++){
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'page-number-btn' + (p === page ? ' active' : '');
-        b.textContent = p;
-        if(p === page) b.setAttribute('aria-current', 'page');
-        b.addEventListener('click', () => { page = p; render(); });
-        numsBox.appendChild(b);
-      }
+      const data = await res.json();
+      const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "응답 없음";
 
-      // 화살표 버튼 상태
-      btnFirst.disabled = (page === 1);
-      btnPrev.disabled  = (page === 1);
-      btnNext.disabled  = (page === total);
-      btnLast.disabled  = (page === total);
+      chatLog.value += "봇: " + botReply + "\n";
+      document.getElementById("userInput").value = "";
+      chatLog.scrollTop = chatLog.scrollHeight; // ✅ 스크롤 자동 하단 이동
     }
+  </script>
 
-    // 화살표 핸들러
-    btnFirst.addEventListener('click', () => { page = 1; render(); });
-    btnPrev .addEventListener('click', () => { page -= 1; render(); });
-    btnNext .addEventListener('click', () => { page += 1; render(); });
-    btnLast .addEventListener('click', () => { page = calcTotalPages(); render(); });
-
-    render();
-  })();
-</script>
- 
 </body>
 </html>

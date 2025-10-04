@@ -228,7 +228,7 @@ input[type="number"] {
 			<div class="row">
 				<label for="itemId">품목 선택</label> <select id="itemId" name="itemId"
 					required>
-					<option value="">-- 품목을 선택하세요 --</option>
+					<option value="">품목 선택</option>
 					<c:forEach var="item" items="${itemList}">
 						<c:if test="${item.type ne 'FG'}">
 							<option value="${item.id}">${item.name}(ID:${item.id})</option>

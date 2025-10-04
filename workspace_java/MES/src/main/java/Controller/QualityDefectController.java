@@ -37,7 +37,7 @@ public class QualityDefectController extends HttpServlet {
                 }
             }
 
-            // ✅ 불량 현황 (코드별 발생건수 + 총 불량수량 + 요약)
+            // ✅ 불량 현황
             if ("status".equals(action)) {
                 String searchStart = request.getParameter("searchStart");
                 String searchEnd = request.getParameter("searchEnd");
@@ -66,7 +66,7 @@ public class QualityDefectController extends HttpServlet {
             List<QualityDefectDTO> thisWeekResults = service.getThisWeekResults();
             request.setAttribute("thisWeekResults", thisWeekResults);
 
-            List<CodeDetailDTO> defectCodes = service.getDefectCodes(); // DEF만 가져옴
+            List<CodeDetailDTO> defectCodes = service.getDefectCodes();
             request.setAttribute("defectCodes", defectCodes);
 
             request.getRequestDispatcher("/WEB-INF/views/QualityDefect.jsp")
@@ -125,12 +125,13 @@ public class QualityDefectController extends HttpServlet {
             boolean success = service.insertDefect(dto);
 
             if (success) {
-                // ✅ 등록 완료 알림만 띄우고 등록 페이지 유지
+                // ✅ 등록 완료
                 response.setContentType("text/html; charset=UTF-8");
                 response.getWriter().println("<script>alert('등록 완료'); location.href='" 
                         + request.getContextPath() + "/quality/new';</script>");
             } else {
-                request.setAttribute("errorMsg", "수량을 확인해주세요");
+                // ✅ DAO에서 false 리턴된 경우 (수량 부족 → 롤백됨)
+                request.setAttribute("errorMsg", "등록 실패: 불량 수량이 현재 남은 수량보다 큽니다.");
                 doGet(request, response);
             }
         } catch (NumberFormatException nfe) {

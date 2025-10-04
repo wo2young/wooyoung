@@ -275,7 +275,7 @@ html, body {
 <div class="row">
   <label for="itemId">품목</label>
   <select id="itemId" name="itemId" required>
-    <option value="">-- FG 품목 선택 --</option>
+    <option value="">제품 선택</option>
     <c:forEach var="it" items="${items}">
       <option value="${it.item_id}">
         <c:out value="${it.item_name}"/>
@@ -329,10 +329,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var $item = document.getElementById('itemId');
   var $loc  = document.getElementById('locationName');
   var $lot  = document.getElementById('lotNo');
+  var $qty  = document.getElementById('qty');
+  let currentStock = 0;
 
-  // 초기 상태
   $lot.disabled = true;
-
   $item.addEventListener('change', loadLots);
   $loc.addEventListener('change', loadLots);
 
@@ -343,6 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if(!itemId || !loc){
       $lot.innerHTML = '<option value="">먼저 품목과 LOCATION을 선택하세요</option>';
       $lot.disabled = true;
+      currentStock = 0;
       return;
     }
 
@@ -360,6 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!Array.isArray(list) || list.length === 0) {
         $lot.innerHTML = '<option value="">해당 조건의 LOT이 없습니다</option>';
         $lot.disabled = true;
+        currentStock = 0;
         return;
       }
 
@@ -367,7 +369,8 @@ document.addEventListener('DOMContentLoaded', function () {
       list.forEach(function(row){
         var label = row.expire ? (row.lotNo + ' / 잔량 ' + row.qty + ' / 유통기한 ' + row.expire)
                                : (row.lotNo + ' / 잔량 ' + row.qty);
-        opts.push('<option value="' + row.lotNo + '">' + label + '</option>');
+        // ✅ data-qty 속성에 잔량 저장
+        opts.push('<option value="' + row.lotNo + '" data-qty="' + row.qty + '">' + label + '</option>');
       });
       $lot.innerHTML = opts.join('');
       $lot.disabled = false;
@@ -375,48 +378,63 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error(e);
       $lot.innerHTML = '<option value="">LOT 조회 오류</option>';
       $lot.disabled = true;
+      currentStock = 0;
     }
   }
 
-  /* ✅ 알림은 유지, 제출은 확실히 진행
-     - 클릭 리스너 제거(버튼을 먼저 disable 하면 네이티브 submit이 취소될 수 있음)
-     - submit 이벤트 안에서만 alert → 그 후 programmatic submit
-  */
+//LOT 선택 시 잔량 저장
+  $lot.addEventListener('change', function(){
+    const opt = $lot.options[$lot.selectedIndex];
+    currentStock = opt ? parseFloat(opt.getAttribute('data-qty')) || 0 : 0;
+    $qty.value = '';
+    if (currentStock > 0) {
+      $qty.setAttribute('max', currentStock);   // 브라우저 기본 제약
+    } else {
+      $qty.removeAttribute('max');
+    }
+  });
+
+  // 출고 수량 입력 시 초과 방지 (alert 없음)
+  $qty.addEventListener('input', function(){
+    let v = parseFloat($qty.value) || 0;
+    if (currentStock && v > currentStock) {
+      $qty.value = currentStock;  // 최대값으로 자동 보정
+    } else if (v < 0) {
+      $qty.value = 0;             // 음수 → 0
+    }
+  });
+
+  // 제출 시 중복 방지 + 알림
   var form = document.querySelector('form[action*="/inventory/out/new"]');
   if (form) {
     var submitBtn = form.querySelector('button[type="submit"]');
     var isSubmitting = false;
 
     form.addEventListener('submit', function(e){
-      // 브라우저 기본 검증 먼저 통과시키기
       if (form.checkValidity && !form.checkValidity()) return;
-      // 중복 제출 방지
       if (isSubmitting) { e.preventDefault(); return; }
 
-      // 기본 제출을 잠시 막고, 알림 후 programmatic submit
       e.preventDefault();
       isSubmitting = true;
 
       alert('출고 등록이 완료되었습니다.');
+      if (submitBtn) submitBtn.disabled = true;
 
-      if (submitBtn) submitBtn.disabled = true; // 여기서 비활성화 (클릭 전에 비활성화 금지)
-
-      // 네이티브 제출 호출 (재귀 방지)
       HTMLFormElement.prototype.submit.call(form);
     });
   }
 
-  // ✅ reset 버튼
+  // reset 버튼
   window.resetForm = function(){
     if (!form) return;
     form.reset();
     $lot.innerHTML = '<option value="">먼저 품목과 창고를 선택하세요</option>';
     $lot.disabled = true;
+    currentStock = 0;
     var submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = false;
   };
 });
 </script>
-
 </body>
 </html>

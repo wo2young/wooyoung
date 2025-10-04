@@ -1,13 +1,26 @@
 package Service;
 
 import DAO.MasterDataBomDAO;
+import DAO.ProductionOrderDAO;
 import yaDTO.BomDTO;
 import yaDTO.BomViewDTO;
 import java.util.List;
 
 public class MasterDataBomService {
     private final MasterDataBomDAO dao = new MasterDataBomDAO();
+    private ProductionOrderDAO orderDao = new ProductionOrderDAO();
 
+    public List<BomViewDTO> getByOrder(int orderId) {
+        try {
+            int itemId = orderDao.findItemIdByOrder(orderId).orElse(-1);
+            if (itemId == -1) return List.of();
+            return dao.listViewByParent(itemId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+    
     public List<BomViewDTO> listView() {
         try {
             return dao.listView();

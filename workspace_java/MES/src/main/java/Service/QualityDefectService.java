@@ -11,12 +11,17 @@ import java.util.Map;
 public class QualityDefectService {
     private final QualityDefectDAO dao = new QualityDefectDAO();
 
-    // ✅ 불량 등록
+    // ✅ 불량 등록 (DAO에서 FAIL_QTY 부족 시 false 반환)
     public boolean insertDefect(QualityDefectDTO dto) {
-        return dao.insert(dto);
+        try {
+            return dao.insert(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // 예외 발생 시 실패 처리
+        }
     }
 
-    // ✅ 이번주 실적번호 목록 가져오기
+    // ✅ 전체 실적번호 + FAIL_QTY 가져오기
     public List<QualityDefectDTO> getThisWeekResults() {
         return dao.getThisWeekResults();
     }

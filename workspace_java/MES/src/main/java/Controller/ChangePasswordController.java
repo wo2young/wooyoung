@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/change-password")
+@WebServlet("/change-password") 
 public class ChangePasswordController extends HttpServlet {
     private final UserDAO userDAO = new UserDAO();
 
-    private static final String JSP = "/WEB-INF/views/mypage.jsp";
+    private static final String JSP = "/WEB-INF/views/dashboard.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -17,6 +17,7 @@ public class CodeMasterDTO {
 	public void setCode_name(String code_name) {
 		this.code_name = code_name;
 	}
+	
 	@Override
 	public String toString() {
 		return "codeMasterDTO [code_id=" + code_id + ", code_name=" + code_name + "]";

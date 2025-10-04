@@ -13,6 +13,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/order")
@@ -62,30 +63,84 @@ public class ProductionOrderController extends HttpServlet {
         }
 
         try {
-            switch (act) {
-                case "order.list": {
-                    int targetItemId = ip(req.getParameter("targetItemId")); // Target 필터
-                    int itemId = ip(req.getParameter("itemId"));             // Order 필터
-                    String status = nv(req.getParameter("status"), "ALL");
+        	switch (act) {
+            case "order.list": {
+                // ====== 필터 ======
+                int targetItemId = ip(req.getParameter("targetItemId")); // 생산목표 필터
+                int itemId       = ip(req.getParameter("itemId"));       // 생산지시 필터
+                String status    = nv(req.getParameter("status"), "ALL");
 
-                    List<ProductionTargetDTO> targets = targetSvc.getTargetList();
-                    targets.removeIf(t -> "완료".equals(t.getStatus()));
-                    if (targetItemId > 0) {
-                        targets.removeIf(t -> t.getItem_id() != targetItemId);
-                    }
+                // ====== 생산지시(아래 표) 페이징 ======
+                int page = ip(req.getParameter("page"));
+                if (page < 1) page = 1;
+                int pageSize = ip(req.getParameter("pageSize"));
+                if (pageSize <= 0) pageSize = 20;
 
-                    List<ProductionOrderDTO> orders = orderSvc.listOrders(itemId, status);
-                    List<ItemMasterDTO> itemList = orderSvc.getTargetItems();
+                int totalOrders = orderSvc.countTotalOrders(itemId, status);
+                int totalPages  = (int) Math.ceil(totalOrders / (double) pageSize);
+                if (totalPages == 0) totalPages = 1;
+                if (page > totalPages) page = totalPages;
 
-                    req.setAttribute("targets", targets);
-                    req.setAttribute("orders", orders);
-                    req.setAttribute("itemList", itemList);
-                    req.setAttribute("targetItemSel", targetItemId);
-                    req.setAttribute("itemSel", itemId);
-                    req.setAttribute("statusSel", status);
-                    req.getRequestDispatcher("/WEB-INF/views/order.jsp").forward(req, resp);
-                    break;
+                List<ProductionOrderDTO> orders =
+                        orderSvc.listOrders(itemId, status, page, pageSize);
+
+                // ====== 생산목표(위 표) 페이징 (JSP 변수명과 일치: targetPage / totalTargetPages) ======
+                int targetPage = ip(req.getParameter("targetPage"));
+                if (targetPage < 1) targetPage = 1;
+                int targetPageSize = ip(req.getParameter("targetPageSize"));
+                if (targetPageSize <= 0) targetPageSize = 20;
+
+                List<ProductionTargetDTO> allTargets = targetSvc.getTargetList();
+                if (allTargets == null) allTargets = new ArrayList<>();
+
+                // 완료 제외
+                allTargets.removeIf(t -> "완료".equals(t.getStatus()));
+                // 선택 품목 필터
+                if (targetItemId > 0) {
+                    final int sel = targetItemId;
+                    allTargets.removeIf(t -> t.getItem_id() != sel);
                 }
+
+                int totalTargets = allTargets.size();
+                int totalTargetPages = (totalTargets == 0) ? 0
+                        : (int) Math.ceil(totalTargets / (double) targetPageSize);
+                if (totalTargetPages > 0 && targetPage > totalTargetPages) {
+                    targetPage = totalTargetPages;
+                }
+
+                int from = (targetPage - 1) * targetPageSize;
+                int to   = Math.min(from + targetPageSize, totalTargets);
+                List<ProductionTargetDTO> targets =
+                        (totalTargets == 0) ? new ArrayList<>()
+                                : allTargets.subList(from, to);
+
+                // 드롭다운 데이터
+                List<ItemMasterDTO> itemList = orderSvc.getTargetItems();
+
+                // ====== View 바인딩 ======
+                // 생산목표(위)
+                req.setAttribute("targets", targets);
+                req.setAttribute("targetPage", targetPage);
+                req.setAttribute("totalTargetPages", totalTargetPages);
+                req.setAttribute("targetItemSel", targetItemId);
+                req.setAttribute("targetPageSize", targetPageSize);
+
+                // 생산지시(아래)
+                req.setAttribute("orders", orders);
+                req.setAttribute("page", page);
+                req.setAttribute("totalPages", totalPages);
+                req.setAttribute("totalOrders", totalOrders);
+                req.setAttribute("pageSize", pageSize);
+                req.setAttribute("itemSel", itemId);
+                req.setAttribute("statusSel", status);
+
+                // 공통
+                req.setAttribute("itemList", itemList);
+
+                req.getRequestDispatcher("/WEB-INF/views/order.jsp").forward(req, resp);
+                break;
+            }
+
 
                 case "order.create": {
                     ProductionOrderDTO dto = new ProductionOrderDTO();

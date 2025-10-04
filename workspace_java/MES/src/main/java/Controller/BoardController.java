@@ -61,6 +61,8 @@ public class BoardController extends HttpServlet {
             addComment(req, resp);
         } else if ("/comment/delete".equals(path)) {
             deleteComment(req, resp);
+        } else if ("/comment/update".equals(path)) {
+            updateComment(req, resp);   // ✅ 댓글 수정 추가
         } else if ("/like/toggle".equals(path)) {
             toggleLike(req, resp);
         } else {
@@ -71,13 +73,21 @@ public class BoardController extends HttpServlet {
     // -------------------- handlers --------------------
     private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            Long uid = requireLoginUserIdOrRedirect(req, resp);
+            if (uid == null) return;
+
             Integer categoryId = parseIntOrNull(req.getParameter("categoryId"));
             String keyword = nullIfBlank(req.getParameter("keyword"));
             int page = parseIntOrDefault(req.getParameter("page"), 1);
-            int size = parseIntOrDefault(req.getParameter("size"), 10);
+            int size = parseIntOrDefault(req.getParameter("size"), 20);
 
             var posts = svc.list(categoryId, keyword, page, size);
             int total = svc.count(categoryId, keyword);
+            int totalPages = (int) Math.ceil((double) total / size);
+
+            int blockSize = 5;
+            int startPage = ((page - 1) / blockSize) * blockSize + 1;
+            int endPage = Math.min(startPage + blockSize - 1, totalPages);
 
             req.setAttribute("categories", svc.categories());
             req.setAttribute("selectedCategoryId", categoryId);
@@ -87,6 +97,10 @@ public class BoardController extends HttpServlet {
             req.setAttribute("page", page);
             req.setAttribute("size", size);
             req.setAttribute("total", total);
+            req.setAttribute("totalPages", totalPages);
+            req.setAttribute("startPage", startPage);
+            req.setAttribute("endPage", endPage);
+
             req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException(e);
@@ -95,6 +109,9 @@ public class BoardController extends HttpServlet {
 
     private void view(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            Long uid = requireLoginUserIdOrRedirect(req, resp);
+            if (uid == null) return;
+
             long postId = Long.parseLong(req.getParameter("id"));
             var post = svc.view(postId, true);
             var comments = svc.comments(postId);
@@ -115,7 +132,12 @@ public class BoardController extends HttpServlet {
             int categoryId = Integer.parseInt(req.getParameter("categoryId"));
             String title   = req.getParameter("title");
             String content = req.getParameter("content");
-            String isNotice= "Y".equals(req.getParameter("isNotice")) ? "Y" : "N";
+
+            boolean isAdmin = Boolean.TRUE.equals(req.getSession().getAttribute("isAdmin"));
+            String isNotice = "N";
+            if (isAdmin) {
+                isNotice = "Y".equals(req.getParameter("isNotice")) ? "Y" : "N";
+            }
 
             BoardPostDTO d = new BoardPostDTO();
             d.setCategoryId(categoryId);
@@ -164,7 +186,12 @@ public class BoardController extends HttpServlet {
             d.setCategoryId(Integer.parseInt(req.getParameter("categoryId")));
             d.setTitle(req.getParameter("title"));
             d.setContent(req.getParameter("content"));
-            d.setIsNotice("Y".equals(req.getParameter("isNotice")) ? "Y" : "N");
+
+            String isNotice = "N";
+            if (isAdmin) {
+                isNotice = "Y".equals(req.getParameter("isNotice")) ? "Y" : "N";
+            }
+            d.setIsNotice(isNotice);
 
             svc.edit(d, uid, isAdmin);
             resp.sendRedirect(req.getContextPath()+"/board/view?id="+d.getPostId());
@@ -174,20 +201,21 @@ public class BoardController extends HttpServlet {
         }
     }
 
-    // 게시글 삭제: 작성자 본인만 (관리자 우회 금지)
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Long uid = requireLoginUserIdOrRedirect(req, resp); if (uid == null) return;
             long postId = Long.parseLong(req.getParameter("postId"));
-            int affected = svc.delete(postId, uid);
+            boolean isAdmin = Boolean.TRUE.equals(req.getSession().getAttribute("isAdmin"));
+
+            int affected = svc.delete(postId, uid, isAdmin);
             if (affected == 0) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+
             resp.sendRedirect(req.getContextPath()+"/board");
         } catch (Exception e) {
             throw new ServletException(e);
         }
     }
 
-    // 댓글 작성: 대댓글 금지 로직은 Service에서 depth 체크
     private void addComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.setCharacterEncoding("utf-8");
@@ -207,14 +235,36 @@ public class BoardController extends HttpServlet {
         }
     }
 
-    // 댓글 삭제: 작성자 본인만 (관리자 우회 금지)
     private void deleteComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Long uid = requireLoginUserIdOrRedirect(req, resp); if (uid == null) return;
             long commentId = Long.parseLong(req.getParameter("commentId"));
             long postId = Long.parseLong(req.getParameter("postId"));
-            int affected = svc.deleteComment(commentId, uid);
+            boolean isAdmin = Boolean.TRUE.equals(req.getSession().getAttribute("isAdmin"));
+
+            int affected = svc.deleteComment(commentId, uid, isAdmin);
             if (affected == 0) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+
+            resp.sendRedirect(req.getContextPath()+"/board/view?id="+postId+"#comments");
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
+    }
+
+    // 📌 댓글 수정
+    private void updateComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            req.setCharacterEncoding("utf-8");
+            Long uid = requireLoginUserIdOrRedirect(req, resp); if (uid == null) return;
+
+            long commentId = Long.parseLong(req.getParameter("commentId"));
+            long postId = Long.parseLong(req.getParameter("postId"));
+            String content = req.getParameter("content");
+            boolean isAdmin = Boolean.TRUE.equals(req.getSession().getAttribute("isAdmin"));
+
+            int affected = svc.updateComment(commentId, content, uid, isAdmin);
+            if (affected == 0) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+
             resp.sendRedirect(req.getContextPath()+"/board/view?id="+postId+"#comments");
         } catch (Exception e) {
             throw new ServletException(e);
@@ -231,11 +281,4 @@ public class BoardController extends HttpServlet {
             throw new ServletException(e);
         }
     }
-
-    // =========================
-    // 전체 정리
-    // - 라우팅/정책은 기존과 동일
-    // - 댓글 작성은 Service에서 depth 검증 → DAO 단순 INSERT
-    // - 화면 들여쓰기는 DTO.level(1/2)로 처리 가능
-    // =========================
 }

@@ -204,13 +204,14 @@ h3{ margin:16px 0 12px; }
           <select id="order-id" name="order_id" required>
             <option value="">-- 생산지시를 선택하세요 --</option>
             <c:forEach var="o" items="${orders}">
-              <option value="${o.order_id}">
-                #<c:out value="${o.order_id}"/>
-                <c:if test="${not empty o.item_name}">&nbsp;|&nbsp;<c:out value="${o.item_name}"/></c:if>
-                &nbsp;- 잔량 <fmt:formatNumber value="${o.remain_qty}"/>
-                <c:if test="${not empty o.due_date}">&nbsp;(마감 <fmt:formatDate value="${o.due_date}" pattern="yyyy-MM-dd"/>)</c:if>
-                <c:if test="${not empty o.status}">&nbsp;[<c:out value="${o.status}"/>]</c:if>
-              </option>
+              <option value="${o.order_id}" data-target="${o.remain_qty}">
+  					지시번호 : <c:out value="${o.order_id}"/>
+  					<c:if test="${not empty o.item_name}">&nbsp;|&nbsp;<c:out value="${o.item_name}"/></c:if>
+ 					 &nbsp;- 목표량 <fmt:formatNumber value="${o.remain_qty}"/>
+					  <c:if test="${not empty o.due_date}">
+					    &nbsp;(마감 <fmt:formatDate value="${o.due_date}" pattern="yyyy-MM-dd"/>)
+					  </c:if>
+					</option>
             </c:forEach>
           </select>
         </div>
@@ -235,6 +236,43 @@ h3{ margin:16px 0 12px; }
 </main>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+	  const orderSel = document.getElementById('order-id');
+	  const goodInp  = document.getElementById('good-ea');
+	  const failInp  = document.getElementById('fail-ea');
+	  let targetQty  = 0;
+
+	  // 지시 선택 시 목표수량 저장
+	  orderSel.addEventListener('change', function() {
+	    const opt = orderSel.options[orderSel.selectedIndex];
+	    targetQty = parseInt(opt.getAttribute('data-target')) || 0;
+	    goodInp.value = '';
+	    failInp.value = '';
+	  });
+
+	  // 자동 계산 및 최대값 제한
+	  function recalc(e) {
+	    if (!targetQty) return;
+
+	    let g = parseInt(goodInp.value) || 0;
+	    let f = parseInt(failInp.value) || 0;
+
+	    if (e.target === goodInp) {
+	      if (g > targetQty) g = targetQty; // 최대값 제한
+	      goodInp.value = g;
+	      failInp.value = targetQty - g;
+	    } else if (e.target === failInp) {
+	      if (f > targetQty) f = targetQty; // 최대값 제한
+	      failInp.value = f;
+	      goodInp.value = targetQty - f;
+	    }
+	  }
+
+	  goodInp.addEventListener('input', recalc);
+	  failInp.addEventListener('input', recalc);
+	});
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form[action*="/result/new"]');
   if (!form) return;
