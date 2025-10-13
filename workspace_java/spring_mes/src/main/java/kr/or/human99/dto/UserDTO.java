@@ -21,6 +21,9 @@ public class UserDTO {
     private String user_role;     // 역할 (Admin / Manager / Worker)
     private Timestamp created_at; // 생성일
     private Timestamp updated_at; // 수정일
+    
+    private String email; // 추후 메일 발송용
+    // phone, birth_date, postal_code, address, address_detail
 
     // 비밀번호 초기화용
     private String reset_token;

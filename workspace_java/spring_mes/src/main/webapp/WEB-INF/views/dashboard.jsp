@@ -90,6 +90,42 @@ body {
 
 	<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+	<c:if test="${not empty msg}">
+		<div id="flashMsg">${msg}</div>
+
+		<style>
+#flashMsg {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(46, 204, 113, 0.9);
+	color: white;
+	font-weight: bold;
+	padding: 15px 25px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	font-size: 18px;
+	z-index: 9999;
+	text-align: center;
+	transition: opacity 1s ease-out;
+}
+</style>
+
+		<script>
+    // 3초 후 메시지 서서히 사라지기
+    setTimeout(() => {
+      const msg = document.getElementById('flashMsg');
+      if (msg) {
+        msg.style.opacity = '0';
+        setTimeout(() => msg.remove(), 1000); // 완전히 사라진 후 제거
+      }
+    }, 1500);
+  </script>
+	</c:if>
+
 	<main class="wrap">
 		<h2>대시보드</h2>
 
@@ -136,6 +172,8 @@ body {
 			</div>
 		</div>
 	</main>
+
+
 
 	<script>
 	// 공통 Chart.js 옵션

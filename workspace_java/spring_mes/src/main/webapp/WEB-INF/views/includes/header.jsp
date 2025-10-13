@@ -17,6 +17,8 @@
 <c:set var="uri" value="${pageContext.request.requestURI != null ? pageContext.request.requestURI : ''}" />
 <c:set var="isBoard" value="${fn:startsWith(uri, cxt.concat('/board'))}" />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
 <style>
 :root {
   /* 버튼 공통 */
