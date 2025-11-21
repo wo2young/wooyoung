@@ -44,6 +44,7 @@ print(a.count('b')) # 몇 번 들어가 있는지 셈
 
 print(a.find('b')) # 최초로 만나는 index(위치) 반환(0부터 시작)
 print(a.find('x')) # 없으면 -1 반환, index()도 비슷한데 없으면 에러
+print(a.rfind('b')) # 뒤에서 부터 최초로 만나는 index 반환
 
 b = 'abcd'
 c = ';'
@@ -58,7 +59,7 @@ b = a.replace('b', '!')
 print(b)
 
 a = "Life is too short"
-b = a.split()   # 글씨를 배영로 만들어 줌
+b = a.split()   # 글씨를 배열로 만들어 줌
 c = a.split(' ') # 전달인자가 없는 경우 기본값 공백
 print(a, b, c)
 
@@ -68,3 +69,5 @@ print(d)
 a = 'https://naver.com'
 print( a.startswith('https'))
 print( a.endswith('.net'))
+
+print('naver' in a)
