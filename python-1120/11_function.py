@@ -162,4 +162,11 @@ def testDebug(x, y) :
 
 testDebug(1,2)
 
+
+# TODO : 일단 실험용
+def uiui() :
+    a = a +1
+    
+    
+
     
