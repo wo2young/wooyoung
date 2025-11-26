@@ -133,13 +133,13 @@ vartest3()
 print(a)
 
 # 람다 lambda
-x = 3
-def test_sqr(x) :
-    return x ** 2
-a = test_sqr(x)
-a = lambda x: x ** 2
+# x = 3
+# def test_sqr(x) :
+#     return x ** 2
+# a = test_sqr(x)
+# a = lambda x: x ** 2
 
-test_sqr(lambda x: x ** 2)
+# test_sqr(lambda x: x ** 2)
 
 def test(x, y) :
     '''
