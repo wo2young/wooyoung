@@ -107,3 +107,59 @@ def test4(c) :
     c = [1,2,3,4,5]
 test4(c)
 print(c)
+
+# 전역 변수를 바꾸는 방법
+## 방법 1
+a = 1
+def vartest(a) :
+    a = a + 1
+    return a
+
+a = vartest(a)
+print(a)
+
+# 방법 2
+a = 1
+def vartest2() :
+    global a # =을 이용해서 값을 변경할 때 만 global을 쓰면 된다
+    a = a + 1
+    
+vartest2()
+print(a)
+
+def vartest3() :
+    a = 3
+vartest3()
+print(a)
+
+# 람다 lambda
+x = 3
+def test_sqr(x) :
+    return x ** 2
+a = test_sqr(x)
+a = lambda x: x ** 2
+
+test_sqr(lambda x: x ** 2)
+
+def test(x, y) :
+    '''
+        함수 설명
+        
+        Args :
+        Parameters :
+            x : int 첫번째 값
+            y : int 두번째 값
+        Returns :
+            integer 두 값을 더한 값
+    '''
+    return x + y
+test(1,2)
+
+def testDebug(x, y) :
+    x = x + 3
+    y = y + 3
+    return y
+
+testDebug(1,2)
+
+    
