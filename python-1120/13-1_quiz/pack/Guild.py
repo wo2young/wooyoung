@@ -12,7 +12,7 @@ class Guild :
                 print(self.users[i]._id, end="")
                 if i+1 == len(self.users) :
                     print("") 
-                                 
+
     def getRanker(self) :
         if len(self.users) == 0 :
             print("유저가 없습니다.")
@@ -26,7 +26,7 @@ class Guild :
             print("우리 길드 랭커 : ", end="")
             return b
     
-    def getBestSalse(self) :
+    def getBestSales(self) :
         if len(self.users) == 0 :
             print("유저가 없습니다.")
             return None

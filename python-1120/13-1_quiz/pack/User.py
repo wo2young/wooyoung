@@ -29,6 +29,11 @@ class User :
         print("id : ", self._id, end=" / ")
         print("level : ", self._level, end=" / ")
         print("inven", self._inven)
+        
+    def __str__(self) :
+        return f'(str)User(id:{self._id}, level:{self._level}, inven:{self._inven})'
     
+    def __repr__(self) :
+        return f'(repr)User(id:{self._id}, level:{self._level}, inven:{self._inven})'
 
 

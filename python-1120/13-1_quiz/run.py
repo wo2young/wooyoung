@@ -11,6 +11,8 @@ u3 = User("C", 12, ["너클"])
 u4 = User("D", 17, ["단검"])
 u5 = User("E", 22, ["지팡이", "모자", "물약"])
 
+print(u1)
+
 users = [u1, u2, u3, u4, u5]
 
 u1.printInfo()
@@ -26,5 +28,5 @@ for u in users :
 # 출력 테스트
 guild.GuildList()          # 전체 유저 리스트
 print(guild.getRanker())   # 가장 레벨 높은 유저
-print(guild.getBestSalse()) # 가장 inven이 큰 유저
+print(guild.getBestSales()) # 가장 inven이 큰 유저
 
