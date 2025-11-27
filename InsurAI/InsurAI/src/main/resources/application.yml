@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/insurai  # DB 이름(원하면 변경)
+    url: jdbc:postgresql://192.168.1.99:5432/insurai  # DB 이름(원하면 변경)
     username: postgres   # DB 사용자 이름
-    password: rladndud       # DB 비밀번호
+    password: tmshdlwls12       # DB 비밀번호
 
   jpa:
     hibernate:
