@@ -8,6 +8,9 @@ print(sub(1,2))
 
 import sys
 print(sys.path) # 모듈을 가져오는 경로 확인 
+print("-" * 20)
+print(sys.modules.keys())
+print("-" * 20)
 
 import folder.calc
 folder.calc.add()
