@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>로그인</h1>
+    <div>
+        <!-- <form method="get" action="login_check"> -->
+        <form method="get" action="login_check2">
+            아이디 : <input type="text" name="id"> <br>
+            비번 : <input type="text" name="pw"> <br>
+            <br>
+            <input type="submit" value="로그인"> <br>
+        </form>
+    </div>
+    <hr>
+    <div>
+        <h1>회원가입</h1>
+        id : <input type="text" id="id"><br>
+        pw : <input type="text" id="pw"><br>
+        <input type="button" value="가입" id="join"><br>
+    </div>
+    <script>
+        document.querySelector('#join').addEventListener('click', function(){
+            console.log('가입 버튼 클릭')
+            const id = document.querySelector('#id').value
+            const pw = document.querySelector('#pw').value
+            const param = {
+                id : id,
+                pw : pw
+            }
+            console.log(param)
+
+            // const chr = new XMLHttpRequest()
+            fetch('/join', {
+                method: 'post',
+                headers : {'Content-Type':'application/json'}, // json 보낼 때 필수
+                body : JSON.stringify(param)
+            })
+            .then( resp => resp.json())
+            .then(result => {
+                consol.log('응답', result)
+                consol.log(result.id)
+                consol.log(result.response)
+            })
+            .catch( function(err){
+                console.log('에러',err)
+            })
+        })
+    </script>
+</body>
+</html>
