@@ -9,7 +9,7 @@ bp = Blueprint("board", __name__)
 @bp.route("/")
 def list_page() :
     rows = selectAll()
-    return render_template("list.html", info=rows)
+    return render_template("list.html", rows=rows)
 
 
 # ====== 글쓰기 화면 ======
