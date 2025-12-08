@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp">
+
+	<select id="selectEmp" resultType="kr.or.human4.dto.EmpDTO">
+		select * from emp2
+	</select>
+
+<!-- 	<select id="selectOneEmp" resultType="kr.or.human4.dto.EmpDTO"> -->
+	<select id="selectOneEmp" resultType="empDTO">
+		select * from emp2
+		where empno = 7788
+	</select>
+
+<!-- 	<select id="selectOneEmpMap" resultType="java.util.HashMap"> -->
+	<select id="selectOneEmpMap" resultType="hashMap">
+		select * from emp2
+		where empno = 7788
+	</select>
+	
+<!-- 	<select id="selectEmpno" resultType="empDTO" parameterType="java.lang.Integer"> -->
+	<select id="selectEmpno" resultType="empDTO" parameterType="int">
+		select * from emp2
+		where empno = #{_parameter}
+	</select>
+
+<!-- 	<select id="selectEname" resultType="empDTO" parameterType="java.lang.String"> -->
+	<select id="selectEname" resultType="empDTO" parameterType="string">
+		select * from emp2
+		where upper(ename) like upper('%' || #{_parameter} || '%')
+	</select>
+	
+	<select id="selectJob" resultType="empDTO" parameterType="string">
+		select * from emp2
+		where job = #{_parameter}
+		<!--
+			#{ } : ''를 자동으로 붙여 줌
+			where ename = 'KING'
+			where empno = 1234
+			
+			${ } : ''를 안붙임
+			where ename = KING
+			where ename = '${_parameter}'
+			where ename = '' or '1' != '2'
+		 -->
+	</select>
+	
+	<select id="selectEmpnoEname" resultType="empDTO" parameterType="empDTO">
+		select * from emp2
+		where empno = #{empno} and ename = #{ename}
+	</select>
+	
+	<select id="getSeqEmp2" resultType="int">
+		select seq_emp2.nextval from dual
+	</select>
+	
+	<!-- empno는 seq_emp2에서 따오고 나머지 정보를 넣는 insert 완성 -->
+	<insert id="insertEmp2" parameterType="empDTO">
+		INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		VALUES (seq_emp2.nextval, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	</insert>
+	
+	<update id="updateEmp2" parameterType="empDTO">
+		UPDATE emp2
+		SET	   ename = #{ename},
+		       job = #{job},
+		       mgr = #{mgr},
+		       hiredate = #{hiredate},
+		       sal = #{sal},
+		       comm = #{comm},
+		       deptno = #{deptno}
+		WHERE  empno = #{empno}
+	</update>
+	
+	<delete id="deleteEmp2" parameterType="empDTO">
+		DELETE emp2
+		WHERE  empno = #{empno}
+	</delete>
+	
+	
+	<insert id="insertEmp3" parameterType="empDTO">
+	
+		<selectKey resultType="int" keyProperty="empno" order="BEFORE">
+			select seq_emp2.nextval from dual
+		</selectKey>
+	
+		INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		VALUES (#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	</insert>
+	
+	
+	<insert id="insertEmp4" 
+		parameterType="empDTO" 
+		useGeneratedKeys="true" 
+		keyProperty="empno">
+		
+		INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		VALUES (seq_emp2.nextval, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	</insert>
+	
+</mapper>
