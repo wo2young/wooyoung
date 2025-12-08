@@ -1,0 +1,21 @@
+server:
+  port: 8080  # 서버 포트
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.1.99:5432/insurai  # DB 이름(원하면 변경)
+    username: postgres   # DB 사용자 이름
+    password: tmshdlwls12       # DB 비밀번호
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # create/update/validate 옵션 중 update 추천
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true       # 콘솔에 SQL 출력
+
+logging:
+  level:
+    org.hibernate.SQL: debug
