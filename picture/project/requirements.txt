@@ -16,4 +16,4 @@ watchfiles==1.1.1
 colorama==0.4.6
 
 # 위 라이브러리 다운로드 명령어
-pip install -r requirements.txt
+# pip install -r requirements.txt
