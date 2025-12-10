@@ -1,18 +1,21 @@
-from app.database import POOL
+# app/services/feed_service.py
+
+from sqlalchemy import text
+from app.database import async_session_maker
 
 
 # ---------------------------------------------------------
-# 공통: user_id 기준으로 접근 가능한 family_id 조회
+# 공통: user_id 기준 family_id 조회 SQL
 # ---------------------------------------------------------
 FAMILY_FILTER_SQL = """
     WITH related AS (
-        SELECT id FROM app_user WHERE id = %(user_id)s
+        SELECT id FROM app_user WHERE id = :user_id
         UNION
-        SELECT father_id FROM app_user WHERE id = %(user_id)s AND father_id IS NOT NULL
+        SELECT father_id FROM app_user WHERE id = :user_id AND father_id IS NOT NULL
         UNION
-        SELECT mother_id FROM app_user WHERE id = %(user_id)s AND mother_id IS NOT NULL
+        SELECT mother_id FROM app_user WHERE id = :user_id AND mother_id IS NOT NULL
         UNION
-        SELECT spouse_id FROM app_user WHERE id = %(user_id)s AND spouse_id IS NOT NULL
+        SELECT spouse_id FROM app_user WHERE id = :user_id AND spouse_id IS NOT NULL
     ),
     families AS (
         SELECT DISTINCT family_id
@@ -24,18 +27,18 @@ FAMILY_FILTER_SQL = """
 
 
 # ---------------------------------------------------------
-# 1) 최신순 Feed (사진 + 일기)
+# 1) 최신 피드 (사진 + 일기)
 # ---------------------------------------------------------
-def get_feed_latest(user_id: int):
-    sql = """
+async def get_feed_latest(user_id: int):
+    sql = text("""
         WITH related AS (
-            SELECT id FROM app_user WHERE id = %(user_id)s
+            SELECT id FROM app_user WHERE id = :user_id
             UNION
-            SELECT father_id FROM app_user WHERE id = %(user_id)s AND father_id IS NOT NULL
+            SELECT father_id FROM app_user WHERE id = :user_id AND father_id IS NOT NULL
             UNION
-            SELECT mother_id FROM app_user WHERE id = %(user_id)s AND mother_id IS NOT NULL
+            SELECT mother_id FROM app_user WHERE id = :user_id AND mother_id IS NOT NULL
             UNION
-            SELECT spouse_id FROM app_user WHERE id = %(user_id)s AND spouse_id IS NOT NULL
+            SELECT spouse_id FROM app_user WHERE id = :user_id AND spouse_id IS NOT NULL
         ),
         families AS (
             SELECT DISTINCT family_id
@@ -74,28 +77,26 @@ def get_feed_latest(user_id: int):
         ) x
         ORDER BY sort_date DESC
         LIMIT 50;
-    """
+    """)
 
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"user_id": user_id})
-            return cur.fetchall()
-
+    async with async_session_maker() as session:
+        result = await session.execute(sql, {"user_id": user_id})
+        return result.fetchall()
 
 
 # ---------------------------------------------------------
 # 2) 랜덤 피드 (사진만)
 # ---------------------------------------------------------
-def get_feed_random(user_id: int):
-    sql = """
+async def get_feed_random(user_id: int):
+    sql = text("""
         WITH related AS (
-            SELECT id FROM app_user WHERE id = %(user_id)s
+            SELECT id FROM app_user WHERE id = :user_id
             UNION
-            SELECT father_id FROM app_user WHERE id = %(user_id)s AND father_id IS NOT NULL
+            SELECT father_id FROM app_user WHERE id = :user_id AND father_id IS NOT NULL
             UNION
-            SELECT mother_id FROM app_user WHERE id = %(user_id)s AND mother_id IS NOT NULL
+            SELECT mother_id FROM app_user WHERE id = :user_id AND mother_id IS NOT NULL
             UNION
-            SELECT spouse_id FROM app_user WHERE id = %(user_id)s AND spouse_id IS NOT NULL
+            SELECT spouse_id FROM app_user WHERE id = :user_id AND spouse_id IS NOT NULL
         ),
         families AS (
             SELECT DISTINCT family_id
@@ -113,28 +114,26 @@ def get_feed_random(user_id: int):
         WHERE album_id IN (SELECT id FROM album_ids)
         ORDER BY RANDOM()
         LIMIT 20;
-    """
+    """)
 
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"user_id": user_id})
-            return cur.fetchall()
-
+    async with async_session_maker() as session:
+        result = await session.execute(sql, {"user_id": user_id})
+        return result.fetchall()
 
 
 # ---------------------------------------------------------
-# 3) 통합 Feed (type+value만 단순하게)
+# 3) 전체 Feed (사진 + 일기)
 # ---------------------------------------------------------
-def get_feed_all(user_id: int):
-    sql = """
+async def get_feed_all(user_id: int):
+    sql = text("""
         WITH related AS (
-            SELECT id FROM app_user WHERE id = %(user_id)s
+            SELECT id FROM app_user WHERE id = :user_id
             UNION
-            SELECT father_id FROM app_user WHERE id = %(user_id)s AND father_id IS NOT NULL
+            SELECT father_id FROM app_user WHERE id = :user_id AND father_id IS NOT NULL
             UNION
-            SELECT mother_id FROM app_user WHERE id = %(user_id)s AND mother_id IS NOT NULL
+            SELECT mother_id FROM app_user WHERE id = :user_id AND mother_id IS NOT NULL
             UNION
-            SELECT spouse_id FROM app_user WHERE id = %(user_id)s AND spouse_id IS NOT NULL
+            SELECT spouse_id FROM app_user WHERE id = :user_id AND spouse_id IS NOT NULL
         ),
         families AS (
             SELECT DISTINCT family_id
@@ -171,9 +170,8 @@ def get_feed_all(user_id: int):
             UNION ALL
             SELECT * FROM diaries
         ) x;
-    """
+    """)
 
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"user_id": user_id})
-            return cur.fetchall()
+    async with async_session_maker() as session:
+        result = await session.execute(sql, {"user_id": user_id})
+        return result.fetchall()

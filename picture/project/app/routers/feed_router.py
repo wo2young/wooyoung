@@ -8,16 +8,16 @@ from app.services.feed_service import (
 router = APIRouter(prefix="/feed", tags=["Feed"])
 
 
-@router.get("/latest")
-def latest_feed(user_id: int):
-    return get_feed_latest(user_id)
+@router.get("/latest/{user_id}", summary="최신 피드 조회")
+async def api_feed_latest(user_id: int):
+    return await get_feed_latest(user_id)
 
 
-@router.get("/random")
-def random_feed(user_id: int):
-    return get_feed_random(user_id)
+@router.get("/random/{user_id}", summary="랜덤 피드 조회")
+async def api_feed_random(user_id: int):
+    return await get_feed_random(user_id)
 
 
-@router.get("/all")
-def all_feed(user_id: int):
-    return get_feed_all(user_id)
+@router.get("/all/{user_id}", summary="전체 피드 조회")
+async def api_feed_all(user_id: int):
+    return await get_feed_all(user_id)

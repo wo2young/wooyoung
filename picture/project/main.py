@@ -22,7 +22,7 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 app.include_router(photo_router.router, prefix="/photos", tags=["Photos"])
 app.include_router(diary_router.router, prefix="/diaries", tags=["Diaries"])
 app.include_router(feed_router.router, prefix="/feed", tags=["Feed"])
-app.include_router(upload_router)   # prefix 이미 upload_router 안에 있음
+app.include_router(upload_router.router)   # prefix 이미 upload_router 안에 있음
 
 @app.get("/")
 async def root():

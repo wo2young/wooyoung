@@ -10,7 +10,7 @@ engine = create_async_engine(
 )
 
 # 세션팩토리
-AsyncSessionLocal = sessionmaker(
+async_session_maker = sessionmaker(
     bind=engine,
     expire_on_commit=False,
     autoflush=False,

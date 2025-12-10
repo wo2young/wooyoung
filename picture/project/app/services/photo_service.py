@@ -1,55 +1,79 @@
-from app.database import POOL
+# app/services/photo_service.py
+
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.database import async_session_maker
 
 
-def create_photo(data):
-    sql = """
+# ----------------------------------
+# 사진 생성
+# ----------------------------------
+async def create_photo(data: dict):
+    sql = text("""
         INSERT INTO photo (
             album_id, uploader_id, original_url, thumbnail_url,
             description, place, taken_at
         )
-        VALUES (%(album_id)s, %(uploader_id)s, %(original_url)s, %(thumbnail_url)s,
-                %(description)s, %(place)s, %(taken_at)s)
+        VALUES (
+            :album_id, :uploader_id, :original_url, :thumbnail_url,
+            :description, :place, :taken_at
+        )
         RETURNING id, created_at;
-    """
+    """)
 
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, data)
-            row = cur.fetchone()
-            return {"id": row["id"], "created_at": row["created_at"]}
+    async with async_session_maker() as session:     # DB 접속
+        result = await session.execute(sql, data)    # 실행
+        row = result.fetchone()
+        await session.commit()
 
-
-def get_photo(photo_id: int):
-    sql = "SELECT * FROM photo WHERE id = %(id)s AND deleted_at IS NULL;"
-    
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"id": photo_id})
-            return cur.fetchone()
+        return {
+            "id": row.id,
+            "created_at": row.created_at
+        }
 
 
-def list_photos_by_album(album_id: int):
-    sql = """
+# ----------------------------------
+# 사진 상세 조회
+# ----------------------------------
+async def get_photo(photo_id: int):
+    sql = text("""
+        SELECT * FROM photo
+        WHERE id = :id AND deleted_at IS NULL;
+    """)
+
+    async with async_session_maker() as session:
+        result = await session.execute(sql, {"id": photo_id})
+        return result.fetchone()
+
+
+# ----------------------------------
+# 앨범별 사진 목록 조회
+# ----------------------------------
+async def list_photos_by_album(album_id: int):
+    sql = text("""
         SELECT *
         FROM photo
-        WHERE album_id = %(album_id)s
+        WHERE album_id = :album_id
           AND deleted_at IS NULL
         ORDER BY created_at DESC;
-    """
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"album_id": album_id})
-            return cur.fetchall()
+    """)
+
+    async with async_session_maker() as session:
+        result = await session.execute(sql, {"album_id": album_id})
+        return result.fetchall()
 
 
-def delete_photo(photo_id: int):
-    sql = """
+# ----------------------------------
+# 사진 삭제 (soft delete)
+# ----------------------------------
+async def delete_photo(photo_id: int):
+    sql = text("""
         UPDATE photo
         SET deleted_at = NOW()
-        WHERE id = %(photo_id)s;
-    """
+        WHERE id = :photo_id;
+    """)
 
-    with POOL.connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(sql, {"photo_id": photo_id})
-            return {"deleted": True}
+    async with async_session_maker() as session:
+        await session.execute(sql, {"photo_id": photo_id})
+        await session.commit()
+        return {"deleted": True}
