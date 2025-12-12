@@ -14,6 +14,8 @@ db.movies.aggregate([
 
 db.movies.find({year: 1995})
 
+db.movies.find({},{genres: 1})
+
 db.movies.countDocuments({ year: 1995 })
 
 db.comments.aggregate([
