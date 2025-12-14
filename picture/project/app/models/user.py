@@ -1,54 +1,49 @@
-# app/models/diary.py
+# app/models/user.py
 
 from sqlalchemy import (
     Column,
     BigInteger,
     String,
-    Text,
     DateTime,
     ForeignKey,
-    Index,
+    UniqueConstraint,
     func,
 )
 from app.database import Base
 
 
-class Diary(Base):
-    __tablename__ = "diary"
+class AppUser(Base):
+    __tablename__ = "app_user"
 
     # =========================
-    # 기본 식별
+    # 기본 식별 정보
     # =========================
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, index=True)
+    name = Column(String(100), nullable=False)
+    phone = Column(String(30), nullable=False, unique=True)
+    profile_image = Column(String, nullable=True)
 
     # =========================
-    # 소속 관계
+    # 가족 관계 (자기 참조 FK)
     # =========================
-    family_id = Column(
-        BigInteger,
-        ForeignKey("family.id"),
-        nullable=False,
-    )
-
-    author_id = Column(
+    father_id = Column(
         BigInteger,
         ForeignKey("app_user.id"),
-        nullable=False,
+        nullable=True,
+    )
+    mother_id = Column(
+        BigInteger,
+        ForeignKey("app_user.id"),
+        nullable=True,
+    )
+    spouse_id = Column(
+        BigInteger,
+        ForeignKey("app_user.id"),
+        nullable=True,
     )
 
     # =========================
-    # 일기 내용
-    # =========================
-    title = Column(String(200), nullable=False)
-    content = Column(Text, nullable=False)
-
-    diary_date = Column(
-        DateTime(timezone=True),
-        nullable=False,
-    )
-
-    # =========================
-    # 시간 컬럼
+    # 시간 컬럼 (soft delete 포함)
     # =========================
     created_at = Column(
         DateTime(timezone=True),
@@ -65,10 +60,8 @@ class Diary(Base):
     )
 
     # =========================
-    # 인덱스
+    # 테이블 제약
     # =========================
     __table_args__ = (
-        Index("idx_diary_family", "family_id"),
-        Index("idx_diary_author", "author_id"),
-        Index("idx_diary_date", "diary_date"),
+        UniqueConstraint("phone", name="uq_app_user_phone"),
     )

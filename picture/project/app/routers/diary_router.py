@@ -1,36 +1,75 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database import get_db
 from app.schemas.diary_schema import DiaryCreate, DiaryUpdate
 from app.services.diary_service import (
     create_diary,
-    get_diary,
     list_diaries_by_family,
     update_diary,
-    delete_diary
+    delete_diary,
+    get_diary_with_photos,
 )
 
-router = APIRouter()
+router = APIRouter(prefix="/diaries", tags=["Diary"])
 
 
+# -------------------------------
+# 일기 생성
+# -------------------------------
 @router.post("/", summary="일기 생성")
-def create_diary_api(payload: DiaryCreate):
-    return create_diary(payload.dict())
+async def create_diary_api(
+    payload: DiaryCreate,
+    db: AsyncSession = Depends(get_db),
+):
+    return await create_diary(db, payload.dict())
 
 
-@router.get("/{diary_id}", summary="일기 상세 조회")
-def get_diary_api(diary_id: int):
-    return get_diary(diary_id)
-
-
+# -------------------------------
+# 가족별 일기 목록
+# -------------------------------
 @router.get("/family/{family_id}", summary="가족별 일기 목록")
-def list_diaries_api(family_id: int):
-    return list_diaries_by_family(family_id)
+async def list_diaries_api(
+    family_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    return await list_diaries_by_family(db, family_id)
 
 
+# -------------------------------
+# 일기 상세 조회 (+ 사진)
+# -------------------------------
+@router.get("/{diary_id}", summary="일기 상세 조회 (+ 사진)")
+async def get_diary_detail(
+    diary_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    diary = await get_diary_with_photos(db, diary_id)
+
+    if not diary:
+        raise HTTPException(status_code=404, detail="Diary not found")
+
+    return diary
+
+
+# -------------------------------
+# 일기 수정
+# -------------------------------
 @router.put("/{diary_id}", summary="일기 수정")
-def update_diary_api(diary_id: int, payload: DiaryUpdate):
-    return update_diary(diary_id, payload.dict())
+async def update_diary_api(
+    diary_id: int,
+    payload: DiaryUpdate,
+    db: AsyncSession = Depends(get_db),
+):
+    return await update_diary(db, diary_id, payload.dict())
 
 
+# -------------------------------
+# 일기 삭제 (soft delete)
+# -------------------------------
 @router.delete("/{diary_id}", summary="일기 삭제")
-def delete_diary_api(diary_id: int):
-    return delete_diary(diary_id)
+async def delete_diary_api(
+    diary_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    return await delete_diary(db, diary_id)
