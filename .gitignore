@@ -33,6 +33,11 @@ tools/
 *.rsuser
 *.sln.docstates
 
+# Docker Desktop / WSL
+DockerDesktopWSL/
+**/DockerDesktopWSL/
+*.vhdx
+
 # Rider / 기타 IDE
 .idea/
 
